@@ -91,8 +91,7 @@ export default function Register() {
   // au moins un chiffre (?=.*[0-9])
   // au moins un caractère spécial (?=.*[!@#$%^&*])
   // une longueur minimale de 8 caractères {8,}.
-  const passwordRegex =
-    /^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/;
+  const passwordRegex = /^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/;
   const handleSubmit = (evt) => {
     evt.preventDefault();
 
@@ -124,6 +123,10 @@ export default function Register() {
     dispatch(registerUser({ username, email, password }));
     navigate('/');
   };
+<<<<<<< HEAD
+=======
+  // Functions to handle input changes
+>>>>>>> 358f42a (Co-authored-by: Julien <julienESN@users.noreply.github.com>)
   const handleUsernameChange = (evt) => {
     dispatch(changeUsernameValue(evt.target.value));
   };
