@@ -57,14 +57,17 @@ export default function Register() {
         return;
       // If the email field is not valid according to the email regex, set the email validation to false and return
       case !emailRegex.test(email):
+        setUsernameValid(true);
         setEmailValid(false);
         return;
       // If the password field is not valid according to the password regex, set the password validation to false and return
       case !passwordRegex.test(password):
+        setEmailValid(true);
         setPasswordValid(false);
         return;
       // If the password and confirmPassword fields do not match, set the password confirmation validation to false and return
       case password !== confirmPassword:
+        setPasswordValid(true);
         setPasswordConfirmed(false);
         return;
       // If all the validations pass, set all validation states to true, and dispatch the registerUser action with the form data
@@ -82,7 +85,6 @@ export default function Register() {
   const handleInputChange = (dispatch, actionCreator) => (evt) => {
     dispatch(actionCreator(evt.target.value));
   };
-
   return (
     <Flex
       minH="100vh"
