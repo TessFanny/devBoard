@@ -3,12 +3,14 @@ import { configureStore } from '@reduxjs/toolkit';
 
 // Import the `userReducer` from the `../features/user/user` file
 import userReducer from '../features/user/user';
+import registerReducer from '../features/register/register'
 
 // Use `configureStore` to create a Redux store,
 // passing in the `userReducer` as the reducer for the `user` slice
 const store = configureStore({
   reducer: {
     user: userReducer,
+    register: registerReducer,
   },
 });
 
