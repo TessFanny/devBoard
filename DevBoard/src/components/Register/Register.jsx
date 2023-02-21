@@ -123,10 +123,6 @@ export default function Register() {
     dispatch(registerUser({ username, email, password }));
     navigate('/');
   };
-<<<<<<< HEAD
-=======
-  // Functions to handle input changes
->>>>>>> 358f42a (Co-authored-by: Julien <julienESN@users.noreply.github.com>)
   const handleUsernameChange = (evt) => {
     dispatch(changeUsernameValue(evt.target.value));
   };
