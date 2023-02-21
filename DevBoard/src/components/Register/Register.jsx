@@ -15,11 +15,10 @@ import {
   Link,
   Center,
   FormErrorMessage,
-} from '@chakra-ui/react';
-import { useState } from 'react';
-import { FaGithub } from 'react-icons/fa';
-import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
-import { useDispatch, useSelector } from 'react-redux';
+} from '../../import/import';
+import { useState, useDispatch, useSelector } from '../../import/import';
+import { FaGithub } from '../../import/import';
+import { ViewIcon, ViewOffIcon } from '../../import/import';
 import {
   changeEmailValue,
   changePasswordValue,
@@ -36,65 +35,56 @@ export default function Register() {
   const [isUsernameValid, setUsernameValid] = useState(true);
   const dispatch = useDispatch();
   // Selector from store
-  const {
-    username,
-    email,
-    password,
-    confirmPassword,
-  } = useSelector((state) => state.register);
+  const { username, email, password, confirmPassword } = useSelector(
+    (state) => state.register
+  );
   // Must have an @ and a .
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   //   au moins une majuscule (?=.*[A-Z])
   // au moins un chiffre (?=.*[0-9])
   // au moins un caractère spécial (?=.*[!@#$%^&*])
   // une longueur minimale de 8 caractères {8,}.
-  const passwordRegex = /^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/;
+  const passwordRegex =
+    /^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/;
   const handleSubmit = (evt) => {
     evt.preventDefault();
 
-    if (username.trim() === '') {
-      setUsernameValid(false);
-      return;
+    // Define a switch statement to handle form validation
+    switch (true) {
+      // If the username field is empty, set the username validation to false and return
+      case username.trim() === '':
+        setUsernameValid(false);
+        return;
+      // If the email field is not valid according to the email regex, set the email validation to false and return
+      case !emailRegex.test(email):
+        setUsernameValid(true);
+        setEmailValid(false);
+        return;
+      // If the password field is not valid according to the password regex, set the password validation to false and return
+      case !passwordRegex.test(password):
+        setEmailValid(true);
+        setPasswordValid(false);
+        return;
+      // If the password and confirmPassword fields do not match, set the password confirmation validation to false and return
+      case password !== confirmPassword:
+        setPasswordValid(true);
+        setPasswordConfirmed(false);
+        return;
+      // If all the validations pass, set all validation states to true, and dispatch the registerUser action with the form data
+      default:
+        setUsernameValid(true);
+        setEmailValid(true);
+        setPasswordValid(true);
+        setPasswordConfirmed(true);
+        dispatch(registerUser({ username, email, password }));
     }
-    // Email muist contain something ans pass the regex
-    if (!emailRegex.test(email)) {
-      setEmailValid(false);
-      return;
-    }
-
-    if (!passwordRegex.test(password)) {
-      setPasswordValid(false);
-      return;
-    }
-
-    if (password !== confirmPassword) {
-      setPasswordConfirmed(false);
-      return;
-    }
-
-    setUsernameValid(true);
-    setEmailValid(true);
-    setPasswordValid(true);
-    setPasswordConfirmed(true);
-
-    dispatch(registerUser({ username, email, password }));
   };
-  const handleUsernameChange = (evt) => {
-    dispatch(changeUsernameValue(evt.target.value));
+  // Cette fonction prend deux arguments : dispatch et actionCreator
+  // Elle renvoie une nouvelle fonction qui sera utilisée dans l'onChange
+  // Cette nouvelle fonction prend un argument (evt) et utilise dispatch et actionCreator pour créer et envoyer une action Redux
+  const handleInputChange = (dispatch, actionCreator) => (evt) => {
+    dispatch(actionCreator(evt.target.value));
   };
-  const handlePasswordChange = (evt) => {
-    dispatch(changePasswordValue(evt.target.value));
-  };
-
-  const handleConfirmPasswordChange = (evt) => {
-    dispatch(changeConfirmPasswordValue(evt.target.value));
-  };
-
-  const handleEmailChange = (evt) => {
-    dispatch(changeEmailValue(evt.target.value));
-    setEmailValid(true);
-  };
-  
   return (
     <Flex
       minH="100vh"
@@ -118,12 +108,17 @@ export default function Register() {
           p={8}
         >
           <Stack spacing={4}>
-
             <FormControl id="firstName" isRequired isInvalid={!isUsernameValid}>
               <FormLabel mx="auto">Username</FormLabel>
-              <Input type="text" onChange={handleUsernameChange} mr="32" />
+              {/* // Utilisation de handleInputChange pour créer une fonction de rappel onChange pour les composants d'entrée
+                  // La valeur de l'entrée est extraite de l'événement et utilisée pour créer une action Redux qui est envoyée via le store */}
+              <Input
+                type="text"
+                onChange={handleInputChange(dispatch, changeUsernameValue)}
+                mr="32"
+              />
               {!isUsernameValid && (
-              <FormErrorMessage>Username is required.</FormErrorMessage>
+                <FormErrorMessage>Username is required.</FormErrorMessage>
               )}
             </FormControl>
 
@@ -133,49 +128,69 @@ export default function Register() {
                 type="email"
                 placeholder="Devboarduser@email.com"
                 value={email}
-                onChange={handleEmailChange}
+                onChange={handleInputChange(dispatch, changeEmailValue)}
                 required
               />
               {!isEmailValid && (
-              <FormErrorMessage>Email is invalid.</FormErrorMessage>
+                <FormErrorMessage>Email is invalid.</FormErrorMessage>
               )}
             </FormControl>
 
             <FormControl id="password" isRequired isInvalid={!isPasswordValid}>
               <FormLabel>Password</FormLabel>
               <InputGroup>
-                <Input type={showPassword ? 'text' : 'password'} onChange={handlePasswordChange} />
+                <Input
+                  type={showPassword ? 'text' : 'password'}
+                  onChange={handleInputChange(dispatch, changePasswordValue)}
+                />
                 <InputRightElement h="full">
                   <Button
                     variant="ghost"
-                    onClick={() => setShowPassword((showPassword) => !showPassword)}
+                    onClick={() =>
+                      setShowPassword((showPassword) => !showPassword)
+                    }
                   >
                     {showPassword ? <ViewIcon /> : <ViewOffIcon />}
                   </Button>
-
                 </InputRightElement>
               </InputGroup>
 
               {!isPasswordValid && (
-              // eslint-disable-next-line max-len
-              <FormErrorMessage>Your password must contain at least one uppercase letter, one number, and one special character, and must not be empty and have min 8 characters.</FormErrorMessage>
+                // eslint-disable-next-line max-len
+                <FormErrorMessage>
+                  Your password must contain at least one uppercase letter, one
+                  number, and one special character, and must not be empty and
+                  have min 8 characters.
+                </FormErrorMessage>
               )}
             </FormControl>
-            <FormControl id="confirmpassword" isRequired isInvalid={!isPasswordConfirmed}>
+            <FormControl
+              id="confirmpassword"
+              isRequired
+              isInvalid={!isPasswordConfirmed}
+            >
               <FormLabel>Confirm Password</FormLabel>
               <InputGroup>
-                <Input type={showPassword ? 'text' : 'password'} onChange={handleConfirmPasswordChange} />
+                <Input
+                  type={showPassword ? 'text' : 'password'}
+                  onChange={handleInputChange(
+                    dispatch,
+                    changeConfirmPasswordValue
+                  )}
+                />
                 <InputRightElement h="full">
                   <Button
                     variant="ghost"
-                    onClick={() => setShowPassword((showPassword) => !showPassword)}
+                    onClick={() =>
+                      setShowPassword((showPassword) => !showPassword)
+                    }
                   >
                     {showPassword ? <ViewIcon /> : <ViewOffIcon />}
                   </Button>
                 </InputRightElement>
               </InputGroup>
               {!isPasswordConfirmed && (
-              <FormErrorMessage>Password does not match.</FormErrorMessage>
+                <FormErrorMessage>Password does not match.</FormErrorMessage>
               )}
             </FormControl>
             <Stack spacing={10} pt={2}>
@@ -211,15 +226,15 @@ export default function Register() {
             </Stack>
             <Stack pt={6}>
               <Text align="center">
-                Already a user?
-                {' '}
-                <Link href="/" color="blue.400">Login</Link>
+                Already a user?{' '}
+                <Link href="/login" color="blue.400">
+                  Login
+                </Link>
               </Text>
             </Stack>
           </Stack>
         </Box>
       </Stack>
     </Flex>
-
   );
 }
