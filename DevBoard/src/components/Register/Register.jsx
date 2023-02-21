@@ -20,6 +20,7 @@ import { useState } from 'react';
 import { FaGithub } from 'react-icons/fa';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import { useDispatch, useSelector } from 'react-redux';
+import axios from 'axios';
 import {
   changeEmailValue,
   changePasswordValue,
@@ -94,7 +95,15 @@ export default function Register() {
     dispatch(changeEmailValue(evt.target.value));
     setEmailValid(true);
   };
-  
+
+  const HandleGitHubAuth = async () => {
+    try {
+      const response = await axios.get('http://localhost:3000/auth/github');
+      console.log(response);
+    } catch (error) {
+      console.error(error);
+    }
+  };
   return (
     <Flex
       minH="100vh"
@@ -203,6 +212,7 @@ export default function Register() {
                   bg: 'black.500',
                   border: 'transparent',
                 }}
+                onClick={HandleGitHubAuth}
               >
                 <Center>
                   <Text>Sign in with Github</Text>
