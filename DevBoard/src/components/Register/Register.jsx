@@ -76,7 +76,7 @@ export default function Register() {
         setEmailValid(true);
         setPasswordValid(true);
         setPasswordConfirmed(true);
-        dispatch(registerUser({ username, email, password }));
+        dispatch(registerUser({ username, email, password, confirmPassword}));
     }
   };
   // Cette fonction prend deux arguments : dispatch et actionCreator
