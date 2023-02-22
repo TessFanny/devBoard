@@ -1,0 +1,30 @@
+li {
+    list-style: none;
+}
+
+.appname {
+    font-weight: 900;
+    font-size: 30px;
+    margin-bottom: 50px;
+}
+
+.SideBar {
+    background-color: rgb(27, 27, 73);
+    color: rgb(237, 237, 237);
+    font-family: 'Outfit', sans-serif;
+    font-size: 19px;
+    width: 12rem;
+    height: 100vh;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    
+
+    &-list-item {
+        margin-bottom: 10px;
+    }
+
+    &-list-item :hover {
+        background-color: rgb(255, 255, 255);
+    }
+}

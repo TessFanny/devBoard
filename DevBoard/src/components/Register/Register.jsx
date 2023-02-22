@@ -12,15 +12,16 @@ import {
   Heading,
   Text,
   useColorModeValue,
-  Link,
   Center,
   FormErrorMessage,
 } from '@chakra-ui/react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FaGithub } from 'react-icons/fa';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { Link } from "react-router-dom";
 import {
   changeEmailValue,
   changePasswordValue,
@@ -30,12 +31,36 @@ import {
 } from '../../features/register/register';
 // Hooks for state management
 export default function Register() {
+  const [rerender, setRerender] = useState(false);
+  const CLIENT_ID = import.meta.env.VITE_CLIENT_ID;
+
+  useEffect(() => {
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const codeParam = urlParams.get("code");
+    
+    if(codeParam && (localStorage.getItem("accessToken") === null)) {
+      async function getAccessToken() {
+          await axios.get("http://localhost:3000/getAccessToken?code=" + codeParam)
+          .then((response) => {
+            return repsonse.json();
+          }).then((data) => {
+            console.log(data);
+            if(data.acces_token) {
+              localStorage.setItem("accessToken", data.acces_token);
+              setRerender(!rerender);
+            }
+          })
+      }
+    }
+  })
   const [showPassword, setShowPassword] = useState(false);
   const [isEmailValid, setEmailValid] = useState(true);
   const [isPasswordValid, setPasswordValid] = useState(true);
   const [isPasswordConfirmed, setPasswordConfirmed] = useState(true);
   const [isUsernameValid, setUsernameValid] = useState(true);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   // Selector from store
   const {
     username,
@@ -79,6 +104,8 @@ export default function Register() {
     setPasswordConfirmed(true);
 
     dispatch(registerUser({ username, email, password }));
+    navigate('/');
+    
   };
   const handleUsernameChange = (evt) => {
     dispatch(changeUsernameValue(evt.target.value));
@@ -97,12 +124,7 @@ export default function Register() {
   };
 
   const HandleGitHubAuth = async () => {
-    try {
-      const response = await axios.get(`http://localhost:3001/GitHubAuth?code=${'mettez le client id ici'}`);
-      console.log(response);
-    } catch (err) {
-      console.error(err);
-    }
+    window.location.assign(`https://github.com/login/oauth/authorize?client_id=${CLIENT_ID}`);
   };
   return (
     <Flex
@@ -223,7 +245,7 @@ export default function Register() {
               <Text align="center">
                 Already a user?
                 {' '}
-                <Link href="/" color="blue.400">Login</Link>
+                <Link to="/login">Login</Link>
               </Text>
             </Stack>
           </Stack>
