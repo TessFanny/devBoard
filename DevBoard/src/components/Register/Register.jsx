@@ -97,7 +97,12 @@ export default function Register() {
   };
 
   const HandleGitHubAuth = async () => {
-    window.location.assign(`https://github.com/login/oauth/authorize?client_id=${CLIENTID}`);
+    try {
+      const response = await axios.get(`http://localhost:3001/GitHubAuth?code=${'mettez le client id ici'}`);
+      console.log(response);
+    } catch (err) {
+      console.error(err);
+    }
   };
   return (
     <Flex
