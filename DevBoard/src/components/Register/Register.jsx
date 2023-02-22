@@ -41,9 +41,9 @@ export default function Register() {
     
     if(codeParam && (localStorage.getItem("accessToken") === null)) {
       async function getAccessToken() {
-          await axios.get("http://localhost:3000/getAccessToken?code=" + codeParam)
+          const response = await axios.get("http://localhost:3000/getAccessToken?code=" + codeParam)
           .then((response) => {
-            return repsonse.json();
+            return response.json();
           }).then((data) => {
             console.log(data);
             if(data.acces_token) {
@@ -52,6 +52,7 @@ export default function Register() {
             }
           })
       }
+      getAccessToken();
     }
   })
   const [showPassword, setShowPassword] = useState(false);
