@@ -1,13 +1,29 @@
-import './App.css';
-import React from 'react';
-import Register from '../Register/Register.jsx';
+import { useState } from 'react';
+import { Box, useBreakpointValue } from '@chakra-ui/react';
 
-function App() {
+import Header from '../Header/Header';
+import Sidebar from '../Sidebar/Sidebar';
+
+const smVariant = { navigation: 'drawer', navigationButton: true };
+const mdVariant = { navigation: 'sidebar', navigationButton: false };
+
+export default function App() {
+  const [isSidebarOpen, setSidebarOpen] = useState(false);
+  const variants = useBreakpointValue({ base: smVariant, md: mdVariant });
+
+  const toggleSidebar = () => setSidebarOpen(!isSidebarOpen);
+
   return (
-    <div className="app">
-      <Register />
-    </div>
+    <>
+      <Sidebar
+        variant={variants?.navigation}
+      />
+      <Box ml={!variants?.navigationButton && 200}>
+        <Header
+          showSidebarButton={variants?.navigationButton}
+          onShowSidebar={toggleSidebar}
+        />
+      </Box>
+    </>
   );
 }
-
-export default App;

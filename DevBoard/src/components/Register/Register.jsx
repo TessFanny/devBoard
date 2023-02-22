@@ -92,7 +92,7 @@ export default function Register() {
       justify="center"
       bg={useColorModeValue('gray.50', 'gray.800')}
     >
-      <Stack spacing={8} mx="1" maxW="lg" py={12} px={6}>
+      <Stack spacing={8} mx="1" maxW="lg" px={6}>
         <Stack align="center">
           <Heading fontSize="4xl" textAlign="center">
             Sign up
