@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Box,
   Flex,
@@ -6,6 +6,8 @@ import {
   useDisclosure,
   Text,
   Button,
+  Slide,
+  SlideFade,
 } from '@chakra-ui/react';
 import {
   FaChartLine,
@@ -15,9 +17,18 @@ import {
   FaColumns,
   FaThumbsUp,
   FaUser,
+  FaPlusSquare,
 } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
-const Sidebar = ({ isOpen, onClose }) => {
+const Sidebar = ({ isOpen }) => {
+  const { isOpen: isSubOpen, onToggle: onSubToggle } = useDisclosure();
+  const [showAddPost, setShowAddPost] = useState(false);
+
+  const handleAddPostClick = () => {
+    setShowAddPost(!showAddPost);
+  };
+
   return (
     <Box
       bg="gray.200"
@@ -45,9 +56,30 @@ const Sidebar = ({ isOpen, onClose }) => {
         <Button variant="ghost" mb="2" leftIcon={<FaChartLine />}>
           Dashboard
         </Button>
-        <Button variant="ghost" mb="2" leftIcon={<FaNewspaper />}>
+        <Button
+          variant="ghost"
+          mb="2"
+          leftIcon={<FaNewspaper />}
+          onClick={onSubToggle}
+        >
           News
         </Button>
+        <Box>
+          <SlideFade in={isSubOpen}>
+            {isSubOpen && (
+              <>
+                <Button
+                  variant="ghost"
+                  mb="2"
+                  leftIcon={<FaPlusSquare />}
+                  onClick={handleAddPostClick}
+                >
+                  Add Post
+                </Button>
+              </>
+            )}
+          </SlideFade>
+        </Box>
         <Button variant="ghost" mb="2" leftIcon={<FaComments />}>
           Forum
         </Button>
@@ -68,17 +100,4 @@ const Sidebar = ({ isOpen, onClose }) => {
   );
 };
 
-const Layout = ({ children }) => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-
-  return (
-    <>
-      <Sidebar isOpen={true} onClose={onClose} />
-      <Box ml="64" p="4">
-        {children}
-      </Box>
-    </>
-  );
-};
-
-export default Layout;
+export default Sidebar;
