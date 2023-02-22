@@ -1,20 +1,25 @@
-import { Routes, Route } from "react-router-dom";
-import React from 'react';
-import Register from '../Register/Register';
-import Login from '../Login/Login';
-import Home from "../Home/Home";
-import './App.css';
+import { useState } from 'react';
+import { Box, Flex, useBreakpointValue, Text } from '@chakra-ui/react';
+import Sidebar from '../Sidebar/Sidebar';
+import Header from '../Header/Header';
+import Repositories from '../repositories/repositories';
 
-function App() {
+// App component
+export default function App() {
   return (
-    <div className="app">
-      <Routes>
-        <Route exact path="/" element={<Home />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
-    </Routes>
-    </div>
+    // Flex container for Sidebar and main content area
+    <Flex>
+      {/* Box for Sidebar */}
+      <Box>
+        <Sidebar />
+      </Box>
+      {/* Box for main content area */}
+      <Box minH="100vh" w={`calc(100vw - 205px)`} p="5" display="flex" alignItems="center" flexDirection="column">
+        {/* Header component */}
+        <Header />
+        {/* Repositories component */}
+        <Repositories />
+      </Box>
+    </Flex>
   );
 }
-
-export default App;
