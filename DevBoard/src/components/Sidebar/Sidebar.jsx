@@ -37,19 +37,16 @@ const Sidebar = ({ isOpen }) => {
 
   return (
     <Box
-      bg="gray.200"
-      w="50"
       h="full"
-      top="0"
-      left="0"
       boxShadow="base"
       overflowY="auto"
       transition="ease-in-out .2s"
       transform={isOpen ? 'translateX(0)' : '-translateX(100%)'}
-      
+      bgColor="white"
+      borderRadius="md"
     >
       <Flex p="4" alignItems="center" justify="center" >
-        <Text fontSize="xl" fontWeight="bold">
+        <Text fontSize="xl" fontWeight="600" mt="5" bgGradient='linear(to-l, #373B44, #4286f4)' bgClip="text">
           DevBoard
         </Text>
       </Flex>
@@ -60,14 +57,15 @@ const Sidebar = ({ isOpen }) => {
         flexDirection="column"
         alignItems="flex-start"
       >
-      <Button variant="ghost" mb="2" leftIcon={<FaChartLine />}>
+      <Button variant="ghost" mb="2" leftIcon={<FaChartLine />} fontWeight="400" >
             <Text pl="2">Dashboard</Text>
           </Button>
           <Button
             variant="ghost"
-            mb="2"
+            mb="4"
             leftIcon={<FaNewspaper />}
             onClick={onSubToggle}
+            fontWeight="400"
           >
             <Text pl="2">News</Text>
           </Button>
@@ -79,9 +77,10 @@ const Sidebar = ({ isOpen }) => {
                 <>
                   <Button
                     variant="ghost"
-                    mb="2"
+                    mb="4"
                     leftIcon={<FaPlusSquare />}
                     onClick={handleAddPostClick}
+                    fontWeight="400"
                   >
                     <Text pl="2">Add Post</Text>
                   </Button>
@@ -89,19 +88,19 @@ const Sidebar = ({ isOpen }) => {
               )}
             </SlideFade>
           </Box>
-       <Button variant="ghost" mb="2" leftIcon={<FaComments />}>
+       <Button variant="ghost" mb="4" leftIcon={<FaComments />} fontWeight="400" >
             <Text pl="2">Forum</Text>
           </Button>
-          <Button variant="ghost" mb="2" leftIcon={<FaFolderOpen />}>
+          <Button variant="ghost" mb="4" leftIcon={<FaFolderOpen />} fontWeight="400" >
             <Text pl="2">Your Projects</Text>
           </Button>
-          <Button variant="ghost" mb="2" leftIcon={<FaColumns />}>
+          <Button variant="ghost" mb="4" leftIcon={<FaColumns />} fontWeight="400" >
             <Text pl="2">Kanban</Text>
           </Button>
-          <Button variant="ghost" mb="2" leftIcon={<FaThumbsUp />}>
+          <Button variant="ghost" mb="4" leftIcon={<FaThumbsUp />}fontWeight="400" >
             <Text pl="2">Likes</Text>
           </Button>
-          <Button variant="ghost" mb="2" leftIcon={<FaUser />}>
+          <Button variant="ghost" mb="4" leftIcon={<FaUser />} fontWeight="400" >
             <Text pl="2">Profile</Text>
           </Button>
       </Box>

@@ -1,4 +1,4 @@
-import { Flex, Text, Box } from "@chakra-ui/react";
+import { Flex, Text, Box, IconButton } from "@chakra-ui/react";
 import { FaUser } from "react-icons/fa";
 import { IoMdSettings } from "react-icons/io"
 
@@ -20,7 +20,7 @@ function Header() {
       <Box display="flex" alignItems="center" gap="2"> 
         <FaUser />
         <Text>Sign In</Text> 
-        <IoMdSettings /> 
+        <IconButton aria-label="Settings" icon={<IoMdSettings />} />
       </Box>
     </Flex>
   )

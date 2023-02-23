@@ -10,15 +10,15 @@ export default function App() {
     // Flex container for Sidebar and main content area
     <Flex>
       {/* Box for Sidebar */}
-      <Box>
+      <Box w="50" pr="1" bgColor="gray.200">
         <Sidebar />
       </Box>
       {/* Box for main content area */}
-      <Box minH="100vh" w={`calc(100vw - 205px)`} p="5" display="flex" alignItems="center" flexDirection="column">
+      <Box minH="100vh" w={`calc(100vw - 210px)`} p="5" display="flex" alignItems="center" flexDirection="column" bgColor="gray.200">
         {/* Header component */}
         <Header />
         {/* Repositories component */}
-        {/* <Repositories /> */}
+        <Repositories />
       </Box>
     </Flex>
   );
