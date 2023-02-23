@@ -18,7 +18,7 @@ export default function App() {
         {/* Header component */}
         <Header />
         {/* Repositories component */}
-        <Repositories />
+        {/* <Repositories /> */}
       </Box>
     </Flex>
   );

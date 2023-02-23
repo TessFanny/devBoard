@@ -1,4 +1,7 @@
-import React from 'react';
+// Import React and useState hooks from the react library
+import React, { useState } from 'react';
+
+// Import various Chakra-UI components, as well as a few React icons
 import {
   Box,
   Flex,
@@ -6,6 +9,8 @@ import {
   useDisclosure,
   Text,
   Button,
+  Slide,
+  SlideFade,
 } from '@chakra-ui/react';
 import {
   FaChartLine,
@@ -15,14 +20,26 @@ import {
   FaColumns,
   FaThumbsUp,
   FaUser,
+  FaPlusSquare,
 } from 'react-icons/fa';
 
-const Sidebar = ({ isOpen, onClose }) => {
+const Sidebar = ({ isOpen }) => {
+  // Destructure the isOpen property from the useDisclosure hook
+  const { isOpen: isSubOpen, onToggle: onSubToggle } = useDisclosure();
+
+  // Create a showAddPost state variable that initially is set to false, and a function to toggle it
+  const [showAddPost, setShowAddPost] = useState(false);
+
+  // Define a function to handle the Add Post button click event
+  const handleAddPostClick = () => {
+    setShowAddPost(!showAddPost);
+  };
+
   return (
     <Box
-      bg="white"
+      bg="gray.200"
       w="50"
-      h="100vh"
+      h="full"
       top="0"
       left="0"
       boxShadow="base"
@@ -31,7 +48,7 @@ const Sidebar = ({ isOpen, onClose }) => {
       transform={isOpen ? 'translateX(0)' : '-translateX(100%)'}
       
     >
-      <Flex p="4" alignItems="center" >
+      <Flex p="4" alignItems="center" justify="center" >
         <Text fontSize="xl" fontWeight="bold">
           DevBoard
         </Text>
@@ -43,27 +60,50 @@ const Sidebar = ({ isOpen, onClose }) => {
         flexDirection="column"
         alignItems="flex-start"
       >
-        <Button variant="ghost" mb="2" leftIcon={<FaChartLine />}>
-          Dashboard
-        </Button>
-        <Button variant="ghost" mb="2" leftIcon={<FaNewspaper />}>
-          News
-        </Button>
-        <Button variant="ghost" mb="2" leftIcon={<FaComments />}>
-          Forum
-        </Button>
-        <Button variant="ghost" mb="2" leftIcon={<FaFolderOpen />}>
-          Your projects
-        </Button>
-        <Button variant="ghost" mb="2" leftIcon={<FaColumns />}>
-          Kanban
-        </Button>
-        <Button variant="ghost" mb="2" leftIcon={<FaThumbsUp />}>
-          Likes
-        </Button>
-        <Button variant="ghost" mb="2" leftIcon={<FaUser />}>
-          Profile
-        </Button>
+      <Button variant="ghost" mb="2" leftIcon={<FaChartLine />}>
+            <Text pl="2">Dashboard</Text>
+          </Button>
+          <Button
+            variant="ghost"
+            mb="2"
+            leftIcon={<FaNewspaper />}
+            onClick={onSubToggle}
+          >
+            <Text pl="2">News</Text>
+          </Button>
+
+          {/* Render the Add Post button inside a slide fade */}
+          <Box>
+            <SlideFade in={isSubOpen}>
+              {isSubOpen && (
+                <>
+                  <Button
+                    variant="ghost"
+                    mb="2"
+                    leftIcon={<FaPlusSquare />}
+                    onClick={handleAddPostClick}
+                  >
+                    <Text pl="2">Add Post</Text>
+                  </Button>
+                </>
+              )}
+            </SlideFade>
+          </Box>
+       <Button variant="ghost" mb="2" leftIcon={<FaComments />}>
+            <Text pl="2">Forum</Text>
+          </Button>
+          <Button variant="ghost" mb="2" leftIcon={<FaFolderOpen />}>
+            <Text pl="2">Your Projects</Text>
+          </Button>
+          <Button variant="ghost" mb="2" leftIcon={<FaColumns />}>
+            <Text pl="2">Kanban</Text>
+          </Button>
+          <Button variant="ghost" mb="2" leftIcon={<FaThumbsUp />}>
+            <Text pl="2">Likes</Text>
+          </Button>
+          <Button variant="ghost" mb="2" leftIcon={<FaUser />}>
+            <Text pl="2">Profile</Text>
+          </Button>
       </Box>
     </Box>
   );
