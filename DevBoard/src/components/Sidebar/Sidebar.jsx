@@ -1,9 +1,6 @@
 // Import React and useState hooks from the react library
 import React, { useState } from 'react';
 
-// Import the Sidebar.scss stylesheet
-import './Sidebar.scss';
-
 // Import various Chakra-UI components, as well as a few React icons
 import {
   Box,
@@ -26,7 +23,7 @@ import {
   FaPlusSquare,
 } from 'react-icons/fa';
 
-// Create a functional component called Sidebar and pass in a prop called isOpen
+
 const Sidebar = ({ isOpen }) => {
   // Destructure the isOpen property from the useDisclosure hook
   const { isOpen: isSubOpen, onToggle: onSubToggle } = useDisclosure();
@@ -39,49 +36,41 @@ const Sidebar = ({ isOpen }) => {
     setShowAddPost(!showAddPost);
   };
 
-  // Render the Sidebar component
-  return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-      }}
-    >
-      <Box
-        bg="gray.200"
-        w="64"
-        h="full"
-        pos="fixed"
-        top="0"
-        left="0"
-        overflowY="auto"
-        transition="ease-in-out .2s"
-        transform={isOpen ? 'translateX(0)' : '-translateX(100%)'}
-      >
-        {/* Render the header  */}
-        <Flex p="4" alignItems="center" justify={'center'}>
-          <Text fontSize="xl" fontWeight="bold">
-            DevBoard
-          </Text>
-        </Flex>
 
-        {/* Render the menu items */}
-        <Box
-          p="4"
-          pl="30"
-          display="flex"
-          flexDirection="column"
-          alignItems="flex-start"
-        >
-          <Button variant="ghost" mb="2" leftIcon={<FaChartLine />}>
+  return (
+    <Box
+      h="full"
+      boxShadow="base"
+      overflowY="auto"
+      transition="ease-in-out .2s"
+      transform={isOpen ? 'translateX(0)' : '-translateX(100%)'}
+      bgColor="white"
+      borderRadius="md"
+    >
+      <Flex p="4" alignItems="center" justify="center" >
+        <Text fontSize="xl" fontWeight="600" mt="5" bgGradient='linear(to-l, #373B44, #4286f4)' bgClip="text">
+          DevBoard
+        </Text>
+      </Flex>
+      <Box
+        p="4"
+        pl="30"
+        display="flex"
+        flexDirection="column"
+        alignItems="flex-start"
+      >
+      <Button variant="ghost" mb="2" leftIcon={<FaChartLine />} fontWeight="400" >
+
             <Text pl="2">Dashboard</Text>
           </Button>
           <Button
             variant="ghost"
-            mb="2"
+
+            mb="4"
             leftIcon={<FaNewspaper />}
             onClick={onSubToggle}
+            fontWeight="400"
+
           >
             <Text pl="2">News</Text>
           </Button>
@@ -93,9 +82,11 @@ const Sidebar = ({ isOpen }) => {
                 <>
                   <Button
                     variant="ghost"
-                    mb="2"
+                    mb="4"
                     leftIcon={<FaPlusSquare />}
                     onClick={handleAddPostClick}
+                    fontWeight="400"
+
                   >
                     <Text pl="2">Add Post</Text>
                   </Button>
@@ -103,27 +94,33 @@ const Sidebar = ({ isOpen }) => {
               )}
             </SlideFade>
           </Box>
-
-          <Button variant="ghost" mb="2" leftIcon={<FaComments />}>
+          
+       <Button variant="ghost" mb="4" leftIcon={<FaComments />} fontWeight="400" >
             <Text pl="2">Forum</Text>
           </Button>
-          <Button variant="ghost" mb="2" leftIcon={<FaFolderOpen />}>
+          <Button variant="ghost" mb="4" leftIcon={<FaFolderOpen />} fontWeight="400" >
             <Text pl="2">Your Projects</Text>
           </Button>
-          <Button variant="ghost" mb="2" leftIcon={<FaColumns />}>
+          <Button variant="ghost" mb="4" leftIcon={<FaColumns />} fontWeight="400" >
             <Text pl="2">Kanban</Text>
           </Button>
-          <Button variant="ghost" mb="2" leftIcon={<FaThumbsUp />}>
+          <Button variant="ghost" mb="4" leftIcon={<FaThumbsUp />}fontWeight="400" >
             <Text pl="2">Likes</Text>
           </Button>
-          <Button variant="ghost" mb="2" leftIcon={<FaUser />}>
+          <Button variant="ghost" mb="4" leftIcon={<FaUser />} fontWeight="400" >
             <Text pl="2">Profile</Text>
           </Button>
-        </Box>
       </Box>
-    </div>
+    </Box>
   );
 };
 
-// Export the Sidebar component
-export default Sidebar;
+// const Layout = ({ children }) => {
+//   const { isOpen, onOpen, onClose } = useDisclosure();
+
+//   return (
+    
+//   );
+// };
+
+ export default Sidebar;
