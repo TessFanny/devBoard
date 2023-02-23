@@ -26,7 +26,7 @@ import {
 import PropTypes from 'prop-types';
 
 
-const Sidebar = ({ isOpen }) => {
+const Sidebar = ({ isOpen, setIsLoading }) => {
   // Destructure the isOpen property from the useDisclosure hook
   const { isOpen: isSubOpen, onToggle: onSubToggle } = useDisclosure();
 
@@ -37,6 +37,14 @@ const Sidebar = ({ isOpen }) => {
   const handleAddPostClick = () => {
     setShowAddPost(!showAddPost);
   };
+
+  const handleLinkClick = () => {
+    setIsLoading(true);
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 500); // 2000 millisecondes (soit 2 secondes) pour le délai de chargement
+  };
+  
 
   return (
     <Box
@@ -107,7 +115,7 @@ const Sidebar = ({ isOpen }) => {
           <Button variant="ghost" mb="4" leftIcon={<FaColumns />} fontWeight="400" onClick={handleLinkClick} >
             <Text pl="2">Kanban</Text>
           </Button>
-          <Button variant="ghost" mb="4" leftIcon={<FaThumbsUp />}fontWeight="400" onClick={handleLinkClick} >
+          <Button variant="ghost" mb="4" leftIcon={<FaThumbsUp />} fontWeight="400" onClick={handleLinkClick} >
             <Text pl="2">Likes</Text>
           </Button>
           <Button variant="ghost" mb="4" leftIcon={<FaUser />} fontWeight="400" onClick={handleLinkClick} >
