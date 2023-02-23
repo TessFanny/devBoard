@@ -28,6 +28,48 @@ import {
 } from '../../features/register/register';
 // Hooks for state management
 export default function Register() {
+  const [rerender, setRerender] = useState(false);
+  const CLIENT_ID = import.meta.env.VITE_CLIENT_ID;
+  useEffect(() => {
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const codeParam = urlParams.get('code');
+
+    if (codeParam && localStorage.getItem('accessToken') === null) {
+      async function getAccessToken() {
+        const response = await fetch(
+          'http://localhost:3000/getAccessToken?code=' + codeParam
+        )
+          .then((response) => {
+            return response.json();
+          })
+          .then((data) => {
+            if (data.access_token) {
+              localStorage.setItem('accessToken', data.access_token);
+              setRerender(!rerender);
+              getUserData();
+            }
+          });
+      }
+      getAccessToken();
+    }
+  }, []);
+
+  async function getUserData() {
+    const response = await fetch('http://localhost:3000/getUserData', {
+      method: 'GET',
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('accessToken'), // Bearer ACCESSTOKEN
+      },
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data);
+      });
+  }
+
   const [showPassword, setShowPassword] = useState(false);
   const [isEmailValid, setEmailValid] = useState(true);
   const [isPasswordValid, setPasswordValid] = useState(true);
@@ -44,8 +86,7 @@ export default function Register() {
   // au moins un chiffre (?=.*[0-9])
   // au moins un caractère spécial (?=.*[!@#$%^&*])
   // une longueur minimale de 8 caractères {8,}.
-  const passwordRegex =
-    /^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/;
+  const passwordRegex = /^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/;
   const handleSubmit = (evt) => {
     evt.preventDefault();
 

@@ -1,13 +1,10 @@
-import './App.css';
-import React from 'react';
-import Register from '../Register/Register.jsx';
-
-function App() {
+import { useState } from 'react';
+import { Box, useBreakpointValue } from '@chakra-ui/react';
+import Sidebar from '../Sidebar/Sidebar';
+export default function App() {
   return (
-    <div className="app">
-      <Register />
-    </div>
+    <>
+      <Sidebar />
+    </>
   );
 }
-
-export default App;
