@@ -23,6 +23,7 @@ import {
   FaPlusSquare,
 } from 'react-icons/fa';
 
+
 const Sidebar = ({ isOpen }) => {
   // Destructure the isOpen property from the useDisclosure hook
   const { isOpen: isSubOpen, onToggle: onSubToggle } = useDisclosure();
@@ -34,6 +35,7 @@ const Sidebar = ({ isOpen }) => {
   const handleAddPostClick = () => {
     setShowAddPost(!showAddPost);
   };
+
 
   return (
     <Box
@@ -58,14 +60,17 @@ const Sidebar = ({ isOpen }) => {
         alignItems="flex-start"
       >
       <Button variant="ghost" mb="2" leftIcon={<FaChartLine />} fontWeight="400" >
+
             <Text pl="2">Dashboard</Text>
           </Button>
           <Button
             variant="ghost"
+
             mb="4"
             leftIcon={<FaNewspaper />}
             onClick={onSubToggle}
             fontWeight="400"
+
           >
             <Text pl="2">News</Text>
           </Button>
@@ -81,6 +86,7 @@ const Sidebar = ({ isOpen }) => {
                     leftIcon={<FaPlusSquare />}
                     onClick={handleAddPostClick}
                     fontWeight="400"
+
                   >
                     <Text pl="2">Add Post</Text>
                   </Button>
@@ -88,6 +94,7 @@ const Sidebar = ({ isOpen }) => {
               )}
             </SlideFade>
           </Box>
+          
        <Button variant="ghost" mb="4" leftIcon={<FaComments />} fontWeight="400" >
             <Text pl="2">Forum</Text>
           </Button>
