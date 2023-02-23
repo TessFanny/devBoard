@@ -12,13 +12,15 @@ import {
   Heading,
   Text,
   useColorModeValue,
-  Link,
   Center,
   FormErrorMessage,
-} from '../../import/import';
-import { useState, useDispatch, useSelector } from '../../import/import';
-import { FaGithub } from '../../import/import';
-import { ViewIcon, ViewOffIcon } from '../../import/import';
+} from '@chakra-ui/react';
+import { useEffect, useState } from 'react';
+import { FaGithub } from 'react-icons/fa';
+import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import {
   changeEmailValue,
   changePasswordValue,
@@ -27,7 +29,49 @@ import {
   registerUser,
 } from '../../features/register/register';
 // Hooks for state management
-export default function Register() {
+function Register() {
+  const [rerender, setRerender] = useState(false);
+  const CLIENT_ID = import.meta.env.VITE_CLIENT_ID;
+  useEffect(() => {
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const codeParam = urlParams.get('code');
+
+    if (codeParam && localStorage.getItem('accessToken') === null) {
+      async function getAccessToken() {
+        const response = await fetch(
+          'http://localhost:3000/getAccessToken?code=' + codeParam
+        )
+          .then((response) => {
+            return response.json();
+          })
+          .then((data) => {
+            if (data.access_token) {
+              localStorage.setItem('accessToken', data.access_token);
+              setRerender(!rerender);
+              getUserData();
+            }
+          });
+      }
+      getAccessToken();
+    }
+  }, []);
+
+  async function getUserData() {
+    const response = await fetch('http://localhost:3000/getUserData', {
+      method: 'GET',
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('accessToken'), // Bearer ACCESSTOKEN
+      },
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data);
+      });
+  }
+
   const [showPassword, setShowPassword] = useState(false);
   const [isEmailValid, setEmailValid] = useState(true);
   const [isPasswordValid, setPasswordValid] = useState(true);
@@ -84,6 +128,11 @@ export default function Register() {
   // Cette nouvelle fonction prend un argument (evt) et utilise dispatch et actionCreator pour créer et envoyer une action Redux
   const handleInputChange = (dispatch, actionCreator) => (evt) => {
     dispatch(actionCreator(evt.target.value));
+  };
+  const HandleGitHubAuth = async () => {
+    window.location.assign(
+      `https://github.com/login/oauth/authorize?client_id=${CLIENT_ID}`
+    );
   };
   return (
     <Flex
@@ -218,6 +267,7 @@ export default function Register() {
                   bg: 'black.500',
                   border: 'transparent',
                 }}
+                onClick={HandleGitHubAuth}
               >
                 <Center>                
                   <Text>Sign in with Github</Text>
@@ -227,9 +277,9 @@ export default function Register() {
             <Stack pt={6}>
               <Text align="center">
                 Already a user?{' '}
-                <Link href="/login" color="blue.400">
+                {/* <Link href="/login" color="blue.400">
                   Login
-                </Link>
+                </Link> */}
               </Text>
             </Stack>
           </Stack>
@@ -238,3 +288,4 @@ export default function Register() {
     </Flex>
   );
 }
+export default Register;
