@@ -1,5 +1,6 @@
 // Import React and useState hooks from the react library
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 // Import various Chakra-UI components, as well as a few React icons
 import {
@@ -22,6 +23,7 @@ import {
   FaUser,
   FaPlusSquare,
 } from 'react-icons/fa';
+import PropTypes from 'prop-types';
 
 
 const Sidebar = ({ isOpen }) => {
@@ -35,7 +37,6 @@ const Sidebar = ({ isOpen }) => {
   const handleAddPostClick = () => {
     setShowAddPost(!showAddPost);
   };
-
 
   return (
     <Box
@@ -84,7 +85,7 @@ const Sidebar = ({ isOpen }) => {
                     variant="ghost"
                     mb="4"
                     leftIcon={<FaPlusSquare />}
-                    onClick={handleAddPostClick}
+                    onClick={handleLinkClick}
                     fontWeight="400"
 
                   >
@@ -98,16 +99,18 @@ const Sidebar = ({ isOpen }) => {
        <Button variant="ghost" mb="4" leftIcon={<FaComments />} fontWeight="400" >
             <Text pl="2">Forum</Text>
           </Button>
-          <Button variant="ghost" mb="4" leftIcon={<FaFolderOpen />} fontWeight="400" >
-            <Text pl="2">Your Projects</Text>
-          </Button>
-          <Button variant="ghost" mb="4" leftIcon={<FaColumns />} fontWeight="400" >
+          <Link to="/repositories">
+            <Button variant="ghost" mb="4" leftIcon={<FaFolderOpen />} fontWeight="400" onClick={handleLinkClick} >
+              <Text pl="2">Your Projects</Text>
+            </Button>
+          </Link>
+          <Button variant="ghost" mb="4" leftIcon={<FaColumns />} fontWeight="400" onClick={handleLinkClick} >
             <Text pl="2">Kanban</Text>
           </Button>
-          <Button variant="ghost" mb="4" leftIcon={<FaThumbsUp />}fontWeight="400" >
+          <Button variant="ghost" mb="4" leftIcon={<FaThumbsUp />}fontWeight="400" onClick={handleLinkClick} >
             <Text pl="2">Likes</Text>
           </Button>
-          <Button variant="ghost" mb="4" leftIcon={<FaUser />} fontWeight="400" >
+          <Button variant="ghost" mb="4" leftIcon={<FaUser />} fontWeight="400" onClick={handleLinkClick} >
             <Text pl="2">Profile</Text>
           </Button>
       </Box>
@@ -115,12 +118,8 @@ const Sidebar = ({ isOpen }) => {
   );
 };
 
-// const Layout = ({ children }) => {
-//   const { isOpen, onOpen, onClose } = useDisclosure();
-
-//   return (
-    
-//   );
-// };
+Sidebar.propTypes = {
+  setIsLoading : PropTypes.func,
+};
 
  export default Sidebar;
