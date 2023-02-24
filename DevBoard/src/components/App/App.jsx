@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import { Box, Flex, useBreakpointValue, Text } from '@chakra-ui/react';
 import Loader from '../Loader/Loader';
 import Sidebar from '../Sidebar/Sidebar';
@@ -8,6 +8,7 @@ import Register from '../Register/Register';
 import Login from '../Login/Login';
 import Repositories from '../repositories/repositories';
 import Profile from '../Profile/Profile';
+import { useSelector } from 'react-redux';
 
 // App component
 export default function App() {
@@ -33,7 +34,7 @@ export default function App() {
             <Route path="/repositories" element={<Repositories />} />
             <Route path="/profile" element={<Profile />} />
           </Routes>
-)}
+        )}
       </Box>
     </Flex>
   );

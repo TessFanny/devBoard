@@ -14,7 +14,6 @@ export const login = createAsyncThunk(
     const { token, newUser } = response.data;
     // Store the received token in local storage
     localStorage.setItem('token', token);
-    console.log(newUser);
     return { newUser };
   },
 );
@@ -57,13 +56,14 @@ export const loginSlice = createSlice({
       // Reducer for handling the fulfilled state of the login request
       .addCase(login.fulfilled, (state, action) => {
         state.user = action.payload.newUser;
-        state.status = 'succeeded';
+        state.status = true;
       })
       // Reducer for handling the rejected state of the login request
       .addCase(login.rejected, (state, action) => {
-        state.status = 'failed';
+        state.status = false;
         state.error = action.error.message;
       });
+
   },
 });
 

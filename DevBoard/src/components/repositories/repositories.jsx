@@ -1,6 +1,31 @@
 import { Flex, Text, SimpleGrid, Card, CardHeader, CardBody, CardFooter, Heading, Button } from "@chakra-ui/react";
+import { useState } from "react";
+import { useSelector } from "react-redux";
+import Notification from '../Notification/Notification';
 
 function Repositories() {
+  const { status } = useSelector((state) => state.login);
+  const localStoragePopup = localStorage.getItem('popupDisplayed');
+  const popup = () => {
+    if(!localStoragePopup && status !== "loading") {
+      localStorage.setItem('popupDisplayed', true)
+      return status ? (
+        <Notification
+         title="Successfully Connected"
+         description="You are now connected !"
+         status="success"
+        />
+      ) : (
+        <Notification
+         title="Oupss Error"
+         description="Something went wrong... Maybe try again"
+         status="error"
+        />
+      )
+  
+      
+    }
+  }
   return (
     // Flex container to center and add margin to the grid of Cards
     <Flex w="98%" mt={10}>
@@ -67,7 +92,9 @@ function Repositories() {
           </CardFooter>
         </Card>
       </SimpleGrid>
-    </Flex>
+      {popup()}
+     </Flex>
+
   );
 }
 

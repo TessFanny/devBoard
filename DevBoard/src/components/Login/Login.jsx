@@ -10,9 +10,11 @@ import {
 import { useDispatch, useSelector } from 'react-redux'; // Importing two hooks from Redux
 import { useState } from 'react'; // Importing useState hook
 import { changeEmailValue, changePasswordValue, login } from '../../features/user/user'; // Importing Redux actions
+import { useNavigate } from 'react-router-dom';
 import PasswordInput from './Password/Password'; // Importing a custom component
 
 function Login() {
+  const navigateto = useNavigate();
   // Use the useDispatch and useSelector hooks to access the store and dispatch actions
   const dispatch = useDispatch();
   const user = useSelector((state) => state.login.user);
@@ -54,6 +56,8 @@ function Login() {
     setPasswordValid(true); // Reset the password validation state variable
     dispatch(login({ email, password }));
     // Dispatch the login action to the store with the email and password as arguments
+    navigateto('/repositories');
+    
   };
 
   // Render the login form using Chakra-UI components
