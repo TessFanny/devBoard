@@ -7,21 +7,24 @@ export const login = createAsyncThunk(
   'user/login',
   async ({ email, password }) => {
     // Make a POST request to a login endpoint with email and password
-    const response = await axios.post('http://localhost:3001/login', {
+    const response = await axios.post('http://tessfanny-server.eddi.cloud:8080/login', {
       email,
       password,
     });
-    const { token } = response.data;
+    const { token, newUser } = response.data;
     // Store the received token in local storage
     localStorage.setItem('token', token);
+    console.log(newUser);
+    return { newUser };
   },
 );
 
 // Define the initial state of the user slice
 const initialState = {
-  email: '',
-  password: '',
-  logged: false,
+  user: {
+    email: "",
+    password: "",
+  },
 };
 
 // Create the user slice
@@ -31,17 +34,15 @@ export const loginSlice = createSlice({
   reducers: {
     // Reducer for changing the email value in state
     changeEmailValue: (state, action) => {
-      state.email = action.payload;
+      state.user.email = action.payload;
     },
     // Reducer for changing the password value in state
     changePasswordValue: (state, action) => {
-      state.password = action.payload;
+      state.user.password = action.payload;
     },
     // Reducer for logging out the user
     logout: (state) => {
-      state.email = '';
-      state.password = '';
-      state.logged = false;
+      state.user = null;
       localStorage.removeItem('token');
     },
   },
@@ -54,9 +55,9 @@ export const loginSlice = createSlice({
         state.error = null;
       })
       // Reducer for handling the fulfilled state of the login request
-      .addCase(login.fulfilled, (state) => {
+      .addCase(login.fulfilled, (state, action) => {
+        state.user = action.payload.newUser;
         state.status = 'succeeded';
-        state.logged = true;
       })
       // Reducer for handling the rejected state of the login request
       .addCase(login.rejected, (state, action) => {

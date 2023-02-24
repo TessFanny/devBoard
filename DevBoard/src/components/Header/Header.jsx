@@ -1,6 +1,7 @@
 import { Flex, Text, Box, IconButton } from "@chakra-ui/react";
 import { FaUser } from "react-icons/fa";
 import { IoMdSettings } from "react-icons/io"
+import { Link } from "react-router-dom";
 
 function Header() {
   return (
@@ -18,8 +19,9 @@ function Header() {
     >
       <Text>Dashboard</Text>
       <Box display="flex" alignItems="center" gap="2"> 
-        <FaUser />
+        <Link to="/signup">
         <Text>Sign In</Text> 
+        </Link>
         <IconButton aria-label="Settings" icon={<IoMdSettings />} />
       </Box>
     </Flex>

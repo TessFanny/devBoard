@@ -4,11 +4,14 @@ import { Box, Flex, useBreakpointValue, Text } from '@chakra-ui/react';
 import Loader from '../Loader/Loader';
 import Sidebar from '../Sidebar/Sidebar';
 import Header from '../Header/Header';
+import Register from '../Register/Register';
+import Login from '../Login/Login';
 import Repositories from '../repositories/repositories';
+import Profile from '../Profile/Profile';
 
 // App component
 export default function App() {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   return (
     // Flex container for Sidebar and main content area
     <Flex>
@@ -25,7 +28,10 @@ export default function App() {
           <Loader />
         ) : (
           <Routes>
+            <Route path="/signup" element={<Register />} />
+            <Route path="/login" element={<Login />} />
             <Route path="/repositories" element={<Repositories />} />
+            <Route path="/profile" element={<Profile />} />
           </Routes>
 )}
       </Box>

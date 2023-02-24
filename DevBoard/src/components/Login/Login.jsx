@@ -15,7 +15,8 @@ import PasswordInput from './Password/Password'; // Importing a custom component
 function Login() {
   // Use the useDispatch and useSelector hooks to access the store and dispatch actions
   const dispatch = useDispatch();
-  const { email, password } = useSelector((state) => state.user);
+  const user = useSelector((state) => state.user.user);
+  const { email, password } = user;
 
   // Create state variables for email and password validation
   const [isEmailValid, setIsEmailValid] = useState(true);

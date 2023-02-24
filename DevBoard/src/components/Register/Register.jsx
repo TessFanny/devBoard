@@ -14,6 +14,7 @@ import {
   useColorModeValue,
   Center,
   FormErrorMessage,
+  Link,
 } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { FaGithub } from 'react-icons/fa';
@@ -120,7 +121,7 @@ function Register() {
         setEmailValid(true);
         setPasswordValid(true);
         setPasswordConfirmed(true);
-        dispatch(registerUser({ username, email, password }));
+        dispatch(registerUser({ username, email, password, passwordConfirm : confirmPassword }));
     }
   };
   // Cette fonction prend deux arguments : dispatch et actionCreator
@@ -277,9 +278,9 @@ function Register() {
             <Stack pt={6}>
               <Text align="center">
                 Already a user?{' '}
-                {/* <Link href="/login" color="blue.400">
+                <Link href="/login" color="blue.400">
                   Login
-                </Link> */}
+                </Link>
               </Text>
             </Stack>
           </Stack>

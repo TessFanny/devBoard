@@ -2,16 +2,18 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-// Define an asynchronous thunk for login
+// Define an asynchronous thunk for register
 export const registerUser = createAsyncThunk(
   'register/registerUser',
-  async ({ username, email, password }) => {
-    // Make a POST request to a login endpoint with email and password
-    const response = await axios.post('http://localhost:3001/register', {
+  async ({ username, email, password, passwordConfirm }) => {
+    // Make a POST request to a register endpoint with email and password
+    const response = await axios.post('http://tessfanny-server.eddi.cloud:8080/register', {
       username,
       email,
       password,
+      passwordConfirm,
     });
+    console.log(response);
   }
 );
 
@@ -42,25 +44,25 @@ export const registerSlice = createSlice({
     changeConfirmPasswordValue: (state, action) => {
       state.confirmPassword = action.payload;
     },
-    //   },
-    //   // Define extra reducers for handling the login async thunk
-    //   extraReducers: (builder) => {
-    //     builder
-    //       // Reducer for handling the pending state of the login request
-    //       .addCase(login.pending, (state) => {
-    //         state.status = 'loading';
-    //         state.error = null;
-    //       })
-    //       // Reducer for handling the fulfilled state of the login request
-    //       .addCase(login.fulfilled, (state) => {
-    //         state.status = 'succeeded';
-    //         state.logged = true;
-    //       })
-    //       // Reducer for handling the rejected state of the login request
-    //       .addCase(login.rejected, (state, action) => {
-    //         state.status = 'failed';
-    //         state.error = action.error.message;
-    //       });
+      },
+      // Define extra reducers for handling the register async thunk
+      extraReducers: (builder) => {
+        builder
+          // Reducer for handling the pending state of the register request
+          .addCase(registerUser.pending, (state) => {
+            state.status = 'loading';
+            state.error = null;
+          })
+          // Reducer for handling the fulfilled state of the register request
+          .addCase(registerUser.fulfilled, (state) => {
+            state.status = 'succeeded';
+            state.password = null;
+          })
+          // Reducer for handling the rejected state of the register request
+          .addCase(registerUser.rejected, (state, action) => {
+            state.status = 'failed';
+            state.error = action.error.message;
+          });
   },
 });
 
