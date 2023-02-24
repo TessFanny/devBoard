@@ -1,9 +1,11 @@
+import { useDispatch, useSelector } from 'react-redux'; // Importing two hooks from Redux
 import { Flex, Box, Text, Image, Editable, EditablePreview, Input, EditableInput, useEditableControls, IconButton, ButtonGroup } from "@chakra-ui/react";
 import { FaEdit, FaCheck, FaWindowClose } from "react-icons/fa";
 import img from "../../../assets/profile.png";
 
 function Username() {
 
+    const { username } = useSelector((state) => state.login.user);
     function EditableControls() {
         const {
           isEditing,
@@ -28,7 +30,7 @@ function Username() {
             display="flex"
             alignItems="center"
             justifyContent="space-around"
-            defaultValue='Username'
+            defaultValue={username}
             fontSize='2xl'
             isPreviewFocusable={false}
             mt="2"
