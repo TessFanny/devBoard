@@ -42,14 +42,15 @@ function Profile() {
                         borderRadius="md"
                         mb="10"
                         />
-                    <Username />
+                    
                 </Box>
             </Box>
             
             <Box w="50%" display="flex">
-                <Box w="100%" display="flex" flexDirection="column" alignItems="flex-end" justifyContent="center" padding="10" height="50%">
-                    <Box display="flex" justifyContent="space-around" alignItems="center" w="100%">
+                <Box w="100%" display="flex" flexDirection="column" alignItems="flex-end" justifyContent="flex-start" height="100%">
+                    <Box display="flex" justifyContent="space-around" alignItems="flex-start" w="100%">
                         <Box>
+                            <Username />
                             <Email />
                             <Github />
                             </Box>
@@ -59,11 +60,16 @@ function Profile() {
                             <Lastname />
                         </Box>
                     </Box>
-                    <Button colorScheme='linkedin' mt="10" onClick={handleSubmit} isLoading={isLoading}>Submit</Button>
+                        <Box w="100%" display="flex" justifyContent="center">
+                        <Box w="80%">
+                            <Button mt="10" w="100%" colorScheme='linkedin' onClick={handleSubmit} isLoading={isLoading}>Submit</Button>
+                        </Box>
+                        </Box>
+                            
                 </Box>
             </Box>
             </Box>
-            {notification && <Notification title="Modification réussite" description="Votre modification à bien été prise en compte !" status="success" />}
+            {notification && <Notification title="Saved !" description="Your changes have been saved" status="success" />}
         </Flex>
     )
 }

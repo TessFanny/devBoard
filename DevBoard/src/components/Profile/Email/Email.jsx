@@ -13,7 +13,7 @@ function Email() {
     
     return(
       <>
-      <Text pl="0">Email adress</Text>
+      <Text pl="0" mt="10">Email adress</Text>
       <Input variant='filled' placeholder='Email adress'  mt="5" value={email} onChange={handleEmailChange} />
       </>
     )

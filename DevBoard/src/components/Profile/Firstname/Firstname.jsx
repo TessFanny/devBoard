@@ -9,7 +9,7 @@ function Firstname() {
     
     return(
       <>
-      <Text pl="0">First name</Text>
+      <Text pl="0" mt="10">First name</Text>
       <Input variant='filled' placeholder='First name'  mt="5" />
       </>
     )
