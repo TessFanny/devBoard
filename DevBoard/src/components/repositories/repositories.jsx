@@ -38,7 +38,7 @@ function Repositories() {
     <Flex w="98%" mt={10}>
       {/* Grid of Cards with 4 columns and responsive width */}
       <SimpleGrid spacing={4} templateColumns='repeat(auto-fill, minmax(200px, 1fr))' w='100%'>
-        {
+        {repositories && 
           repositories.map((repo) => (
             <Card key={repo.id}>
           <CardHeader>
