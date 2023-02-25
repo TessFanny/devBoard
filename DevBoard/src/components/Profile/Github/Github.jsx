@@ -5,7 +5,7 @@ import img from "../../../assets/profile.png";
 
 function Github() {
 
-  const { email } = useSelector((state) => state.login.user);
+  const { github } = useSelector((state) => state.login.user);
     
     return(
       <>
@@ -15,7 +15,7 @@ function Github() {
       pointerEvents='none'
       children={<FaGithub color="grey"/>}
     />
-    <Input variant='filled' placeholder='username' isDisabled={true} />
+    <Input variant='filled' placeholder='username' isDisabled={true} value={github} />
   </InputGroup>
       </>
     )

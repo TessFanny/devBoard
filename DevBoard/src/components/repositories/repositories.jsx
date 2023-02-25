@@ -1,11 +1,20 @@
-import { Flex, Text, SimpleGrid, Card, CardHeader, CardBody, CardFooter, Heading, Button, position } from "@chakra-ui/react";
+import { Flex, Text, SimpleGrid, Card, CardHeader, CardBody, CardFooter, Heading, Button, position, IconButton } from "@chakra-ui/react";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { SlRefresh } from 'react-icons/sl'
+import { useDispatch, useSelector } from "react-redux";
+import { getRepo, getUserGithubRepos } from "../../features/user/user";
 import Notification from '../Notification/Notification';
 
 function Repositories() {
+  const { repositories } = useSelector((state) => state.login.user);
   const { status } = useSelector((state) => state.login);
+  const dispatch = useDispatch();
   const localStoragePopup = localStorage.getItem('popupDisplayed');
+
+  const loadRepo = async () => {
+    const repo = await getUserGithubRepos();
+    dispatch(getRepo(repo));
+  }
 
   const popup = () => {
     if(!localStoragePopup && status !== "loading") {
@@ -29,67 +38,24 @@ function Repositories() {
     <Flex w="98%" mt={10}>
       {/* Grid of Cards with 4 columns and responsive width */}
       <SimpleGrid spacing={4} templateColumns='repeat(auto-fill, minmax(200px, 1fr))' w='100%'>
-        {/* Card #1 */}
-        <Card>
-          {/* Card header with title */}
+        {
+          repositories.map((repo) => (
+            <Card key={repo.id}>
           <CardHeader>
-            <Heading size='md'> Repositories</Heading>
+            <Heading size='md'>{repo.name}</Heading>
           </CardHeader>
-          {/* Card body with text */}
           <CardBody>
-            <Text>Lorem ipsum here is your repo #</Text>
+            <Text>{repo.description}</Text>
           </CardBody>
-          {/* Card footer with button */}
           <CardFooter>
-            <Button>View here</Button>
+            <Button as="a" href={repo.html_url} target="_blank">View here</Button>
           </CardFooter>
         </Card>
-        {/* Card #2 */}
-        <Card>
-          {/* Card header with title */}
-          <CardHeader>
-            <Heading size='md'> Repositories</Heading>
-          </CardHeader>
-          {/* Card body with text */}
-          <CardBody>
-            <Text>Lorem ipsum here is your repo #</Text>
-          </CardBody>
-          {/* Card footer with button */}
-          <CardFooter>
-            <Button>View here</Button>
-          </CardFooter>
-        </Card>
-        {/* Card #3 */}
-        <Card>
-          {/* Card header with title */}
-          <CardHeader>
-            <Heading size='md'> Repositories</Heading>
-          </CardHeader>
-          {/* Card body with text */}
-          <CardBody>
-            <Text>Lorem ipsum here is your repo #</Text>
-          </CardBody>
-          {/* Card footer with button */}
-          <CardFooter>
-            <Button>View here</Button>
-          </CardFooter>
-        </Card>
-        {/* Card #4 */}
-        <Card>
-          {/* Card header with title */}
-          <CardHeader>
-            <Heading size='md'> Repositories</Heading>
-          </CardHeader>
-          {/* Card body with text */}
-          <CardBody>
-            <Text>Lorem ipsum here is your repo #</Text>
-          </CardBody>
-          {/* Card footer with button */}
-          <CardFooter>
-            <Button>View here</Button>
-          </CardFooter>
-        </Card>
+          ))
+        }
+
       </SimpleGrid>
+      <IconButton aria-label='refresh repo' icon={<SlRefresh />} onClick={loadRepo} />
       {popup()}
      </Flex>
 

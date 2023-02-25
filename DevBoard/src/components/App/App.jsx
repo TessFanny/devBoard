@@ -29,7 +29,7 @@ export default function App() {
           <Loader />
         ) : (
           <Routes>
-            <Route path="/signup" element={<Register />} />
+            <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
             <Route path="/repositories" element={<Repositories />} />
             <Route path="/profile" element={<Profile />} />

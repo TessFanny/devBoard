@@ -42,7 +42,7 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
     setIsLoading(true);
     setTimeout(() => {
       setIsLoading(false);
-    }, 500); // 2000 millisecondes (soit 2 secondes) pour le délai de chargement
+    }, 500);
   };
   
 

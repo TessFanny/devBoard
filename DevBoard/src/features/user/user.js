@@ -41,6 +41,39 @@ export const modifyUser = createAsyncThunk(
   },
 );
 
+export async function getUserGithubData() {
+  const response = await fetch('http://tessfanny-server.eddi.cloud:8080/getUserData', {
+    method: 'GET',
+    headers: {
+      Authorization: 'Bearer ' + localStorage.getItem('accessToken'), // Bearer ACCESSTOKEN
+    },
+  })
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      console.log(data);
+      return data;
+    });
+    return response;
+}
+
+export async function getUserGithubRepos() {
+  const response = await fetch('http://tessfanny-server.eddi.cloud:8080/getUserRepos', {
+    method: 'GET',
+    headers: {
+      Authorization: 'Bearer ' + localStorage.getItem('accessToken'), // Bearer ACCESSTOKEN
+    },
+  })
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      return data;
+    });
+    return response;
+}
+
 // Define the initial state of the user slice
 const initialState = {
   user: {
@@ -61,6 +94,13 @@ export const loginSlice = createSlice({
     // Reducer for changing the password value in state
     changePasswordValue: (state, action) => {
       state.user.password = action.payload;
+    },
+    addGithub: (state, action) => {
+      state.user.github = action.payload;
+    },
+    getRepo: (state, action) => {
+      console.log(action.payload);
+      state.user.repositories = action.payload;
     },
     // Reducer for logging out the user
     logout: (state) => {
@@ -117,6 +157,8 @@ export const loginSlice = createSlice({
 export const {
   changeEmailValue,
   changePasswordValue,
+  addGithub,
+  getRepo,
   logout,
 } = loginSlice.actions;
 

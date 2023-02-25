@@ -12,7 +12,6 @@ function Header() {
   const { id } = useSelector((state) => state.login.user);
   const handleLogout = () => {
     dispatch(logout());
-    navigateto('/');
   }
   return (
     <Flex
@@ -30,11 +29,11 @@ function Header() {
       <Text>Dashboard</Text>
       <Box display="flex" alignItems="center" gap="2"> 
       {id ? (
-        <Link to="/logout">
+        <Link to="/">
         <IconButton aria-label="Log out" icon={<FiLogOut />} onClick={handleLogout} />
         </Link>
       ) : (
-        <Link to="/signup">
+        <Link to="/register">
         <Text>Sign In</Text> 
         </Link>
       )}
