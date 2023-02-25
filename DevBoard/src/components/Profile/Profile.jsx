@@ -11,7 +11,7 @@ function Profile() {
       
     return(
         <Flex w="98%" mt="10">
-            <Box w="20%">
+            <Box w="50%">
                 <Image
                   boxSize="200px"
                   src={img}
@@ -19,7 +19,7 @@ function Profile() {
                 />
             </Box>
 
-            <Box w="500px" display="flex">
+            <Box w="50%" display="flex">
                 <Card p="5" w="100%">
                     <Box display="flex" flexDirection="column" alignItems="flex-start">
                         <Username />

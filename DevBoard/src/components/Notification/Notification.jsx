@@ -9,6 +9,7 @@ function Notification({ title, description, status }) {
             status,
             duration: 9000,
             isClosable: true,
+            position: "bottom-right"
         })
     }
     return (
