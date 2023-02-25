@@ -5,21 +5,30 @@ import img from "../../assets/profile.png";
 import Username from "./Username/Username";
 import Github from "./Github/Github";
 import Email from "./Email/Email";
+import { useDispatch, useSelector } from "react-redux";
+import { modifyUser } from "../../features/user/user";
 
 function Profile() {
 
-      
+    const dispatch = useDispatch();
+    const { user } = useSelector((state) => state.login);
+    const handleSubmit = (evt) => {
+        evt.preventDefault();
+        console.log("handlesubmit");
+        dispatch(modifyUser({ user }));
+    } 
+
     return(
         <Flex w="98%" mt="10" h="80%">
             <Box w="20%" pr="10">
-            <Box display="flex" flexDirection="column" alignItems="flex-start">
-            <Image
-                  maxW="200px"
-                  src={img}
-                  borderRadius="md"
-                />
-                <Username />
-            </Box>
+                <Box display="flex" flexDirection="column" alignItems="flex-start">
+                    <Image
+                        maxW="200px"
+                        src={img}
+                        borderRadius="md"
+                        />
+                    <Username />
+                </Box>
             </Box>
             
             <Box w="50%" display="flex">
@@ -35,7 +44,7 @@ function Profile() {
                             <Lastname />
                         </Box>
                     </Box>
-                    <Button colorScheme='linkedin' mt="10">Submit</Button>
+                    <Button colorScheme='linkedin' mt="10" onClick={handleSubmit}>Submit</Button>
                 </Box>
             </Box>
         </Flex>

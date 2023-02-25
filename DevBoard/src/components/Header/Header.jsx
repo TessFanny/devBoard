@@ -1,9 +1,19 @@
 import { Flex, Text, Box, IconButton } from "@chakra-ui/react";
 import { FaUser } from "react-icons/fa";
 import { IoMdSettings } from "react-icons/io"
-import { Link } from "react-router-dom";
+import { FiLogOut } from "react-icons/fi"
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { logout } from "../../features/user/user";
 
 function Header() {
+  const navigateto = useNavigate();
+  const dispatch = useDispatch();
+  const { id } = useSelector((state) => state.login.user);
+  const handleLogout = () => {
+    dispatch(logout());
+    navigateto('/');
+  }
   return (
     <Flex
       h="10%" // Sets the height of the header
@@ -19,9 +29,15 @@ function Header() {
     >
       <Text>Dashboard</Text>
       <Box display="flex" alignItems="center" gap="2"> 
+      {id ? (
+        <Link to="/logout">
+        <IconButton aria-label="Log out" icon={<FiLogOut />} onClick={handleLogout} />
+        </Link>
+      ) : (
         <Link to="/signup">
         <Text>Sign In</Text> 
         </Link>
+      )}
         <IconButton aria-label="Settings" icon={<IoMdSettings />} />
       </Box>
     </Flex>

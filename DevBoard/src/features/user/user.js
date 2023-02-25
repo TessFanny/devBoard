@@ -17,6 +17,29 @@ export const login = createAsyncThunk(
     return { newUser };
   },
 );
+// Define an asynchronous thunk for login
+export const modifyUser = createAsyncThunk(
+  'user/modifyUser',
+  async ({ user }) => {
+    const { id, firstname, lastname, username, email, image_path } = user;
+    // Make a patch request to a modify endpoint with user object
+    const response = await axios.patch(`http://tessfanny-server.eddi.cloud:8080/user/${id}`,
+    {
+      firstname,
+      lastname,
+      username,
+      email,
+      image_path,
+    }, {
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('token'), // Bearer ACCESSTOKEN
+      },
+    });
+    const modifiedUser = response.data;
+    // Store the received token in local storage
+    return { modifiedUser };
+  },
+);
 
 // Define the initial state of the user slice
 const initialState = {
@@ -41,8 +64,13 @@ export const loginSlice = createSlice({
     },
     // Reducer for logging out the user
     logout: (state) => {
-      state.user = null;
+      const user = {
+        email: "",
+        password: "",
+      }
+      state.user = user;
       localStorage.removeItem('token');
+      localStorage.removeItem('popupDisplayed');
     },
   },
   // Define extra reducers for handling the login async thunk
@@ -60,11 +88,29 @@ export const loginSlice = createSlice({
       })
       // Reducer for handling the rejected state of the login request
       .addCase(login.rejected, (state, action) => {
+        state.user.email = "";
+        state.user.password = "";
+        state.status = false;
+        state.error = action.error.message;
+      })
+      .addCase(modifyUser.pending, (state) => {
+        state.status = 'loading';
+        state.error = null;
+      })
+      // Reducer for handling the fulfilled state of the modify request
+      .addCase(modifyUser.fulfilled, (state, action) => {
+        state.user = action.payload.modifiedUser;
+        state.status = true;
+      })
+      // Reducer for handling the rejected state of the modify request
+      .addCase(modifyUser.rejected, (state) => {
+        // state.user = 
         state.status = false;
         state.error = action.error.message;
       });
 
   },
+  
 });
 
 // Export the actions created by the user slice
