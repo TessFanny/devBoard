@@ -1,4 +1,4 @@
-import { Flex, Box, Text, Image, Divider, Card } from "@chakra-ui/react";
+import { Flex, Box, Text, Image, Divider, Card, Input, Button } from "@chakra-ui/react";
 import Firstname from "./Firstname/Firstname";
 import Lastname from "./Lastname/Lastname";
 import img from "../../assets/profile.png";
@@ -10,32 +10,33 @@ function Profile() {
 
       
     return(
-        <Flex w="98%" mt="10">
-            <Box w="50%">
-                <Image
-                  boxSize="200px"
+        <Flex w="98%" mt="10" h="80%">
+            <Box w="20%" pr="10">
+            <Box display="flex" flexDirection="column" alignItems="flex-start">
+            <Image
+                  maxW="200px"
                   src={img}
                   borderRadius="md"
                 />
+                <Username />
             </Box>
-
+            </Box>
+            
             <Box w="50%" display="flex">
-                <Card p="5" w="100%">
-                    <Box display="flex" flexDirection="column" alignItems="flex-start">
-                        <Username />
-                        <Flex>
-                            <Box mr="10">
-                                <Email />
-                                <Github />
+                <Box w="100%" display="flex" flexDirection="column" alignItems="flex-end" justifyContent="center" bgColor="white" padding="10" borderRadius="md" boxShadow="md" height="50%">
+                    <Box display="flex" justifyContent="space-around" alignItems="center" w="100%">
+                        <Box>
+                            <Email />
+                            <Github />
                             </Box>
-                            <Divider orientation='vertical' borderWidth="1px" borderColor="gray" borderRadius="xl" />
-                            <Box ml="10" display="flex" alignItems="flex-start" flexDirection="column">
-                                <Firstname />
-                                <Lastname />
-                            </Box>
-                        </Flex>
+
+                            <Box>
+                            <Firstname />
+                            <Lastname />
+                        </Box>
                     </Box>
-                </Card>
+                    <Button colorScheme='linkedin' mt="10">Submit</Button>
+                </Box>
             </Box>
         </Flex>
     )

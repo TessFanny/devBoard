@@ -1,33 +1,23 @@
 import { useDispatch, useSelector } from 'react-redux'; // Importing two hooks from Redux
-import { Flex, Box, Text, Image, Editable, EditablePreview, Input, EditableInput, useEditableControls, IconButton, ButtonGroup } from "@chakra-ui/react";
-import { FaEdit, FaCheck, FaWindowClose } from "react-icons/fa";
+import { Text, Input, InputGroup, InputLeftElement } from "@chakra-ui/react";
+import { FaGithub } from "react-icons/fa";
 import img from "../../../assets/profile.png";
 
 function Github() {
 
-    function EditableControls() {
-        const {
-          isEditing,
-          getSubmitButtonProps,
-          getCancelButtonProps,
-          getEditButtonProps,
-        } = useEditableControls()
+  const { email } = useSelector((state) => state.login.user);
     
-        return isEditing ? (
-          <ButtonGroup size='sm'>
-            <IconButton icon={<FaCheck />} {...getSubmitButtonProps()} />
-            <IconButton icon={<FaWindowClose />} {...getCancelButtonProps()} />
-          </ButtonGroup>
-        ) : (
-          <Flex>
-            <IconButton size='sm' icon={<FaEdit />} {...getEditButtonProps()} />
-          </Flex>
-        )
-      }
     return(
-        <Text fontSize="xl" mt="2">
-          Github : 
-        </Text>
+      <>
+      <Text pl="0" mt="10" mb="5">GitHub</Text>
+      <InputGroup>
+    <InputLeftElement
+      pointerEvents='none'
+      children={<FaGithub color="grey"/>}
+    />
+    <Input variant='filled' placeholder='username' isDisabled={true} />
+  </InputGroup>
+      </>
     )
 }
 

@@ -36,7 +36,7 @@ function Username() {
             mt="2"
             mb="6"
     >
-      <EditablePreview mr="2" />
+      <EditablePreview mr="5" />
       {/* Here is the custom input */}
       <Input as={EditableInput} />
       <EditableControls />
