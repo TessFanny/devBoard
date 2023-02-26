@@ -30,7 +30,6 @@ import {
   registerUser,
 } from '../../features/register/register';
 import { getUserGithubData } from '../../features/user/user';
-import { addGithub } from '../../features/user/user';
 // Hooks for state management
 function Register() {
   const [rerender, setRerender] = useState(false);
@@ -43,13 +42,11 @@ function Register() {
 
     if (codeParam && localStorage.getItem('accessToken') === null) {
       async function getAccessToken() {
-        try{
+        try {
           const response = await fetch(
-            'http://tessfanny-server.eddi.cloud:8080/getAccessToken?code=' + codeParam
+            `http://tessfanny-server.eddi.cloud:8080/getAccessToken?code=${codeParam}`,
           )
-            .then((response) => {
-              return response.json();
-            })
+            .then((response) => response.json())
             .then((data) => {
               if (data.access_token) {
                 localStorage.setItem('accessToken', data.access_token);
@@ -58,10 +55,10 @@ function Register() {
                 navigateto('/');
               }
             });
-        }catch(err) {
+        } catch (err) {
           console.error(err);
         }
-        }
+      }
       getAccessToken();
     }
   }, []);
@@ -73,8 +70,10 @@ function Register() {
   const [isUsernameValid, setUsernameValid] = useState(true);
   const dispatch = useDispatch();
   // Selector from store
-  const { username, email, password, confirmPassword } = useSelector(
-    (state) => state.register
+  const {
+    username, email, password, confirmPassword,
+  } = useSelector(
+    (state) => state.register,
   );
   // Must have an @ and a .
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -82,8 +81,7 @@ function Register() {
   // au moins un chiffre (?=.*[0-9])
   // au moins un caractère spécial (?=.*[!@#$%^&*])
   // une longueur minimale de 8 caractères {8,}.
-  const passwordRegex =
-    /^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/;
+  const passwordRegex = /^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/;
   const handleSubmit = (evt) => {
     evt.preventDefault();
 
@@ -114,8 +112,10 @@ function Register() {
         setEmailValid(true);
         setPasswordValid(true);
         setPasswordConfirmed(true);
-        dispatch(registerUser({ username, email, password, passwordConfirm : confirmPassword }));
-        navigateto('/');
+        dispatch(registerUser({
+          username, email, password, passwordConfirm: confirmPassword,
+        }));
+        navigateto('/home');
     }
   };
   // Cette fonction prend deux arguments : dispatch et actionCreator
@@ -126,17 +126,18 @@ function Register() {
   };
   const HandleGitHubAuth = async () => {
     window.location.assign(
-      `https://github.com/login/oauth/authorize?client_id=${CLIENT_ID}`
+      `https://github.com/login/oauth/authorize?client_id=${CLIENT_ID}`,
     );
   };
   return (
     <Flex
-      minH="100vh"
       align="center"
       justify="center"
       bg={useColorModeValue('gray.50', 'gray.800')}
+      h="100%"
+      w="35%"
     >
-      <Stack spacing={8} mx="1" maxW="lg" py={12} px={6}>
+      <Stack spacing={8} mx="1" maxW="lg" py={12} px={6} w="100%">
         <Stack align="center">
           <Heading fontSize="4xl" textAlign="center">
             Sign up
@@ -146,6 +147,7 @@ function Register() {
           </Text>
         </Stack>
         <Box
+          w="100%"
           rounded="lg"
           bg={useColorModeValue('white', 'gray.700')}
           boxShadow="lg"
@@ -190,9 +192,7 @@ function Register() {
                 <InputRightElement h="full">
                   <Button
                     variant="ghost"
-                    onClick={() =>
-                      setShowPassword((showPassword) => !showPassword)
-                    }
+                    onClick={() => setShowPassword((showPassword) => !showPassword)}
                   >
                     {showPassword ? <ViewIcon /> : <ViewOffIcon />}
                   </Button>
@@ -219,15 +219,13 @@ function Register() {
                   type={showPassword ? 'text' : 'password'}
                   onChange={handleInputChange(
                     dispatch,
-                    changeConfirmPasswordValue
+                    changeConfirmPasswordValue,
                   )}
                 />
                 <InputRightElement h="full">
                   <Button
                     variant="ghost"
-                    onClick={() =>
-                      setShowPassword((showPassword) => !showPassword)
-                    }
+                    onClick={() => setShowPassword((showPassword) => !showPassword)}
                   >
                     {showPassword ? <ViewIcon /> : <ViewOffIcon />}
                   </Button>
@@ -271,7 +269,8 @@ function Register() {
             </Stack>
             <Stack pt={6}>
               <Text align="center">
-                Already a user?{' '}
+                Already a user?
+                {' '}
                 <Link href="/login" color="blue.400">
                   Login
                 </Link>

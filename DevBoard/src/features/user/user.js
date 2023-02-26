@@ -21,20 +21,26 @@ export const login = createAsyncThunk(
 export const modifyUser = createAsyncThunk(
   'user/modifyUser',
   async ({ user }) => {
-    const { id, firstname, lastname, username, email, image_path } = user;
+    const {
+      id, firstname, lastname, username, email, image_path,
+    } = user;
     // Make a patch request to a modify endpoint with user object
-    const response = await axios.patch(`http://tessfanny-server.eddi.cloud:8080/user/${id}`,
-    {
-      firstname,
-      lastname,
-      username,
-      email,
-      image_path,
-    }, {
-      headers: {
-        Authorization: 'Bearer ' + localStorage.getItem('token'), // Bearer ACCESSTOKEN
+    const response = await axios.patch(
+      `http://tessfanny-server.eddi.cloud:8080/user/${id}`,
+      {
+        firstname,
+        lastname,
+        username,
+        email,
+        image_path,
       },
-    });
+
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`, // Bearer ACCESSTOKEN
+        },
+      },
+    );
     const modifiedUser = response.data;
     // Store the received token in local storage
     return { modifiedUser };
@@ -45,40 +51,34 @@ export async function getUserGithubData() {
   const response = await fetch('http://tessfanny-server.eddi.cloud:8080/getUserData', {
     method: 'GET',
     headers: {
-      Authorization: 'Bearer ' + localStorage.getItem('accessToken'), // Bearer ACCESSTOKEN
+      Authorization: `Bearer ${localStorage.getItem('accessToken')}`, // Bearer ACCESSTOKEN
     },
   })
-    .then((response) => {
-      return response.json();
-    })
+    .then((response) => response.json())
     .then((data) => {
       console.log(data);
       return data;
     });
-    return response;
+  return response;
 }
 
 export async function getUserGithubRepos() {
   const response = await fetch('http://tessfanny-server.eddi.cloud:8080/getUserRepos', {
     method: 'GET',
     headers: {
-      Authorization: 'Bearer ' + localStorage.getItem('accessToken'), // Bearer ACCESSTOKEN
+      Authorization: `Bearer ${localStorage.getItem('accessToken')}`, // Bearer ACCESSTOKEN
     },
   })
-    .then((response) => {
-      return response.json();
-    })
-    .then((data) => {
-      return data;
-    });
-    return response;
+    .then((response) => response.json())
+    .then((data) => data);
+  return response;
 }
 
 // Define the initial state of the user slice
 const initialState = {
   user: {
-    email: "",
-    password: "",
+    email: '',
+    password: '',
   },
 };
 
@@ -105,9 +105,9 @@ export const loginSlice = createSlice({
     // Reducer for logging out the user
     logout: (state) => {
       const user = {
-        email: "",
-        password: "",
-      }
+        email: '',
+        password: '',
+      };
       state.user = user;
       localStorage.removeItem('token');
       localStorage.removeItem('popupDisplayed');
@@ -128,8 +128,8 @@ export const loginSlice = createSlice({
       })
       // Reducer for handling the rejected state of the login request
       .addCase(login.rejected, (state, action) => {
-        state.user.email = "";
-        state.user.password = "";
+        state.user.email = '';
+        state.user.password = '';
         state.status = false;
         state.error = action.error.message;
       })
@@ -144,13 +144,12 @@ export const loginSlice = createSlice({
       })
       // Reducer for handling the rejected state of the modify request
       .addCase(modifyUser.rejected, (state) => {
-        // state.user = 
+        // state.user =
         state.status = false;
         state.error = action.error.message;
       });
-
   },
-  
+
 });
 
 // Export the actions created by the user slice
