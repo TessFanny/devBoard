@@ -44,15 +44,17 @@ function Profile() {
               borderRadius="md"
               mb="10"
             />
-            <Tag size="lg" colorScheme="telegram" borderRadius="full">
-              <Avatar
-                bg="telegram.500"
-                size="xs"
-                ml={-1}
-                mr={2}
-              />
-              <TagLabel>{role}</TagLabel>
-            </Tag>
+            {role && (
+              <Tag size="lg" colorScheme="telegram" borderRadius="full">
+                <Avatar
+                  bg="telegram.500"
+                  size="xs"
+                  ml={-1}
+                  mr={2}
+                />
+                <TagLabel>{role}</TagLabel>
+              </Tag>
+            )}
           </Box>
         </Box>
 
