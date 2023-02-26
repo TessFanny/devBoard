@@ -78,8 +78,8 @@ function Login() {
           <Heading fontSize="4xl" textAlign="center">
             Sign In
           </Heading>
-          <Text fontSize="lg" color="gray.600">
-            to get acces to your Dashboard📊
+          <Text fontSize="lg" color="gray.600" textAlign="center">
+            to get acces to your Dashboard 📊
           </Text>
         </Stack>
         <Box w="85%" h="70%" display="flex" justifyContent="center" borderRadius="md" boxShadow="lg" padding="4" bgColor="white">

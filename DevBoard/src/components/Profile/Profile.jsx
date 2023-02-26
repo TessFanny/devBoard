@@ -1,5 +1,6 @@
+/* eslint-disable react/react-in-jsx-scope */
 import {
-  Flex, Box, Text, Image, Divider, Card, Input, Button,
+  Flex, Box, Image, Button, Tag, TagLabel, Avatar,
 } from '@chakra-ui/react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
@@ -16,8 +17,8 @@ function Profile() {
   const [isLoading, setIsLoading] = useState(false);
   const [notification, setNotification] = useState(false);
   const dispatch = useDispatch();
-  const { user } = useSelector((state) => state.login);
-  const { status } = useSelector((state) => state.login);
+  const { user, status } = useSelector((state) => state.login);
+  const { role } = user;
   const handleSubmit = (evt) => {
     evt.preventDefault();
     if (isLoading) return;
@@ -43,7 +44,15 @@ function Profile() {
               borderRadius="md"
               mb="10"
             />
-
+            <Tag size="lg" colorScheme="telegram" borderRadius="full">
+              <Avatar
+                bg="telegram.500"
+                size="xs"
+                ml={-1}
+                mr={2}
+              />
+              <TagLabel>{role}</TagLabel>
+            </Tag>
           </Box>
         </Box>
 

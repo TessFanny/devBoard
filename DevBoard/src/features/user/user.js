@@ -95,6 +95,15 @@ export const loginSlice = createSlice({
     changePasswordValue: (state, action) => {
       state.user.password = action.payload;
     },
+    changeUsernameValue: (state, action) => {
+      state.user.username = action.payload;
+    },
+    changeFirstnameValue: (state, action) => {
+      state.user.firstname = action.payload;
+    },
+    changeLastnameValue: (state, action) => {
+      state.user.lastname = action.payload;
+    },
     addGithub: (state, action) => {
       state.user.github = action.payload;
     },
@@ -156,6 +165,9 @@ export const loginSlice = createSlice({
 export const {
   changeEmailValue,
   changePasswordValue,
+  changeUsernameValue,
+  changeFirstnameValue,
+  changeLastnameValue,
   addGithub,
   getRepo,
   logout,

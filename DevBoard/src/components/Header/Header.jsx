@@ -1,10 +1,14 @@
-import { Flex, Text, Box, IconButton } from "@chakra-ui/react";
-import { FaUser } from "react-icons/fa";
-import { IoMdSettings } from "react-icons/io"
-import { FiLogOut } from "react-icons/fi"
-import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
-import { logout } from "../../features/user/user";
+/* eslint-disable react/react-in-jsx-scope */
+import {
+  Flex, Text, Box, IconButton, MenuButton, MenuItem, MenuList, Menu,
+} from '@chakra-ui/react';
+import { FaUser, FaUserEdit } from 'react-icons/fa';
+import { FiLogOut } from 'react-icons/fi';
+import { IoMdSettings } from 'react-icons/io';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { logout } from '../../features/user/user';
 
 function Header() {
   const navigateto = useNavigate();
@@ -12,7 +16,14 @@ function Header() {
   const { id } = useSelector((state) => state.login.user);
   const handleLogout = () => {
     dispatch(logout());
-  }
+  };
+
+  const [showMenu, setShowMenu] = useState(false);
+
+  const handleButtonClick = () => {
+    setShowMenu(!showMenu);
+  };
+
   return (
     <Flex
       h="10%" // Sets the height of the header
@@ -27,20 +38,32 @@ function Header() {
       borderRadius="md"
     >
       <Text>Dashboard</Text>
-      <Box display="flex" alignItems="center" gap="2"> 
-      {id ? (
-        <Link to="/">
-        <IconButton aria-label="Log out" icon={<FiLogOut />} onClick={handleLogout} />
-        </Link>
-      ) : (
-        <Link to="/register">
-        <Text>Sign In</Text> 
-        </Link>
-      )}
+      <Box display="flex" alignItems="center" gap="2">
+        {id ? (
+          <Menu>
+            <MenuButton as={IconButton} icon={<FaUser />} onClick={handleButtonClick} />
+            <MenuList>
+              <Link to="/profile">
+                <MenuItem icon={<FaUserEdit />}>
+                  Profile
+                </MenuItem>
+              </Link>
+              <Link to="/">
+                <MenuItem icon={<FiLogOut />} onClick={handleLogout}>
+                  Log out
+                </MenuItem>
+              </Link>
+            </MenuList>
+          </Menu>
+        ) : (
+          <Link to="/register">
+            <Text>Sign In</Text>
+          </Link>
+        )}
         <IconButton aria-label="Settings" icon={<IoMdSettings />} />
       </Box>
     </Flex>
-  )
+  );
 }
 
 export default Header;
