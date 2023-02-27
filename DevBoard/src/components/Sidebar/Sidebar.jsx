@@ -42,7 +42,7 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
     setIsLoading(true);
     setTimeout(() => {
       setIsLoading(false);
-    }, 500); // 2000 millisecondes (soit 2 secondes) pour le délai de chargement
+    }, 500);
   };
   
 
@@ -118,9 +118,11 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
           <Button variant="ghost" mb="4" leftIcon={<FaThumbsUp />} fontWeight="400" onClick={handleLinkClick} >
             <Text pl="2">Likes</Text>
           </Button>
-          <Button variant="ghost" mb="4" leftIcon={<FaUser />} fontWeight="400" onClick={handleLinkClick} >
-            <Text pl="2">Profile</Text>
-          </Button>
+          <Link to="/profile">
+            <Button variant="ghost" mb="4" leftIcon={<FaUser />} fontWeight="400" onClick={handleLinkClick} >
+              <Text pl="2">Profile</Text>
+            </Button>
+          </Link>
       </Box>
     </Box>
   );
