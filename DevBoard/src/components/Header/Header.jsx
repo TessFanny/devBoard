@@ -1,6 +1,13 @@
 /* eslint-disable react/react-in-jsx-scope */
 import {
-  Flex, Text, Box, IconButton, MenuButton, MenuItem, MenuList, Menu,
+  Flex,
+  Text,
+  Box,
+  IconButton,
+  MenuButton,
+  MenuItem,
+  MenuList,
+  Menu,
 } from '@chakra-ui/react';
 import { FaUser, FaUserEdit } from 'react-icons/fa';
 import { FiLogOut } from 'react-icons/fi';
@@ -9,15 +16,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { logout } from '../../features/user/user';
-
+import { useLocation } from 'react-router-dom';
+import RouteInfo from './RouteInfo/Routeinfo';
 function Header() {
   const navigateto = useNavigate();
   const dispatch = useDispatch();
-  const { id } = useSelector((state) => state.login.user);
+  const { id, username } = useSelector((state) => state.login.user);
+
   const handleLogout = () => {
     dispatch(logout());
   };
-
+  const location = useLocation();
   const [showMenu, setShowMenu] = useState(false);
 
   const handleButtonClick = () => {
@@ -37,16 +46,23 @@ function Header() {
       boxShadow="base"
       borderRadius="md"
     >
-      <Text>Dashboard</Text>
+      <RouteInfo />
       <Box display="flex" alignItems="center" gap="2">
         {id ? (
           <Menu>
-            <MenuButton as={IconButton} icon={<FaUser />} onClick={handleButtonClick} />
+            <MenuButton
+              as={IconButton}
+              icon={
+                <>
+                  <Text pr="0.5rem">{username}</Text> <FaUser />
+                </>
+              }
+              onClick={handleButtonClick}
+              p="1rem"
+            />
             <MenuList>
               <Link to="/profile">
-                <MenuItem icon={<FaUserEdit />}>
-                  Profile
-                </MenuItem>
+                <MenuItem icon={<FaUserEdit />}>Profile</MenuItem>
               </Link>
               <Link to="/">
                 <MenuItem icon={<FiLogOut />} onClick={handleLogout}>
