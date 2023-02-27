@@ -7,7 +7,7 @@ export const login = createAsyncThunk(
   '/login',
   async ({ email, password }) => {
     // Make a POST request to a login endpoint with email and password
-    const response = await axios.post('http://tessfanny-server.eddi.cloud:8080/login', {
+    const response = await axios.post(`${VITE_BACKEND_URL}/login`, {
       email,
       password,
     });
@@ -26,7 +26,7 @@ export const modifyUser = createAsyncThunk(
     } = user;
     // Make a patch request to a modify endpoint with user object
     const response = await axios.patch(
-      `http://tessfanny-server.eddi.cloud:8080/user/${id}`,
+      `${VITE_BACKEND_URL}/user/${id}`,
       {
         firstname,
         lastname,
@@ -48,7 +48,7 @@ export const modifyUser = createAsyncThunk(
 );
 
 export async function getUserGithubData() {
-  const response = await fetch('http://tessfanny-server.eddi.cloud:8080/getUserData', {
+  const response = await fetch('${VITE_BACKEND_URL}/getUserData', {
     method: 'GET',
     headers: {
       Authorization: `Bearer ${localStorage.getItem('accessToken')}`, // Bearer ACCESSTOKEN
@@ -63,7 +63,7 @@ export async function getUserGithubData() {
 }
 
 export async function getUserGithubRepos() {
-  const response = await fetch('http://tessfanny-server.eddi.cloud:8080/getUserRepos', {
+  const response = await fetch('${VITE_BACKEND_URL}/getUserRepos', {
     method: 'GET',
     headers: {
       Authorization: `Bearer ${localStorage.getItem('accessToken')}`, // Bearer ACCESSTOKEN

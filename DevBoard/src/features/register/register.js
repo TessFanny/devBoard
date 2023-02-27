@@ -7,7 +7,7 @@ export const registerUser = createAsyncThunk(
   'register/registerUser',
   async ({ username, email, password, passwordConfirm }) => {
     // Make a POST request to a register endpoint with email and password
-    const response = await axios.post('http://tessfanny-server.eddi.cloud:8080/register', {
+    const response = await axios.post(`${VITE_BACKEND_URL}/register`, {
       username,
       email,
       password,
