@@ -48,7 +48,7 @@ export const modifyUser = createAsyncThunk(
 );
 
 export async function getUserGithubData() {
-  const response = await fetch('${VITE_BACKEND_URL}/getUserData', {
+  const response = await fetch(`${VITE_BACKEND_URL}/getUserData`, {
     method: 'GET',
     headers: {
       Authorization: `Bearer ${localStorage.getItem('accessToken')}`, // Bearer ACCESSTOKEN
@@ -63,7 +63,7 @@ export async function getUserGithubData() {
 }
 
 export async function getUserGithubRepos() {
-  const response = await fetch('${VITE_BACKEND_URL}/getUserRepos', {
+  const response = await fetch(`${VITE_BACKEND_URL}/getUserRepos`, {
     method: 'GET',
     headers: {
       Authorization: `Bearer ${localStorage.getItem('accessToken')}`, // Bearer ACCESSTOKEN
