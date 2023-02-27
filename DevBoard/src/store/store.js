@@ -1,18 +1,27 @@
-// Import the `configureStore` function from the `@reduxjs/toolkit` library
-import { configureStore } from '@reduxjs/toolkit';
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import { persistStore, persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 
-// Import the `userReducer` from the `../features/user/user` file
-import userReducer from '../features/user/user';
-import registerReducer from '../features/register/register'
+import { persistedLoginReducer } from './persistConfig';
+import registerReducer from '../features/register/register';
 
-// Use `configureStore` to create a Redux store,
-// passing in the `userReducer` as the reducer for the `user` slice
-const store = configureStore({
-  reducer: {
-    user: userReducer,
-    register: registerReducer,
-  },
+const rootReducer = combineReducers({
+  login: persistedLoginReducer,
+  register: registerReducer,
 });
 
-// Export the created store so that it can be used in the app
-export default store;
+const persistConfig = {
+  key: 'root',
+  storage,
+  whitelist: ['login'], 
+};
+
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+
+const store = configureStore({
+  reducer: persistedReducer,
+});
+
+const persistor = persistStore(store);
+
+export { store, persistor };

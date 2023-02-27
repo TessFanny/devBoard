@@ -13,7 +13,7 @@ function PasswordInput() {
   const handleClick = () => setShow(!show);
 
   // retrieve the password from the Redux store using the 'useSelector' hook
-  const password = useSelector((state) => state.user.password);
+  const password = useSelector((state) => state.login.password);
 
   // retrieve the 'dispatch' function from the Redux store using the 'useDispatch' hook
   const dispatch = useDispatch();
