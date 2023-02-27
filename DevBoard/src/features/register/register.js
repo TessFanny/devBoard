@@ -7,7 +7,7 @@ export const registerUser = createAsyncThunk(
   'register/registerUser',
   async ({ username, email, password }) => {
     // Make a POST request to a login endpoint with email and password
-    const response = await axios.post('http://localhost:3001/register', {
+    const response = await axios.post('http://localhost:3000/register', {
       username,
       email,
       password,
