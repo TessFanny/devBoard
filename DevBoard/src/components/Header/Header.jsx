@@ -16,7 +16,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { logout } from '../../features/user/user';
-
+import { useLocation } from 'react-router-dom';
+import RouteInfo from './RouteInfo/Routeinfo';
 function Header() {
   const navigateto = useNavigate();
   const dispatch = useDispatch();
@@ -25,7 +26,7 @@ function Header() {
   const handleLogout = () => {
     dispatch(logout());
   };
-
+  const location = useLocation();
   const [showMenu, setShowMenu] = useState(false);
 
   const handleButtonClick = () => {
@@ -45,7 +46,7 @@ function Header() {
       boxShadow="base"
       borderRadius="md"
     >
-      <Text>Dashboard</Text>
+      <RouteInfo />
       <Box display="flex" alignItems="center" gap="2">
         {id ? (
           <Menu>
