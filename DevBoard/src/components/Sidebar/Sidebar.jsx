@@ -119,7 +119,7 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
                 >
                   <Text pl="2">Add Post</Text>
                 </Button>
-                <Link to="/feed">
+                <Link to="/feeds">
                   <Button
                     variant="ghost"
                     mb="4"

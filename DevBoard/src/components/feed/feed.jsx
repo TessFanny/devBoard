@@ -9,10 +9,11 @@ import { useEffect } from 'react';
 const Feed = ({ userId, isProfile = false }) => {
 
   const [feeds, setFeeds] = useState([]);
-
+  const VITE_BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
   const fetchData =  async () => {
       try {
-          const response = await fetch(`http://localhost:3000/api/feeds`, {
+          console.log("1")
+          const response = await fetch(`${VITE_BACKEND_URL}/api/feeds`, {
           method: "GET",
       })
       const data = await response.json();
@@ -39,13 +40,13 @@ return (
                 Feed from {feeds[0]?.title}
           </Text>
           <Text>
-            {/* {feeds[0].description} */}
-           {console.log(feeds[0].items[0])}
+            {feeds[0]?.description}
+           {/* {console.log(feeds[0].items[0])} */}
           </Text>
       <ul>
-        {feeds[0].items.map((item, index) => (
+        {/* {feeds[0].items.map((item, index) => ( */}
           {/* <News key={index} item={item} /> */}
-        ))}
+        {/* ))} */}
       </ul>
     </div>
   );

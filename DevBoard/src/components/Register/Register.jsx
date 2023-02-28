@@ -35,6 +35,7 @@ import { getUserGithubData } from '../../features/user/user';
 function Register() {
   const [rerender, setRerender] = useState(false);
   const CLIENT_ID = import.meta.env.VITE_CLIENT_ID;
+  const VITE_BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
   const navigateto = useNavigate();
   useEffect(() => {
     const queryString = window.location.search;

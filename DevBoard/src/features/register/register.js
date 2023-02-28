@@ -6,8 +6,9 @@ import axios from 'axios';
 export const registerUser = createAsyncThunk(
   'register/registerUser',
   async ({ username, email, password, passwordConfirm }) => {
+    const VITE_BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
     // Make a POST request to a register endpoint with email and password
-    const response = await axios.post(`${VITE_BACKEND_URL}/register`, {
+    const response = await axios.post(`${VITE_BACKEND_URL}/api/register`, {
       username,
       email,
       password,
