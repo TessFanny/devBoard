@@ -117,7 +117,7 @@ function Register() {
         dispatch(registerUser({
           username, email, password, passwordConfirm: confirmPassword,
         }));
-        navigateto('/home');
+        navigateto('/login');
     }
   };
   // Cette fonction prend deux arguments : dispatch et actionCreator

@@ -38,16 +38,19 @@ export default function App() {
   // Redirect user to register page if not logged in and not on login or homepage routes
 
   // Hide Sidebar and Header components for /register and /login routes
-  const isRegisterOrLoginRouteOrHomeOrHome =
+  const isRegisterOrLoginRouteOrHome =
     location.pathname === '/register' ||
     location.pathname === '/login' ||
-    location.pathname === '/home';
-  const sidebar = isRegisterOrLoginRouteOrHomeOrHome ? null : (
+    location.pathname === '/homepage';
+
+  const isHomepage = location.pathname === '/homepage';
+
+  const sidebar = isRegisterOrLoginRouteOrHome ? null : (
     <Box w="50" pr="1" bgColor="gray.200">
       <Sidebar setIsLoading={setIsLoading} />
     </Box>
   );
-  const header = isRegisterOrLoginRouteOrHomeOrHome ? null : <Header />;
+  const header = isRegisterOrLoginRouteOrHome ? null : <Header />;
 
   return (
     // Flex container for Sidebar and main content area
@@ -56,8 +59,8 @@ export default function App() {
       {/* Box for main content area */}
       <Box
         minH="100vh"
-        w={isRegisterOrLoginRouteOrHomeOrHome ? '100vw' : 'calc(100vw - 210px)'}
-        p="5"
+        w={isRegisterOrLoginRouteOrHome ? '100vw' : 'calc(100vw - 210px)'}
+        p={!isHomepage ? "5" : ""}
         display="flex"
         alignItems="center"
         flexDirection="column"
