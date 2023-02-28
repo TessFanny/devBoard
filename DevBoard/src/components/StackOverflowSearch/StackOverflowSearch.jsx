@@ -37,8 +37,8 @@ function StackOverflowSearch() {
   };
 
   return (
-    <Box p="4" bg="gray.100">
-      <form onSubmit={handleFormSubmit} style={{ marginTop: '2rem' }}>
+    <Box p="4" bg="gray.100" style={{ marginTop: '2rem' }}>
+      <form onSubmit={handleFormSubmit}>
         <Stack direction="row">
           <Input
             type="text"
@@ -76,7 +76,7 @@ function StackOverflowSearch() {
           ))}
         </List>
       ) : (
-        <Text mt="4">No results.</Text>
+        <Text mt="4">Make a research.</Text>
       )}
     </Box>
   );
