@@ -6,6 +6,7 @@ import blob from '../../assets/blob.svg';
 import blob2 from '../../assets/blobanimation.svg';
 
 function Homepage() {
+    // Homepage
   const defaultOptions = {
     loop: true,
     autoplay: true,
