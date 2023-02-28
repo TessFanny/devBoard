@@ -45,7 +45,7 @@ function Register() {
       async function getAccessToken() {
         try {
           const response = await fetch(
-            `http://tessfanny-server.eddi.cloud:8080/getAccessToken?code=${codeParam}`,
+            `http://tessfanny-server.eddi.cloud:8080/api/getAccessToken?code=${codeParam}`,
           )
             .then((response) => response.json())
             .then((data) => {
