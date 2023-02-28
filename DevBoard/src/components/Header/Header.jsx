@@ -25,7 +25,7 @@ function Header() {
 
   const handleLogout = () => {
     dispatch(logout());
-    window.location.replace('/login');
+    window.location.replace('/homepage');
   };
   const location = useLocation();
   const [showMenu, setShowMenu] = useState(false);
@@ -65,7 +65,7 @@ function Header() {
               <Link to="/profile">
                 <MenuItem icon={<FaUserEdit />}>Profile</MenuItem>
               </Link>
-              <Link to="/">
+              <Link to="/homepage">
                 <MenuItem icon={<FiLogOut />} onClick={handleLogout}>
                   Log out
                 </MenuItem>
