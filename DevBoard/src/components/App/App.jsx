@@ -1,6 +1,6 @@
 /* eslint-disable react/react-in-jsx-scope */
-import { useState } from 'react';
-import { Routes, Route, useLocation } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import { Box, Flex, useBreakpointValue, Text } from '@chakra-ui/react';
 import Loader from '../Loader/Loader';
 import Sidebar from '../Sidebar/Sidebar';
@@ -13,8 +13,27 @@ import Homepage from '../Homepage/Homepage';
 
 // App component
 export default function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const location = useLocation();
+
+  // Check if user is logged in
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      setIsLoggedIn(true);
+    }
+    if (
+      !token &&
+      location.pathname !== '/login' &&
+      location.pathname !== '/homepage'
+    ) {
+      window.location.replace('/login');
+    }
+  }, []);
+
+  // Redirect user to register page if not logged in and not on login or homepage routes
 
   // Hide Sidebar and Header components for /register and /login routes
   const isRegisterOrLoginRouteOrHomeOrHome =

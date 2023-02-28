@@ -25,6 +25,7 @@ function Header() {
 
   const handleLogout = () => {
     dispatch(logout());
+    window.location.replace('/login');
   };
   const location = useLocation();
   const [showMenu, setShowMenu] = useState(false);
