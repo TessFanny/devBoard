@@ -35,6 +35,7 @@ import { getUserGithubData } from '../../features/user/user';
 function Register() {
   const [rerender, setRerender] = useState(false);
   const CLIENT_ID = import.meta.env.VITE_CLIENT_ID;
+  const VITE_BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
   const navigateto = useNavigate();
   useEffect(() => {
     const queryString = window.location.search;
@@ -45,7 +46,7 @@ function Register() {
       async function getAccessToken() {
         try {
           const response = await fetch(
-            `http://tessfanny-server.eddi.cloud:8080/api/getAccessToken?code=${codeParam}`,
+            `${VITE_BACKEND_URL}/getAccessToken?code=${codeParam}`,
           )
             .then((response) => response.json())
             .then((data) => {
@@ -263,7 +264,7 @@ function Register() {
                 }}
                 onClick={HandleGitHubAuth}
               >
-                <Center>
+                <Center>                
                   <Text>Sign in with Github</Text>
                 </Center>
               </Button>

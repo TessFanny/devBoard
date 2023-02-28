@@ -59,6 +59,7 @@ Reunion 9h30 Pour rachid se sera 9h et toute absence injustifié sera indiqué d
 - https://danvops.fr/2021/mes-flux-rss/
 - https://dev.to/nataliedeweerd/how-to-use-the-dev-to-api-5gl3
 
+
 ### Rappel sur Git 
 
 On crée tous notre propre branche pour dev et on push uniquement sur cette Branche avant le merge du soir du Git master !

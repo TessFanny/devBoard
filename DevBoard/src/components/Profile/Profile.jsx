@@ -105,7 +105,6 @@ function Profile() {
                 <Email />
                 <Github />
               </Box>
-
               <Box>
                 <Firstname />
                 <Lastname />
@@ -116,8 +115,7 @@ function Profile() {
                 <Button mt="10" w="100%" colorScheme="linkedin" onClick={handleSubmit} isLoading={isLoading}>Submit</Button>
               </Box>
             </Box>
-
-          </Box>
+            </Box>
         </Box>
       </Box>
       {notification && <Notification title="Saved !" description="Your changes have been saved" status="success" />}

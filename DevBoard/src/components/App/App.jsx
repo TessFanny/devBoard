@@ -9,6 +9,7 @@ import Register from '../Register/Register';
 import Login from '../Login/Login';
 import Repositories from '../repositories/repositories';
 import Profile from '../Profile/Profile';
+import Feed from '../feed/feed'
 import Homepage from '../Homepage/Homepage';
 import StackOverflowSearch from '../StackOverflowSearch/StackOverflowSearch';
 // App component
@@ -70,7 +71,8 @@ export default function App() {
           <Routes>
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/repositories" element={<Repositories />} />
+            <Route path="/repositories" element={<Repositories/>} />
+            <Route path="/feed" element={<Feed />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/homepage" element={<Homepage />} />
             <Route path="/stackoverflow" element={<StackOverflowSearch />} />
@@ -80,3 +82,22 @@ export default function App() {
     </Flex>
   );
 }
+// {/* <Flex>
+// {/* Box for Sidebar */}
+// <Box w="50" pr="1" bgColor="gray.200">
+//   <Sidebar setIsLoading={setIsLoading} />
+// </Box>
+// {/* Box for main content area */}
+// <Box minH="100vh" w={`calc(100vw - 210px)`} p="5" display="flex" alignItems="center" flexDirection="column" bgColor="gray.200">
+//   {/* Header component */}
+//   <Header />
+//   {/* Repositories component */}
+//   {isLoading ? (
+//     <Loader />
+//   ) : (
+//     <Routes>
+//       <Route path="/repositories" element={<Repositories />} />
+//     </Routes>
+// )}
+// </Box> */}
+// </Flex>
