@@ -1,17 +1,28 @@
 import React, { useState } from 'react';
+import {
+  Input,
+  Button,
+  Stack,
+  Box,
+  List,
+  ListItem,
+  Link,
+  Text,
+  Spinner,
+} from '@chakra-ui/react';
 
 function StackOverflowSearch() {
   const [query, setQuery] = useState('');
   const [results, setResults] = useState([]);
-  const [loading, setLoading] = useState(false); // Ajout de l'état de chargement
+  const [loading, setLoading] = useState(false);
 
   const searchStackOverflow = async () => {
-    setLoading(true); // Mettre l'état de chargement à true au début de la recherche
+    setLoading(true);
     const url = `https://api.stackexchange.com/2.3/search?order=desc&sort=activity&intitle=${query}&site=stackoverflow`;
     const response = await fetch(url);
     const data = await response.json();
     setResults(data.items);
-    setLoading(false); // Mettre l'état de chargement à false une fois que la recherche est terminée
+    setLoading(false);
   };
 
   const handleQueryChange = (event) => {
@@ -26,32 +37,48 @@ function StackOverflowSearch() {
   };
 
   return (
-    <div style={{ backdropFilter: 'blur(10px)', opacity: 1 }}>
-      <form onSubmit={handleFormSubmit} style={{ paddingTop: '2rem' }}>
-        <label>
-          Search Stack Overflow:
-          <input type="text" value={query} onChange={handleQueryChange} />
-        </label>
-        <button type="submit">Search</button>
+    <Box p="4" bg="gray.100">
+      <form onSubmit={handleFormSubmit} style={{ marginTop: '2rem' }}>
+        <Stack direction="row">
+          <Input
+            type="text"
+            placeholder="Search Stack Overflow"
+            value={query}
+            onChange={handleQueryChange}
+            size="lg"
+            focusBorderColor="blue.500"
+            _hover={{ borderColor: 'blue.500' }}
+          />
+          <Button
+            type="submit"
+            colorScheme="blue"
+            size="lg"
+            isLoading={loading}
+            loadingText="Searching"
+          >
+            Search
+          </Button>
+        </Stack>
       </form>
-      {loading ? ( // Vérifier si l'état de chargement est vrai pour afficher le flou ou l'opacité
-        <div style={{ backdropFilter: 'blur(10px)', opacity: 0.5 }}>
-          <p>Searching...</p>
-        </div>
+      {loading ? (
+        <Stack mt="4" align="center">
+          <Spinner size="lg" />
+          <Text>Searching...</Text>
+        </Stack>
       ) : results.length > 0 ? (
-        <ul>
+        <List mt="4">
           {results.map((result) => (
-            <li key={result.question_id}>
-              <a href={result.link} target="_blank" rel="noreferrer">
+            <ListItem key={result.question_id}>
+              <Link href={result.link} target="_blank" rel="noreferrer">
                 {result.title}
-              </a>
-            </li>
+              </Link>
+            </ListItem>
           ))}
-        </ul>
+        </List>
       ) : (
-        <p>No results.</p>
+        <Text mt="4">No results.</Text>
       )}
-    </div>
+    </Box>
   );
 }
 
