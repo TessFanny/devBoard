@@ -9,13 +9,9 @@ import Register from '../Register/Register';
 import Login from '../Login/Login';
 import Repositories from '../repositories/repositories';
 import Profile from '../Profile/Profile';
-<<<<<<< HEAD
-import Home from '../Home/Home';
 import Feed from '../feed/feed'
 import { useDispatch, useSelector } from "react-redux";
-=======
 import Homepage from '../Homepage/Homepage';
->>>>>>> fa9ad53b01911363d1697e69a3299cf425fcdc2b
 
 // App component
 export default function App() {
