@@ -12,7 +12,7 @@ import Profile from '../Profile/Profile';
 import Feed from '../feed/feed'
 import { useDispatch, useSelector } from "react-redux";
 import Homepage from '../Homepage/Homepage';
-
+import StackOverflowSearch from '../StackOverflowSearch/StackOverflowSearch';
 // App component
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -30,6 +30,7 @@ export default function App() {
     if (
       !token &&
       location.pathname !== '/login' &&
+      location.pathname !== '/register' &&
       location.pathname !== '/homepage'
     ) {
       window.location.replace('/login');
@@ -76,6 +77,7 @@ export default function App() {
             <Route path="/feed" element={<Feed />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/homepage" element={<Homepage />} />
+            <Route path="/stackoverflow" element={<StackOverflowSearch />} />
           </Routes>
         )}
       </Box>
