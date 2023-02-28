@@ -23,6 +23,7 @@ import {
   FaUser,
   FaPlusSquare,
 } from 'react-icons/fa';
+import { BsStackOverflow } from 'react-icons/bs';
 import PropTypes from 'prop-types';
 
 const Sidebar = ({ isOpen, setIsLoading }) => {
@@ -132,6 +133,22 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
             onClick={() => setActiveRoute('/repositories')}
           >
             <Text pl="2">Your Projects</Text>
+          </Button>
+        </Link>
+        <Link to="/stackoverflow">
+          <Button
+            variant="ghost"
+            mb="4"
+            leftIcon={
+              <BsStackOverflow
+                color={activeRoute == '/stackoverflow' ? 'blue' : 'gray'}
+              />
+            }
+            fontWeight="400"
+            onClick={handleLinkClick}
+            onClick={() => setActiveRoute('/stackoverflow')}
+          >
+            <Text pl="2">StackOverflow</Text>
           </Button>
         </Link>
         <Button
