@@ -167,6 +167,22 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
             <Text pl="2">StackOverflow</Text>
           </Button>
         </Link>
+        <Link to="/playground">
+          <Button
+            variant="ghost"
+            mb="4"
+            leftIcon={
+              <BsStackOverflow
+                color={activeRoute == '/stackoverflow' ? 'blue' : 'gray'}
+              />
+            }
+            fontWeight="400"
+            onClick={handleLinkClick}
+            onClick={() => setActiveRoute('/playground')}
+          >
+            <Text pl="2">Playground</Text>
+          </Button>
+        </Link>
         <Button
           variant="ghost"
           mb="4"

@@ -12,6 +12,7 @@ import Profile from '../Profile/Profile';
 import Feed from '../feed/feed'
 import Homepage from '../Homepage/Homepage';
 import StackOverflowSearch from '../StackOverflowSearch/StackOverflowSearch';
+import Playground from '../Playground/Playground';
 // App component
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -76,6 +77,7 @@ export default function App() {
             <Route path="/profile" element={<Profile />} />
             <Route path="/homepage" element={<Homepage />} />
             <Route path="/stackoverflow" element={<StackOverflowSearch />} />
+            <Route path="/playground" element={<Playground/>} />
           </Routes>
         )}
       </Box>
