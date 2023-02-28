@@ -47,6 +47,7 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
   };
 
   return (
+    
     <Box
       h="full"
       boxShadow="base"
@@ -191,6 +192,8 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
         </Link>
       </Box>
     </Box>
+
+    
   );
 };
 
