@@ -10,7 +10,6 @@ import Login from '../Login/Login';
 import Repositories from '../repositories/repositories';
 import Profile from '../Profile/Profile';
 import Feed from '../feed/feed'
-import { useDispatch, useSelector } from "react-redux";
 import Homepage from '../Homepage/Homepage';
 import StackOverflowSearch from '../StackOverflowSearch/StackOverflowSearch';
 // App component
@@ -18,7 +17,6 @@ export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const location = useLocation();
-  const isAuth = Boolean(useSelector((state) => state.token));
 
   // Check if user is logged in
 
