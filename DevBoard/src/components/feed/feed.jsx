@@ -41,8 +41,9 @@ return (
     <TabPanels>
       {feeds.map(feed => 
       <TabPanel>
-        {feed?.description}
-        <p>coucou</p>
+        <Text>{feed?.description}</Text>
+        <Text>{feed?.language}</Text>
+        <Text>{feed?.link}</Text>       
       </TabPanel>)}
     </TabPanels>
   </Tabs>
