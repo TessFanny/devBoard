@@ -22,12 +22,11 @@ import {
   FaThumbsUp,
   FaUser,
   FaPlusSquare,
-  FaRegNewspaper
+  FaRegNewspaper,
 } from 'react-icons/fa';
 import { BsStackOverflow } from 'react-icons/bs';
 import PropTypes from 'prop-types';
-import { useNavigate } from "react-router-dom";
-
+import { useNavigate } from 'react-router-dom';
 
 const Sidebar = ({ isOpen, setIsLoading }) => {
   // Destructure the isOpen property from the useDisclosure hook
@@ -52,7 +51,6 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
   };
 
   return (
-    
     <Box
       h="full"
       boxShadow="base"
@@ -61,6 +59,7 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
       transform={isOpen ? 'translateX(0)' : '-translateX(100%)'}
       bgColor="white"
       borderRadius="md"
+      w="13vw"
     >
       <Flex p="4" alignItems="center" justify="center">
         <Text
@@ -100,7 +99,7 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
             <FaNewspaper color={activeRoute == '/news' ? 'blue' : 'gray'} />
           }
           onClick={onSubToggle}
-          onClick={() => setActiveRoute('/news')}
+          // onClick={() => setActiveRoute('/news')}
           fontWeight="400"
         >
           <Text pl="2">News</Text>
@@ -124,7 +123,7 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
                   <Button
                     variant="ghost"
                     mb="4"
-                    leftIcon={<FaRegNewspaper/>}
+                    leftIcon={<FaRegNewspaper />}
                     onClick={handleLinkClick}
                     fontWeight="400"
                   >
@@ -208,8 +207,6 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
         </Link>
       </Box>
     </Box>
-
-    
   );
 };
 
