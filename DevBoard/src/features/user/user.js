@@ -1,13 +1,13 @@
 // Import necessary libraries
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
-
+const VITE_BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 // Define an asynchronous thunk for login
 export const login = createAsyncThunk(
   '/login',
   async ({ email, password }) => {
     // Make a POST request to a login endpoint with email and password
-    const response = await axios.post(`${VITE_BACKEND_URL}/login`, {
+    const response = await axios.post(`${VITE_BACKEND_URL}/api/login`, {
       email,
       password,
     });
@@ -26,7 +26,7 @@ export const modifyUser = createAsyncThunk(
     } = user;
     // Make a patch request to a modify endpoint with user object
     const response = await axios.patch(
-      `${VITE_BACKEND_URL}/user/${id}`,
+      `${VITE_BACKEND_URL}/api/user/${id}`,
       {
         firstname,
         lastname,
@@ -52,7 +52,7 @@ export const modifyUserPicture = createAsyncThunk(
   async ({ formData, id }) => {
     // Make a patch request to a modify endpoint with formData
     const response = await axios.patch(
-      `http://tessfanny-server.eddi.cloud:8080/api/user/${id}/profile`,formData,
+      `${VITE_BACKEND_URL}/api/user/${id}/profile`,formData,
       {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`, // Bearer ACCESSTOKEN
@@ -70,7 +70,7 @@ export const modifyUserPicture = createAsyncThunk(
 );
 
 export async function getUserGithubData() {
-  const response = await fetch(`${VITE_BACKEND_URL}/getUserData`, {
+  const response = await fetch(`${VITE_BACKEND_URL}/api/getUserData`, {
     method: 'GET',
     headers: {
       Authorization: `Bearer ${localStorage.getItem('accessToken')}`, // Bearer ACCESSTOKEN
@@ -85,7 +85,7 @@ export async function getUserGithubData() {
 }
 
 export async function getUserGithubRepos() {
-  const response = await fetch(`${VITE_BACKEND_URL}/getUserRepos`, {
+  const response = await fetch(`${VITE_BACKEND_URL}/api/getUserRepos`, {
     method: 'GET',
     headers: {
       Authorization: `Bearer ${localStorage.getItem('accessToken')}`, // Bearer ACCESSTOKEN

@@ -4,7 +4,7 @@ import {
 } from '@chakra-ui/react';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import {News} from './News'
+// import {News} from './News'
 
 const Feed = ({ userId, isProfile = false }) => {
 
@@ -12,7 +12,7 @@ const Feed = ({ userId, isProfile = false }) => {
 
   const fetchData =  async () => {
       try {
-          const response = await fetch(`http://localhost:3000/feeds`, {
+          const response = await fetch(`http://localhost:3000/api/feeds`, {
           method: "GET",
       })
       const data = await response.json();
@@ -39,12 +39,12 @@ return (
                 Feed from {feeds[0]?.title}
           </Text>
           <Text>
-            {feeds[0].description}
+            {/* {feeds[0].description} */}
            {console.log(feeds[0].items[0])}
           </Text>
       <ul>
         {feeds[0].items.map((item, index) => (
-          <News key={index} item={item} />
+          {/* <News key={index} item={item} /> */}
         ))}
       </ul>
     </div>
