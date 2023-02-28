@@ -10,7 +10,7 @@ import Login from '../Login/Login';
 import Repositories from '../repositories/repositories';
 import Profile from '../Profile/Profile';
 import Homepage from '../Homepage/Homepage';
-
+import StackOverflowSearch from '../StackOverflowSearch/StackOverflowSearch';
 // App component
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -27,6 +27,7 @@ export default function App() {
     if (
       !token &&
       location.pathname !== '/login' &&
+      location.pathname !== '/register' &&
       location.pathname !== '/homepage'
     ) {
       window.location.replace('/login');
@@ -72,6 +73,7 @@ export default function App() {
             <Route path="/repositories" element={<Repositories />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/homepage" element={<Homepage />} />
+            <Route path="/stackoverflow" element={<StackOverflowSearch />} />
           </Routes>
         )}
       </Box>
