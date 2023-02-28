@@ -9,6 +9,9 @@ import {
   Link,
   Text,
   Spinner,
+  Flex,
+  SimpleGrid,
+  Heading,
 } from '@chakra-ui/react';
 
 function StackOverflowSearch() {
@@ -37,9 +40,22 @@ function StackOverflowSearch() {
   };
 
   return (
-    <Box p="4" bg="gray.100" style={{ marginTop: '2rem' }}>
-      <form onSubmit={handleFormSubmit}>
-        <Stack direction="row">
+    <Flex
+      w="90%"
+      minH="80%"
+      mt="2rem"
+      bgColor="gray.50"
+      borderRadius="md"
+      boxShadow="md"
+      p="4"
+      flexDir="column"
+      align="center"
+    >
+      <form
+        onSubmit={handleFormSubmit}
+        style={{ width: '90%', marginBottom: '2rem' }}
+      >
+        <Stack direction="row" align="center">
           <Input
             type="text"
             placeholder="Search Stack Overflow"
@@ -61,24 +77,37 @@ function StackOverflowSearch() {
         </Stack>
       </form>
       {loading ? (
-        <Stack mt="4" align="center">
-          <Spinner size="lg" />
-          <Text>Searching...</Text>
-        </Stack>
+        <Flex justify="center" align="center" w="90%">
+          <Stack align="center">
+            <Spinner size="lg" />
+            <Text>Searching...</Text>
+          </Stack>
+        </Flex>
       ) : results.length > 0 ? (
-        <List mt="4">
-          {results.map((result) => (
-            <ListItem key={result.question_id}>
-              <Link href={result.link} target="_blank" rel="noreferrer">
-                {result.title}
-              </Link>
-            </ListItem>
-          ))}
-        </List>
+        <Box style={{ flex: '1', width: '95%', h: '75%' }}>
+          <Stack spacing={2} w="95%" h="92%" overflowY="scroll">
+            {results.map((result) => (
+              <Box
+                key={result.question_id}
+                bg="white"
+                borderRadius="md"
+                boxShadow="md"
+                p="4"
+                w="90%"
+              >
+                <Link href={result.link} target="_blank" rel="noreferrer">
+                  <Heading size="md">{result.title}</Heading>
+                </Link>
+              </Box>
+            ))}
+          </Stack>
+        </Box>
       ) : (
-        <Text mt="4">Make a research.</Text>
+        <Flex justify="center" align="center" w="100%" mt="4">
+          <Text>Make a research.</Text>
+        </Flex>
       )}
-    </Box>
+    </Flex>
   );
 }
 

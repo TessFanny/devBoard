@@ -36,7 +36,7 @@ function Header() {
 
   return (
     <Flex
-      h="10%" // Sets the height of the header
+      h="10vh" // Sets the height of the header
       w="98%" // Sets the width of the header
       p="4" // Sets the padding of the header
       pr="10" // Sets the right padding of the header
