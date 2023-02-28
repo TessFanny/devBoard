@@ -12,7 +12,6 @@ import Github from './Github/Github';
 import Email from './Email/Email';
 import { modifyUser } from '../../features/user/user';
 import Notification from '../Notification/Notification';
-import
 
 function Profile() {
   const [isLoading, setIsLoading] = useState(false);
@@ -45,7 +44,6 @@ function Profile() {
               borderRadius="md"
               mb="10"
             />
-            {/* <Dropzone /> */}
             {role && (
               <Tag size="lg" colorScheme="telegram" borderRadius="full">
                 <Avatar
@@ -68,7 +66,6 @@ function Profile() {
                 <Email />
                 <Github />
               </Box>
-
               <Box>
                 <Firstname />
                 <Lastname />
@@ -79,34 +76,7 @@ function Profile() {
                 <Button mt="10" w="100%" colorScheme="linkedin" onClick={handleSubmit} isLoading={isLoading}>Submit</Button>
               </Box>
             </Box>
-            <Dropzone
-                    acceptedFiles=".jpg,.jpeg,.png"
-                    multiple={false}
-                    onDrop={(acceptedFiles) =>
-                      setFieldValue("picture", acceptedFiles[0])
-                    }
-                  >
-                    {({ getRootProps, getInputProps }) => (
-                      <Box
-                        {...getRootProps()}
-                        border={`2px dashed ${palette.primary.main}`}
-                        p="1rem"
-                        sx={{ "&:hover": { cursor: "pointer" } }}
-                      >
-                        <input {...getInputProps()} />
-                        {!values.picture ? (
-                          <p>Add Picture Here</p>
-                        ) : (
-                          <FlexBetween>
-                            <Typography>{values.picture.name}</Typography>
-                            <EditOutlinedIcon />
-                          </FlexBetween>
-                        )}
-                      </Box>
-                    )}
-                  </Dropzone>
-
-          </Box>
+            </Box>
         </Box>
       </Box>
       {notification && <Notification title="Saved !" description="Your changes have been saved" status="success" />}

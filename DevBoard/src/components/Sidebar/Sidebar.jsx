@@ -22,13 +22,17 @@ import {
   FaThumbsUp,
   FaUser,
   FaPlusSquare,
+  FaRegNewspaper
 } from 'react-icons/fa';
 import PropTypes from 'prop-types';
+import { useNavigate } from "react-router-dom";
 
 
 const Sidebar = ({ isOpen, setIsLoading }) => {
   // Destructure the isOpen property from the useDisclosure hook
   const { isOpen: isSubOpen, onToggle: onSubToggle } = useDisclosure();
+
+  const navigate = useNavigate();
 
   // Create a showAddPost state variable that initially is set to false, and a function to toggle it
   const [showAddPost, setShowAddPost] = useState(false);
@@ -95,10 +99,19 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
                     leftIcon={<FaPlusSquare />}
                     onClick={handleLinkClick}
                     fontWeight="400"
-
                   >
                     <Text pl="2">Add Post</Text>
                   </Button>
+                  <Link to="/feed">
+                  <Button
+                    variant="ghost"
+                    mb="4"
+                    leftIcon={<FaRegNewspaper/>}
+                    fontWeight="400"
+                    >
+                  <Text pl="2">RSS Feed</Text>
+                  </Button>
+                  </Link>
                 </>
               )}
             </SlideFade>

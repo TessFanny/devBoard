@@ -12,11 +12,14 @@ import Login from '../Login/Login';
 import Repositories from '../repositories/repositories';
 import Profile from '../Profile/Profile';
 import Home from '../Home/Home';
+import Feed from '../feed/feed'
+import { useDispatch, useSelector } from "react-redux";
 
 // App component
 export default function App() {
   const [isLoading, setIsLoading] = useState(false);
   const location = useLocation();
+  const isAuth = Boolean(useSelector((state) => state.token));
 
   // Hide Sidebar and Header components for /register and /login routes
   const isRegisterOrLoginRouteOrHomeOrHome = location.pathname === '/register' || location.pathname === '/login' || location.pathname === '/home';
@@ -49,7 +52,8 @@ export default function App() {
           <Routes>
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/repositories" element={<Repositories />} />
+            <Route path="/repositories" element={<Repositories/>} />
+            <Route path="/feed" element={<Feed />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/home" element={<Home />} />
           </Routes>
