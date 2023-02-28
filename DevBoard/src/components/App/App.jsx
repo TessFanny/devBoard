@@ -1,9 +1,7 @@
 /* eslint-disable react/react-in-jsx-scope */
-import { useState } from 'react';
-import { Routes, Route, useLocation } from 'react-router-dom';
-import {
-  Box, Flex, useBreakpointValue, Text,
-} from '@chakra-ui/react';
+import { useState, useEffect } from 'react';
+import { Routes, Route, useLocation, Navigate } from 'react-router-dom';
+import { Box, Flex, useBreakpointValue, Text } from '@chakra-ui/react';
 import Loader from '../Loader/Loader';
 import Sidebar from '../Sidebar/Sidebar';
 import Header from '../Header/Header';
@@ -11,18 +9,44 @@ import Register from '../Register/Register';
 import Login from '../Login/Login';
 import Repositories from '../repositories/repositories';
 import Profile from '../Profile/Profile';
+<<<<<<< HEAD
 import Home from '../Home/Home';
 import Feed from '../feed/feed'
 import { useDispatch, useSelector } from "react-redux";
+=======
+import Homepage from '../Homepage/Homepage';
+>>>>>>> fa9ad53b01911363d1697e69a3299cf425fcdc2b
 
 // App component
 export default function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const location = useLocation();
   const isAuth = Boolean(useSelector((state) => state.token));
 
+  // Check if user is logged in
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      setIsLoggedIn(true);
+    }
+    if (
+      !token &&
+      location.pathname !== '/login' &&
+      location.pathname !== '/homepage'
+    ) {
+      window.location.replace('/login');
+    }
+  }, []);
+
+  // Redirect user to register page if not logged in and not on login or homepage routes
+
   // Hide Sidebar and Header components for /register and /login routes
-  const isRegisterOrLoginRouteOrHomeOrHome = location.pathname === '/register' || location.pathname === '/login' || location.pathname === '/home';
+  const isRegisterOrLoginRouteOrHomeOrHome =
+    location.pathname === '/register' ||
+    location.pathname === '/login' ||
+    location.pathname === '/home';
   const sidebar = isRegisterOrLoginRouteOrHomeOrHome ? null : (
     <Box w="50" pr="1" bgColor="gray.200">
       <Sidebar setIsLoading={setIsLoading} />
@@ -55,7 +79,7 @@ export default function App() {
             <Route path="/repositories" element={<Repositories/>} />
             <Route path="/feed" element={<Feed />} />
             <Route path="/profile" element={<Profile />} />
-            <Route path="/home" element={<Home />} />
+            <Route path="/homepage" element={<Homepage />} />
           </Routes>
         )}
       </Box>

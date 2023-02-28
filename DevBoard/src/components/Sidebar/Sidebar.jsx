@@ -1,6 +1,6 @@
 // Import React and useState hooks from the react library
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 // Import various Chakra-UI components, as well as a few React icons
 import {
@@ -31,7 +31,8 @@ import { useNavigate } from "react-router-dom";
 const Sidebar = ({ isOpen, setIsLoading }) => {
   // Destructure the isOpen property from the useDisclosure hook
   const { isOpen: isSubOpen, onToggle: onSubToggle } = useDisclosure();
-
+  const location = useLocation();
+  const [activeRoute, setActiveRoute] = useState(location.pathname);
   const navigate = useNavigate();
 
   // Create a showAddPost state variable that initially is set to false, and a function to toggle it
@@ -48,7 +49,6 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
       setIsLoading(false);
     }, 500);
   };
-  
 
   return (
     <Box
@@ -60,8 +60,14 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
       bgColor="white"
       borderRadius="md"
     >
-      <Flex p="4" alignItems="center" justify="center" >
-        <Text fontSize="xl" fontWeight="600" mt="5" bgGradient='linear(to-l, #373B44, #4286f4)' bgClip="text">
+      <Flex p="4" alignItems="center" justify="center">
+        <Text
+          fontSize="xl"
+          fontWeight="600"
+          mt="5"
+          bgGradient="linear(to-l, #373B44, #4286f4)"
+          bgClip="text"
+        >
           DevBoard
         </Text>
       </Flex>
@@ -72,77 +78,112 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
         flexDirection="column"
         alignItems="flex-start"
       >
-      <Button variant="ghost" mb="2" leftIcon={<FaChartLine />} fontWeight="400" >
+        <Button
+          variant="ghost"
+          mb="2"
+          leftIcon={
+            <FaChartLine
+              color={activeRoute == '/dashboard' ? 'blue' : 'gray'}
+            />
+          }
+          fontWeight="400"
+          onClick={() => setActiveRoute('/dashboard')}
+        >
+          <Text pl="2">Dashboard</Text>
+        </Button>
+        <Button
+          variant="ghost"
+          mb="4"
+          leftIcon={
+            <FaNewspaper color={activeRoute == '/news' ? 'blue' : 'gray'} />
+          }
+          onClick={onSubToggle}
+          onClick={() => setActiveRoute('/news')}
+          fontWeight="400"
+        >
+          <Text pl="2">News</Text>
+        </Button>
 
-            <Text pl="2">Dashboard</Text>
-          </Button>
+        {/* Render the Add Post button inside a slide fade */}
+        <Box>
+          <SlideFade in={isSubOpen}>
+            {isSubOpen && (
+              <>
+                <Button
+                  variant="ghost"
+                  mb="4"
+                  leftIcon={<FaPlusSquare />}
+                  onClick={handleLinkClick}
+                  fontWeight="400"
+                >
+                  <Text pl="2">Add Post</Text>
+                </Button>
+              </>
+            )}
+          </SlideFade>
+        </Box>
+
+        <Link to="/repositories">
           <Button
             variant="ghost"
-
             mb="4"
-            leftIcon={<FaNewspaper />}
-            onClick={onSubToggle}
+            leftIcon={
+              <FaFolderOpen
+                color={activeRoute == '/repositories' ? 'blue' : 'gray'}
+              />
+            }
             fontWeight="400"
-
+            onClick={handleLinkClick}
+            onClick={() => setActiveRoute('/repositories')}
           >
-            <Text pl="2">News</Text>
+            <Text pl="2">Your Projects</Text>
           </Button>
-
-          {/* Render the Add Post button inside a slide fade */}
-          <Box>
-            <SlideFade in={isSubOpen}>
-              {isSubOpen && (
-                <>
-                  <Button
-                    variant="ghost"
-                    mb="4"
-                    leftIcon={<FaPlusSquare />}
-                    onClick={handleLinkClick}
-                    fontWeight="400"
-                  >
-                    <Text pl="2">Add Post</Text>
-                  </Button>
-                  <Link to="/feed">
-                  <Button
-                    variant="ghost"
-                    mb="4"
-                    leftIcon={<FaRegNewspaper/>}
-                    fontWeight="400"
-                    >
-                  <Text pl="2">RSS Feed</Text>
-                  </Button>
-                  </Link>
-                </>
-              )}
-            </SlideFade>
-          </Box>
-          
-       <Button variant="ghost" mb="4" leftIcon={<FaComments />} fontWeight="400" >
-            <Text pl="2">Forum</Text>
+        </Link>
+        <Button
+          variant="ghost"
+          mb="4"
+          leftIcon={
+            <FaColumns color={activeRoute == '/kanban' ? 'blue' : 'gray'} />
+          }
+          fontWeight="400"
+          onClick={handleLinkClick}
+          onClick={() => setActiveRoute('/kanban')}
+        >
+          <Text pl="2">Kanban</Text>
+        </Button>
+        <Button
+          variant="ghost"
+          mb="4"
+          leftIcon={
+            <FaThumbsUp color={activeRoute == '/likes' ? 'blue' : 'gray'} />
+          }
+          fontWeight="400"
+          onClick={handleLinkClick}
+          onClick={() => setActiveRoute('/likes')}
+        >
+          <Text pl="2">Likes</Text>
+        </Button>
+        <Link to="/profile">
+          <Button
+            variant="ghost"
+            mb="4"
+            leftIcon={
+              <FaUser color={activeRoute == '/profile' ? 'blue' : 'gray'} />
+            }
+            fontWeight="400"
+            onClick={handleLinkClick}
+            onClick={() => setActiveRoute('/profile')}
+          >
+            <Text pl="2">Profile</Text>
           </Button>
-          <Link to="/repositories">
-            <Button variant="ghost" mb="4" leftIcon={<FaFolderOpen />} fontWeight="400" onClick={handleLinkClick} >
-              <Text pl="2">Your Projects</Text>
-            </Button>
-          </Link>
-          <Button variant="ghost" mb="4" leftIcon={<FaColumns />} fontWeight="400" onClick={handleLinkClick} >
-            <Text pl="2">Kanban</Text>
-          </Button>
-          <Button variant="ghost" mb="4" leftIcon={<FaThumbsUp />} fontWeight="400" onClick={handleLinkClick} >
-            <Text pl="2">Likes</Text>
-          </Button>
-          <Link to="/profile">
-            <Button variant="ghost" mb="4" leftIcon={<FaUser />} fontWeight="400" onClick={handleLinkClick} >
-              <Text pl="2">Profile</Text>
-            </Button>
-          </Link>
+        </Link>
       </Box>
     </Box>
   );
 };
 
 Sidebar.propTypes = {
-  setIsLoading : PropTypes.func,
+  setIsLoading: PropTypes.func,
 };
 
- export default Sidebar;
+export default Sidebar;

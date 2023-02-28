@@ -1,7 +1,8 @@
 /* eslint-disable react/react-in-jsx-scope */
 import {
-  Flex, Box, Image, Button, Tag, TagLabel, Avatar,
+  Flex, Box, Image, Button, Tag, TagLabel, Avatar, Input, Icon, IconButton,
 } from '@chakra-ui/react';
+import { FaUpload } from "react-icons/fa";
 import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
 import Firstname from './Firstname/Firstname';
@@ -12,13 +13,31 @@ import Github from './Github/Github';
 import Email from './Email/Email';
 import { modifyUser } from '../../features/user/user';
 import Notification from '../Notification/Notification';
+import { modifyUserPicture } from '../../features/user/user';
 
 function Profile() {
   const [isLoading, setIsLoading] = useState(false);
   const [notification, setNotification] = useState(false);
   const dispatch = useDispatch();
   const { user, status } = useSelector((state) => state.login);
-  const { role } = user;
+  const { role, image_path, id } = user;
+  
+
+  const handleFileSelect = (e) => {
+    // const file = URL.createObjectURL(e.target.files[0]);
+    // console.log(file);
+    // dispatch(addImg(file));
+    // dispatch(addImg(e.target.files));
+
+    const file = e.target.files[0];
+    const formData = new FormData();
+    formData.append('file', file);
+    console.log(formData);
+    console.log(id);
+    dispatch(modifyUserPicture({formData, id}));
+    // dispatch(addImg(U));
+  };
+
   const handleSubmit = (evt) => {
     evt.preventDefault();
     if (isLoading) return;
@@ -40,12 +59,32 @@ function Profile() {
           <Box display="flex" flexDirection="column" alignItems="flex-start" p="10">
             <Image
               maxW="200px"
-              src={img}
+              src={`http://tessfanny-server.eddi.cloud:8080/images/${image_path}`}
+              fallbackSrc={img}
               borderRadius="md"
               mb="10"
             />
+            <IconButton
+              aria-label="Upload"
+              icon={<FaUpload />}
+              size="sm"
+              borderRadius="md"
+              bg="gray.300"
+              _hover={{ bg: "gray.400" }}
+              _active={{ bg: "gray.500" }}
+              onClick={() => document.getElementById("fileInput").click()}
+            >
+            </IconButton>
+            <Input
+              id="fileInput"
+              variant="unstyled"
+              type="file"
+              onChange={handleFileSelect}
+              display="none"
+            />
+
             {role && (
-              <Tag size="lg" colorScheme="telegram" borderRadius="full">
+              <Tag size="lg" colorScheme="telegram" borderRadius="full" mt="7">
                 <Avatar
                   bg="telegram.500"
                   size="xs"

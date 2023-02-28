@@ -47,6 +47,28 @@ export const modifyUser = createAsyncThunk(
   },
 );
 
+export const modifyUserPicture = createAsyncThunk(
+  'user/modifyUserPicture',
+  async ({ formData, id }) => {
+    // Make a patch request to a modify endpoint with formData
+    const response = await axios.patch(
+      `http://tessfanny-server.eddi.cloud:8080/api/user/${id}/profile`,formData,
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`, // Bearer ACCESSTOKEN
+          "Content-Type": "multipart/form-data",
+        },
+      },
+    ).then((response) => {
+      return response;
+    }).catch((err) => {
+      console.error(err);
+    });
+    const user = response.data;
+    return { user };
+  },
+);
+
 export async function getUserGithubData() {
   const response = await fetch(`${VITE_BACKEND_URL}/getUserData`, {
     method: 'GET',
@@ -153,6 +175,22 @@ export const loginSlice = createSlice({
       })
       // Reducer for handling the rejected state of the modify request
       .addCase(modifyUser.rejected, (state) => {
+        // state.user =
+        state.status = false;
+        state.error = action.error.message;
+      })
+      .addCase(modifyUserPicture.pending, (state) => {
+        state.status = 'loading';
+        state.error = null;
+      })
+      // Reducer for handling the fulfilled state of the modify request
+      .addCase(modifyUserPicture.fulfilled, (state, action) => {
+        //console.log(action.payload);
+        state.user = action.payload.user;
+        state.status = true;
+      })
+      // Reducer for handling the rejected state of the modify request
+      .addCase(modifyUserPicture.rejected, (state) => {
         // state.user =
         state.status = false;
         state.error = action.error.message;
