@@ -33,7 +33,6 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
   const { isOpen: isSubOpen, onToggle: onSubToggle } = useDisclosure();
   const location = useLocation();
   const [activeRoute, setActiveRoute] = useState(location.pathname);
-  const navigate = useNavigate();
 
 
 
@@ -85,7 +84,7 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
           mb="2"
           leftIcon={
             <FaChartLine
-              color={activeRoute == '/dashboard' ? 'blue' : 'gray'}
+              color={activeRoute === '/dashboard' ? 'blue' : 'gray'}
             />
           }
           fontWeight="400"
@@ -97,7 +96,7 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
           variant="ghost"
           mb="4"
           leftIcon={
-            <FaNewspaper color={activeRoute == '/news' ? 'blue' : 'gray'} />
+            <FaNewspaper color={activeRoute === '/news' ? 'blue' : 'gray'} />
           }
           onClick={onSubToggle}
           // onClick={() => setActiveRoute('/news')}
@@ -142,7 +141,7 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
             mb="4"
             leftIcon={
               <FaFolderOpen
-                color={activeRoute == '/repositories' ? 'blue' : 'gray'}
+                color={activeRoute === '/repositories' ? 'blue' : 'gray'}
               />
             }
             fontWeight="400"
@@ -158,7 +157,7 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
             mb="4"
             leftIcon={
               <BsStackOverflow
-                color={activeRoute == '/stackoverflow' ? 'blue' : 'gray'}
+                color={activeRoute === '/stackoverflow' ? 'blue' : 'gray'}
               />
             }
             fontWeight="400"
@@ -174,7 +173,7 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
             mb="4"
             leftIcon={
               <BsStackOverflow
-                color={activeRoute == '/stackoverflow' ? 'blue' : 'gray'}
+                color={activeRoute === '/playground' ? 'blue' : 'gray'}
               />
             }
             fontWeight="400"
@@ -188,7 +187,7 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
           variant="ghost"
           mb="4"
           leftIcon={
-            <FaColumns color={activeRoute == '/kanban' ? 'blue' : 'gray'} />
+            <FaColumns color={activeRoute === '/kanban' ? 'blue' : 'gray'} />
           }
           fontWeight="400"
           onClick={handleLinkClick}
@@ -200,7 +199,7 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
           variant="ghost"
           mb="4"
           leftIcon={
-            <FaThumbsUp color={activeRoute == '/likes' ? 'blue' : 'gray'} />
+            <FaThumbsUp color={activeRoute === '/likes' ? 'blue' : 'gray'} />
           }
           fontWeight="400"
           onClick={handleLinkClick}
@@ -213,7 +212,7 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
               variant="ghost"
               mb="4"
               leftIcon={
-                <FaUser color={activeRoute == '/organisation' ? 'blue' : 'gray'} />
+                <FaUser color={activeRoute === '/organisation' ? 'blue' : 'gray'} />
               }
               fontWeight="400"
               onClick={handleLinkClick}
@@ -227,7 +226,7 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
             variant="ghost"
             mb="4"
             leftIcon={
-              <FaUser color={activeRoute == '/profile' ? 'blue' : 'gray'} />
+              <FaUser color={activeRoute === '/profile' ? 'blue' : 'gray'} />
             }
             fontWeight="400"
             onClick={handleLinkClick}

@@ -44,7 +44,7 @@ return (
         <Text>{feed?.description}</Text>
         <Text>{feed?.language}</Text>
         <Text>{feed?.link}</Text> 
-        {/* {<Items items= {feed.items} />} */}
+        {feed.items.map(item => <Text>{item.title}</Text>)}
       </TabPanel>
       )}
     </TabPanels>
