@@ -33,7 +33,8 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
   const { isOpen: isSubOpen, onToggle: onSubToggle } = useDisclosure();
   const location = useLocation();
   const [activeRoute, setActiveRoute] = useState(location.pathname);
-  const navigate = useNavigate();
+
+
 
   // Create a showAddPost state variable that initially is set to false, and a function to toggle it
   const [showAddPost, setShowAddPost] = useState(false);
@@ -59,7 +60,7 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
       transform={isOpen ? 'translateX(0)' : '-translateX(100%)'}
       bgColor="white"
       borderRadius="md"
-      w="13vw"
+      w={['100%']}
     >
       <Flex p="4" alignItems="center" justify="center">
         <Text
@@ -74,7 +75,6 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
       </Flex>
       <Box
         p="4"
-        pl="30"
         display="flex"
         flexDirection="column"
         alignItems="flex-start"
@@ -84,7 +84,7 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
           mb="2"
           leftIcon={
             <FaChartLine
-              color={activeRoute == '/dashboard' ? 'blue' : 'gray'}
+              color={activeRoute === '/dashboard' ? 'blue' : 'gray'}
             />
           }
           fontWeight="400"
@@ -96,7 +96,7 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
           variant="ghost"
           mb="4"
           leftIcon={
-            <FaNewspaper color={activeRoute == '/news' ? 'blue' : 'gray'} />
+            <FaNewspaper color={activeRoute === '/news' ? 'blue' : 'gray'} />
           }
           onClick={onSubToggle}
           // onClick={() => setActiveRoute('/news')}
@@ -119,7 +119,7 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
                 >
                   <Text pl="2">Add Post</Text>
                 </Button>
-                <Link to="/feeds">
+                <Link to="/feed">
                   <Button
                     variant="ghost"
                     mb="4"
@@ -141,7 +141,7 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
             mb="4"
             leftIcon={
               <FaFolderOpen
-                color={activeRoute == '/repositories' ? 'blue' : 'gray'}
+                color={activeRoute === '/repositories' ? 'blue' : 'gray'}
               />
             }
             fontWeight="400"
@@ -157,7 +157,7 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
             mb="4"
             leftIcon={
               <BsStackOverflow
-                color={activeRoute == '/stackoverflow' ? 'blue' : 'gray'}
+                color={activeRoute === '/stackoverflow' ? 'blue' : 'gray'}
               />
             }
             fontWeight="400"
@@ -167,11 +167,27 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
             <Text pl="2">StackOverflow</Text>
           </Button>
         </Link>
+        <Link to="/playground">
+          <Button
+            variant="ghost"
+            mb="4"
+            leftIcon={
+              <BsStackOverflow
+                color={activeRoute === '/playground' ? 'blue' : 'gray'}
+              />
+            }
+            fontWeight="400"
+            onClick={handleLinkClick}
+            onClick={() => setActiveRoute('/playground')}
+          >
+            <Text pl="2">Playground</Text>
+          </Button>
+        </Link>
         <Button
           variant="ghost"
           mb="4"
           leftIcon={
-            <FaColumns color={activeRoute == '/kanban' ? 'blue' : 'gray'} />
+            <FaColumns color={activeRoute === '/kanban' ? 'blue' : 'gray'} />
           }
           fontWeight="400"
           onClick={handleLinkClick}
@@ -183,7 +199,7 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
           variant="ghost"
           mb="4"
           leftIcon={
-            <FaThumbsUp color={activeRoute == '/likes' ? 'blue' : 'gray'} />
+            <FaThumbsUp color={activeRoute === '/likes' ? 'blue' : 'gray'} />
           }
           fontWeight="400"
           onClick={handleLinkClick}
@@ -191,12 +207,26 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
         >
           <Text pl="2">Likes</Text>
         </Button>
+        <Link to="/organizations">
+          <Button
+              variant="ghost"
+              mb="4"
+              leftIcon={
+                <FaUser color={activeRoute === '/organisation' ? 'blue' : 'gray'} />
+              }
+              fontWeight="400"
+              onClick={handleLinkClick}
+              onClick={() => setActiveRoute('/profile')}
+          >
+            <Text pl="2">Organizations</Text>
+          </Button>
+        </Link>
         <Link to="/profile">
           <Button
             variant="ghost"
             mb="4"
             leftIcon={
-              <FaUser color={activeRoute == '/profile' ? 'blue' : 'gray'} />
+              <FaUser color={activeRoute === '/profile' ? 'blue' : 'gray'} />
             }
             fontWeight="400"
             onClick={handleLinkClick}

@@ -96,6 +96,7 @@ function StackOverflowSearch() {
       results.length > 0 ? (
         <Box style={{ flex: '1', width: '100%', h: '75%' }}>
           <Stack display="flex" w="100%" h="92%" overflowY="scroll">
+
             {results.map((result) => (
               <div
                 key={result.question_id}
@@ -108,6 +109,7 @@ function StackOverflowSearch() {
                   width: '100%',
                   marginBottom: '8px',
                 }}
+
               >
                 <Link href={result.link} isExternal>
                   <Box boxShadow="md" p={4} borderRadius="md">

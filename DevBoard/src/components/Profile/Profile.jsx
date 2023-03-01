@@ -53,12 +53,12 @@ function Profile() {
   };
 
   return (
-    <Flex w="98%" mt="10" h="80%">
-      <Box w="100%" display="flex" bgColor="white" borderRadius="md" boxShadow="md">
-        <Box w="20%" pr="10">
-          <Box display="flex" flexDirection="column" alignItems="flex-start" p="10">
+    <Flex w="98%" mt={['5', '5', '10']} h={['100%', '100%', '100%', '80%', '80%']}>
+      <Box w="100%" display="flex" flexDirection={['column', 'column', 'column', 'row']} bgColor="white" borderRadius="md" boxShadow="md">
+        <Box w={['100%', '100%', '100%', '35%', '20%']} pr={['0', '0', '0', '0', '10']}>
+          <Box display="flex" flexDirection="column" alignItems={['center', 'center', 'center', 'flex-start']} p={['3','10']}>
             <Image
-              maxW="200px"
+              maxW={['350px', '400px', '400xpx', '200px', '200px']}
               src={`http://tessfanny-server.eddi.cloud:8080/images/${image_path}`}
               fallbackSrc={img}
               borderRadius="md"
@@ -97,20 +97,20 @@ function Profile() {
           </Box>
         </Box>
 
-        <Box w="45%" display="flex" pl="100">
+        <Box w={['100%', '100%', '100%', '65%', '45%']} display="flex" pl={['0', '0', '0', '0', '100']}>
           <Box w="100%" display="flex" flexDirection="column" alignItems="flex-end" justifyContent="flex-start" height="100%">
-            <Box display="flex" justifyContent="space-between" alignItems="flex-start" w="100%">
-              <Box>
+            <Box display="flex" justifyContent="space-between" alignItems="flex-start" flexDirection={['column', 'column', 'column', 'row', 'row']} w="100%" pl={['3', '3', '3', '0']} pr={['3', '3', '3', '10']} >
+              <Box w={['100%', '100%', '100%', '47%', '47%']}>
                 <Username />
                 <Email />
                 <Github />
               </Box>
-              <Box>
+              <Box w={['100%', '100%', '100%', '47%', '47%']}>
                 <Firstname />
                 <Lastname />
               </Box>
             </Box>
-            <Box w="100%" display="flex" justifyContent="center">
+            <Box w="100%" display="flex" justifyContent="center" pl={['3', '3', '3', '0']} pr={['3', '3', '3', '10']} pb={['3', '3', '3', '0']}>
               <Box w="100%">
                 <Button mt="10" w="100%" colorScheme="linkedin" onClick={handleSubmit} isLoading={isLoading}>Submit</Button>
               </Box>

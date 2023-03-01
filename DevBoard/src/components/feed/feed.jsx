@@ -1,23 +1,20 @@
-import {
-  Flex, Text, SimpleGrid, Card, CardHeader, CardBody,
-  CardFooter, Heading, Button, IconButton, Center, Box,
-} from '@chakra-ui/react';
+import {Accordion, AccordionButton, AccordionItem, AccordionPanel, Box, Flex, Text} from '@chakra-ui/react';
+import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
 import { useState } from 'react';
 import { useEffect } from 'react';
-// import {News} from './News'
+import Items from './Items'
 
-const Feed = ({ userId, isProfile = false }) => {
+
+const Feed = () => {
 
   const [feeds, setFeeds] = useState([]);
   const VITE_BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
   const fetchData =  async () => {
       try {
-          console.log("1")
           const response = await fetch(`${VITE_BACKEND_URL}/api/feeds`, {
           method: "GET",
       })
       const data = await response.json();
-      console.log(data)
       setFeeds(data);
       } catch(error){       
         console.error(error)
@@ -33,23 +30,49 @@ const Feed = ({ userId, isProfile = false }) => {
 //       getFeeds();
 //     }
 //   }, []);
+    console.log(feeds)
 
 return (
-    <div>
-          <Text fontSize="lg" color="gray.600">
-                Feed from {feeds[0]?.title}
-          </Text>
-          <Text>
-            {feeds[0]?.description}
-           {/* {console.log(feeds[0].items[0])} */}
-          </Text>
-      <ul>
-        {/* {feeds[0].items.map((item, index) => ( */}
-          {/* <News key={index} item={item} /> */}
-        {/* ))} */}
-      </ul>
-    </div>
+
+    <Tabs>
+    <TabList>
+    {feeds &&
+      feeds.map(feed => <Tab>{feed?.title}</Tab>)}
+        </TabList>
+        <TabPanels>
+          {feeds.map(feed =>
+          <TabPanel>
+            <Text>{feed?.description}</Text>
+            <Text>{feed?.language}</Text>
+            <Text>{feed?.link}</Text>
+            {feed.items.map((item) => (
+
+                <Accordion>
+                    <AccordionItem>
+                        <h2>
+                            <AccordionButton>
+                                <Box as="span" flex='1' textAlign='left'>
+                                    {item.title}
+                                </Box>
+
+                            </AccordionButton>
+                        </h2>
+                        <AccordionPanel pb={4}>
+                            {item.content}
+                        </AccordionPanel>
+                    </AccordionItem>
+
+                </Accordion>
+
+
+            ))}
+          </TabPanel>
+          )}
+        </TabPanels>
+    </Tabs>
   );
 };
 
 export default Feed
+
+  
