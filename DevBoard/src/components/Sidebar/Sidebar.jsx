@@ -22,12 +22,11 @@ import {
   FaThumbsUp,
   FaUser,
   FaPlusSquare,
-  FaRegNewspaper
+  FaRegNewspaper,
 } from 'react-icons/fa';
 import { BsStackOverflow } from 'react-icons/bs';
 import PropTypes from 'prop-types';
-import { useNavigate } from "react-router-dom";
-
+import { useNavigate } from 'react-router-dom';
 
 const Sidebar = ({ isOpen, setIsLoading }) => {
   // Destructure the isOpen property from the useDisclosure hook
@@ -35,6 +34,8 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
   const location = useLocation();
   const [activeRoute, setActiveRoute] = useState(location.pathname);
   const navigate = useNavigate();
+
+
 
   // Create a showAddPost state variable that initially is set to false, and a function to toggle it
   const [showAddPost, setShowAddPost] = useState(false);
@@ -60,6 +61,7 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
       transform={isOpen ? 'translateX(0)' : '-translateX(100%)'}
       bgColor="white"
       borderRadius="md"
+      w={['']}
     >
       <Flex p="4" alignItems="center" justify="center">
         <Text
@@ -74,7 +76,6 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
       </Flex>
       <Box
         p="4"
-        pl="30"
         display="flex"
         flexDirection="column"
         alignItems="flex-start"
@@ -99,7 +100,7 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
             <FaNewspaper color={activeRoute == '/news' ? 'blue' : 'gray'} />
           }
           onClick={onSubToggle}
-          onClick={() => setActiveRoute('/news')}
+          // onClick={() => setActiveRoute('/news')}
           fontWeight="400"
         >
           <Text pl="2">News</Text>
@@ -123,7 +124,7 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
                   <Button
                     variant="ghost"
                     mb="4"
-                    leftIcon={<FaRegNewspaper/>}
+                    leftIcon={<FaRegNewspaper />}
                     onClick={handleLinkClick}
                     fontWeight="400"
                   >
@@ -207,6 +208,20 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
         >
           <Text pl="2">Likes</Text>
         </Button>
+        <Link to="/organizations">
+          <Button
+              variant="ghost"
+              mb="4"
+              leftIcon={
+                <FaUser color={activeRoute == '/organisation' ? 'blue' : 'gray'} />
+              }
+              fontWeight="400"
+              onClick={handleLinkClick}
+              onClick={() => setActiveRoute('/profile')}
+          >
+            <Text pl="2">Organizations</Text>
+          </Button>
+        </Link>
         <Link to="/profile">
           <Button
             variant="ghost"

@@ -7,25 +7,26 @@ import {
   MenuButton,
   MenuItem,
   MenuList,
-  Menu,
+  Menu, useMediaQuery,
 } from '@chakra-ui/react';
 import { FaUser, FaUserEdit } from 'react-icons/fa';
 import { FiLogOut } from 'react-icons/fi';
 import { IoMdSettings } from 'react-icons/io';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { logout } from '../../features/user/user';
 import { useLocation } from 'react-router-dom';
 import RouteInfo from './RouteInfo/Routeinfo';
+import BurgerMenu from "../BurgerMenu/BurgerMenu.jsx";
 function Header() {
-  const navigateto = useNavigate();
   const dispatch = useDispatch();
   const { id, username } = useSelector((state) => state.login.user);
+  const [isSmallerThan1000] = useMediaQuery('(max-width: 1000px)');
 
   const handleLogout = () => {
     dispatch(logout());
-    window.location.replace('/login');
+    window.location.replace('/homepage');
   };
   const location = useLocation();
   const [showMenu, setShowMenu] = useState(false);
@@ -36,8 +37,8 @@ function Header() {
 
   return (
     <Flex
-      h="10%" // Sets the height of the header
-      w="98%" // Sets the width of the header
+      h="10vh" // Sets the height of the header
+      w={isSmallerThan1000 ? '100%' : '98%'} // Sets the width of the header
       p="4" // Sets the padding of the header
       pr="10" // Sets the right padding of the header
       pl="10" // Sets the left padding of the header
@@ -47,7 +48,12 @@ function Header() {
       boxShadow="base"
       borderRadius="md"
     >
+      <Box display="flex" alignItems="center" gap="2">
+      {isSmallerThan1000 && (
+          <BurgerMenu />
+      )}
       <RouteInfo />
+      </Box>
       <Box display="flex" alignItems="center" gap="2">
         {id ? (
           <Menu>
@@ -65,7 +71,7 @@ function Header() {
               <Link to="/profile">
                 <MenuItem icon={<FaUserEdit />}>Profile</MenuItem>
               </Link>
-              <Link to="/">
+              <Link to="/homepage">
                 <MenuItem icon={<FiLogOut />} onClick={handleLogout}>
                   Log out
                 </MenuItem>

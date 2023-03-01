@@ -1,13 +1,15 @@
 /* eslint-disable react/react-in-jsx-scope */
 import {
   Flex, Text, SimpleGrid, Card, CardHeader, CardBody,
-  CardFooter, Heading, Button, IconButton, Center, Box,
+  CardFooter, Heading, Button, IconButton, Center, Box, useMediaQuery, Image,
 } from '@chakra-ui/react';
 import { SlRefresh } from 'react-icons/sl';
 import { FaGithub } from 'react-icons/fa';
+import { RiGitRepositoryFill } from 'react-icons/ri';
 import { useDispatch, useSelector } from 'react-redux';
 import { getRepo, getUserGithubRepos } from '../../features/user/user';
 import Notification from '../Notification/Notification';
+import folderImg from '../../assets/folder-svgrepo-com.svg'
 
 function Repositories() {
   const { repositories } = useSelector((state) => state.login.user);
@@ -15,6 +17,7 @@ function Repositories() {
   const dispatch = useDispatch();
   const localStoragePopup = localStorage.getItem('popupDisplayed');
   const githubLogged = localStorage.getItem('accessToken');
+  const [isSmallerThan1000] = useMediaQuery('(max-width: 1000px)');
 
   const HandleGitHubAuth = async () => {
     window.location.assign(
@@ -50,26 +53,27 @@ function Repositories() {
   };
   return (
     // Flex container to center and add margin to the grid of Cards
-    <Flex w="98%" minH="80%" mt={10} bgColor="gray.50" borderRadius="md" boxShadow="md" p="4">
+    <Flex w={isSmallerThan1000 ? '100%' : '98%'} minH="80%" mt={10} bgColor="gray.50" borderRadius="md" boxShadow="md" p="4">
       {githubLogged ? (
         <>
-          <SimpleGrid spacing={4} templateColumns="repeat(auto-fill, minmax(200px, 1fr))" w="100%" h="31%">
+          <SimpleGrid spacing={4} templateColumns="repeat(auto-fill, minmax(300px, 1fr))" w="100%" h="31%">
             {repositories
             && repositories.map((repo) => (
-              <Card key={repo.id}>
-                <CardHeader>
+              <Card key={repo.id} w="100%">
+                <CardHeader display="flex" justifyContent="center" pb="0">
                   <Heading size="md">{repo.name}</Heading>
                 </CardHeader>
-                <CardBody>
-                  <Text>{repo.description}</Text>
+                <CardBody display="flex" flexDirection="column" alignItems="center" pb="0">
+                  <Image src={folderImg} boxSize="120px"></Image>
+                  <Text textAlign="center" mt="5" fontSize="14px">{repo.description}</Text>
                 </CardBody>
-                <CardFooter>
+                <CardFooter display="flex" justifyContent="center">
                   <Button as="a" href={repo.html_url} target="_blank">View here</Button>
                 </CardFooter>
               </Card>
             ))}
           </SimpleGrid>
-          <IconButton aria-label="refresh repo" icon={<SlRefresh />} onClick={loadRepo} />
+          <IconButton aria-label="refresh repo" icon={<SlRefresh />} onClick={loadRepo} position="fixed" right={isSmallerThan1000 ? '10px' : '50px'} />
 
         </>
 
