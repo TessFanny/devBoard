@@ -7,7 +7,7 @@ import { SlRefresh } from 'react-icons/sl';
 import { FaGithub } from 'react-icons/fa';
 import { RiGitRepositoryFill } from 'react-icons/ri';
 import { useDispatch, useSelector } from 'react-redux';
-import { getRepo, getUserGithubRepos } from '../../features/user/user';
+import {getRepo, getUserGithubData, getUserGithubRepos} from '../../features/user/user';
 import Notification from '../Notification/Notification';
 import folderImg from '../../assets/folder-svgrepo-com.svg'
 
@@ -19,6 +19,32 @@ function Repositories() {
   const githubLogged = localStorage.getItem('accessToken');
   const [isSmallerThan1000] = useMediaQuery('(max-width: 1000px)');
 
+
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const codeParam = urlParams.get('code');
+
+  if (codeParam && localStorage.getItem('accessToken') === null) {
+    async function getAccessToken() {
+      try {
+        const response = await fetch(
+            `${import.meta.env.VITE_BACKEND_URL}/api/getAccessToken?code=${codeParam}`,
+        )
+            .then((response) => response.json())
+            .then((data) => {
+              if (data.access_token) {
+                localStorage.setItem('accessToken', data.access_token);
+                setRerender(!rerender);
+                getUserGithubData();
+                navigateto('/');
+              }
+            });
+      } catch (err) {
+        console.error(err);
+      }
+    }
+    getAccessToken();
+  }
   const HandleGitHubAuth = async () => {
     window.location.assign(
       `https://github.com/login/oauth/authorize?client_id=${import.meta.env.VITE_CLIENT_ID}`,

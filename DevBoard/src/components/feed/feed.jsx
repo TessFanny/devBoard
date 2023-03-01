@@ -36,7 +36,7 @@ return (
 
     <Tabs>
     <TabList>
-    {feeds &&
+    {feeds[0] &&
       feeds.map(feed => <Tab>{feed?.title}</Tab>)}
         </TabList>
         <TabPanels>
@@ -58,7 +58,9 @@ return (
                             </AccordionButton>
                         </h2>
                         <AccordionPanel pb={4}>
-                            {item.content}
+                            {new window.DOMParser()
+                                .parseFromString(item.content, "text/html")
+                                .documentElement.textContent}
                         </AccordionPanel>
                     </AccordionItem>
 
