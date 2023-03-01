@@ -45,9 +45,9 @@ function StackOverflowSearch() {
   // The component returns JSX that renders a search form and displays the search results
   return (
     <Flex
-      w="90%"
+      w="98%"
       minH="80%"
-      mt="2rem"
+      mt="10"
       bgColor="gray.50"
       borderRadius="md"
       boxShadow="md"
@@ -91,10 +91,11 @@ function StackOverflowSearch() {
             <Text>Searching...</Text>
           </Stack>
         </Flex>
-      ) : /* // If the search has returned results, they are displayed in a Box component */
-      results.length > 0 ? (
-        <Box style={{ flex: '1', width: '95%', h: '75%' }}>
-          <Stack spacing={2} w="95%" h="92%" overflowY="scroll">
+/* // If the search has returned results, they are displayed in a Box component */
+      ) : results.length > 0 ? (
+        <Box style={{ flex: '1', width: '100%', h: '75%' }}>
+          <Stack display="flex" w="100%" h="92%" overflowY="scroll">
+
             {results.map((result) => (
               <Box
                 key={result.question_id}
@@ -102,7 +103,7 @@ function StackOverflowSearch() {
                 borderRadius="md"
                 boxShadow="md"
                 p="4"
-                w="90%"
+                w="100%"
               >
                 <Link href={result.link} target="_blank" rel="noreferrer">
                   <Heading size="md">{result.title}</Heading>
