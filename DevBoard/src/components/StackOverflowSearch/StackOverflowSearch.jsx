@@ -13,6 +13,7 @@ import {
   SimpleGrid,
   Heading,
 } from '@chakra-ui/react';
+import { TiInputChecked } from 'react-icons/ti';
 // This function component is called StackOverflowSearch
 function StackOverflowSearch() {
   // The state variables 'query', 'results' and 'loading' are declared using the useState hook
@@ -22,7 +23,7 @@ function StackOverflowSearch() {
   // This function is used to search StackOverflow using the 'query' state variable
   const searchStackOverflow = async () => {
     setLoading(true);
-    const url = `https://api.stackexchange.com/2.3/search?order=desc&sort=relevance&intitle=${query}&site=stackoverflow&pagesize=20`;
+    const url = `https://api.stackexchange.com/2.3/search?order=desc&sort=relevance&intitle=${query}&site=stackoverflow&pagesize=20&filter=withbody`;
     const response = await fetch(url);
     const data = await response.json();
     console.log(data);
@@ -45,45 +46,46 @@ function StackOverflowSearch() {
   };
   // The component returns JSX that renders a search form and displays the search results
   return (
-    <Flex
-      w="98%"
-      minH="80%"
-      mt="10"
-      bgColor="gray.50"
-      borderRadius="md"
-      boxShadow="md"
-      p="4"
-      flexDir="column"
-      align="center"
-    >
-      {/* /* This is the search form / */}
-      <form
-        onSubmit={handleFormSubmit}
-        style={{ width: '90%', marginBottom: '2rem' }}
+    <>
+      <Flex
+        w="98%"
+        minH="80%"
+        mt="10"
+        bgColor="gray.50"
+        borderRadius="md"
+        boxShadow="md"
+        p="4"
+        flexDir="column"
+        align="center"
       >
-        {/* {/ The search input and submit button are wrapped in a Stack /} */}
-        <Stack direction="row" align="center">
-          <Input
-            type="text"
-            placeholder="Search Stack Overflow"
-            value={query}
-            onChange={handleQueryChange}
-            size="lg"
-            focusBorderColor="blue.500"
-            _hover={{ borderColor: 'blue.500' }}
-          />
-          <Button
-            type="submit"
-            colorScheme="blue"
-            size="lg"
-            isLoading={loading}
-            loadingText="Searching"
-          >
-            Search
-          </Button>
-        </Stack>
-      </form>
-      {/* If the search is currently loading, a Spinner and a Text component are displayed  */}
+        {/* /* This is the search form / */}
+        <form
+          onSubmit={handleFormSubmit}
+          style={{ width: '90%', marginBottom: '2rem' }}
+        >
+          {/* {/ The search input and submit button are wrapped in a Stack /} */}
+          <Stack direction="row" align="center">
+            <Input
+              type="text"
+              placeholder="Search Stack Overflow"
+              value={query}
+              onChange={handleQueryChange}
+              size="lg"
+              focusBorderColor="blue.500"
+              _hover={{ borderColor: 'blue.500' }}
+            />
+            <Button
+              type="submit"
+              colorScheme="blue"
+              size="lg"
+              isLoading={loading}
+              loadingText="Searching"
+            >
+              Search
+            </Button>
+          </Stack>
+        </form>
+        {/* If the search is currently loading, a Spinner and a Text component are displayed  */}
 
       {loading ? (
         <Flex justify="center" align="center" w="90%">
