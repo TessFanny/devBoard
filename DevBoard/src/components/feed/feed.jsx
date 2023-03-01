@@ -2,15 +2,15 @@ import {Flex, Text} from '@chakra-ui/react';
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
 import { useState } from 'react';
 import { useEffect } from 'react';
-// import {News} from './News'
+import Items from './Items'
 
-const Feed = ({ userId, isProfile = false }) => {
+
+const Feed = () => {
 
   const [feeds, setFeeds] = useState([]);
   const VITE_BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
   const fetchData =  async () => {
       try {
-          console.log("1")
           const response = await fetch(`${VITE_BACKEND_URL}/api/feeds`, {
           method: "GET",
       })
@@ -43,8 +43,10 @@ return (
       <TabPanel>
         <Text>{feed?.description}</Text>
         <Text>{feed?.language}</Text>
-        <Text>{feed?.link}</Text>       
-      </TabPanel>)}
+        <Text>{feed?.link}</Text> 
+        {/* {<Items items= {feed.items} />} */}
+      </TabPanel>
+      )}
     </TabPanels>
   </Tabs>
   );
