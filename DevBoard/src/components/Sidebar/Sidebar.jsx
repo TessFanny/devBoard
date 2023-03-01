@@ -60,7 +60,7 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
       transform={isOpen ? 'translateX(0)' : '-translateX(100%)'}
       bgColor="white"
       borderRadius="md"
-      w={['']}
+      w={['100%']}
     >
       <Flex p="4" alignItems="center" justify="center">
         <Text
@@ -119,7 +119,7 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
                 >
                   <Text pl="2">Add Post</Text>
                 </Button>
-                <Link to="/feeds">
+                <Link to="/feed">
                   <Button
                     variant="ghost"
                     mb="4"
