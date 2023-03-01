@@ -1,4 +1,4 @@
-import {Flex, Text} from '@chakra-ui/react';
+import {Accordion, AccordionButton, AccordionItem, AccordionPanel, Box, Flex, Text} from '@chakra-ui/react';
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
 import { useState } from 'react';
 import { useEffect } from 'react';
@@ -30,25 +30,46 @@ const Feed = () => {
 //       getFeeds();
 //     }
 //   }, []);
+    console.log(feeds)
 
 return (
 
     <Tabs>
     <TabList>
-    {console.log(feeds)}
-      {feeds.map(feed => <Tab>{feed?.title}</Tab>)}
-    </TabList>
-    <TabPanels>
-      {feeds.map(feed => 
-      <TabPanel>
-        <Text>{feed?.description}</Text>
-        <Text>{feed?.language}</Text>
-        <Text>{feed?.link}</Text> 
-        {feed.items.map(item => <Text>{item.title}</Text>)}
-      </TabPanel>
-      )}
-    </TabPanels>
-  </Tabs>
+    {feeds &&
+      feeds.map(feed => <Tab>{feed?.title}</Tab>)}
+        </TabList>
+        <TabPanels>
+          {feeds.map(feed =>
+          <TabPanel>
+            <Text>{feed?.description}</Text>
+            <Text>{feed?.language}</Text>
+            <Text>{feed?.link}</Text>
+            {feed.items.map((item) => (
+
+                <Accordion>
+                    <AccordionItem>
+                        <h2>
+                            <AccordionButton>
+                                <Box as="span" flex='1' textAlign='left'>
+                                    {item.title}
+                                </Box>
+
+                            </AccordionButton>
+                        </h2>
+                        <AccordionPanel pb={4}>
+                            {item.content}
+                        </AccordionPanel>
+                    </AccordionItem>
+
+                </Accordion>
+
+
+            ))}
+          </TabPanel>
+          )}
+        </TabPanels>
+    </Tabs>
   );
 };
 
