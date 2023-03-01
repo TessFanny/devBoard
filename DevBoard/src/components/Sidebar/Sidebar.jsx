@@ -35,6 +35,8 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
   const [activeRoute, setActiveRoute] = useState(location.pathname);
   const navigate = useNavigate();
 
+
+
   // Create a showAddPost state variable that initially is set to false, and a function to toggle it
   const [showAddPost, setShowAddPost] = useState(false);
 
@@ -59,7 +61,7 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
       transform={isOpen ? 'translateX(0)' : '-translateX(100%)'}
       bgColor="white"
       borderRadius="md"
-      w="13vw"
+      w={['']}
     >
       <Flex p="4" alignItems="center" justify="center">
         <Text
@@ -74,7 +76,6 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
       </Flex>
       <Box
         p="4"
-        pl="30"
         display="flex"
         flexDirection="column"
         alignItems="flex-start"
@@ -191,6 +192,20 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
         >
           <Text pl="2">Likes</Text>
         </Button>
+        <Link to="/organizations">
+          <Button
+              variant="ghost"
+              mb="4"
+              leftIcon={
+                <FaUser color={activeRoute == '/organisation' ? 'blue' : 'gray'} />
+              }
+              fontWeight="400"
+              onClick={handleLinkClick}
+              onClick={() => setActiveRoute('/profile')}
+          >
+            <Text pl="2">Organizations</Text>
+          </Button>
+        </Link>
         <Link to="/profile">
           <Button
             variant="ghost"

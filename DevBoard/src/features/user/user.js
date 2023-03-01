@@ -96,6 +96,18 @@ export async function getUserGithubRepos() {
   return response;
 }
 
+export async function getUserOrgs() {
+    const response = await fetch(`${VITE_BACKEND_URL}/api/getUserOrgs`, {
+        method: 'GET',
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem('accessToken')}`, // Bearer ACCESSTOKEN
+        },
+    })
+        .then((response) => response.json())
+        .then((data) => data);
+    return response;
+}
+
 // Define the initial state of the user slice
 const initialState = {
   user: {
@@ -132,6 +144,9 @@ export const loginSlice = createSlice({
     getRepo: (state, action) => {
       console.log(action.payload);
       state.user.repositories = action.payload;
+    },
+    getOrgs: (state, action) => {
+        state.user.organizations = action.payload;
     },
     // Reducer for logging out the user
     logout: (state) => {
@@ -208,6 +223,7 @@ export const {
   changeLastnameValue,
   addGithub,
   getRepo,
+  getOrgs,
   logout,
 } = loginSlice.actions;
 

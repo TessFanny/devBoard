@@ -1,7 +1,7 @@
 /* eslint-disable react/react-in-jsx-scope */
 import { useState, useEffect } from 'react';
 import { Routes, Route, useLocation, Navigate } from 'react-router-dom';
-import { Box, Flex, useBreakpointValue, Text } from '@chakra-ui/react';
+import {Box, Flex, useBreakpointValue, Text, useMediaQuery} from '@chakra-ui/react';
 import Loader from '../Loader/Loader';
 import Sidebar from '../Sidebar/Sidebar';
 import Header from '../Header/Header';
@@ -12,6 +12,8 @@ import Profile from '../Profile/Profile';
 import Feed from '../feed/feed'
 import Homepage from '../Homepage/Homepage';
 import StackOverflowSearch from '../StackOverflowSearch/StackOverflowSearch';
+import Organizations from "../Organizations/Organizations.jsx";
+import BurgerMenu from "../BurgerMenu/BurgerMenu.jsx";
 // App component
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -45,22 +47,27 @@ export default function App() {
 
   const isHomepage = location.pathname === '/homepage';
 
-  const sidebar = isRegisterOrLoginRouteOrHome ? null : (
+  const [isSmallerThan1000] = useMediaQuery('(max-width: 1000px)');
+
+  const sidebar = isRegisterOrLoginRouteOrHome || isSmallerThan1000 ? null : (
     <Box w="50" pr="1" bgColor="gray.200">
       <Sidebar setIsLoading={setIsLoading} />
     </Box>
   );
   const header = isRegisterOrLoginRouteOrHome ? null : <Header />;
 
+
+
   return (
     // Flex container for Sidebar and main content area
     <Flex>
+
       {sidebar}
       {/* Box for main content area */}
       <Box
         minH="100vh"
-        w={isRegisterOrLoginRouteOrHome ? '100vw' : 'calc(100vw - 210px)'}
-        p={!isHomepage ? "5" : ""}
+        w={isRegisterOrLoginRouteOrHome || isSmallerThan1000 ? '100vw' : 'calc(100vw - 210px)'}
+        p={isHomepage || isSmallerThan1000 ? "" : "5"}
         display="flex"
         alignItems="center"
         flexDirection="column"
@@ -79,6 +86,7 @@ export default function App() {
             <Route path="/profile" element={<Profile />} />
             <Route path="/homepage" element={<Homepage />} />
             <Route path="/stackoverflow" element={<StackOverflowSearch />} />
+            <Route path="/organizations" element={<Organizations />} />
           </Routes>
         )}
       </Box>
