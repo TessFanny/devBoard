@@ -1,4 +1,5 @@
 import {Flex, IconButton, Menu, MenuButton, MenuItem, MenuList, Text} from "@chakra-ui/react";
+import { Link } from 'react-router-dom';
 import {GiHamburgerMenu} from 'react-icons/gi';
 import {
     FaChartLine,
@@ -23,33 +24,49 @@ function BurgerMenu() {
                 variant='outline'
             />
             <MenuList>
-                <MenuItem icon={<FaChartLine />} command='⌘T'>
+                <MenuItem icon={<FaChartLine />}>
                         Dashboard
                 </MenuItem>
-                <MenuItem icon={<FaChartLine />} command='⌘T'>
+                <Link to="/feed">
+                <MenuItem icon={<FaNewspaper />}>
                     News
                 </MenuItem>
-                <MenuItem icon={<FaChartLine />} command='⌘T'>
-                    Dashboard
+                </Link>
+                <Link to="/repositories">
+                <MenuItem icon={<FaFolderOpen />}>
+                    Your Project
                 </MenuItem>
-                <MenuItem icon={<FaChartLine />} command='⌘T'>
-                    Dashboard
+                </Link>
+                <Link to="stackoverflow">
+                <MenuItem icon={<BsStackOverflow />}>
+                    StackOverflow
                 </MenuItem>
-                <MenuItem icon={<FaChartLine />} command='⌘T'>
-                    Dashboard
+                </Link>
+                <Link to="playground">
+                <MenuItem icon={<FaChartLine />}>
+                    Playground
                 </MenuItem>
-                <MenuItem icon={<FaChartLine />} command='⌘T'>
-                    Dashboard
+                </Link>
+                <Link to="kanban">
+                <MenuItem icon={<FaColumns />}>
+                    kanban
                 </MenuItem>
-                <MenuItem icon={<FaChartLine />} command='⌘T'>
-                    Dashboard
+                </Link>
+                <Link to="likes">
+                <MenuItem icon={<FaThumbsUp />}>
+                    Likes
                 </MenuItem>
-                <MenuItem icon={<FaChartLine />} command='⌘T'>
-                    Dashboard
+                </Link>
+                <Link to="organizations">
+                <MenuItem icon={<FaChartLine />}>
+                    Oganization
                 </MenuItem>
-                <MenuItem icon={<FaChartLine />} command='⌘T'>
-                    Dashboard
+                </Link>
+                <Link to="profile">
+                <MenuItem icon={<FaUser />}>
+                    Profile
                 </MenuItem>
+                </Link>
 
             </MenuList>
         </Menu>

@@ -88,7 +88,10 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
             />
           }
           fontWeight="400"
-          onClick={() => setActiveRoute('/dashboard')}
+          onClick={() => {
+            handleLinkClick();
+            setActiveRoute('/dashboard')
+          }}
         >
           <Text pl="2">Dashboard</Text>
         </Button>
@@ -145,8 +148,10 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
               />
             }
             fontWeight="400"
-            onClick={handleLinkClick}
-            onClick={() => setActiveRoute('/repositories')}
+            onClick={() => {
+              handleLinkClick();
+              setActiveRoute('/repositories')
+            }}
           >
             <Text pl="2">Your Projects</Text>
           </Button>
@@ -161,8 +166,10 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
               />
             }
             fontWeight="400"
-            onClick={handleLinkClick}
-            onClick={() => setActiveRoute('/stackoverflow')}
+            onClick={() => {
+              handleLinkClick();
+              setActiveRoute('/stackoverflow')
+            }}
           >
             <Text pl="2">StackOverflow</Text>
           </Button>
@@ -177,8 +184,10 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
               />
             }
             fontWeight="400"
-            onClick={handleLinkClick}
-            onClick={() => setActiveRoute('/playground')}
+            onClick={() => {
+              handleLinkClick();
+              setActiveRoute('/playground')
+            }}
           >
             <Text pl="2">Playground</Text>
           </Button>
@@ -190,8 +199,10 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
             <FaColumns color={activeRoute === '/kanban' ? 'blue' : 'gray'} />
           }
           fontWeight="400"
-          onClick={handleLinkClick}
-          onClick={() => setActiveRoute('/kanban')}
+          onClick={() => {
+            handleLinkClick();
+            setActiveRoute('/kanban')
+          }}
         >
           <Text pl="2">Kanban</Text>
         </Button>
@@ -202,8 +213,10 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
             <FaThumbsUp color={activeRoute === '/likes' ? 'blue' : 'gray'} />
           }
           fontWeight="400"
-          onClick={handleLinkClick}
-          onClick={() => setActiveRoute('/likes')}
+          onClick={() => {
+            handleLinkClick();
+            setActiveRoute('/likes')
+          }}
         >
           <Text pl="2">Likes</Text>
         </Button>
@@ -215,8 +228,10 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
                 <FaUser color={activeRoute === '/organisation' ? 'blue' : 'gray'} />
               }
               fontWeight="400"
-              onClick={handleLinkClick}
-              onClick={() => setActiveRoute('/profile')}
+              onClick={() => {
+                handleLinkClick();
+                setActiveRoute('/organization')
+              }}
           >
             <Text pl="2">Organizations</Text>
           </Button>
@@ -229,8 +244,10 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
               <FaUser color={activeRoute === '/profile' ? 'blue' : 'gray'} />
             }
             fontWeight="400"
-            onClick={handleLinkClick}
-            onClick={() => setActiveRoute('/profile')}
+            onClick={() => {
+              handleLinkClick();
+              setActiveRoute('/profile')
+            }}
           >
             <Text pl="2">Profile</Text>
           </Button>
