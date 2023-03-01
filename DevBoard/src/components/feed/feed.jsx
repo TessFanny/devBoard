@@ -2,8 +2,14 @@ import {Flex, Text} from '@chakra-ui/react';
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
 import { useState } from 'react';
 import { useEffect } from 'react';
-import Items from './Items'
-
+import Item from './Item'
+import {
+  Accordion,
+  AccordionItem,
+  AccordionButton,
+  AccordionPanel,
+  AccordionIcon,
+} from '@chakra-ui/react'
 
 const Feed = () => {
 
@@ -44,7 +50,7 @@ return (
         <Text>{feed?.description}</Text>
         <Text>{feed?.language}</Text>
         <Text>{feed?.link}</Text> 
-        {/* {<Items items= {feed.items} />} */}
+        {feed?.items.map(item => (<Accordion> {item.title} </Accordion>))}        
       </TabPanel>
       )}
     </TabPanels>
@@ -55,3 +61,18 @@ return (
 export default Feed
 
   
+ {/* <AccordionItem>
+                                  <h2>
+                                    <AccordionButton>
+                                      <Box as="span" flex='1' textAlign='left'>
+                                        {item.title}
+                                      </Box>
+                                      <AccordionIcon />
+                                    </AccordionButton>
+                                  </h2>
+                                  <AccordionPanel pb={4}>
+                                    {item.content}
+                                    {item.link}
+                                    {item.pubDate} - {item?.author}
+                                  </AccordionPanel>
+                                </AccordionItem>  */}

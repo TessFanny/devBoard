@@ -7,21 +7,23 @@ import {
     AccordionIcon,
   } from '@chakra-ui/react'
 
-const Item = (item) => {
+  
+const Item = (author,title, content,pubDate, link) => {
 
     return (
         <AccordionItem>
         <h2>
           <AccordionButton>
             <Box as="span" flex='1' textAlign='left'>
-              {item?.title}
+              {title}
             </Box>
             <AccordionIcon />
           </AccordionButton>
         </h2>
         <AccordionPanel pb={4}>
-          {item?.content}
-          {item?.pubDate} - {item?.creator}
+          {content}
+          {link}
+          {pubDate} - {author}
         </AccordionPanel>
       </AccordionItem>
     );
