@@ -22,9 +22,10 @@ function StackOverflowSearch() {
   // This function is used to search StackOverflow using the 'query' state variable
   const searchStackOverflow = async () => {
     setLoading(true);
-    const url = `https://api.stackexchange.com/2.3/search?order=desc&sort=activity&intitle=${query}&site=stackoverflow`;
+    const url = `https://api.stackexchange.com/2.3/search?order=desc&sort=relevance&intitle=${query}&site=stackoverflow&pagesize=20`;
     const response = await fetch(url);
     const data = await response.json();
+    console.log(data);
     // The 'results' state variable is updated with the data obtained from the search
     setResults(data.items);
     setLoading(false);
@@ -91,24 +92,55 @@ function StackOverflowSearch() {
             <Text>Searching...</Text>
           </Stack>
         </Flex>
-/* // If the search has returned results, they are displayed in a Box component */
-      ) : results.length > 0 ? (
+      ) : /* // If the search has returned results, they are displayed in a Box component */
+      results.length > 0 ? (
         <Box style={{ flex: '1', width: '100%', h: '75%' }}>
           <Stack display="flex" w="100%" h="92%" overflowY="scroll">
 
             {results.map((result) => (
-              <Box
+              <div
                 key={result.question_id}
-                bg="white"
-                borderRadius="md"
-                boxShadow="md"
-                p="4"
-                w="100%"
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  borderRadius: 'md',
+                  boxShadow: 'md',
+                  padding: '4',
+                  width: '100%',
+                  marginBottom: '8px',
+                }}
+
               >
-                <Link href={result.link} target="_blank" rel="noreferrer">
-                  <Heading size="md">{result.title}</Heading>
+                <Link href={result.link} isExternal>
+                  <Box boxShadow="md" p={4} borderRadius="md">
+                    <Flex alignItems="center" mb={2}>
+                      <Text fontWeight="bold" fontSize="xl" mr={2}>
+                        {result.score}
+                      </Text>
+                      <Text mr={2}>votes</Text>
+                      <Text fontWeight="bold" fontSize="xl" mr={2}>
+                        {result.answer_count}
+                      </Text>
+                      <Text mr={2}>answers</Text>
+                      <Text fontWeight="bold" fontSize="xl" mr={2}>
+                        {result.view_count}
+                      </Text>
+                      <Text>views</Text>
+                    </Flex>
+                    <Heading size="md" mb={2}>
+                      {result.title}
+                    </Heading>
+                    <Text mb={2}>By {result.owner.display_name}</Text>
+                    <List display="flex" flexWrap="wrap" mb={2}>
+                      {result.tags.map((tag, index) => (
+                        <ListItem key={index} mr={2}>
+                          {tag}
+                        </ListItem>
+                      ))}
+                    </List>
+                  </Box>
                 </Link>
-              </Box>
+              </div>
             ))}
           </Stack>
         </Box>
