@@ -1,4 +1,11 @@
-import {Accordion, AccordionButton, AccordionItem, AccordionPanel, Box, Flex, Text} from '@chakra-ui/react';
+import {Box, Flex, Text} from '@chakra-ui/react';
+import {
+  Accordion,
+  AccordionItem,
+  AccordionButton,
+  AccordionPanel,
+  AccordionIcon,
+} from '@chakra-ui/react'
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
 import { useState } from 'react';
 import { useEffect } from 'react';
@@ -46,14 +53,14 @@ return (
             <Text>{feed?.link}</Text>
             {feed.items.map((item) => (
 
-                <Accordion>
+                <Accordion allowMultiple>
                     <AccordionItem>
                         <h2>
                             <AccordionButton>
                                 <Box as="span" flex='1' textAlign='left'>
                                     {item.title}
                                 </Box>
-
+                                <AccordionIcon />
                             </AccordionButton>
                         </h2>
                         <AccordionPanel pb={4}>
