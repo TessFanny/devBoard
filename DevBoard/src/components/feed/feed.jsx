@@ -2,7 +2,6 @@ import {Accordion, AccordionButton, AccordionItem, AccordionPanel, Box, Flex, Te
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
 import { useState } from 'react';
 import { useEffect } from 'react';
-import Items from './Items'
 
 
 const Feed = () => {
