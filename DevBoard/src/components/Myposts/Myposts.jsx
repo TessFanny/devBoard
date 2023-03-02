@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Post from "./Post";
+import {Box, Flex, useMediaQuery} from "@chakra-ui/react";
 
 const MyPosts = (user_id) => {
 
@@ -10,6 +11,7 @@ const MyPosts = (user_id) => {
 // const token = useSelector((state) => state.token);   v2
     const [posts, setPosts]= useState([])
     const { user, status } = useSelector((state) => state.login);
+    const [isSmallerThan1000] = useMediaQuery('(max-width: 1000px)');
     const getPosts = async () => {
         const VITE_BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
@@ -43,9 +45,25 @@ const MyPosts = (user_id) => {
     useEffect(() => {getPosts(); }, []);
 
     return (
-        <>
-            {posts.map((post) => ( <Post key= {post.id} title={post.title}  content ={post.content} imageuser={post.image_path} username={post.username} date={post.date} like={post.like} /> ))}
-        </>
+        <Flex w={isSmallerThan1000 ? '100%' : '98%'}
+              h="80%" mt={10}
+
+              bgColor="gray.50"
+              borderRadius="md"
+              boxShadow="md" p="4" overflow="hidden">
+            <Box width="100%"
+                 h="100%"
+                 overflowY="scroll">
+                {posts.map((post) => (
+                    <Post key= {post.id}
+                          title={post.title}
+                          content ={post.content}
+                          imageuser={post.image_path}
+                          username={post.username}
+                          date={post.date} like={post.like} /> ))}
+            </Box>
+
+        </Flex>
     );
 };
 

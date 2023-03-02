@@ -62,10 +62,19 @@ function Header() {
               as={IconButton}
               icon={
                 <>
-                  <Text pr="0.5rem">{username}</Text> 
-                  <Avatar name={username} size='sm' src={`${VITE_BACKEND_URL}/images/${image_path}`}>  
-                    <AvatarBadge boxSize='1.25em' bg='green.500' /> 
-                  </Avatar>
+                  {isSmallerThan1000 ? (
+                      <Avatar name={username} size='sm' src={`${VITE_BACKEND_URL}/images/${image_path}`}>
+                        <AvatarBadge boxSize='1.25em' bg='green.500' />
+                      </Avatar>
+                  ) : (
+                      <>
+                      <Text pr="0.5rem">{username}</Text>
+                    <Avatar name={username} size='sm' src={`${VITE_BACKEND_URL}/images/${image_path}`}>
+                    <AvatarBadge boxSize='1.25em' bg='green.500' />
+                    </Avatar>
+                      </>
+                  )}
+
                 </>
               }
               onClick={handleButtonClick}
