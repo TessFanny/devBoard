@@ -11,6 +11,7 @@ const Posts = () => {
     const [posts, setPosts]= useState([])
 
     const getPosts = async () => {
+        const VITE_BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
     try {const response = await fetch(`${VITE_BACKEND_URL}/api/posts`, {
         method: "GET"
@@ -18,8 +19,9 @@ const Posts = () => {
         });
 
         const data = await response.json();
+        console.log(data)
         // dispatch(setPosts({ posts: data }));              v2
-        setPosts({ posts: data })
+        setPosts(data)
     } catch(error) {
         console.error(error)
     }
@@ -41,7 +43,7 @@ const Posts = () => {
 
     return (
         <>
-            {posts.map(() => ( <Post/> ))}
+            {posts.map((post) => ( <Post key= {post.id} title={post.title}  content ={post.content} imageuser={post.image_path} username={post.username} date={post.date} like={post.like} /> ))}
         </>
     );
 };
