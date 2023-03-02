@@ -143,7 +143,18 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
                     onClick={handleLinkClick}
                     fontWeight="400"
                   >
-                    <Text pl="2">Devboard News</Text>
+                    <Text pl="2">Devboard Posts</Text>
+                  </Button>
+                </Link>
+                <Link to="/mypost">
+                  <Button
+                    variant="ghost"
+                    mb="4"
+                    leftIcon={<FaRegNewspaper />}
+                    onClick={handleLinkClick}
+                    fontWeight="400"
+                  >
+                    <Text pl="2">My posts</Text>
                   </Button>
                 </Link>
               </>

@@ -23,6 +23,7 @@ import Organizations from '../Organizations/Organizations.jsx';
 import BurgerMenu from '../BurgerMenu/BurgerMenu.jsx';
 import PostForm from "../PostForm/PostForm.jsx";
 import Posts from '../posts/Posts';
+import MyPosts from '../Myposts/Myposts';
 
 // App component
 export default function App() {
@@ -96,6 +97,7 @@ export default function App() {
             <Route path="/repositories" element={<Repositories />} />
             <Route path="/feed" element={<Feed />} />
             <Route path="/posts" element={<Posts />} />
+            <Route path="/mypost" element={<MyPosts />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/homepage" element={<Homepage />} />
             <Route path="/stackoverflow" element={<StackOverflowSearch />} />

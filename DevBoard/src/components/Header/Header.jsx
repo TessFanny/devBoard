@@ -9,7 +9,8 @@ import {
   MenuList,
   Menu, useMediaQuery,
 } from '@chakra-ui/react';
-import { FaUser, FaUserEdit } from 'react-icons/fa';
+import { Avatar, AvatarBadge, } from '@chakra-ui/react'
+import { FaUserEdit } from 'react-icons/fa';
 import { FiLogOut } from 'react-icons/fi';
 import { IoMdSettings } from 'react-icons/io';
 import { useDispatch, useSelector } from 'react-redux';
@@ -21,7 +22,7 @@ import RouteInfo from './RouteInfo/Routeinfo';
 import BurgerMenu from "../BurgerMenu/BurgerMenu.jsx";
 function Header() {
   const dispatch = useDispatch();
-  const { id, username } = useSelector((state) => state.login.user);
+  const { id, username,image_path } = useSelector((state) => state.login.user);
   const [isSmallerThan1000] = useMediaQuery('(max-width: 1000px)');
 
   const handleLogout = () => {
@@ -34,7 +35,7 @@ function Header() {
   const handleButtonClick = () => {
     setShowMenu(!showMenu);
   };
-
+  const VITE_BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
   return (
     <Flex
       h="10vh" // Sets the height of the header
@@ -61,7 +62,10 @@ function Header() {
               as={IconButton}
               icon={
                 <>
-                  <Text pr="0.5rem">{username}</Text> <FaUser />
+                  <Text pr="0.5rem">{username}</Text> 
+                  <Avatar name={username} size='sm' src={`${VITE_BACKEND_URL}/images/${image_path}`}>  
+                    <AvatarBadge boxSize='1.25em' bg='green.500' /> 
+                  </Avatar>
                 </>
               }
               onClick={handleButtonClick}
