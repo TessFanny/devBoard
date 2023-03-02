@@ -133,6 +133,17 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
                     <Text pl="2">Rss Feed</Text>
                   </Button>
                 </Link>
+                <Link to="/posts">
+                  <Button
+                    variant="ghost"
+                    mb="4"
+                    leftIcon={<FaRegNewspaper />}
+                    onClick={handleLinkClick}
+                    fontWeight="400"
+                  >
+                    <Text pl="2">Devboard News</Text>
+                  </Button>
+                </Link>
               </>
             )}
           </SlideFade>
