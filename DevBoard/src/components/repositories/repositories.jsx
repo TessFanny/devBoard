@@ -10,8 +10,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import {getRepo, getUserGithubData, getUserGithubRepos} from '../../features/user/user';
 import Notification from '../Notification/Notification';
 import folderImg from '../../assets/folder-svgrepo-com.svg'
+import {useEffect, useState} from "react";
 
 function Repositories() {
+  const [rerender, setRerender] = useState(false);
   const { repositories } = useSelector((state) => state.login.user);
   const { status } = useSelector((state) => state.login);
   const dispatch = useDispatch();
@@ -19,7 +21,7 @@ function Repositories() {
   const githubLogged = localStorage.getItem('accessToken');
   const [isSmallerThan1000] = useMediaQuery('(max-width: 1000px)');
 
-
+  useEffect(() => {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
   const codeParam = urlParams.get('code');
@@ -45,6 +47,7 @@ function Repositories() {
     }
     getAccessToken();
   }
+  }, []);
   const HandleGitHubAuth = async () => {
     window.location.assign(
       `https://github.com/login/oauth/authorize?client_id=${import.meta.env.VITE_CLIENT_ID}`,
