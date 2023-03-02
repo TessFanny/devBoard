@@ -74,10 +74,11 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
         </Text>
       </Flex>
       <Box
-        p="4"
-        display="flex"
-        flexDirection="column"
-        alignItems="flex-start"
+          w="100%"
+          p="4"
+          display="flex"
+          flexDirection="column"
+          alignItems="flex-start"
       >
         <Button
           variant="ghost"
@@ -109,7 +110,7 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
         </Button>
 
         {/* Render the Add Post button inside a slide fade */}
-        <Box>
+        <Box w="1px">
           <SlideFade in={isSubOpen}>
             {isSubOpen && (
               <>

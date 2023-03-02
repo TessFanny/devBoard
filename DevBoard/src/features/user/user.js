@@ -169,7 +169,7 @@ export const loginSlice = createSlice({
       })
       // Reducer for handling the fulfilled state of the login request
       .addCase(login.fulfilled, (state, action) => {
-        state.user = action.payload.userAuth[0];
+        state.user = action.payload.userAuth;
         state.status = true;
       })
       // Reducer for handling the rejected state of the login request

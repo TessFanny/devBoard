@@ -16,16 +16,19 @@ import {
 import { useDispatch, useSelector } from 'react-redux'; // Importing two hooks from Redux
 import { useState } from 'react'; // Importing useState hook
 import { useNavigate } from 'react-router-dom';
-import { changeEmailValue, changePasswordValue, login } from '../../features/user/user'; // Importing Redux actions
-import PasswordInput from './Password/Password'; // Importing a custom component
+import {changeEmailValue, changePasswordValue, login, modifyUser} from '../../features/user/user'; // Importing Redux actions
+import PasswordInput from './Password/Password';
+import Notification from "../Notification/Notification.jsx"; // Importing a custom component
 
 function Login() {
   const navigateto = useNavigate();
   // Use the useDispatch and useSelector hooks to access the store and dispatch actions
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.login.user);
+  const { user, status } = useSelector((state) => state.login);
   const { email, password } = user;
 
+  const [isLoading, setIsLoading] = useState(false);
+  const [notification, setNotification] = useState(false);
   // Create state variables for email and password validation
   const [isEmailValid, setIsEmailValid] = useState(true);
   const [isPasswordValid, setPasswordValid] = useState(true);
@@ -60,9 +63,20 @@ function Login() {
 
     setIsEmailValid(true); // Reset the email validation state variable
     setPasswordValid(true); // Reset the password validation state variable
-    dispatch(login({ email, password }));
     // Dispatch the login action to the store with the email and password as arguments
-    navigateto('/repositories');
+    if (isLoading) return;
+    setIsLoading(true);
+    dispatch(login({ email, password }));
+    setTimeout(() => {
+      setIsLoading(false);
+      if(status === true) {
+        navigateto('/repositories');
+      }
+      setNotification(true);
+      setTimeout(() => {
+        setNotification(false);
+      }, 100); // Masquer la notification après 3 secondes
+    }, 500);
   };
 
   // Render the login form using Chakra-UI components
@@ -109,6 +123,7 @@ function Login() {
               width="100%"
               display="flex"
               onClick={handleSubmit}
+              isLoading={isLoading}
             >
               Submit
             </Button>
@@ -124,6 +139,7 @@ function Login() {
           </FormControl>
         </Box>
       </Box>
+      {notification && <Notification title="Oupss..." description="Your email/password are incorrect..." status="error" />}
     </Flex>
   );
 }

@@ -1,6 +1,6 @@
 /* eslint-disable react/react-in-jsx-scope */
 import {
-  Flex, Box, Image, Button, Tag, TagLabel, Avatar, Input, Icon, IconButton,
+  Flex, Box, Image, Button, Tag, TagLabel, Avatar, Input, Icon, IconButton, Divider, Text,
 } from '@chakra-ui/react';
 import { FaUpload } from "react-icons/fa";
 import { useDispatch, useSelector } from 'react-redux';
@@ -84,6 +84,7 @@ function Profile() {
             />
 
             {role && (
+                
               <Tag size="lg" colorScheme="telegram" borderRadius="full" mt="7">
                 <Avatar
                   bg="telegram.500"
@@ -94,6 +95,13 @@ function Profile() {
                 <TagLabel>{role}</TagLabel>
               </Tag>
             )}
+
+            <Divider bgColor='gray.300' h="1px" mt="3.5" mb="3.5" />
+
+            <Text fontWeight="500" color="gray.600">Organizations</Text>
+
+
+
           </Box>
         </Box>
 
