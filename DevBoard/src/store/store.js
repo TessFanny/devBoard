@@ -4,10 +4,12 @@ import storage from 'redux-persist/lib/storage';
 
 import { persistedLoginReducer } from './persistConfig';
 import registerReducer from '../features/register/register';
+import postReducer from '../features//Post/post';
 
 const rootReducer = combineReducers({
   login: persistedLoginReducer,
   register: registerReducer,
+  post: postReducer,
 });
 
 const persistConfig = {

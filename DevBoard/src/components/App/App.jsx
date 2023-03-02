@@ -21,6 +21,7 @@ import StackOverflowSearch from '../StackOverflowSearch/StackOverflowSearch';
 import Playground from '../Playground/playground.jsx';
 import Organizations from '../Organizations/Organizations.jsx';
 import BurgerMenu from '../BurgerMenu/BurgerMenu.jsx';
+import PostForm from "../PostForm/PostForm.jsx";
 import Posts from '../posts/Posts';
 import MyPosts from '../Myposts/Myposts';
 
@@ -101,6 +102,7 @@ export default function App() {
             <Route path="/stackoverflow" element={<StackOverflowSearch />} />
             <Route path="/playground" element={<Playground />} />
             <Route path="/organizations" element={<Organizations />} />
+            <Route path="/addpost" element={<PostForm />} />
           </Routes>
         )}
       </Box>
