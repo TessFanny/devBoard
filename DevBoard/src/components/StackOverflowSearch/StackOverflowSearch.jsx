@@ -12,6 +12,7 @@ import {
   Flex,
   SimpleGrid,
   Heading,
+  Avatar,
 } from '@chakra-ui/react';
 import { TiInputChecked } from 'react-icons/ti';
 // This function component is called StackOverflowSearch
