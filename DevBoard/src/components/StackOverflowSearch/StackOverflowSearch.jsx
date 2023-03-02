@@ -12,6 +12,7 @@ import {
   Flex,
   SimpleGrid,
   Heading,
+  Avatar,
 } from '@chakra-ui/react';
 import { TiInputChecked } from 'react-icons/ti';
 // This function component is called StackOverflowSearch
@@ -167,8 +168,18 @@ function StackOverflowSearch() {
             <Stack display="flex" w="100%" h="92%" overflowY="scroll">
               {results.map((result) => (
                 <div key={result.question_id}>
-                  <Link href={result.link} isExternal>
-                    <Box boxShadow="md" p={4} borderRadius="md">
+                  <Link
+                    href={result.link}
+                    isExternal
+                    _hover={{ textDecoration: 'none' }}
+                  >
+                    <Box
+                      boxShadow="md"
+                      p={4}
+                      borderRadius="md"
+                      w={'70vw'}
+                      h={'20vh'}
+                    >
                       <Flex alignItems="center">
                         <Box>
                           <Text
@@ -179,6 +190,7 @@ function StackOverflowSearch() {
                               margin: '0vw',
                               padding: '2px',
                               justifyContent: 'flex-end',
+                              textDecoration: 'none',
                             }}
                           >
                             {result.score} votes
@@ -193,6 +205,7 @@ function StackOverflowSearch() {
                               flexDirection: 'row',
                               alignItems: 'center',
                               padding: '2px',
+                              textDecoration: 'none',
                             }}
                           >
                             <TiInputChecked
@@ -214,11 +227,13 @@ function StackOverflowSearch() {
                             {result.view_count} views
                           </Text>
                         </Box>
-                        <Heading size="md" pl="10px">
+                        <Heading size="md" pl="10px" color={'#2b97fe'}>
                           {result.title}
                           <Text
                             style={{
                               paddingTop: '2rem',
+                              fontSize: '1rem',
+                              color: 'black',
                             }}
                           >
                             {result.body
@@ -232,13 +247,32 @@ function StackOverflowSearch() {
                         </Heading>
                       </Flex>
                       <Box />
-                      <Text mb={2}>By {result.owner.display_name}</Text>
-                      <List display="flex" flexWrap="wrap" mb={2}>
+                      <List display="flex" mb={2} ml={'7.6rem'} mt={'1rem'}>
                         {result.tags.map((tag, index) => (
-                          <ListItem key={index} mr={2}>
+                          <ListItem
+                            key={index}
+                            color="hsl(205,47%,42%)"
+                            bgColor={'hsl(205,46%,92%)'}
+                            fontSize="sm"
+                            padding="5px"
+                          >
                             {tag}
                           </ListItem>
                         ))}
+                        <Flex
+                          alignItems="center"
+                          ml="40rem"
+                          display={'flex'}
+                          h={'1rem'}
+                        >
+                          <Avatar src={result.owner.profile_image} mr={2} />
+                          <Text fontSize="sm" mr={2}>
+                            By {result.owner.display_name}
+                          </Text>
+                          <Text fontSize="sm">
+                            Reputation: {result.owner.reputation}
+                          </Text>
+                        </Flex>
                       </List>
                     </Box>
                   </Link>
