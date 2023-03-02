@@ -82,10 +82,11 @@ function Profile() {
               onChange={handleFileSelect}
               display="none"
             />
+            <Divider bgColor='gray.300' h="1px" mt="3.5" mb="3.5" />
+            <Text fontWeight="500" color="gray.600">Role</Text>
 
             {role && (
-                
-              <Tag size="lg" colorScheme="telegram" borderRadius="full" mt="7">
+              <Tag size="lg" colorScheme="telegram" borderRadius="full" mt="5">
                 <Avatar
                   bg="telegram.500"
                   size="xs"
