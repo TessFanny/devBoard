@@ -70,7 +70,7 @@ export default function App() {
 
   return (
     // Flex container for Sidebar and main content area
-    <Flex>
+    <Flex h="100vh">
       {sidebar}
       {/* Box for main content area */}
       <Box
