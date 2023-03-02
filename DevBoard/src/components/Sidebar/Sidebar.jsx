@@ -113,6 +113,7 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
           <SlideFade in={isSubOpen}>
             {isSubOpen && (
               <>
+                <Link to="/addpost">
                 <Button
                   variant="ghost"
                   mb="4"
@@ -122,6 +123,7 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
                 >
                   <Text pl="2">Add Post</Text>
                 </Button>
+                </Link>
                 <Link to="/feed">
                   <Button
                     variant="ghost"
