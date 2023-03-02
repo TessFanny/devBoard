@@ -11,10 +11,10 @@ export const login = createAsyncThunk(
       email,
       password,
     });
-    const { token, newUser } = response.data;
+    const { token, userAuth } = response.data;
     // Store the received token in local storage
     localStorage.setItem('token', token);
-    return { newUser };
+    return { userAuth };
   },
 );
 // Define an asynchronous thunk for login
@@ -169,7 +169,7 @@ export const loginSlice = createSlice({
       })
       // Reducer for handling the fulfilled state of the login request
       .addCase(login.fulfilled, (state, action) => {
-        state.user = action.payload.newUser;
+        state.user = action.payload.userAuth[0];
         state.status = true;
       })
       // Reducer for handling the rejected state of the login request
