@@ -96,7 +96,8 @@ export default function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/repositories" element={<Repositories />} />
             <Route path="/feed" element={<Feed />} />
-            <Route path="/posts" element={<MyPosts />} />
+            <Route path="/posts" element={<Posts />} />
+            <Route path="/mypost" element={<MyPosts />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/homepage" element={<Homepage />} />
             <Route path="/stackoverflow" element={<StackOverflowSearch />} />
