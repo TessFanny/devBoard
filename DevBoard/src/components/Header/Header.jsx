@@ -9,8 +9,8 @@ import {
   MenuList,
   Menu, useMediaQuery,
 } from '@chakra-ui/react';
-import { Avatar, AvatarBadge, AvatarGroup } from '@chakra-ui/react'
-import { FaUser, FaUserEdit } from 'react-icons/fa';
+import { Avatar, AvatarBadge, } from '@chakra-ui/react'
+import { FaUserEdit } from 'react-icons/fa';
 import { FiLogOut } from 'react-icons/fi';
 import { IoMdSettings } from 'react-icons/io';
 import { useDispatch, useSelector } from 'react-redux';
