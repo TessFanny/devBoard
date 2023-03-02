@@ -13,8 +13,11 @@ import {
   SimpleGrid,
   Heading,
   Avatar,
+  Icon,
 } from '@chakra-ui/react';
 import { TiInputChecked } from 'react-icons/ti';
+import { BsStackOverflow } from 'react-icons/bs';
+
 // This function component is called StackOverflowSearch
 function StackOverflowSearch() {
   // The state variables 'query', 'results' and 'loading' are declared using the useState hook
