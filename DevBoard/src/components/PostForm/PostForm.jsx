@@ -44,7 +44,7 @@ function PostForm() {
               borderRadius="md"
               boxShadow="md" p="4">
             <Box w="100%">
-                <FormControl display="flex" flexDirection='column'>
+                <FormControl h="100%" display="flex" flexDirection="column" justifyContent="space-around">
                     <Input placeholder='New post title here...'
                            size="lg" height="120px"
                            textAlign="center"
@@ -63,14 +63,14 @@ function PostForm() {
                             backgroundColor: "white",
                             boxShadow: "2px 2px 5px rgba(0, 0, 0, 0.1)",
                             color: "black",
-                            marginTop: "2.5rem"
+
                         }}
 
                     />
 
 
                     <Button colorScheme='blue'
-                            mt="10" height="60px"
+                             height="60px"
                             isLoading={isLoading}
                             onClick={handleSubmit}>Publish</Button>
                 </FormControl>
