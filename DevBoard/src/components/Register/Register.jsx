@@ -137,7 +137,7 @@ function Register() {
       justify="center"
       bg={useColorModeValue('gray.50', 'gray.800')}
       h="100%"
-      w="35%"
+      w="100%"
     >
       <Stack spacing={8} mx="1" maxW="lg" py={12} px={6} w="100%">
         <Stack align="center">

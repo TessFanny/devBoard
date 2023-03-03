@@ -4,20 +4,28 @@ import Lottie from 'lottie-react';
 import homepage from '../../assets/homepage.json';
 import blob from '../../assets/blob.svg';
 import blob2 from '../../assets/blobanimation.svg';
-// import Register from '../Register/Register';
-// import Login from '../Login/Login';
+import Register from '../Register/Register';
+import Login from '../Login/Login';
 import { motion } from "framer-motion"
 import { useState } from 'react';
 
 
-
 function Homepage() {
+
     // Homepage
     
     const [showDiv, setShowDiv] = useState(false);
+    const [showLogin, setShowLogin] = useState(false);
+    const [showHomepage, setShowHomepage]= useState(true)
 
-    const toggleDiv = () => {
+    const showRegister = () => {
       setShowDiv(!showDiv);
+      setShowHomepage(!showHomepage);
+    };
+
+    const showLoginComponent = () => {
+      setShowLogin(!showLogin);
+      setShowHomepage(!showHomepage);
     };
 
   const defaultOptions = {
@@ -33,34 +41,44 @@ function Homepage() {
             w="100%" minH="100%"
             flexDirection={['column', 'column','column', 'row']}>
 
-          <Image src={blob2}
-                 position="absolute"
-                 opacity="0.5"
-                 w={['80%', '80%', '80%', '35%']}
-                 left="-50"
-                 top="-70">
+        <Image  src={blob2}
+                position="absolute"
+                opacity="0.5"
+                w={['80%', '80%', '80%', '35%']}
+                left="-50"
+                top="-70">
           </Image>
 
         <Image src={blob}
-               position="fixed"
-               top="-500"
-               right="-710"
-               opacity="0.1">
+              position="fixed"
+              top="-500"
+              right="-710"
+              opacity="0.1">
         </Image>
+          {showHomepage && (
+            <motion.div
+                  initial={{ x:500, opacity:0 }}
+                  animate={{ x:0, opacity:1 }}
+                  exit={{ opacity: 0 }}
+                  style={{ 
+                    display: 'flex', 
+                    flexWrap: 'wrap'}} 
+                    >
+
 
         <Box w={['100%', '100%', '100%', '50%']}
-             h={['50%', '50%', '50%', '100%']}
-             display="flex"
-             justifyContent={['center', 'center', 'center', 'flex-end']}
-             alignItems="center"
-             pr={['0', '0', '0', '10']}>
+              h={['50%', '50%', '50%', '100%']}
+              display="flex"
+              justifyContent={['center', 'center', 'center', 'flex-end']}
+              alignItems="center"
+              pr={['0', '0', '0', '10']}>
 
           <Box display="flex"
-               flexDirection="column"
-               w={['90%', '90%', '80%', '60%']} h="50%"
-               alignItems="center"
-               justifyContent={['flex-start', 'flex-start', 'flex-end', 'center']}
-               mb="10">
+                flexDirection="column"
+                w={['90%', '90%', '80%', '60%']} h="50%"
+                alignItems="center"
+                justifyContent={['flex-start', 'flex-start', 'flex-end', 'center']}
+                mb="10">
 
             <Text
                 fontSize="70px"
@@ -72,20 +90,29 @@ function Homepage() {
             </Text>
 
             <Text fontSize="lg"
-                  textAlign="center"
                   color="gray.300">
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-                when an unknown printer took a galle
+            Welcome to DevBoard, the central hub for all development needs! 
             </Text>
-
-              <Link to="/register">
-            <Button w={['150px', '150px', '200px', '150px']}
+            <Text fontSize="lg"
+                  color="gray.300">
+                  Streamline your workflow and stay organized with 
+                  our dashboard, designed specifically for developers. Collaborate with team members, 
+                  and access key metrics and analytics 
+                  all in one place.
+                  Take your development to the next level with DevBoard today!"
+            </Text>                         
+            <Button onClick={showRegister}
+                    w={['150px', '150px', '200px', '150px']}
                     mt="6" colorScheme="blue"
-            >Start here
+            >Register here
+            </Button>
+            <Button onClick={showLoginComponent}
+                    w={['150px', '150px', '200px', '150px']}
+                    mt="6" colorScheme="blue"
+            >Login here
             </Button>            
-              </Link>
           </Box>
+
         </Box>
         <Box  w={['100%', '100%', '100%', '50%']}
               h={['50%', '50%', '50%', '100%']}
@@ -97,17 +124,27 @@ function Homepage() {
           <Lottie
               animationData={homepage}
               style={{ width: '600px', height: '100%' }}/>
-        </Box>
+         </Box>
+      </motion.div>
+        )}
         {showDiv && (
                 <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
+                  initial={{ x:-500, opacity:0 }}
+                  animate={{ x:0, opacity:1 }}
                   exit={{ opacity: 0 }}
                 >
-                  <p>Ceci est une motion div!</p>
+                  <Register />
                 </motion.div>
-              )}
-              <Button onClick={toggleDiv}>Afficher le register</Button>
+        )} 
+        {showLogin && (
+                <motion.div
+                  initial={{ x:-500, opacity:0 }}
+                  animate={{ x:0, opacity:1 }}
+                  exit={{ opacity: 0 }}
+                >
+                  <Login />
+                </motion.div>
+        )}         
       </Flex>
   );
 }

@@ -87,7 +87,7 @@ function Login() {
       align="center"
       justify="center"
     >
-      <Box w="40%" h="70%" display="flex" justifyContent="space-around" alignItems="center" bgColor="gray.50" flexDirection="column" p="6" borderRadius="md" boxShadow="md">
+      <Box w="100%" h="70%" display="flex" justifyContent="space-around" alignItems="center" bgColor="gray.50" flexDirection="column" p="6" borderRadius="md" boxShadow="md">
         <Stack align="center">
           <Heading fontSize="4xl" textAlign="center">
             Sign In

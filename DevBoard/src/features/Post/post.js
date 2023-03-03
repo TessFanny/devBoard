@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { login } from '../user/user.js';
+
 export const deletePost = createAsyncThunk(
   'post/deletePost',
   async ({ title, content, postId, user_id }) => {
