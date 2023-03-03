@@ -32,7 +32,6 @@ function PostEdit() {
   // Récupération de l'ID utilisateur depuis le store Redux
   const { id } = useSelector((state) => state.login.user);
   const user_id = id;
-
   // Récupération de l'URL de l'API backend depuis les variables d'environnement
   const VITE_BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
@@ -47,7 +46,11 @@ function PostEdit() {
     async function fetchPost() {
       const response = await fetch(`${VITE_BACKEND_URL}/api/post/${postId}`);
       const data = await response.json();
-      console.log(data);
+      if (user_id !== data.user_id) {
+        // L'utilisateur n'est pas autorisé à modifier ou supprimer le post, donc on le redirige vers la page précédente
+        navigateto('/mypost');
+        return;
+      }
       dispatch(changeTitleValue(data.title));
       dispatch(changeContentValue(data.content));
     }
