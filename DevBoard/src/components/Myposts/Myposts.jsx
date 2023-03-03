@@ -29,9 +29,7 @@ const MyPosts = () => {
       <Box width="100%" h="100%" overflowY="scroll">
         {posts && posts.length > 0 ? (
           posts.map((post) => (
-            <div key={post.id}>
-              <Flex alignItems="center" justifyContent="space-between">
-                <Box>
+
                   <Post
                     title={post.title}
                     content={post.content}
@@ -39,15 +37,9 @@ const MyPosts = () => {
                     username={post.username}
                     date={new Date(post.created_at).toLocaleDateString()} // format date
                     like={post.like}
+                    id={post.id}
                   />
-                  {user.id === post.user_id && (
-                    <Link to={`/editpost/${post.id}`}>
-                      <IconButton icon={<FaEdit />} aria-label="Edit" />
-                    </Link>
-                  )}
-                </Box>
-              </Flex>
-            </div>
+
           ))
         ) : (
           // Si l'utilisateur n'a pas publié de posts, affiche un message d'erreur

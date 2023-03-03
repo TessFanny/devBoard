@@ -80,7 +80,7 @@ function PostEdit() {
       setTimeout(() => {
         setNotification(false);
         navigateto('/mypost');
-      }, 3000); // Masquer la notification après 3 secondes
+      }, 100); // Masquer la notification après 3 secondes
     }, 500);
   };
 

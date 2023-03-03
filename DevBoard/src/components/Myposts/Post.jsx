@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, CardHeader, CardBody, CardFooter } from '@chakra-ui/react'
+import {Card, CardHeader, CardBody, CardFooter, IconButton} from '@chakra-ui/react'
 import { Heading } from '@chakra-ui/react'
 import { Stack, HStack, VStack } from '@chakra-ui/react'
 import { Box } from '@chakra-ui/react'
@@ -9,8 +9,10 @@ import { Button, ButtonGroup } from '@chakra-ui/react'
 import { useState } from 'react'
 import {useDispatch} from "react-redux";
 import { BiLike } from 'react-icons/bi';
+import {Link} from "react-router-dom";
+import {FaEdit} from "react-icons/fa";
 
-function Post({title,content, like, date, imageuser, username}) {
+function Post({title,content, like, date, imageuser, username, id}) {
     
     const [isLoading, setIsLoading] = useState(false);
     const handleSubmit = (evt) => {
@@ -68,6 +70,10 @@ function Post({title,content, like, date, imageuser, username}) {
             <Box mt="10" display="flex" alignItems="center">
                 <BiLike />
                 <Text ml="1">{like}</Text>
+                    <Link to={`/editpost/${id}`}>
+                        <IconButton icon={<FaEdit />} aria-label="Edit" />
+                    </Link>
+
             </Box>
 
             </CardBody>
