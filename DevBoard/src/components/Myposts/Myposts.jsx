@@ -23,6 +23,7 @@ const MyPosts = (user_id) => {
       );
 
       const data = await response.json(); // Récupère les données sous forme de JSON
+      console.log(data);
       setPosts(data); // Met à jour l'état des posts avec les données récupérées
     } catch (error) {
       console.error(error);
@@ -55,7 +56,7 @@ const MyPosts = (user_id) => {
                     content={post.content}
                     imageuser={post.image_path}
                     username={post.username}
-                    date={post.date}
+                    date={new Date(post.created_at).toLocaleDateString()} // format date
                     like={post.like}
                   />
                   {user.id === post.user_id && (
