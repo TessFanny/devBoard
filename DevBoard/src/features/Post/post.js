@@ -45,6 +45,9 @@ export const addPost = createAsyncThunk(
   }
 );
 
+
+
+
 const initialState = {
   title: '',
   content: '',
@@ -56,8 +59,29 @@ export const postSlice = createSlice({
     changeTitleValue: (state, action) => {
       state.title = action.payload;
     },
-    changeContentValue: (state, action) => {
-      state.content = action.payload;
+    extraReducers: (builder) => {
+        builder
+            // Reducer for handling the pending state of the addPost request
+            .addCase(addPost.pending, (state) => {
+                state.status = 'loading';
+                state.error = null;
+            })
+            // Reducer for handling the fulfilled state of the addPost request
+            .addCase(addPost.fulfilled, (state) => {
+                console.log("test")
+                state.post = {
+                    title: '',
+                    content: '',
+                }
+                state.status = true;
+            })
+            // Reducer for handling the rejected state of the addPost request
+            .addCase(addPost.rejected, (state, action) => {
+                state.status = false;
+                state.error = action.error.message;
+            })
+
+
     },
   },
   extraReducers: (builder) => {

@@ -24,6 +24,8 @@ import BurgerMenu from '../BurgerMenu/BurgerMenu.jsx';
 import PostForm from '../PostForm/PostForm.jsx';
 import Posts from '../posts/Posts';
 import MyPosts from '../Myposts/Myposts';
+
+import Likes from "../Likes/Likes.jsx";
 import PostEdit from '../Myposts/Postedit.jsx';
 
 // App component
@@ -105,6 +107,7 @@ export default function App() {
             <Route path="/playground" element={<Playground />} />
             <Route path="/organizations" element={<Organizations />} />
             <Route path="/addpost" element={<PostForm />} />
+            <Route path="/likes" element={<Likes />} />
             <Route path="/editpost/:postId" element={<PostEdit />} />
           </Routes>
         )}
