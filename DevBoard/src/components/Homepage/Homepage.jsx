@@ -4,9 +4,22 @@ import Lottie from 'lottie-react';
 import homepage from '../../assets/homepage.json';
 import blob from '../../assets/blob.svg';
 import blob2 from '../../assets/blobanimation.svg';
+// import Register from '../Register/Register';
+// import Login from '../Login/Login';
+import { motion } from "framer-motion"
+import { useState } from 'react';
+
+
 
 function Homepage() {
     // Homepage
+    
+    const [showDiv, setShowDiv] = useState(false);
+
+    const toggleDiv = () => {
+      setShowDiv(!showDiv);
+    };
+
   const defaultOptions = {
     loop: true,
     autoplay: true,
@@ -70,7 +83,7 @@ function Homepage() {
             <Button w={['150px', '150px', '200px', '150px']}
                     mt="6" colorScheme="blue"
             >Start here
-            </Button>
+            </Button>            
               </Link>
           </Box>
         </Box>
@@ -85,6 +98,16 @@ function Homepage() {
               animationData={homepage}
               style={{ width: '600px', height: '100%' }}/>
         </Box>
+        {showDiv && (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                >
+                  <p>Ceci est une motion div!</p>
+                </motion.div>
+              )}
+              <Button onClick={toggleDiv}>Afficher le register</Button>
       </Flex>
   );
 }
