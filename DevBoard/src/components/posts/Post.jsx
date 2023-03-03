@@ -6,6 +6,9 @@ import { Box } from '@chakra-ui/react'
 import { Text } from '@chakra-ui/react'
 import { Avatar} from '@chakra-ui/react'
 import {BiLike} from "react-icons/bi";
+import ReactMarkdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
+
 
 function Post({title,content, like, date, imageuser, username}) {
     const VITE_BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
@@ -26,6 +29,7 @@ function Post({title,content, like, date, imageuser, username}) {
     //   dispatch(setPost({ post: updatedPost }))
 
     return (
+        
         <Card mb="5" boxShadow="md">
             <CardHeader w="100%" pb="0">
                 <Box display="flex" alignItems="center" w="100%" mb="3">
@@ -42,9 +46,11 @@ function Post({title,content, like, date, imageuser, username}) {
             <CardBody pt="0">
                 {/* <Stack divider={<StackDivider />} spacing='4'> */}
                 <Box>
-                    <Text pt='2' fontSize='sm'>
-                        {content}
-                    </Text>
+                <Text pt='2' fontSize='sm'>
+                    <div> <ReactMarkdown children={content} className="react-markdown-test" remarkPlugins={[remarkGfm]} />
+                    </div>
+                </Text>
+                    
                 </Box>
                 <Box mt="10" display="flex" alignItems="center">
                     <BiLike />
