@@ -7,6 +7,7 @@ import {html} from '@codemirror/lang-html'
 import { css } from '@codemirror/lang-css';
 import { okaidia } from '@uiw/codemirror-theme-okaidia';
 import { Button } from '@chakra-ui/react';
+import { FaCopy } from 'react-icons/fa';
 
 function Playground() {
   const [htmldata, setHtml] = useLocalStorage('html', '')
@@ -47,7 +48,7 @@ function Playground() {
           extensions={[javascript({ jsx: true })]}      
           onChange={setJs}
         />
-        <Button onClick={() => copyToClipboard(js)}>Copy
+        <Button onClick={() => copyToClipboard(js)}><FaCopy />  Copy
         </Button>
         </div>
         <div>
@@ -62,7 +63,7 @@ function Playground() {
             })]}      
             onChange={setHtml}
           />
-          <Button onClick={() => copyToClipboard(htmldata)}>Copy</Button>
+          <Button onClick={() => copyToClipboard(htmldata)}> <FaCopy /> Copy</Button>
         </div>
         
         <div>
@@ -75,7 +76,7 @@ function Playground() {
               extensions={[css()]}    
               onChange={setCss}
             />
-            <Button onClick={() => copyToClipboard(cssdata)}>Copy</Button>
+            <Button onClick={() => copyToClipboard(cssdata)}> <FaCopy /> Copy</Button>
         </div>
           
         </div>
