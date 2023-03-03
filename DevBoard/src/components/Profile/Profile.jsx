@@ -70,7 +70,11 @@ function Profile() {
     dispatch(deleteUser({ id }));
     setTimeout(() => {
       setIsLoading(false);
-      navigateto('/homepage');
+      setNotification(true);
+      navigateto('/homepage')
+      setTimeout(() => {
+        setNotification(false);
+      }, 100); // Masquer la notification après 3 secondes
     }, 500);
   }
 

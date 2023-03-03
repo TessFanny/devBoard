@@ -61,9 +61,10 @@ function Homepage() {
             <Text fontSize="lg"
                   textAlign="center"
                   color="gray.300">
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-                when an unknown printer took a galle
+                A platform designed to assist developers
+                in finding resources to solve development problems and
+                centralize multiple feeds of news and information related
+                to development.
             </Text>
 
               <Link to="/register">

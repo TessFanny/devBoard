@@ -75,7 +75,7 @@ function Login() {
       setNotification(true);
       setTimeout(() => {
         setNotification(false);
-      }, 100); // Masquer la notification après 3 secondes
+      }, 30000); // Masquer la notification après 3 secondes
     }, 500);
   };
 

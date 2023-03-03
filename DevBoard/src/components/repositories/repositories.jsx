@@ -38,14 +38,15 @@ function Repositories() {
                 localStorage.setItem('accessToken', data.access_token);
                 setRerender(!rerender);
                 getUserGithubData();
-                navigateto('/');
+                loadRepo()
               }
             });
       } catch (err) {
         console.error(err);
       }
     }
-    getAccessToken();
+    getAccessToken()
+
   }
   }, []);
   const HandleGitHubAuth = async () => {
