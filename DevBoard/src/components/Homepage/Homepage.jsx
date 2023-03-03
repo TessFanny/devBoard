@@ -87,12 +87,12 @@ function Homepage() {
               </Link>
           </Box>
         </Box>
-        <Box w={['100%', '100%', '100%', '50%']}
-             h={['50%', '50%', '50%', '100%']}
-             display="flex"
-             alignItems={['flex-end', 'center', 'center']}
-             justifyContent={['center', 'center', 'center', 'flex-start']}
-             pl={['0', '0', '0', '10']}>
+        <Box  w={['100%', '100%', '100%', '50%']}
+              h={['50%', '50%', '50%', '100%']}
+              display="flex"
+              alignItems={['flex-end', 'center', 'center']}
+              justifyContent={['center', 'center', 'center', 'flex-start']}
+              pl={['0', '0', '0', '10']}>
 
           <Lottie
               animationData={homepage}
