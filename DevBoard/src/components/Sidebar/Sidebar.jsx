@@ -231,6 +231,7 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
         >
           <Text pl="2">Kanban</Text>
         </Button>
+        <Link to="/likes">
         <Button
           variant="ghost"
           mb="4"
@@ -245,6 +246,7 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
         >
           <Text pl="2">Likes</Text>
         </Button>
+        </Link>
         <Link to="/organizations">
           <Button
               variant="ghost"

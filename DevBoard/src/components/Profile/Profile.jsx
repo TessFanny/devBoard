@@ -37,7 +37,7 @@ function Profile() {
   const dispatch = useDispatch();
   const { user, status } = useSelector((state) => state.login);
   const { role, image_path, id } = user;
-  const navigateto = useNavigate()
+  const navigateto = useNavigate();
   
 
   const handleFileSelect = (e) => {

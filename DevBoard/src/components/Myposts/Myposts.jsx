@@ -1,37 +1,18 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import Post from './Post';
 import { Box, Flex, useMediaQuery, IconButton } from '@chakra-ui/react';
-import { Link } from 'react-router-dom';
-import { FaEdit, FaHeart } from 'react-icons/fa';
+import { getUserPosts } from '../../features/user/user.js';
+import { FaEdit } from 'react-icons/fa';
+const MyPosts = () => {
+  const dispatch = useDispatch();
 
-const MyPosts = (user_id) => {
-  const [posts, setPosts] = useState([]); // Déclare un état pour stocker les posts de l'utilisateur
-  const { user } = useSelector((state) => state.login); // Récupère l'utilisateur actuellement connecté
-  const [isSmallerThan1000] = useMediaQuery('(max-width: 1000px)'); // Utilise un hook de Chakra UI pour détecter la taille de l'écran
+  const { user, posts } = useSelector((state) => state.login);
+  const [isSmallerThan1000] = useMediaQuery('(max-width: 1000px)');
 
-  // Définit une fonction asynchrone pour récupérer les posts de l'utilisateur
-  const getPosts = async () => {
-    const VITE_BACKEND_URL = import.meta.env.VITE_BACKEND_URL; // Récupère l'URL du backend à partir de la variable d'environnement
-
-    try {
-      const response = await fetch(
-        `${VITE_BACKEND_URL}/api/user/${user.id}/posts`,
-        {
-          method: 'GET',
-        }
-      );
-
-      const data = await response.json(); // Récupère les données sous forme de JSON
-      console.log(data);
-      setPosts(data); // Met à jour l'état des posts avec les données récupérées
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  // Utilise le hook useEffect pour appeler la fonction getPosts une fois que le composant est monté
   useEffect(() => {
-    getPosts();
+    dispatch(getUserPosts(user));
   }, []);
 
   return (
