@@ -1,7 +1,20 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { login } from '../user/user.js';
-
+export const deletePost = createAsyncThunk(
+  'post/deletePost',
+  async ({ title, content, postId, user_id }) => {
+    const VITE_BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+    const response = await axios.delete(
+      `${VITE_BACKEND_URL}/api/user/${user_id}/post/${postId}`,
+      {
+        title,
+        content,
+      }
+    );
+    console.log(response);
+  }
+);
 export const editPost = createAsyncThunk(
   'post/editPost',
   async ({ title, content, postId, user_id }) => {

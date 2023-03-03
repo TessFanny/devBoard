@@ -5,12 +5,12 @@ import {
   Box,
   FormControl,
   Input,
-  Textarea,
   Button,
 } from '@chakra-ui/react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   editPost,
+  deletePost,
   changeContentValue,
   changeTitleValue,
 } from '../../features/Post/post';
@@ -19,21 +19,30 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import Notification from '../Notification/Notification.jsx';
+
 function PostEdit() {
+  // States
   const [isLoading, setIsLoading] = useState(false);
   const [notification, setNotification] = useState(false);
   const [isSmallerThan1000] = useMediaQuery('(max-width: 1000px)');
+
+  // Récupération du state "post" depuis le store Redux
   const { title, content } = useSelector((state) => state.post);
+
+  // Récupération de l'ID utilisateur depuis le store Redux
   const { id } = useSelector((state) => state.login.user);
   const user_id = id;
-  const VITE_BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
-  const navigateto = useNavigate();
 
+  // Récupération de l'URL de l'API backend depuis les variables d'environnement
+  const VITE_BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
+  // Récupération de l'ID du post à éditer depuis les paramètres de l'URL
   const { postId } = useParams();
 
-  console.log(postId);
+  // Initialisation du dispatcher Redux
   const dispatch = useDispatch();
 
+  // Récupération des données du post à éditer depuis l'API backend et mise à jour du state "post" dans le store Redux
   useEffect(() => {
     async function fetchPost() {
       const response = await fetch(`${VITE_BACKEND_URL}/api/post/${postId}`);
@@ -44,15 +53,19 @@ function PostEdit() {
     }
     fetchPost();
   }, [postId]);
+
+  // Gestionnaire de changement de titre
   const handleTitleChange = (evt) => {
     dispatch(changeTitleValue(evt.target.value));
   };
 
+  // Gestionnaire de changement de contenu
   const handleContentChange = (evt) => {
     console.log(evt);
     dispatch(changeContentValue(evt));
   };
 
+  // Gestionnaire de soumission du formulaire d'édition de post
   const handleSubmit = () => {
     if (isLoading) return;
     setIsLoading(true);
@@ -63,10 +76,20 @@ function PostEdit() {
       setTimeout(() => {
         setNotification(false);
       }, 100); // Masquer la notification après 3 secondes
-      navigateto('/mypost');
     }, 500);
+    navigateto('/mypost');
   };
 
+  // Gestionnaire de suppression de post
+  const handleDelete = () => {
+    dispatch(deletePost({ title, content, postId, user_id }));
+    navigateto('/mypost');
+  };
+
+  // Initialisation du hook de navigation
+  const navigateto = useNavigate();
+
+  // Rendu du composant
   return (
     <Flex
       w={isSmallerThan1000 ? '100%' : '98%'}
@@ -116,6 +139,14 @@ function PostEdit() {
             onClick={handleSubmit}
           >
             Edit !
+          </Button>
+          <Button
+            colorScheme="red"
+            height="60px"
+            isLoading={isLoading}
+            onClick={handleDelete}
+          >
+            Delete post !
           </Button>
         </FormControl>
       </Box>

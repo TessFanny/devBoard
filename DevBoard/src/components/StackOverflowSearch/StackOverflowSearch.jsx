@@ -100,44 +100,112 @@ function StackOverflowSearch() {
           <Box style={{ flex: '1', width: '100%', h: '75%' }}>
             <Stack display="flex" w="100%" h="92%" overflowY="scroll">
               {results.map((result) => (
-                <div
-                  key={result.question_id}
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    borderRadius: 'md',
-                    boxShadow: 'md',
-                    padding: '4',
-                    width: '100%',
-                    marginBottom: '8px',
-                  }}
-                >
-                  <Link href={result.link} isExternal>
-                    <Box boxShadow="md" p={4} borderRadius="md">
-                      <Flex alignItems="center" mb={2}>
-                        <Text fontWeight="bold" fontSize="xl" mr={2}>
-                          {result.score}
-                        </Text>
-                        <Text mr={2}>votes</Text>
-                        <Text fontWeight="bold" fontSize="xl" mr={2}>
-                          {result.answer_count}
-                        </Text>
-                        <Text mr={2}>answers</Text>
-                        <Text fontWeight="bold" fontSize="xl" mr={2}>
-                          {result.view_count}
-                        </Text>
-                        <Text>views</Text>
+                <div key={result.question_id}>
+                  <Link
+                    href={result.link}
+                    isExternal
+                    _hover={{ textDecoration: 'none' }}
+                  >
+                    <Box
+                      boxShadow="md"
+                      p={4}
+                      borderRadius="md"
+                      w={'70vw'}
+                      h={'20vh'}
+                    >
+                      <Flex alignItems="center">
+                        <Box>
+                          <Text
+                            fontWeight="bold"
+                            fontSize="sm"
+                            style={{
+                              display: 'flex',
+                              margin: '0vw',
+                              padding: '2px',
+                              justifyContent: 'flex-end',
+                              textDecoration: 'none',
+                            }}
+                          >
+                            {result.score} votes
+                          </Text>
+
+                          <Text
+                            fontSize="sm"
+                            bgColor="green"
+                            color="white"
+                            style={{
+                              display: 'flex',
+                              flexDirection: 'row',
+                              alignItems: 'center',
+                              padding: '2px',
+                              textDecoration: 'none',
+                            }}
+                          >
+                            <TiInputChecked
+                              size={30}
+                              style={{ marginRight: '0.5rem' }}
+                            />
+                            {result.answer_count} answers
+                          </Text>
+
+                          <Text
+                            fontSize="sm"
+                            style={{
+                              display: 'flex',
+                              margin: '0vw',
+                              padding: '2px',
+                              justifyContent: 'flex-end',
+                            }}
+                          >
+                            {result.view_count} views
+                          </Text>
+                        </Box>
+                        <Heading size="md" pl="10px" color={'#2b97fe'}>
+                          {result.title}
+                          <Text
+                            style={{
+                              paddingTop: '2rem',
+                              fontSize: '1rem',
+                              color: 'black',
+                            }}
+                          >
+                            {result.body
+                              .replace(/<\/?p>/g, '')
+                              .split('\n')
+                              .slice(0, 2)
+                              .join('\n')}
+                            {result.body.replace(/<\/?p>/g, '').split('\n')
+                              .length > 2 && '...'}
+                          </Text>
+                        </Heading>
                       </Flex>
-                      <Heading size="md" mb={2}>
-                        {result.title}
-                      </Heading>
-                      <Text mb={2}>By {result.owner.display_name}</Text>
-                      <List display="flex" flexWrap="wrap" mb={2}>
+                      <Box />
+                      <List display="flex" mb={2} ml={'7.6rem'} mt={'1rem'}>
                         {result.tags.map((tag, index) => (
-                          <ListItem key={index} mr={2}>
+                          <ListItem
+                            key={index}
+                            color="hsl(205,47%,42%)"
+                            bgColor={'hsl(205,46%,92%)'}
+                            fontSize="sm"
+                            padding="5px"
+                          >
                             {tag}
                           </ListItem>
                         ))}
+                        <Flex
+                          alignItems="center"
+                          ml="40rem"
+                          display={'flex'}
+                          h={'1rem'}
+                        >
+                          <Avatar src={result.owner.profile_image} mr={2} />
+                          <Text fontSize="sm" mr={2}>
+                            By {result.owner.display_name}
+                          </Text>
+                          <Text fontSize="sm">
+                            Reputation: {result.owner.reputation}
+                          </Text>
+                        </Flex>
                       </List>
                     </Box>
                   </Link>
