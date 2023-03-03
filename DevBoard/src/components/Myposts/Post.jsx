@@ -9,6 +9,8 @@ import { Button, ButtonGroup } from '@chakra-ui/react'
 import { useState } from 'react'
 import {useDispatch} from "react-redux";
 import { BiLike } from 'react-icons/bi';
+import ReactMarkdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
 
 function Post({title,content, like, date, imageuser, username}) {
     
@@ -62,7 +64,9 @@ function Post({title,content, like, date, imageuser, username}) {
             {/* <Stack divider={<StackDivider />} spacing='4'> */}
             <Box>
                 <Text pt='2' fontSize='sm'>
-                {content}
+                    <div> 
+                        <ReactMarkdown children={content} className="react-markdown-test" remarkPlugins={[remarkGfm]} />
+                    </div>
                 </Text>
             </Box>
             <Box mt="10" display="flex" alignItems="center">
