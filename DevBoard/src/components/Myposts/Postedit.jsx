@@ -40,7 +40,8 @@ function PostEdit() {
 
   // Initialisation du dispatcher Redux
   const dispatch = useDispatch();
-
+  // Initialisation du hook de navigation
+  const navigateto = useNavigate();
   // Récupération des données du post à éditer depuis l'API backend et mise à jour du state "post" dans le store Redux
   useEffect(() => {
     async function fetchPost() {
@@ -78,19 +79,25 @@ function PostEdit() {
       setNotification(true);
       setTimeout(() => {
         setNotification(false);
-      }, 100); // Masquer la notification après 3 secondes
+        navigateto('/mypost');
+      }, 3000); // Masquer la notification après 3 secondes
     }, 500);
-    navigateto('/mypost');
   };
 
   // Gestionnaire de suppression de post
   const handleDelete = () => {
+    if (isLoading) return;
+    setIsLoading(true);
     dispatch(deletePost({ title, content, postId, user_id }));
-    navigateto('/mypost');
+    setTimeout(() => {
+      setIsLoading(false);
+      setNotification(true);
+      setTimeout(() => {
+        setNotification(false);
+        navigateto('/mypost');
+      }, 3000); // Masquer la notification après 3 secondes
+    }, 500);
   };
-
-  // Initialisation du hook de navigation
-  const navigateto = useNavigate();
 
   // Rendu du composant
   return (
