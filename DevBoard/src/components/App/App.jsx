@@ -21,9 +21,10 @@ import StackOverflowSearch from '../StackOverflowSearch/StackOverflowSearch';
 import Playground from '../Playground/playground.jsx';
 import Organizations from '../Organizations/Organizations.jsx';
 import BurgerMenu from '../BurgerMenu/BurgerMenu.jsx';
-import PostForm from "../PostForm/PostForm.jsx";
+import PostForm from '../PostForm/PostForm.jsx';
 import Posts from '../posts/Posts';
 import MyPosts from '../Myposts/Myposts';
+import PostEdit from '../Myposts/Postedit.jsx';
 
 // App component
 export default function App() {
@@ -70,7 +71,7 @@ export default function App() {
 
   return (
     // Flex container for Sidebar and main content area
-    <Flex>
+    <Flex h="100vh">
       {sidebar}
       {/* Box for main content area */}
       <Box
@@ -104,6 +105,7 @@ export default function App() {
             <Route path="/playground" element={<Playground />} />
             <Route path="/organizations" element={<Organizations />} />
             <Route path="/addpost" element={<PostForm />} />
+            <Route path="/editpost/:postId" element={<PostEdit />} />
           </Routes>
         )}
       </Box>

@@ -11,10 +11,10 @@ export const login = createAsyncThunk(
       email,
       password,
     });
-    const { token, newUser } = response.data;
+    const { token, userAuth } = response.data;
     // Store the received token in local storage
     localStorage.setItem('token', token);
-    return { newUser };
+    return { userAuth };
   },
 );
 // Define an asynchronous thunk for login
@@ -67,6 +67,26 @@ export const modifyUserPicture = createAsyncThunk(
     const user = response.data;
     return { user };
   },
+);
+
+export const deleteUser = createAsyncThunk(
+    'user/deleteUser',
+    async ({ id }) => {
+        // Make a delete request
+        const response = await axios.delete(
+            `${VITE_BACKEND_URL}/api/user/${id}`,
+            {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`, // Bearer ACCESSTOKEN
+                    "Content-Type": "multipart/form-data",
+                },
+            },
+        ).then((response) => {
+            return response;
+        }).catch((err) => {
+            console.error(err);
+        });
+    },
 );
 
 export async function getUserGithubData() {
@@ -169,7 +189,7 @@ export const loginSlice = createSlice({
       })
       // Reducer for handling the fulfilled state of the login request
       .addCase(login.fulfilled, (state, action) => {
-        state.user = action.payload.newUser;
+        state.user = action.payload.userAuth;
         state.status = true;
       })
       // Reducer for handling the rejected state of the login request
@@ -209,7 +229,26 @@ export const loginSlice = createSlice({
         // state.user =
         state.status = false;
         state.error = action.error.message;
-      });
+      })
+        .addCase(deleteUser.pending, (state) => {
+            state.status = 'loading';
+            state.error = null;
+        })
+        // Reducer for handling the fulfilled state of the modify request
+        .addCase(deleteUser.fulfilled, (state) => {
+            const user = {
+                email: '',
+                password: '',
+            };
+            state.user = user;
+            state.status = true;
+        })
+        // Reducer for handling the rejected state of the modify request
+        .addCase(deleteUser.rejected, (state, action) => {
+            // state.user =
+            state.status = false;
+            state.error = action.error.message;
+        });
   },
 
 });

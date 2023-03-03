@@ -10,8 +10,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import {getRepo, getUserGithubData, getUserGithubRepos} from '../../features/user/user';
 import Notification from '../Notification/Notification';
 import folderImg from '../../assets/folder-svgrepo-com.svg'
+import {useEffect, useState} from "react";
 
 function Repositories() {
+  const [rerender, setRerender] = useState(false);
   const { repositories } = useSelector((state) => state.login.user);
   const { status } = useSelector((state) => state.login);
   const dispatch = useDispatch();
@@ -19,7 +21,7 @@ function Repositories() {
   const githubLogged = localStorage.getItem('accessToken');
   const [isSmallerThan1000] = useMediaQuery('(max-width: 1000px)');
 
-
+  useEffect(() => {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
   const codeParam = urlParams.get('code');
@@ -45,6 +47,7 @@ function Repositories() {
     }
     getAccessToken();
   }
+  }, []);
   const HandleGitHubAuth = async () => {
     window.location.assign(
       `https://github.com/login/oauth/authorize?client_id=${import.meta.env.VITE_CLIENT_ID}`,
@@ -79,10 +82,15 @@ function Repositories() {
   };
   return (
     // Flex container to center and add margin to the grid of Cards
-    <Flex w={isSmallerThan1000 ? '100%' : '98%'} minH="80%" mt={10} bgColor="gray.50" borderRadius="md" boxShadow="md" p="4">
+    <Flex w={isSmallerThan1000 ? '100%' : '98%'} h="80%" mt={10} bgColor="gray.50" borderRadius="md" boxShadow="md" p="4">
+      <Box h="100%" w="100%" overflowY="scroll">
+
       {githubLogged ? (
         <>
-          <SimpleGrid spacing={4} templateColumns="repeat(auto-fill, minmax(300px, 1fr))" w="100%" h="31%">
+          <SimpleGrid spacing={4}
+                      templateColumns="repeat(auto-fill, minmax(300px, 1fr))"
+                      w="100%"
+                      h="31%">
             {repositories
             && repositories.map((repo) => (
               <Card key={repo.id} w="100%">
@@ -99,7 +107,7 @@ function Repositories() {
               </Card>
             ))}
           </SimpleGrid>
-          <IconButton aria-label="refresh repo" icon={<SlRefresh />} onClick={loadRepo} position="fixed" right={isSmallerThan1000 ? '10px' : '50px'} />
+          <IconButton aria-label="refresh repo" icon={<SlRefresh />} onClick={loadRepo} position="fixed" right={isSmallerThan1000 ? '40px' : '80px'} top={isSmallerThan1000 ? ('150') : ('180')} />
 
         </>
 
@@ -131,6 +139,7 @@ function Repositories() {
           </Box>
         </Flex>
       )}
+      </Box>
       {popup()}
     </Flex>
 
