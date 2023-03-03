@@ -16,6 +16,9 @@ export const addPost = createAsyncThunk(
     }
 );
 
+
+
+
 const initialState = {
     title: '',
     content: '',
@@ -52,6 +55,7 @@ export const postSlice = createSlice({
                 state.status = false;
                 state.error = action.error.message;
             })
+
     },
 });
 

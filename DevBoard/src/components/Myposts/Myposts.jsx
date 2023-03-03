@@ -2,47 +2,21 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Post from "./Post";
 import {Box, Flex, useMediaQuery} from "@chakra-ui/react";
+import {getUserPosts} from "../../features/user/user.js";
 
-const MyPosts = (user_id) => {
+const MyPosts = () => {
 
-//   const dispatch = useDispatch();
-//   const posts = useSelector((state) => state.posts);    v2
+    const dispatch = useDispatch();
 
-// const token = useSelector((state) => state.token);   v2
-    const [posts, setPosts]= useState([])
-    const { user, status } = useSelector((state) => state.login);
+    const { user, posts } = useSelector((state) => state.login);
     const [isSmallerThan1000] = useMediaQuery('(max-width: 1000px)');
-    const getPosts = async () => {
-        const VITE_BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
-    try {
-        const response = await fetch(`${VITE_BACKEND_URL}/api/user/${user.id}/posts`, {
-        method: "GET"
-        //   headers: { Authorization: `Bearer ${token}` },  v2
-        });
+    console.log(posts)
 
-        const data = await response.json();
-        console.log(data)
-        // dispatch(setPosts({ posts: data }));              v2
-        setPosts(data)
-    } catch(error) {
-        console.error(error)
-    }
-    };
+    useEffect(() => {
+        dispatch(getUserPosts(user));
 
-//   const getUserPosts = async () => {
-//     const response = await fetch(
-//       `${VITE_BACKEND_URL}/api/user/${userId}/posts`,
-//       {
-//         method: "GET"
-//         // headers: { Authorization: `Bearer ${token}` }, 
-//       }
-//     );
-//     const data = await response.json();
-//     dispatch(setPosts({ posts: data }));
-//   };                                                 v2
-
-    useEffect(() => {getPosts(); }, []);
+    }, []);
 
     return (
         <Flex w={isSmallerThan1000 ? '100%' : '98%'}
@@ -54,7 +28,8 @@ const MyPosts = (user_id) => {
             <Box width="100%"
                  h="100%"
                  overflowY="scroll">
-                {posts.map((post) => (
+                {posts &&
+                    posts.map((post) => (
                     <Post key= {post.id}
                           title={post.title}
                           content ={post.content}
