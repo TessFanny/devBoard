@@ -11,6 +11,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import {
   editPost,
+  deletePost,
   changeContentValue,
   changeTitleValue,
 } from '../../features/Post/post';
@@ -63,10 +64,15 @@ function PostEdit() {
       setTimeout(() => {
         setNotification(false);
       }, 100); // Masquer la notification après 3 secondes
-      navigateto('/mypost');
     }, 500);
+    navigateto('/mypost');
   };
 
+  const handleDelete = () => {
+    dispatch(deletePost({ title, content, postId, user_id }));
+
+    navigateto('/mypost');
+  };
   return (
     <Flex
       w={isSmallerThan1000 ? '100%' : '98%'}
@@ -116,6 +122,14 @@ function PostEdit() {
             onClick={handleSubmit}
           >
             Edit !
+          </Button>
+          <Button
+            colorScheme="red"
+            height="60px"
+            isLoading={isLoading}
+            onClick={handleDelete}
+          >
+            Delete post !
           </Button>
         </FormControl>
       </Box>
