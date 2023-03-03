@@ -95,7 +95,20 @@ export const getUserPosts = createAsyncThunk(
         const VITE_BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
         // Make a POST request to a register endpoint with email and password
         const response = await axios.get(`${VITE_BACKEND_URL}/api/user/${id}/posts`);
-        const {data} = response
+        const {data} = response;
+        return data;
+    }
+
+);
+
+export const getUserLikedPosts = createAsyncThunk(
+    'user/getUserLikedPosts',
+    async ({ id }) => {
+        const VITE_BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+        // Make a POST request to a register endpoint with email and password
+        const response = await axios.get(`${VITE_BACKEND_URL}/api/user/${id}/like/posts`);
+        const {data} = response;
+        console.log(data);
         return data;
     }
 
@@ -222,7 +235,6 @@ export const loginSlice = createSlice({
       })
       // Reducer for handling the rejected state of the modify request
       .addCase(modifyUser.rejected, (state) => {
-        // state.user =
         state.status = false;
         state.error = action.error.message;
       })
@@ -238,7 +250,6 @@ export const loginSlice = createSlice({
       })
       // Reducer for handling the rejected state of the modify request
       .addCase(modifyUserPicture.rejected, (state) => {
-        // state.user =
         state.status = false;
         state.error = action.error.message;
       })
@@ -257,7 +268,6 @@ export const loginSlice = createSlice({
         })
         // Reducer for handling the rejected state of the modify request
         .addCase(deleteUser.rejected, (state, action) => {
-            // state.user =
             state.status = false;
             state.error = action.error.message;
         })
@@ -267,13 +277,25 @@ export const loginSlice = createSlice({
         })
         // Reducer for handling the fulfilled state of the modify request
         .addCase(getUserPosts.fulfilled, (state, action) => {
-            console.log(action.payload);
             state.posts = action.payload;
             state.status = true;
         })
         // Reducer for handling the rejected state of the modify request
         .addCase(getUserPosts.rejected, (state, action) => {
-            // state.user =
+            state.status = false;
+            state.error = action.error.message;
+        })
+        .addCase(getUserLikedPosts.pending, (state) => {
+            state.status = 'loading';
+            state.error = null;
+        })
+        // Reducer for handling the fulfilled state of the modify request
+        .addCase(getUserLikedPosts.fulfilled, (state, action) => {
+            state.liked_posts = action.payload;
+            state.status = true;
+        })
+        // Reducer for handling the rejected state of the modify request
+        .addCase(getUserLikedPosts.rejected, (state, action) => {
             state.status = false;
             state.error = action.error.message;
         });

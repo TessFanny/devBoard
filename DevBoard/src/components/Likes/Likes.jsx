@@ -1,91 +1,43 @@
-import React from 'react'
-import { Card, CardHeader, CardBody, CardFooter } from '@chakra-ui/react'
-import { Heading } from '@chakra-ui/react'
-import { Stack, HStack, VStack } from '@chakra-ui/react'
-import { Box } from '@chakra-ui/react'
-import { Text } from '@chakra-ui/react'
-import { Avatar} from '@chakra-ui/react'
-import { Button, ButtonGroup } from '@chakra-ui/react'
-import { useState } from 'react'
-import {useDispatch} from "react-redux";
-import { BiLike } from 'react-icons/bi';
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import Post from "../posts/Post";
+import {Box, Flex, useMediaQuery} from "@chakra-ui/react";
+import {getUserLikedPosts} from "../../features/user/user.js";
 
-function Likes({title,content, like, date, imageuser, username}) {
+const Likes = () => {
 
-    const [isLoading, setIsLoading] = useState(false);
-    const handleSubmit = (evt) => {
-        const dispatch = useDispatch();
-        evt.preventDefault();
-        if (isLoading) return;
-        setIsLoading(true);
-        dispatch(modifyUser({ user }));
-        setTimeout(() => {
-            setIsLoading(false);
-            setNotification(true);
-            setTimeout(() => {
-                setNotification(false);
-            }, 100); // Masquer la notification après 3 secondes
-        }, 500);
-    };
-    const VITE_BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
-    // const dispatch = useDispatch();
-    // const token = useSelector((state) => state.token);
-    // const loggedInUserId = useSelector((state) => state.user._id);
+    const dispatch = useDispatch();
 
-    // const patchLike = async () => {
-    //   const response = await fetch(`http://localhost:3001/posts/${postId}/like`, {
-    //     method: "PATCH",
-    //     headers: {
-    //       Authorization: `Bearer ${token}`,
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify({ userId: loggedInUserId }),
-    //   });
-    //   const updatedPost = await response.json();
-    //   dispatch(setPost({ post: updatedPost }))
+    const { user, liked_posts } = useSelector((state) => state.login);
+    const [isSmallerThan1000] = useMediaQuery('(max-width: 1000px)');
+
+    useEffect(() => {
+        dispatch(getUserLikedPosts(user));
+
+    }, []);
 
     return (
-        <Card mb="5" boxShadow="md">
-            <CardHeader w="100%" pb="0">
-                <Box display="flex" alignItems="center" w="100%" mb="3">
-                    <Avatar name={username} src={`${VITE_BACKEND_URL}/images/${imageuser}`}/>
-                    <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center">
-                        <Text fontSize="sm" ml="3">{username}</Text>
-                        <Text fontSize="sm" ml="3">Date : {date} </Text>
-                    </Box>
+        <Flex w={isSmallerThan1000 ? '100%' : '98%'}
+              h="80%" mt={10}
 
-                </Box>
+              bgColor="gray.50"
+              borderRadius="md"
+              boxShadow="md" p="4" overflow="hidden">
+            <Box width="100%"
+                 h="100%"
+                 overflowY="scroll">
+                {liked_posts &&
+                    liked_posts.map((post) => (
+                        <Post key= {post.id}
+                              title={post.title}
+                              content ={post.content}
+                              imageuser={post.image_path}
+                              username={post.username}
+                              date={post.date} like={post.like} /> ))}
+            </Box>
 
-                <Heading size='md'>{title}</Heading>
-            </CardHeader>
-            <CardBody pt="0">
-                {/* <Stack divider={<StackDivider />} spacing='4'> */}
-                <Box>
-                    <Text pt='2' fontSize='sm'>
-                        {content}
-                    </Text>
-                </Box>
-                <Box mt="10" display="flex" alignItems="center">
-                    <BiLike />
-                    <Text ml="1">{like}</Text>
-                </Box>
+        </Flex>
+    );
+};
 
-            </CardBody>
-
-        </Card>
-    )
-}
-
-export default Post
-
-
-
-
-// const Post = ({
-
-// }) => {
-
-;
-
-
-
+export default Likes;

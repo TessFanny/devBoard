@@ -11,8 +11,6 @@ const MyPosts = () => {
     const { user, posts } = useSelector((state) => state.login);
     const [isSmallerThan1000] = useMediaQuery('(max-width: 1000px)');
 
-    console.log(posts)
-
     useEffect(() => {
         dispatch(getUserPosts(user));
 
