@@ -82,10 +82,15 @@ function Repositories() {
   };
   return (
     // Flex container to center and add margin to the grid of Cards
-    <Flex w={isSmallerThan1000 ? '100%' : '98%'} minH="80%" mt={10} bgColor="gray.50" borderRadius="md" boxShadow="md" p="4">
+    <Flex w={isSmallerThan1000 ? '100%' : '98%'} h="80%" mt={10} bgColor="gray.50" borderRadius="md" boxShadow="md" p="4">
+      <Box h="100%" w="100%" overflowY="scroll">
+
       {githubLogged ? (
         <>
-          <SimpleGrid spacing={4} templateColumns="repeat(auto-fill, minmax(300px, 1fr))" w="100%" h="31%">
+          <SimpleGrid spacing={4}
+                      templateColumns="repeat(auto-fill, minmax(300px, 1fr))"
+                      w="100%"
+                      h="31%">
             {repositories
             && repositories.map((repo) => (
               <Card key={repo.id} w="100%">
@@ -102,7 +107,7 @@ function Repositories() {
               </Card>
             ))}
           </SimpleGrid>
-          <IconButton aria-label="refresh repo" icon={<SlRefresh />} onClick={loadRepo} position="fixed" right={isSmallerThan1000 ? '10px' : '50px'} />
+          <IconButton aria-label="refresh repo" icon={<SlRefresh />} onClick={loadRepo} position="fixed" right={isSmallerThan1000 ? '40px' : '80px'} top={isSmallerThan1000 ? ('150') : ('180')} />
 
         </>
 
@@ -134,6 +139,7 @@ function Repositories() {
           </Box>
         </Flex>
       )}
+      </Box>
       {popup()}
     </Flex>
 

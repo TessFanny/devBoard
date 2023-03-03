@@ -1,6 +1,20 @@
 /* eslint-disable react/react-in-jsx-scope */
 import {
-  Flex, Box, Image, Button, Tag, TagLabel, Avatar, Input, Icon, IconButton, Divider, Text,
+  Flex,
+  Box,
+  Image,
+  Button,
+  Tag,
+  TagLabel,
+  Avatar,
+  Input,
+  Icon,
+  IconButton,
+  Divider,
+  Text,
+  useDisclosure,
+  Modal,
+  ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalCloseButton, ModalFooter,
 } from '@chakra-ui/react';
 import { FaUpload } from "react-icons/fa";
 import { useDispatch, useSelector } from 'react-redux';
@@ -11,23 +25,22 @@ import img from '../../assets/profile.png';
 import Username from './Username/Username';
 import Github from './Github/Github';
 import Email from './Email/Email';
-import { modifyUser } from '../../features/user/user';
+import {deleteUser, modifyUser} from '../../features/user/user';
 import Notification from '../Notification/Notification';
 import { modifyUserPicture } from '../../features/user/user';
+import {useNavigate} from "react-router-dom";
 
 function Profile() {
+  const { isOpen, onOpen, onClose } = useDisclosure()
   const [isLoading, setIsLoading] = useState(false);
   const [notification, setNotification] = useState(false);
   const dispatch = useDispatch();
   const { user, status } = useSelector((state) => state.login);
   const { role, image_path, id } = user;
+  const navigateto = useNavigate()
   
 
   const handleFileSelect = (e) => {
-    // const file = URL.createObjectURL(e.target.files[0]);
-    // console.log(file);
-    // dispatch(addImg(file));
-    // dispatch(addImg(e.target.files));
 
     const file = e.target.files[0];
     const formData = new FormData();
@@ -35,7 +48,6 @@ function Profile() {
     console.log(formData);
     console.log(id);
     dispatch(modifyUserPicture({formData, id}));
-    // dispatch(addImg(U));
   };
 
   const handleSubmit = (evt) => {
@@ -51,6 +63,16 @@ function Profile() {
       }, 100); // Masquer la notification après 3 secondes
     }, 500);
   };
+
+  const handleDelete = (evt) => {
+    if (isLoading) return;
+    setIsLoading(true);
+    dispatch(deleteUser({ id }));
+    setTimeout(() => {
+      setIsLoading(false);
+      navigateto('/homepage');
+    }, 500);
+  }
 
   return (
     <Flex w="98%" mt={['5', '5', '10']} h={['100%', '100%', '100%', '80%', '80%']}>
@@ -99,7 +121,22 @@ function Profile() {
 
             <Divider bgColor='gray.300' h="1px" mt="3.5" mb="3.5" />
 
-            <Text fontWeight="500" color="gray.600">Organizations</Text>
+            <Text fontWeight="500" color="gray.600">Account</Text>
+            <Button colorScheme="red" variant="outline" mt="3.5" onClick={onOpen}>Delete</Button>
+
+            <Modal onClose={onClose} isOpen={isOpen} isCentered>
+              <ModalOverlay />
+              <ModalContent>
+                <ModalHeader>Delete Account</ModalHeader>
+                <ModalCloseButton />
+                <ModalBody>
+                  <Text>If you delete your account, you will no longer be able to access DevBoard unless you create another one.</Text>
+                </ModalBody>
+                <ModalFooter display="flex" justifyContent="center">
+                  <Button onClick={handleDelete} isLoading={isLoading} colorScheme="red">I understand and I want to delete my account</Button>
+                </ModalFooter>
+              </ModalContent>
+            </Modal>
 
 
 
