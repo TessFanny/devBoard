@@ -5,6 +5,7 @@ import {Box, Flex, Stat, Text, useMediaQuery} from "@chakra-ui/react";
 import {getUserPosts} from "../../features/user/user.js";
 import {useDispatch, useSelector} from "react-redux";
 import {deleteLike, getLikedPosts, getPosts, likePost} from "../../features/Post/post.js";
+import Loader from "../Loader/Loader.jsx";
 
 const Posts = () => {
 
@@ -40,7 +41,7 @@ const Posts = () => {
                           like={post.like}
                           isLiked={liked_posts && liked_posts.some((likedPost) => likedPost.id === post.id)} />
                 ))) : (
-                    <Text>no post</Text>
+                <Loader />
             )}
 
             </Box>
