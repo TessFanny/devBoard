@@ -33,6 +33,10 @@ function Login() {
   const [isEmailValid, setIsEmailValid] = useState(true);
   const [isPasswordValid, setPasswordValid] = useState(true);
 
+  if(status === true) {
+    navigateto('/repositories');
+  }
+
   // Event handler for email input change
   const handleEmailChange = (evt) => {
     dispatch(changeEmailValue(evt.target.value));
@@ -69,9 +73,6 @@ function Login() {
     dispatch(login({ email, password }));
     setTimeout(() => {
       setIsLoading(false);
-      if(status === true) {
-        navigateto('/repositories');
-      }
       setNotification(true);
       setTimeout(() => {
         setNotification(false);

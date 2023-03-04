@@ -72,13 +72,6 @@ function Repositories() {
           />
         );
       }
-      return (
-        <Notification
-          title="Oupss Error"
-          description="Something went wrong... Maybe try again"
-          status="error"
-        />
-      );
     }
   };
   return (

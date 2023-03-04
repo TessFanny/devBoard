@@ -187,6 +187,7 @@ export const loginSlice = createSlice({
         password: '',
       };
       state.user = user;
+      state.status = null;
       localStorage.removeItem('token');
       localStorage.removeItem('popupDisplayed');
     },
