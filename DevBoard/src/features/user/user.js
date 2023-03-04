@@ -94,7 +94,11 @@ export const getUserPosts = createAsyncThunk(
     async ({ id }) => {
         const VITE_BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
         // Make a POST request to a register endpoint with email and password
-        const response = await axios.get(`${VITE_BACKEND_URL}/api/user/${id}/posts`);
+        const response = await axios.get(`${VITE_BACKEND_URL}/api/user/${id}/posts`,
+        {headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`, // Bearer ACCESSTOKEN
+        }}
+        );
         const {data} = response;
         return data;
     }
@@ -105,6 +109,7 @@ export const getUserLikedPosts = createAsyncThunk(
     'user/getUserLikedPosts',
     async ({ id }) => {
         const VITE_BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+        
         // Make a POST request to a register endpoint with email and password
         const response = await axios.get(`${VITE_BACKEND_URL}/api/user/${id}/like/posts`);
         const {data} = response;

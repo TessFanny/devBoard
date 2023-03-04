@@ -104,12 +104,12 @@ function Homepage() {
             <Button onClick={showRegister}
                     w={['150px', '150px', '200px', '150px']}
                     mt="6" colorScheme="blue"
-            >Register here
+            >Register
             </Button>
             <Button onClick={showLoginComponent}
                     w={['150px', '150px', '200px', '150px']}
                     mt="6" colorScheme="blue"
-            >Login here
+            >Login
             </Button>            
           </Box>
 
@@ -124,7 +124,7 @@ function Homepage() {
           <Lottie
               animationData={homepage}
               style={{ width: '600px', height: '100%' }}/>
-         </Box>
+        </Box>
       </motion.div>
         )}
         {showDiv && (
