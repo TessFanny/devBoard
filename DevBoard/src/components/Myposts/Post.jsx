@@ -53,9 +53,9 @@ function Post({title,content, like, date, imageuser, username, id}) {
         <CardHeader w="100%" pb="0">
             <Box display="flex" alignItems="center" w="100%" mb="3">
                 <Avatar name={username} src={`${VITE_BACKEND_URL}/images/${imageuser}`}/>
-                <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center">
+                <Box display="flex" flexDirection="column" justifyContent="center" alignItems="flex-start">
                     <Text fontSize="sm" ml="3">{username}</Text>
-                    <Text fontSize="sm" ml="3">Date : {date} </Text>
+                    <Text fontSize="sm" ml="3">{date} </Text>
                 </Box>
 
             </Box>
@@ -71,7 +71,7 @@ function Post({title,content, like, date, imageuser, username, id}) {
                     </div>
                 </Text>
             </Box>
-            <Box mt="10" display="flex" alignItems="center">
+            <Box mt="10" display="flex" alignItems="center" justifyContent="flex-start" gap="2">
                 <BiLike />
                 <Text ml="1">{like}</Text>
                     <Link to={`/editpost/${id}`}>
