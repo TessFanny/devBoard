@@ -30,7 +30,13 @@ export const editPost = createAsyncThunk(
       {
         title,
         content,
-      }
+      },
+
+        {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`, // Bearer ACCESSTOKEN
+            },
+        }
     );
     console.log(response);
   }

@@ -45,7 +45,14 @@ function PostEdit() {
   // Récupération des données du post à éditer depuis l'API backend et mise à jour du state "post" dans le store Redux
   useEffect(() => {
     async function fetchPost() {
-      const response = await fetch(`${VITE_BACKEND_URL}/api/post/${postId}`);
+      const response = await fetch(`${VITE_BACKEND_URL}/api/post/${postId}`,
+
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem('token')}`, // Bearer ACCESSTOKEN
+            },
+          }
+          );
       const data = await response.json();
       if (user_id !== data.user_id) {
         // L'utilisateur n'est pas autorisé à modifier ou supprimer le post, donc on le redirige vers la page précédente
