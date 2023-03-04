@@ -95,7 +95,7 @@ function PostEdit() {
   const handleDelete = () => {
     if (isLoading) return;
     setIsLoading(true);
-    dispatch(deletePost({ title, content, postId, user_id }));
+    dispatch(deletePost({ postId, user_id }));
     setTimeout(() => {
       setIsLoading(false);
       setNotification(true);

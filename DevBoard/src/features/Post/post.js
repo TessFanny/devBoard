@@ -3,14 +3,10 @@ import axios from 'axios';
 import { login } from '../user/user.js';
 export const deletePost = createAsyncThunk(
   'post/deletePost',
-  async ({ title, content, postId, user_id }) => {
+  async ({ postId, id }) => {
     const VITE_BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
     const response = await axios.delete(
-      `${VITE_BACKEND_URL}/api/user/${user_id}/post/${postId}`,
-      {
-        title,
-        content,
-      },
+      `${VITE_BACKEND_URL}/api/user/${id}/post/${postId}`,
 
         {
             headers: {
