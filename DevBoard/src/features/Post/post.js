@@ -10,7 +10,13 @@ export const deletePost = createAsyncThunk(
       {
         title,
         content,
-      }
+      },
+
+        {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`, // Bearer ACCESSTOKEN
+            },
+        }
     );
     console.log(response);
   }
@@ -39,7 +45,13 @@ export const addPost = createAsyncThunk(
       {
         title,
         content,
-      }
+      },
+
+        {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`, // Bearer ACCESSTOKEN
+            },
+        }
     );
     console.log(response);
   }
@@ -49,7 +61,13 @@ export const getPosts = createAsyncThunk(
     async () => {
         const VITE_BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
         // Make a POST request to a register endpoint with email and password
-        const response = await axios.get(`${VITE_BACKEND_URL}/api/posts`);
+        const response = await axios.get(`${VITE_BACKEND_URL}/api/posts`,
+            {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`, // Bearer ACCESSTOKEN
+                },
+            }
+            );
         const {data} = response;
         return data;
     }
@@ -61,7 +79,13 @@ export const getLikedPosts = createAsyncThunk(
     async ({ id }) => {
         const VITE_BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
         // Make a POST request to a register endpoint with email and password
-        const response = await axios.get(`${VITE_BACKEND_URL}/api/user/${id}/like/posts`);
+        const response = await axios.get(`${VITE_BACKEND_URL}/api/user/${id}/like/posts`,
+            {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`, // Bearer ACCESSTOKEN
+                },
+            }
+            );
         const {data} = response;
         console.log(data);
         return data;
@@ -74,7 +98,13 @@ export const likePost = createAsyncThunk(
     async ({ id, postId }) => {
         const VITE_BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
         // Make a POST request to a register endpoint with email and password
-        const response = await axios.get(`${VITE_BACKEND_URL}/api/user/${id}/like/post/${postId}`);
+        const response = await axios.get(`${VITE_BACKEND_URL}/api/user/${id}/like/post/${postId}`,
+            {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`, // Bearer ACCESSTOKEN
+                },
+            }
+            );
         const {data} = response;
     }
 
@@ -85,7 +115,14 @@ export const deleteLike = createAsyncThunk(
     async ({ id, postId }) => {
         const VITE_BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
         // Make a POST request to a register endpoint with email and password
-        const response = await axios.delete(`${VITE_BACKEND_URL}/api/user/${id}/like/post/${postId}`);
+        const response = await axios.delete(`${VITE_BACKEND_URL}/api/user/${id}/like/post/${postId}`,
+
+            {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`, // Bearer ACCESSTOKEN
+                },
+            }
+            );
         const {data} = response;
     }
 
