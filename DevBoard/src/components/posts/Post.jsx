@@ -1,7 +1,6 @@
 import React from 'react'
 import { Card, CardHeader, CardBody, CardFooter } from '@chakra-ui/react'
 import { Heading } from '@chakra-ui/react'
-import { Stack, HStack, VStack } from '@chakra-ui/react'
 import { Box } from '@chakra-ui/react'
 import { Text } from '@chakra-ui/react'
 import { Avatar} from '@chakra-ui/react'
@@ -12,22 +11,6 @@ import remarkGfm from 'remark-gfm'
 
 function Post({title,content, like, date, imageuser, username}) {
     const VITE_BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
-    // const dispatch = useDispatch();
-    // const token = useSelector((state) => state.token);
-    // const loggedInUserId = useSelector((state) => state.user._id);
-
-    // const patchLike = async () => {
-    //   const response = await fetch(`http://localhost:3001/posts/${postId}/like`, {
-    //     method: "PATCH",
-    //     headers: {
-    //       Authorization: `Bearer ${token}`,
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify({ userId: loggedInUserId }),
-    //   });
-    //   const updatedPost = await response.json();
-    //   dispatch(setPost({ post: updatedPost }))
-
     return (
         
         <Card mb="5" boxShadow="md">
