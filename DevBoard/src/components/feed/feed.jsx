@@ -17,16 +17,22 @@ const Feed = () => {
   const VITE_BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
   const fetchData =  async () => {
       try {
-          const response = await fetch(`${VITE_BACKEND_URL}/api/feeds`, {
-          method: "GET",
-      })
+          const response = await fetch(`${VITE_BACKEND_URL}/api/feeds`,
+
+              {
+                  headers: {
+                      Authorization: `Bearer ${localStorage.getItem('token')}`, // Bearer ACCESSTOKEN
+                  },
+              }
+              )
+          console.log(response);
       const data = await response.json();
       setFeeds(data);
       } catch(error){       
         console.error(error)
       }
     }
-    useEffect(() => {fetchData()},[])
+    useEffect(() => {fetchData()},[feeds])
 
 // useEffect(() => {
 //     if (token) {
