@@ -41,7 +41,7 @@ function Homepage() {
   };
   return (
       <Flex bgGradient='linear(to-r, #2e76ff, #172c69)'
-            w="100%" minH="100%"
+            w="100%" h="100%"
             flexDirection={['column', 'column','column', 'row']}>
 
         <Image  src={blob2}
@@ -79,10 +79,10 @@ function Homepage() {
 
           <Box display="flex"
                 flexDirection="column"
-                w={['90%', '90%', '80%', '60%']} h="50%"
+                w={['90%', '90%', '80%', '60%']} h="100%"
                 alignItems="center"
-                justifyContent={['flex-start', 'flex-start', 'flex-end', 'center']}
-                mb="10">
+                justifyContent={['flex-start', 'flex-start', 'flex-start', 'center']}
+                mb={["0", "0", "0", "10"]}>
 
             <Text
                 fontSize="70px"
@@ -94,17 +94,13 @@ function Homepage() {
             </Text>
 
             <Text fontSize="lg"
-                  color="gray.300">
-
-            Welcome to DevBoard, the central hub for all development needs! 
-            </Text>
-            <Text fontSize="lg"
-                  color="gray.300">
-                  Streamline your workflow and stay organized with 
-                  our dashboard, designed specifically for developers. Collaborate with team members, 
-                  and access key metrics and analytics 
+                  color="gray.300"
+                  textAlign="center">
+                  Streamline your workflow and stay organized with
+                  our dashboard, designed specifically for developers. Collaborate with team members,
+                  and access key metrics and analytics
                   all in one place.
-                  Take your development to the next level with DevBoard today!"
+                  Take your development to the next level with DevBoard today!
             </Text>
             <Box w="100%" display="flex" justifyContent="center" gap={2}>
                 <Button onClick={showRegister}
@@ -123,15 +119,15 @@ function Homepage() {
 
         </Box>
         <Box  w={['100%', '100%', '100%', '50%']}
-              h={['50%', '50%', '50%', '100%']}
+              h={['55%', '50%', '50%', '100%']}
               display="flex"
-              alignItems={['flex-end', 'center', 'center']}
+              alignItems={['flex-end', 'center', 'flex-start', 'center']}
               justifyContent={['center', 'center', 'center', 'flex-start']}
               pl={['0', '0', '0', '10']}>
 
           <Lottie
               animationData={homepage}
-              style={{ width: '600px', height: '100%' }}/>
+              style={{ width: '550px', height: '100%' }}/>
         </Box>
       </motion.div>
         )}

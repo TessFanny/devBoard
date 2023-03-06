@@ -14,7 +14,7 @@ import {
   Text,
   useDisclosure,
   Modal,
-  ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalCloseButton, ModalFooter,
+  ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalCloseButton, ModalFooter, useMediaQuery,
 } from '@chakra-ui/react';
 import { FaUpload } from "react-icons/fa";
 import { useDispatch, useSelector } from 'react-redux';
@@ -34,6 +34,7 @@ function Profile() {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [isLoading, setIsLoading] = useState(false);
   const [notification, setNotification] = useState(false);
+  const [isSmallerThan1000] = useMediaQuery('(max-width: 1000px)');
   const dispatch = useDispatch();
   const { user, status } = useSelector((state) => state.login);
   const { role, image_path, id } = user;
@@ -108,8 +109,12 @@ function Profile() {
               onChange={handleFileSelect}
               display="none"
             />
-            <Divider bgColor='gray.300' h="1px" mt="3.5" mb="3.5" />
-            <Text fontWeight="500" color="gray.600">Role</Text>
+            {!isSmallerThan1000 && (
+                <>
+                  <Divider bgColor='gray.300' h="1px" mt="3.5" mb="3.5" />
+                  <Text fontWeight="500" color="gray.600">Role</Text>
+                </>
+            )}
 
             {role && (
               <Tag size="lg" colorScheme="telegram" borderRadius="full" mt="5">
@@ -122,11 +127,14 @@ function Profile() {
                 <TagLabel>{role}</TagLabel>
               </Tag>
             )}
+            {!isSmallerThan1000 && (
+                <>
+                  <Divider bgColor='gray.300' h="1px" mt="3.5" mb="3.5" />
 
-            <Divider bgColor='gray.300' h="1px" mt="3.5" mb="3.5" />
-
-            <Text fontWeight="500" color="gray.600">Account</Text>
-            <Button colorScheme="red" variant="outline" mt="3.5" onClick={onOpen}>Delete</Button>
+                  <Text fontWeight="500" color="gray.600">Account</Text>
+                  <Button colorScheme="red" variant="outline" mt="3.5" onClick={onOpen}>Delete</Button>
+                </>
+            )}
 
             <Modal onClose={onClose} isOpen={isOpen} isCentered>
               <ModalOverlay />

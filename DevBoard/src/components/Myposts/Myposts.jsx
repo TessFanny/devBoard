@@ -18,7 +18,7 @@ const MyPosts = () => {
   return (
     <Flex
       w={isSmallerThan1000 ? '100%' : '98%'}
-      h="80%"
+      h="80vh"
       mt={10}
       bgColor="gray.50"
       borderRadius="md"
