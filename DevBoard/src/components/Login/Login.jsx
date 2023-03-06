@@ -18,9 +18,10 @@ import { useState } from 'react'; // Importing useState hook
 import { useNavigate } from 'react-router-dom';
 import {changeEmailValue, changePasswordValue, login, modifyUser} from '../../features/user/user'; // Importing Redux actions
 import PasswordInput from './Password/Password';
-import Notification from "../Notification/Notification.jsx"; // Importing a custom component
+import Notification from "../Notification/Notification.jsx";
+import Email from "./Email/Email.jsx"; // Importing a custom component
 
-function Login() {
+function Login({setShowDiv, setShowLogin}) {
   const navigateto = useNavigate();
   // Use the useDispatch and useSelector hooks to access the store and dispatch actions
   const dispatch = useDispatch();
@@ -80,48 +81,55 @@ function Login() {
     }, 500);
   };
 
+  const handleRegister = () => {
+    setShowDiv(true);
+    setShowLogin(false);
+  }
   // Render the login form using Chakra-UI components
   return (
     <Flex
-      w="100%"
-      h="100%"
+      w={["100%", "100%", "100%", "452px"]}
+      h="100vh"
       align="center"
-      justify="center"
+      justify="space-around"
+      bgColor="rgba(247, 250, 252, 0.8)"
+      py={[0, 0, 12, 12]} px={[0, 0, 6, 6]}
+      flexDirection="column"
     >
-      <Box w="40%" h="70%" display="flex" justifyContent="space-around" alignItems="center" bgColor="gray.50" flexDirection="column" p="6" borderRadius="md" boxShadow="md">
-        <Stack align="center">
-          <Heading fontSize="4xl" textAlign="center">
-            Sign In
-          </Heading>
-          <Text fontSize="lg" color="gray.600" textAlign="center">
-            to get acces to your Dashboard 📊
-          </Text>
-        </Stack>
-        <Box w="85%" h="70%" display="flex" justifyContent="center" borderRadius="md" boxShadow="lg" padding="4" bgColor="white">
+      <Stack align="center">
+        <Heading fontSize="4xl" textAlign="center">
+          Sign In
+        </Heading>
+        <Text fontSize="lg" color="gray.600" textAlign="center">
+          to get acces to your Dashboard 📊
+        </Text>
+      </Stack>
+      <Box w="100%" h="70%" display="flex" justifyContent="space-around" alignItems="center" bgColor="gray.50" flexDirection="column" borderRadius="md" boxShadow="md">
+
+        <Box w="90%" h="85%" display="flex" justifyContent="center">
           <FormControl isInvalid={!isEmailValid || !isPasswordValid} w="80%" h="100%" display="flex" flexDirection="column" justifyContent="space-around">
-            <FormLabel>Email address</FormLabel>
-            <Input
-              type="email"
-              placeholder="Devboarduser@email.com"
-              value={email}
-              onChange={handleEmailChange}
-              required
-            />
-            {!isEmailValid && (
-            <FormErrorMessage>Email is required.</FormErrorMessage>
-            )}
-            <FormLabel>Password</FormLabel>
-            <PasswordInput value={password} onChange={handlePasswordChange} />
-            {' '}
-            {/* Use a custom password input component */}
-            {!isPasswordValid && (
-            <FormErrorMessage>Password is required.</FormErrorMessage>
-            )}
+            <Box>
+              <Email />
+              {!isEmailValid && (
+                  <FormErrorMessage>Email is required.</FormErrorMessage>
+              )}
+            </Box>
+
+            <Box>
+              <PasswordInput />
+              {' '}
+              {/* Use a custom password input component */}
+              {!isPasswordValid && (
+                  <FormErrorMessage>Password is required.</FormErrorMessage>
+              )}
+            </Box>
+
             <Button
               mt={4}
               colorScheme="blue"
               type="submit"
               width="100%"
+              size="lg"
               display="flex"
               onClick={handleSubmit}
               isLoading={isLoading}
@@ -132,7 +140,7 @@ function Login() {
             <Text align="center">
               You don't have an account ?
               {' '}
-              <Link href="/register" color="blue.400">
+              <Link onClick={handleRegister} color="blue.400">
                 Register here
               </Link>
             </Text>

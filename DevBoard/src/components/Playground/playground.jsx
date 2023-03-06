@@ -6,6 +6,8 @@ import { javascript } from '@codemirror/lang-javascript';
 import {html} from '@codemirror/lang-html'
 import { css } from '@codemirror/lang-css';
 import { okaidia } from '@uiw/codemirror-theme-okaidia';
+import { Button } from '@chakra-ui/react';
+import { FaCopy } from 'react-icons/fa';
 
 function Playground() {
   const [htmldata, setHtml] = useLocalStorage('html', '')
@@ -27,11 +29,17 @@ function Playground() {
     return () => clearTimeout(timeout)
   }, [htmldata, cssdata, js])
 
+  const copyToClipboard= (editor) => {
+    navigator.clipboard.writeText(editor);
+
+  };
+
   return (
     <>
       <div className="pane">
        <div className='top-pane'>
-        <CodeMirror
+       <div>
+       <CodeMirror
           value={js}
           placeholder='Please enter the JavaScript code.'
           height="100%"
@@ -40,26 +48,37 @@ function Playground() {
           extensions={[javascript({ jsx: true })]}      
           onChange={setJs}
         />
-        <CodeMirror
-          value={htmldata}
-          placeholder='Please enter the Html code.'
-          height="100%"
-          width="400px"
-          theme={okaidia}
-          extensions={[html({
-            matchClosingTags: true
-          })]}      
-          onChange={setHtml}
-        />
-        <CodeMirror
-          placeholder='Please enter the Css code.'
-          value={cssdata}
-          height="100%"
-          width="400px"
-          theme={okaidia}
-          extensions={[css()]}    
-          onChange={setCss}
-        />
+        <Button onClick={() => copyToClipboard(js)}><FaCopy />  Copy
+        </Button>
+        </div>
+        <div>
+          <CodeMirror
+            value={htmldata}
+            placeholder='Please enter the Html code.'
+            height="100%"
+            width="400px"
+            theme={okaidia}
+            extensions={[html({
+              matchClosingTags: true
+            })]}      
+            onChange={setHtml}
+          />
+          <Button onClick={() => copyToClipboard(htmldata)}> <FaCopy /> Copy</Button>
+        </div>
+        
+        <div>
+          <CodeMirror
+              placeholder='Please enter the Css code.'
+              value={cssdata}
+              height="100%"
+              width="400px"
+              theme={okaidia}
+              extensions={[css()]}    
+              onChange={setCss}
+            />
+            <Button onClick={() => copyToClipboard(cssdata)}> <FaCopy /> Copy</Button>
+        </div>
+          
         </div>
         <div className="botom-pane">
         <iframe

@@ -27,6 +27,7 @@ import {
 import { BsStackOverflow } from 'react-icons/bs';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
+import { Badge } from '@chakra-ui/react'
 
 const Sidebar = ({ isOpen, setIsLoading }) => {
   // Destructure the isOpen property from the useDisclosure hook
@@ -94,7 +95,8 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
             setActiveRoute('/dashboard')
           }}
         >
-          <Text pl="2">Dashboard</Text>
+          <Text pl="2">Dashboard <Badge colorScheme='purple'>v2</Badge></Text>
+          
         </Button>
         <Button
           variant="ghost"
@@ -229,7 +231,7 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
             setActiveRoute('/kanban')
           }}
         >
-          <Text pl="2">Kanban</Text>
+          <Text pl="2">Kanban <Badge colorScheme='purple'>v2</Badge></Text>
         </Button>
         <Link to="/likes">
         <Button

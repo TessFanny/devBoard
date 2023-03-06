@@ -24,9 +24,9 @@ import BurgerMenu from '../BurgerMenu/BurgerMenu.jsx';
 import PostForm from '../PostForm/PostForm.jsx';
 import Posts from '../posts/Posts';
 import MyPosts from '../Myposts/Myposts';
-
 import Likes from "../Likes/Likes.jsx";
 import PostEdit from '../Myposts/Postedit.jsx';
+import Kanban from '../Kanban/Kanban';
 
 // App component
 export default function App() {
@@ -107,6 +107,7 @@ export default function App() {
             <Route path="/playground" element={<Playground />} />
             <Route path="/addpost" element={<PostForm />} />
             <Route path="/likes" element={<Likes />} />
+            <Route path="/kanban" element={<Kanban />} />            
             <Route path="/editpost/:postId" element={<PostEdit />} />
           </Routes>
         )}
