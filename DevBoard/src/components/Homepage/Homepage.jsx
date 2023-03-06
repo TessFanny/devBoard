@@ -164,7 +164,7 @@ function Homepage() {
               >
               <Lottie
                   animationData={login}
-                  style={{ width: '500px', height: '100%', opacity: '0.9' }}/>
+                  style={{ width: '500px', height: '100%', opacity: '0.8' }}/>
               </motion.div>
               </Flex>
           )}
