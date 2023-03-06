@@ -249,22 +249,6 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
           <Text pl="2">Likes</Text>
         </Button>
         </Link>
-        <Link to="/organizations">
-          <Button
-              variant="ghost"
-              mb="4"
-              leftIcon={
-                <FaUser color={activeRoute === '/organisation' ? 'blue' : 'gray'} />
-              }
-              fontWeight="400"
-              onClick={() => {
-                handleLinkClick();
-                setActiveRoute('/organization')
-              }}
-          >
-            <Text pl="2">Organizations</Text>
-          </Button>
-        </Link>
         <Link to="/profile">
           <Button
             variant="ghost"

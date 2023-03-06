@@ -13,7 +13,7 @@ const MyPosts = () => {
 
   useEffect(() => {
     dispatch(getUserPosts(user));
-  }, []);
+  }, [posts]);
 
   return (
     <Flex
@@ -37,7 +37,7 @@ const MyPosts = () => {
                     username={post.username}
                     date={new Date(post.created_at).toLocaleDateString()} // format date
                     like={post.like}
-                    id={post.id}
+                    postId={post.id}
                   />
 
           ))

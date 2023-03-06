@@ -95,6 +95,7 @@ function Homepage() {
 
             <Text fontSize="lg"
                   color="gray.300">
+
             Welcome to DevBoard, the central hub for all development needs! 
             </Text>
             <Text fontSize="lg"

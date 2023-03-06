@@ -105,7 +105,6 @@ export default function App() {
             <Route path="/homepage" element={<Homepage />} />
             <Route path="/stackoverflow" element={<StackOverflowSearch />} />
             <Route path="/playground" element={<Playground />} />
-            <Route path="/organizations" element={<Organizations />} />
             <Route path="/addpost" element={<PostForm />} />
             <Route path="/likes" element={<Likes />} />
             <Route path="/kanban" element={<Kanban />} />            

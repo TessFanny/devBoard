@@ -34,6 +34,10 @@ function Login({setShowDiv, setShowLogin}) {
   const [isEmailValid, setIsEmailValid] = useState(true);
   const [isPasswordValid, setPasswordValid] = useState(true);
 
+  if(status === true) {
+    navigateto('/repositories');
+  }
+
   // Event handler for email input change
   const handleEmailChange = (evt) => {
     dispatch(changeEmailValue(evt.target.value));
@@ -70,13 +74,10 @@ function Login({setShowDiv, setShowLogin}) {
     dispatch(login({ email, password }));
     setTimeout(() => {
       setIsLoading(false);
-      if(status === true) {
-        navigateto('/repositories');
-      }
       setNotification(true);
       setTimeout(() => {
         setNotification(false);
-      }, 100); // Masquer la notification après 3 secondes
+      }, 30000); // Masquer la notification après 3 secondes
     }, 500);
   };
 

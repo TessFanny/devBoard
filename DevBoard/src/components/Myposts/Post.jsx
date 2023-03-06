@@ -1,61 +1,40 @@
 import React from 'react'
 import {Card, CardHeader, CardBody, CardFooter, IconButton} from '@chakra-ui/react'
 import { Heading } from '@chakra-ui/react'
-import { Stack, HStack, VStack } from '@chakra-ui/react'
 import { Box } from '@chakra-ui/react'
 import { Text } from '@chakra-ui/react'
 import { Avatar} from '@chakra-ui/react'
-import { Button, ButtonGroup } from '@chakra-ui/react'
 import { useState } from 'react'
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import { BiLike } from 'react-icons/bi';
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {FaEdit} from "react-icons/fa";
+import {RiDeleteBin6Line} from 'react-icons/ri';
+import {deletePost} from "../../features/Post/post.js";
 
-function Post({title,content, like, date, imageuser, username, id}) {
-    
+function Post({title,content, like, date, imageuser, username, postId}) {
+    const navigateto = useNavigate();
     const [isLoading, setIsLoading] = useState(false);
-    const handleSubmit = (evt) => {
-        const dispatch = useDispatch();
-        evt.preventDefault();
-        if (isLoading) return;
-        setIsLoading(true);
-        dispatch(modifyUser({ user }));
-        setTimeout(() => {
-            setIsLoading(false);
-            setNotification(true);
-            setTimeout(() => {
-            setNotification(false);
-          }, 100); // Masquer la notification après 3 secondes
-        }, 500);
-    };
+    const { id } = useSelector((state) => state.login.user);
+    const { posts } = useSelector((state) => state.login);
+    const dispatch = useDispatch();
     const VITE_BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
-    // const dispatch = useDispatch();
-    // const token = useSelector((state) => state.token);
-    // const loggedInUserId = useSelector((state) => state.user._id);
-
-    // const patchLike = async () => {
-    //   const response = await fetch(`http://localhost:3001/posts/${postId}/like`, {
-    //     method: "PATCH",
-    //     headers: {
-    //       Authorization: `Bearer ${token}`,
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify({ userId: loggedInUserId }),
-    //   });
-    //   const updatedPost = await response.json();
-    //   dispatch(setPost({ post: updatedPost }))
+console.log(posts);
+    const handleDelete = () => {
+        dispatch(deletePost({ postId, id }));
+        posts.filter((item) => item.id !== postId);
+    }
 
     return (
     <Card mb="5" boxShadow="md">
         <CardHeader w="100%" pb="0">
             <Box display="flex" alignItems="center" w="100%" mb="3">
                 <Avatar name={username} src={`${VITE_BACKEND_URL}/images/${imageuser}`}/>
-                <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center">
+                <Box display="flex" flexDirection="column" justifyContent="center" alignItems="flex-start">
                     <Text fontSize="sm" ml="3">{username}</Text>
-                    <Text fontSize="sm" ml="3">Date : {date} </Text>
+                    <Text fontSize="sm" ml="3">{date} </Text>
                 </Box>
 
             </Box>
@@ -63,7 +42,7 @@ function Post({title,content, like, date, imageuser, username, id}) {
             <Heading size='md'>{title}</Heading>
         </CardHeader>
         <CardBody pt="0">
-            {/* <Stack divider={<StackDivider />} spacing='4'> */}
+
             <Box>
                 <Text pt='2' fontSize='sm'>
                     <div> 
@@ -71,12 +50,13 @@ function Post({title,content, like, date, imageuser, username, id}) {
                     </div>
                 </Text>
             </Box>
-            <Box mt="10" display="flex" alignItems="center">
+            <Box mt="10" display="flex" alignItems="center" justifyContent="flex-start" gap="2">
                 <BiLike />
                 <Text ml="1">{like}</Text>
-                    <Link to={`/editpost/${id}`}>
+                    <Link to={`/editpost/${postId}`}>
                         <IconButton icon={<FaEdit />} aria-label="Edit" />
                     </Link>
+                        <IconButton icon={<RiDeleteBin6Line />} aria-label="Edit" onClick={handleDelete} />
 
             </Box>
 
