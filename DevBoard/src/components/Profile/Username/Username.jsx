@@ -14,8 +14,13 @@ function Username() {
 
   return (
     <>
-      <Text pl="0" mt="10">Username</Text>
-      <Input variant="filled" placeholder="Last name" mt="5" value={username} onChange={handleUsernameChange} />
+      <Text pl="0" mt="10" color="#BCD2FF" fontWeight="600" >Username</Text>
+      <Input variant="filled"
+             placeholder="Last name"
+             mt="5"
+             value={username}
+             onChange={handleUsernameChange}
+             bgColor="rgba(219, 231, 255, 0.6)" fontWeight="600" color="#505E7B" />
     </>
   );
 }

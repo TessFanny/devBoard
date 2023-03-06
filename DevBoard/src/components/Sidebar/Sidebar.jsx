@@ -59,17 +59,17 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
       overflowY="auto"
       transition="ease-in-out .2s"
       transform={isOpen ? 'translateX(0)' : '-translateX(100%)'}
-      bgColor="white"
-      borderRadius="md"
+      bgColor="rgba(219, 231, 255, 0.2)" style={{'backdrop-filter': 'blur(15px)'}}
+      zIndex={1}
+      borderRadius="lg"
       w={['100%']}
     >
       <Flex p="4" alignItems="center" justify="center">
         <Text
-          fontSize="xl"
-          fontWeight="600"
+          fontSize="30px"
+          fontWeight="700"
           mt="5"
-          bgGradient="linear(to-l, #373B44, #4286f4)"
-          bgClip="text"
+          color="#BCD2FF"
         >
           DevBoard
         </Text>
@@ -86,7 +86,7 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
           mb="2"
           leftIcon={
             <FaChartLine
-              color={activeRoute === '/dashboard' ? 'blue' : 'gray'}
+              color={activeRoute === '/dashboard' ? 'blue' : '#BCD2FF'}
             />
           }
           fontWeight="400"
@@ -95,20 +95,20 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
             setActiveRoute('/dashboard')
           }}
         >
-          <Text pl="2">Dashboard <Badge colorScheme='purple'>v2</Badge></Text>
+          <Text pl="2" color="#BCD2FF" fontWeight="600">Dashboard <Badge colorScheme='purple'>v2</Badge></Text>
           
         </Button>
         <Button
           variant="ghost"
           mb="4"
           leftIcon={
-            <FaNewspaper color={activeRoute === '/news' ? 'blue' : 'gray'} />
+            <FaNewspaper color={activeRoute === '/news' ? 'blue' : '#BCD2FF'} />
           }
           onClick={onSubToggle}
           // onClick={() => setActiveRoute('/news')}
           fontWeight="400"
         >
-          <Text pl="2">News</Text>
+          <Text pl="2" color="#BCD2FF">News</Text>
         </Button>
 
         {/* Render the Add Post button inside a slide fade */}
@@ -124,7 +124,7 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
                   onClick={handleLinkClick}
                   fontWeight="400"
                 >
-                  <Text pl="2">Add Post</Text>
+                  <Text pl="2" fontWeight="600">Add Post</Text>
                 </Button>
                 </Link>
                 <Link to="/feed">
@@ -171,7 +171,7 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
             mb="4"
             leftIcon={
               <FaFolderOpen
-                color={activeRoute === '/repositories' ? 'blue' : 'gray'}
+                color={activeRoute === '/repositories' ? 'blue' : '#BCD2FF'}
               />
             }
             fontWeight="400"
@@ -180,7 +180,7 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
               setActiveRoute('/repositories')
             }}
           >
-            <Text pl="2">Your Projects</Text>
+            <Text pl="2" color="#BCD2FF" fontWeight="600">Your Projects</Text>
           </Button>
         </Link>
         <Link to="/stackoverflow">
@@ -189,7 +189,7 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
             mb="4"
             leftIcon={
               <BsStackOverflow
-                color={activeRoute === '/stackoverflow' ? 'blue' : 'gray'}
+                color={activeRoute === '/stackoverflow' ? 'blue' : '#BCD2FF'}
               />
             }
             fontWeight="400"
@@ -198,7 +198,7 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
               setActiveRoute('/stackoverflow')
             }}
           >
-            <Text pl="2">StackOverflow</Text>
+            <Text pl="2" color="#BCD2FF" fontWeight="600">StackOverflow</Text>
           </Button>
         </Link>
         <Link to="/playground">
@@ -207,7 +207,7 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
             mb="4"
             leftIcon={
               <BsStackOverflow
-                color={activeRoute === '/playground' ? 'blue' : 'gray'}
+                color={activeRoute === '/playground' ? 'blue' : '#BCD2FF'}
               />
             }
             fontWeight="400"
@@ -216,14 +216,14 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
               setActiveRoute('/playground')
             }}
           >
-            <Text pl="2">Playground</Text>
+            <Text pl="2" color="#BCD2FF" fontWeight="600">Playground</Text>
           </Button>
         </Link>
         <Button
           variant="ghost"
           mb="4"
           leftIcon={
-            <FaColumns color={activeRoute === '/kanban' ? 'blue' : 'gray'} />
+            <FaColumns color={activeRoute === '/kanban' ? 'blue' : '#BCD2FF'} />
           }
           fontWeight="400"
           onClick={() => {
@@ -231,14 +231,14 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
             setActiveRoute('/kanban')
           }}
         >
-          <Text pl="2">Kanban <Badge colorScheme='purple'>v2</Badge></Text>
+          <Text pl="2" color="#BCD2FF" fontWeight="600">Kanban <Badge colorScheme='purple'>v2</Badge></Text>
         </Button>
         <Link to="/likes">
         <Button
           variant="ghost"
           mb="4"
           leftIcon={
-            <FaThumbsUp color={activeRoute === '/likes' ? 'blue' : 'gray'} />
+            <FaThumbsUp color={activeRoute === '/likes' ? 'blue' : '#BCD2FF'} />
           }
           fontWeight="400"
           onClick={() => {
@@ -246,7 +246,7 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
             setActiveRoute('/likes')
           }}
         >
-          <Text pl="2">Likes</Text>
+          <Text pl="2" color="#BCD2FF" fontWeight="600">Likes</Text>
         </Button>
         </Link>
         <Link to="/profile">
@@ -254,7 +254,7 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
             variant="ghost"
             mb="4"
             leftIcon={
-              <FaUser color={activeRoute === '/profile' ? 'blue' : 'gray'} />
+              <FaUser color={activeRoute === '/profile' ? '#BCD2FF' : '#BCD2FF'} />
             }
             fontWeight="400"
             onClick={() => {
@@ -262,7 +262,7 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
               setActiveRoute('/profile')
             }}
           >
-            <Text pl="2">Profile</Text>
+            <Text pl="2" color="#BCD2FF" fontWeight="600">Profile</Text>
           </Button>
         </Link>
       </Box>

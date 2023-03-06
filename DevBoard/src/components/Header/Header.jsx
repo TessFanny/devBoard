@@ -43,11 +43,12 @@ function Header() {
       p="4" // Sets the padding of the header
       pr="10" // Sets the right padding of the header
       pl="10" // Sets the left padding of the header
-      bgColor="white" // Sets the background color of the header
+      bgColor="rgba(219, 231, 255, 0.2)" style={{'backdrop-filter': 'blur(15px)'}} // Sets the background color of the header
       alignItems="center" // Sets the vertical alignment of the header's children
       justifyContent="space-between" // Sets the horizontal alignment of the header's children
-      boxShadow="base"
+      boxShadow="lg"
       borderRadius="md"
+      zIndex={1}
     >
       <Box display="flex" alignItems="center" gap="2">
       {isSmallerThan1000 && (
@@ -60,6 +61,7 @@ function Header() {
           <Menu>
             <MenuButton
               as={IconButton}
+              bgColor="rgba(219, 231, 255, 0.5)"
               icon={
                 <>
                   {isSmallerThan1000 ? (
@@ -68,7 +70,7 @@ function Header() {
                       </Avatar>
                   ) : (
                       <>
-                      <Text pr="0.5rem">{username}</Text>
+                      <Text pr="0.5rem" color="#2B3447" fontWeight="600">{username}</Text>
                     <Avatar name={username} size='sm' src={`${VITE_BACKEND_URL}/images/${image_path}`}>
                     <AvatarBadge boxSize='1.25em' bg='green.500' />
                     </Avatar>
@@ -96,7 +98,7 @@ function Header() {
             <Text>Sign In</Text>
           </Link>
         )}
-        <IconButton aria-label="Settings" icon={<IoMdSettings />} />
+        <IconButton aria-label="Settings" bgColor="rgba(219, 231, 255, 0.5)" color="#2B3447" icon={<IoMdSettings />} />
       </Box>
     </Flex>
   );

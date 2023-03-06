@@ -81,7 +81,7 @@ function Profile() {
 
   return (
     <Flex w="98%" mt={['5', '5', '10']} h={['100%', '100%', '100%', '80%', '80%']}>
-      <Box w="100%" display="flex" flexDirection={['column', 'column', 'column', 'row']} bgColor="white" borderRadius="md" boxShadow="md">
+      <Box w="100%" display="flex" flexDirection={['column', 'column', 'column', 'row']} bgColor="rgba(219, 231, 255, 0.2)" style={{'backdrop-filter': 'blur(15px)'}} borderRadius="md" boxShadow="lg" zIndex={1}>
         <Box w={['100%', '100%', '100%', '35%', '20%']} pr={['0', '0', '0', '0', '10']}>
           <Box display="flex" flexDirection="column" alignItems={['center', 'center', 'center', 'flex-start']} p={['3','10']}>
             <Image
@@ -112,7 +112,7 @@ function Profile() {
             {!isSmallerThan1000 && (
                 <>
                   <Divider bgColor='gray.300' h="1px" mt="3.5" mb="3.5" />
-                  <Text fontWeight="500" color="gray.600">Role</Text>
+                  <Text color="#BCD2FF" fontWeight="600">Role</Text>
                 </>
             )}
 
@@ -131,8 +131,8 @@ function Profile() {
                 <>
                   <Divider bgColor='gray.300' h="1px" mt="3.5" mb="3.5" />
 
-                  <Text fontWeight="500" color="gray.600">Account</Text>
-                  <Button colorScheme="red" variant="outline" mt="3.5" onClick={onOpen}>Delete</Button>
+                  <Text color="#BCD2FF" fontWeight="600">Account</Text>
+                  <Button colorScheme="red" mt="3.5" onClick={onOpen}>Delete</Button>
                 </>
             )}
 
@@ -170,7 +170,7 @@ function Profile() {
             </Box>
             <Box w="100%" display="flex" justifyContent="center" pl={['3', '3', '3', '0']} pr={['3', '3', '3', '10']} pb={['3', '3', '3', '0']}>
               <Box w="100%">
-                <Button mt="10" w="100%" colorScheme="linkedin" onClick={handleSubmit} isLoading={isLoading}>Submit</Button>
+                <Button mt="10" w="100%" style={{backgroundColor: '#BCD2FF'}} color="#2B3447" onClick={handleSubmit} isLoading={isLoading}>Submit</Button>
               </Box>
             </Box>
             </Box>
