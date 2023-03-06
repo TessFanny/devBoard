@@ -32,7 +32,7 @@ const Feed = () => {
         console.error(error)
       }
     }
-    useEffect(() => {fetchData()},[feeds])
+    useEffect(() => {fetchData()},[])
 
 // useEffect(() => {
 //     if (token) {
