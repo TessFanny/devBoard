@@ -31,8 +31,10 @@ import {
   registerUser,
 } from '../../features/register/register';
 import { getUserGithubData } from '../../features/user/user';
+import Email from "../Login/Email/Email.jsx";
+import PasswordInput from "../Login/Password/Password.jsx";
 // Hooks for state management
-function Register() {
+function Register({setShowDiv, setShowLogin}) {
   const [rerender, setRerender] = useState(false);
   const CLIENT_ID = import.meta.env.VITE_CLIENT_ID;
   const VITE_BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
@@ -131,157 +133,141 @@ function Register() {
       `https://github.com/login/oauth/authorize?client_id=${CLIENT_ID}`,
     );
   };
+
+  const handleLogin = () => {
+    setShowDiv(false);
+    setShowLogin(true);
+  }
   return (
-    <Flex
-      align="center"
-      justify="center"
-      bg={useColorModeValue('gray.50', 'gray.800')}
-      h="100%"
-      w="100%"
-    >
-      <Stack spacing={8} mx="1" maxW="lg" py={12} px={6} w="100%">
+      <Flex
+          w={["100%", "100%", "100%", "452px"]}
+          h="100vh"
+          align="center"
+          justify="space-around"
+          bgColor="rgba(247, 250, 252, 0.8)"
+          py={[0, 0, 12, 12]} px={[0, 0, 6, 6]}
+          flexDirection="column"
+      >
         <Stack align="center">
           <Heading fontSize="4xl" textAlign="center">
-            Sign up
+            Sign In
           </Heading>
-          <Text fontSize="lg" color="gray.600">
+          <Text fontSize="lg" color="gray.600" textAlign="center">
             to enjoy all of our cool features ✌️
           </Text>
         </Stack>
-        <Box
-          w="100%"
-          rounded="lg"
-          bg={useColorModeValue('white', 'gray.700')}
-          boxShadow="lg"
-          p={8}
-        >
-          <Stack spacing={4}>
-            <FormControl id="firstName" isRequired isInvalid={!isUsernameValid}>
-              <FormLabel mx="auto">Username</FormLabel>
-              {/* // Utilisation de handleInputChange pour créer une fonction de rappel onChange pour les composants d'entrée
+        <Box w="100%" h="70%" display="flex" justifyContent="space-around" alignItems="center" bgColor="gray.50" flexDirection="column" borderRadius="md" boxShadow="md">
+          <Box w="90%" h="85%" display="flex" justifyContent="center">
+            <Stack spacing={4} w="80%" h="100%">
+              <FormControl id="firstName" isRequired isInvalid={!isUsernameValid} >
+                <FormLabel mx="auto">Username</FormLabel>
+                {/* // Utilisation de handleInputChange pour créer une fonction de rappel onChange pour les composants d'entrée
                   // La valeur de l'entrée est extraite de l'événement et utilisée pour créer une action Redux qui est envoyée via le store */}
-              <Input
-                type="text"
-                onChange={handleInputChange(dispatch, changeUsernameValue)}
-                mr="32"
-              />
-              {!isUsernameValid && (
-                <FormErrorMessage>Username is required.</FormErrorMessage>
-              )}
-            </FormControl>
-
-            <FormControl id="email" isRequired isInvalid={!isEmailValid}>
-              <FormLabel>Email address</FormLabel>
-              <Input
-                type="email"
-                placeholder="Devboarduser@email.com"
-                value={email}
-                onChange={handleInputChange(dispatch, changeEmailValue)}
-                required
-              />
-              {!isEmailValid && (
-                <FormErrorMessage>Email is invalid.</FormErrorMessage>
-              )}
-            </FormControl>
-
-            <FormControl id="password" isRequired isInvalid={!isPasswordValid}>
-              <FormLabel>Password</FormLabel>
-              <InputGroup>
                 <Input
-                  type={showPassword ? 'text' : 'password'}
-                  onChange={handleInputChange(dispatch, changePasswordValue)}
-                />
-                <InputRightElement h="full">
-                  <Button
-                    variant="ghost"
-                    onClick={() => setShowPassword((showPassword) => !showPassword)}
-                  >
-                    {showPassword ? <ViewIcon /> : <ViewOffIcon />}
-                  </Button>
-                </InputRightElement>
-              </InputGroup>
+                    type="text"
+                    onChange={handleInputChange(dispatch, changeUsernameValue)}
 
-              {!isPasswordValid && (
-                // eslint-disable-next-line max-len
-                <FormErrorMessage>
-                  Your password must contain at least one uppercase letter, one
-                  number, and one special character, and must not be empty and
-                  have min 8 characters.
-                </FormErrorMessage>
-              )}
-            </FormControl>
-            <FormControl
-              id="confirmpassword"
-              isRequired
-              isInvalid={!isPasswordConfirmed}
-            >
-              <FormLabel>Confirm Password</FormLabel>
-              <InputGroup>
+                />
+                {!isUsernameValid && (
+                    <FormErrorMessage>Username is required.</FormErrorMessage>
+                )}
+              </FormControl>
+
+              <FormControl id="email" isRequired isInvalid={!isEmailValid}>
+                <FormLabel>Email address</FormLabel>
                 <Input
-                  type={showPassword ? 'text' : 'password'}
-                  onChange={handleInputChange(
-                    dispatch,
-                    changeConfirmPasswordValue,
-                  )}
+                    type="email"
+                    placeholder="Devboarduser@email.com"
+                    value={email}
+                    onChange={handleInputChange(dispatch, changeEmailValue)}
+                    required
                 />
-                <InputRightElement h="full">
-                  <Button
-                    variant="ghost"
-                    onClick={() => setShowPassword((showPassword) => !showPassword)}
-                  >
-                    {showPassword ? <ViewIcon /> : <ViewOffIcon />}
-                  </Button>
-                </InputRightElement>
-              </InputGroup>
-              {!isPasswordConfirmed && (
-                <FormErrorMessage>Password does not match.</FormErrorMessage>
-              )}
-            </FormControl>
-            <Stack spacing={10} pt={2}>
-              <Button
-                onClick={handleSubmit}
-                loadingText="Submitting"
-                size="lg"
-                bg="blue.400"
-                color="white"
-                _hover={{
-                  bg: 'blue.500',
-                  border: 'transparent',
-                }}
-              >
-                Sign up
-              </Button>
+                {!isEmailValid && (
+                    <FormErrorMessage>Email is invalid.</FormErrorMessage>
+                )}
+              </FormControl>
 
-              <Button
-                loadingText="Submitting"
-                bg="black"
-                size="lg"
-                color="white"
-                leftIcon={<FaGithub />}
-                _hover={{
-                  bg: 'black.500',
-                  border: 'transparent',
-                }}
-                onClick={HandleGitHubAuth}
+              <FormControl id="password" isRequired isInvalid={!isPasswordValid}>
+                <FormLabel>Password</FormLabel>
+                <InputGroup>
+                  <Input
+                      type={showPassword ? 'text' : 'password'}
+                      onChange={handleInputChange(dispatch, changePasswordValue)}
+                  />
+                  <InputRightElement h="full">
+                    <Button
+                        variant="ghost"
+                        onClick={() => setShowPassword((showPassword) => !showPassword)}
+                    >
+                      {showPassword ? <ViewIcon /> : <ViewOffIcon />}
+                    </Button>
+                  </InputRightElement>
+                </InputGroup>
+
+                {!isPasswordValid && (
+                    // eslint-disable-next-line max-len
+                    <FormErrorMessage>
+                      Your password must contain at least one uppercase letter, one
+                      number, and one special character, and must not be empty and
+                      have min 8 characters.
+                    </FormErrorMessage>
+                )}
+              </FormControl>
+              <FormControl
+                  id="confirmpassword"
+                  isRequired
+                  isInvalid={!isPasswordConfirmed}
               >
-                <Center>                
-                  <Text>Sign in with Github</Text>
-                </Center>
-              </Button>
+                <FormLabel>Confirm Password</FormLabel>
+                <InputGroup>
+                  <Input
+                      type={showPassword ? 'text' : 'password'}
+                      onChange={handleInputChange(
+                          dispatch,
+                          changeConfirmPasswordValue,
+                      )}
+                  />
+                  <InputRightElement h="full">
+                    <Button
+                        variant="ghost"
+                        onClick={() => setShowPassword((showPassword) => !showPassword)}
+                    >
+                      {showPassword ? <ViewIcon /> : <ViewOffIcon />}
+                    </Button>
+                  </InputRightElement>
+                </InputGroup>
+                {!isPasswordConfirmed && (
+                    <FormErrorMessage>Password does not match.</FormErrorMessage>
+                )}
+              </FormControl>
+              <Stack spacing={10} pt={2}>
+                <Button
+                    onClick={handleSubmit}
+                    loadingText="Submitting"
+                    size="lg"
+                    bg="blue.400"
+                    color="white"
+                    _hover={{
+                      bg: 'blue.500',
+                      border: 'transparent',
+                    }}
+                >
+                  Sign up
+                </Button>
+              </Stack>
+              <Stack pt={6}>
+                <Text align="center">
+                  Already a user?
+                  {' '}
+                  <Link onClick={handleLogin} color="blue.400">
+                    Login
+                  </Link>
+                </Text>
+              </Stack>
             </Stack>
-            <Stack pt={6}>
-              <Text align="center">
-                Already a user?
-                {' '}
-                <Link href="/login" color="blue.400">
-                  Login
-                </Link>
-              </Text>
-            </Stack>
-          </Stack>
+          </Box>
         </Box>
-      </Stack>
-    </Flex>
+      </Flex>
   );
 }
 export default Register;

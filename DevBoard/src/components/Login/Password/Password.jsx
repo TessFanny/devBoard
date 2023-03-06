@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  Input, InputGroup, InputRightElement, Button,
+    Input, InputGroup, InputRightElement, Button, FormLabel, Box,
 } from '@chakra-ui/react';
 import { useDispatch, useSelector } from 'react-redux';
 import { changePasswordValue } from '../../../features/user/user';
@@ -24,22 +24,26 @@ function PasswordInput() {
   };
 
   return (
-    // render an input field with an eye icon that toggles password visibility when clicked
-    <InputGroup size="md">
-      <Input
-        pr="4.5rem"
-        type={show ? 'text' : 'password'}
-        placeholder="Enter password"
-        value={password}
-        onChange={handleChange}
-        required
-      />
-      <InputRightElement width="4.5rem">
-        <Button h="1.75rem" size="sm" onClick={handleClick} >
-          {show ? 'Hide' : 'Show'}
-        </Button>
-      </InputRightElement>
-    </InputGroup>
+
+      <Box>
+          <FormLabel>Password</FormLabel>
+          <InputGroup size="md">
+              <Input
+                  pr="4.5rem"
+                  type={show ? 'text' : 'password'}
+                  placeholder="Enter password"
+                  value={password}
+                  onChange={handleChange}
+                  required
+              />
+              <InputRightElement width="4.5rem">
+                  <Button h="1.75rem" size="sm" onClick={handleClick} >
+                      {show ? 'Hide' : 'Show'}
+                  </Button>
+              </InputRightElement>
+          </InputGroup>
+      </Box>
+
   );
 }
 

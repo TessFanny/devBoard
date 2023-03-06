@@ -1,13 +1,15 @@
-import {Box, Button, Flex, Heading, Image, Text} from '@chakra-ui/react';
+import {Box, Button, Flex, Heading, Image, Text, useMediaQuery} from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import Lottie from 'lottie-react';
 import homepage from '../../assets/homepage.json';
-import blob from '../../assets/blob.svg';
+import blob from '../../assets/blobanimationBG.svg';
 import blob2 from '../../assets/blobanimation.svg';
+import login from '../../assets/security6.json';
 import Register from '../Register/Register';
 import Login from '../Login/Login';
 import { motion } from "framer-motion"
 import { useState } from 'react';
+import log from "eslint-plugin-react/lib/util/log.js";
 
 
 function Homepage() {
@@ -17,6 +19,7 @@ function Homepage() {
     const [showDiv, setShowDiv] = useState(false);
     const [showLogin, setShowLogin] = useState(false);
     const [showHomepage, setShowHomepage]= useState(true)
+    const [isSmallerThan1050] = useMediaQuery('(max-width: 1050px)');
 
     const showRegister = () => {
       setShowDiv(!showDiv);
@@ -55,6 +58,7 @@ function Homepage() {
               right="-710"
               opacity="0.1">
         </Image>
+
           {showHomepage && (
             <motion.div
                   initial={{ x:500, opacity:0 }}
@@ -100,17 +104,20 @@ function Homepage() {
                   and access key metrics and analytics 
                   all in one place.
                   Take your development to the next level with DevBoard today!"
-            </Text>                         
-            <Button onClick={showRegister}
-                    w={['150px', '150px', '200px', '150px']}
-                    mt="6" colorScheme="blue"
-            >Register
-            </Button>
-            <Button onClick={showLoginComponent}
-                    w={['150px', '150px', '200px', '150px']}
-                    mt="6" colorScheme="blue"
-            >Login
-            </Button>            
+            </Text>
+            <Box w="100%" display="flex" justifyContent="center" gap={2}>
+                <Button onClick={showRegister}
+                        w={['150px', '150px', '200px', '150px']}
+                        mt="6" colorScheme="blue"
+                >Get started
+                </Button>
+                <Button onClick={showLoginComponent}
+                        w={['150px', '150px', '200px', '150px']}
+                        mt="6" colorScheme="blue"
+                >Login
+                </Button>
+            </Box>
+
           </Box>
 
         </Box>
@@ -129,22 +136,38 @@ function Homepage() {
         )}
         {showDiv && (
                 <motion.div
-                  initial={{ x:-500, opacity:0 }}
+                  initial={{ x:-150, opacity:0 }}
                   animate={{ x:0, opacity:1 }}
+                  transition={{ duration: 0.3 }}
                   exit={{ opacity: 0 }}
                 >
-                  <Register />
+                  <Register setShowDiv={setShowDiv} setShowLogin={setShowLogin} />
                 </motion.div>
         )} 
         {showLogin && (
                 <motion.div
-                  initial={{ x:-500, opacity:0 }}
-                  animate={{ x:0, opacity:1 }}
-                  exit={{ opacity: 0 }}
+                    initial={{ x:-150, opacity:0 }}
+                    animate={{ x:0, opacity:1 }}
+                    transition={{ duration: 0.3 }}
+                    exit={{ opacity: 0 }}
                 >
-                  <Login />
+                  <Login setShowLogin={setShowLogin} setShowDiv={setShowDiv} />
                 </motion.div>
-        )}         
+        )}
+          {!showHomepage && (
+              <Flex w="100%"justifyContent="center" display={isSmallerThan1050 ? "none" : "flex"}>
+              <motion.div
+                  initial={{ opacity:0 }}
+                  animate={{ opacity:1 }}
+                  transition={{ duration: 0.3 }}
+                  exit={{ opacity: 0 }}
+              >
+              <Lottie
+                  animationData={login}
+                  style={{ width: '500px', height: '100%', opacity: '0.9' }}/>
+              </motion.div>
+              </Flex>
+          )}
       </Flex>
   );
 }
