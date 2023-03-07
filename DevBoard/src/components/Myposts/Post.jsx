@@ -13,18 +13,7 @@ import {Link, useNavigate} from "react-router-dom";
 import {FaEdit} from "react-icons/fa";
 import {RiDeleteBin6Line} from 'react-icons/ri';
 import {deletePost} from "../../features/Post/post.js";
-
-Post.propTypes = {
-    postId: PropTypes.number,
-    title: PropTypes.string,
-    content:PropTypes.string,
-    like: PropTypes.number,
-    date: PropTypes.instanceOf(Date),
-    imageuser:PropTypes.string,
-    username:PropTypes.string,
-    isLiked: PropTypes.bool,
-};
-
+import PropTypes from "prop-types";
 
 function Post({title,content, like, date, imageuser, username, postId}) {
     const navigateto = useNavigate();
@@ -76,6 +65,18 @@ console.log(posts);
         </Card>
 )
 }
+
+Post.propTypes = {
+    postId: PropTypes.number,
+    title: PropTypes.string,
+    content:PropTypes.string,
+    like: PropTypes.number,
+    date: PropTypes.instanceOf(Date),
+    imageuser:PropTypes.string,
+    username:PropTypes.string,
+    isLiked: PropTypes.bool,
+};
+
 
 export default Post
 

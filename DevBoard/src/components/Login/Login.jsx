@@ -19,7 +19,8 @@ import { useNavigate } from 'react-router-dom';
 import {changeEmailValue, changePasswordValue, login, modifyUser} from '../../features/user/user'; // Importing Redux actions
 import PasswordInput from './Password/Password';
 import Notification from "../Notification/Notification.jsx";
-import Email from "./Email/Email.jsx"; // Importing a custom component
+import Email from "./Email/Email.jsx";
+import PropTypes from "prop-types"; // Importing a custom component
 
 function Login({setShowDiv, setShowLogin}) {
   const navigateto = useNavigate();

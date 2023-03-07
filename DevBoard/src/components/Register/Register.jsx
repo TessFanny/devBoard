@@ -33,6 +33,7 @@ import {
 import { getUserGithubData } from '../../features/user/user';
 import Email from "../Login/Email/Email.jsx";
 import PasswordInput from "../Login/Password/Password.jsx";
+import PropTypes from "prop-types";
 // Hooks for state management
 function Register({setShowDiv, setShowLogin}) {
   const [rerender, setRerender] = useState(false);
