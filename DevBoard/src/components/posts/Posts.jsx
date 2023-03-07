@@ -31,7 +31,7 @@ const Posts = () => {
               zIndex={1}>
             <Box width="100%"
                  h="100%"
-                 overflowY="scroll">
+                 overflowY="auto">
             {liked_posts && posts ? (
                 posts.map((post) => (
                     <Post key={post.id}
