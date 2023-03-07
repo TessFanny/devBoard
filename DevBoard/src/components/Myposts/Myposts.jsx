@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
 import Post from './Post';
 import { Box, Flex, useMediaQuery, IconButton } from '@chakra-ui/react';
 import { getUserPosts } from '../../features/user/user.js';
-import { FaEdit } from 'react-icons/fa';
+
 const MyPosts = () => {
   const dispatch = useDispatch();
 

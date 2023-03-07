@@ -1,5 +1,5 @@
 import React from 'react'
-import {Card, CardHeader, CardBody, CardFooter, IconButton} from '@chakra-ui/react'
+import {Card, CardHeader, CardBody, IconButton} from '@chakra-ui/react'
 import { Heading } from '@chakra-ui/react'
 import { Box } from '@chakra-ui/react'
 import { Text } from '@chakra-ui/react'
@@ -13,6 +13,18 @@ import {Link, useNavigate} from "react-router-dom";
 import {FaEdit} from "react-icons/fa";
 import {RiDeleteBin6Line} from 'react-icons/ri';
 import {deletePost} from "../../features/Post/post.js";
+
+Post.propTypes = {
+    postId: PropTypes.number,
+    title: PropTypes.string,
+    content:PropTypes.string,
+    like: PropTypes.number,
+    date: PropTypes.instanceOf(Date),
+    imageuser:PropTypes.string,
+    username:PropTypes.string,
+    isLiked: PropTypes.bool,
+};
+
 
 function Post({title,content, like, date, imageuser, username, postId}) {
     const navigateto = useNavigate();
