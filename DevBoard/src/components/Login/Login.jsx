@@ -153,4 +153,9 @@ function Login({setShowDiv, setShowLogin}) {
   );
 }
 
+Login.propTypes = {
+  setShowDiv: PropTypes.func,
+  setShowLogin: PropTypes.func
+};
+
 export default Login;

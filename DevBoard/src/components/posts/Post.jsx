@@ -9,7 +9,18 @@ import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import {deleteLike, likePost} from "../../features/Post/post.js";
 import {useDispatch, useSelector} from "react-redux";
+import PropTypes from 'prop-types';
 
+Post.propTypes = {
+        postId: PropTypes.number,
+        title: PropTypes.string,
+        content:PropTypes.string,
+        like: PropTypes.number,
+        date: PropTypes.instanceOf(Date),
+        imageuser:PropTypes.string,
+        username:PropTypes.string,
+        isLiked: PropTypes.bool,
+    };
 
 function Post({postId, title, content, like, date, imageuser, username, isLiked }) {
     const VITE_BACKEND_URL = import.meta.env.VITE_BACKEND_URL;

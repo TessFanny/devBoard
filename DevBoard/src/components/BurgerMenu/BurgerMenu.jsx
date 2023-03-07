@@ -1,4 +1,4 @@
-import {chakra, Flex, IconButton, Menu, MenuButton, MenuItem, MenuList, Text} from "@chakra-ui/react";
+import {Flex, IconButton, Menu, MenuButton, MenuItem, MenuList, Text} from "@chakra-ui/react";
 import { Link } from 'react-router-dom';
 import {GiHamburgerMenu} from 'react-icons/gi';
 import {
@@ -15,7 +15,7 @@ import { BsStackOverflow } from 'react-icons/bs';
 
 import {Badge} from '@chakra-ui/react'
 
-function BurgerMenu({ isOpen, setIsLoading }) {
+function BurgerMenu() {
 
     return (
         <Flex>

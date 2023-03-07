@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Post from "../posts/Post";
 import {Box, Flex, useMediaQuery} from "@chakra-ui/react";

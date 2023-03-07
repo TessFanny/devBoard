@@ -85,7 +85,7 @@ function Playground() {
           srcDoc={srcDoc}
           title="output"
           sandbox="allow-same-origin"
-          width="300px"
+          width="400px"
           height="100%"
         />
       </div>
