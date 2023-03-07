@@ -20,7 +20,7 @@ const Posts = () => {
         }, []);
 
     return (
-        <Flex w={isSmallerThan1000 ? '100%' : '98%'}
+        <Flex w={isSmallerThan1000 ? '100%' : '70%'}
               h="80vh" mt={10}
               overflow="hidden"
               bgColor="bgPrimary"
