@@ -90,7 +90,7 @@ function Header({setIsLoading}) {
               onClick={handleButtonClick}
               p="1rem"
             />
-            <MenuList bgColor="primary" boxShadow="lg" p="1" display="flex" flexDirection="column" gap={2}>
+            <MenuList bgColor="bgPrimary" border="none" style={{'backdrop-filter': 'blur(300px)'}} boxShadow="lg" p="1" display="flex" flexDirection="column" gap={2}>
               <Link to="/profile">
                 <MenuItem bgColor="secondary" icon={<FaUserEdit />}>Profile</MenuItem>
               </Link>
