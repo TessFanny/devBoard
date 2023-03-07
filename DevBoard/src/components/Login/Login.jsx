@@ -77,7 +77,7 @@ function Login({setShowDiv, setShowLogin}) {
       setNotification(true);
       setTimeout(() => {
         setNotification(false);
-      }, 30000); // Masquer la notification après 3 secondes
+      }, 300); // Masquer la notification après 3 secondes
     }, 500);
   };
 

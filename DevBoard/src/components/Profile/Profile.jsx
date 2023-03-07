@@ -80,10 +80,27 @@ function Profile() {
   }
 
   return (
-    <Flex w="98%" mt={['5', '5', '10']} h={['100%', '100%', '100%', '80%', '80%']}>
-      <Box w="100%" display="flex" flexDirection={['column', 'column', 'column', 'row']} bgColor="bgPrimary" style={{'backdrop-filter': 'blur(15px)'}} borderRadius="md" boxShadow="lg" zIndex={1}>
-        <Box w={['100%', '100%', '100%', '35%', '20%']} pr={['0', '0', '0', '0', '10']}>
-          <Box display="flex" flexDirection="column" alignItems={['center', 'center', 'center', 'flex-start']} p={['3','10']}>
+    <Flex w="98%"
+          mt={['5', '5', '10']}
+          h={['100%', '100%', '100%', '80%', '80%']}>
+
+      <Box w="100%"
+           display="flex"
+           flexDirection={['column', 'column', 'column', 'row']}
+           bgColor="bgPrimary"
+           style={{'backdrop-filter': 'blur(15px)'}}
+           borderRadius="md"
+           boxShadow="lg"
+           zIndex={1}>
+
+        <Box w={['100%', '100%', '100%', '35%', '20%']}
+             pr={['0', '0', '0', '0', '10']}>
+
+          <Box display="flex"
+               flexDirection="column"
+               alignItems={['center', 'center', 'center', 'flex-start']}
+               p={['3','10']}>
+
             <Image
               maxW={['350px', '400px', '400xpx', '200px', '200px']}
               src={`http://tessfanny-server.eddi.cloud:8080/images/${image_path}`}
@@ -98,7 +115,7 @@ function Profile() {
               borderRadius="md"
               bg="primary"
               color="black200"
-              _hover={{ bg: "gray.400" }}
+              _hover={{ bg: "secondary" }}
               _active={{ bg: "gray.500" }}
               onClick={() => document.getElementById("fileInput").click()}
             >
@@ -118,7 +135,11 @@ function Profile() {
             )}
 
             {role && (
-              <Tag size="lg" colorScheme="telegram" borderRadius="full" mt="5">
+              <Tag size="lg"
+                   colorScheme="telegram"
+                   borderRadius="full"
+                   mt="5">
+
                 <Avatar
                   bg="telegram.500"
                   size="xs"
@@ -130,9 +151,12 @@ function Profile() {
             )}
             {!isSmallerThan1000 && (
                 <>
-                  <Divider bgColor='secondary' h="1px" mt="3.5" mb="3.5" />
+                  <Divider bgColor='secondary'
+                           h="1px" mt="3.5"
+                           mb="3.5" />
 
-                  <Text color="primary" fontWeight="600">Account</Text>
+                  <Text color="primary"
+                        fontWeight="600">Account</Text>
                   <Button colorScheme="red" mt="3.5" onClick={onOpen}>Delete</Button>
                 </>
             )}
@@ -156,9 +180,24 @@ function Profile() {
           </Box>
         </Box>
 
-        <Box w={['100%', '100%', '100%', '65%', '45%']} display="flex" pl={['0', '0', '0', '0', '100']}>
-          <Box w="100%" display="flex" flexDirection="column" alignItems="flex-end" justifyContent="flex-start" height="100%">
-            <Box display="flex" justifyContent="space-between" alignItems="flex-start" flexDirection={['column', 'column', 'column', 'row', 'row']} w="100%" pl={['3', '3', '3', '0']} pr={['3', '3', '3', '10']} >
+        <Box w={['100%', '100%', '100%', '65%', '45%']}
+             display="flex"
+             pl={['0', '0', '0', '0', '100']}>
+
+          <Box w="100%"
+               display="flex"
+               flexDirection="column"
+               alignItems="flex-end"
+               justifyContent="flex-start"
+               height="100%">
+
+            <Box display="flex"
+                 justifyContent="space-between"
+                 alignItems="flex-start"
+                 flexDirection={['column', 'column', 'column', 'row', 'row']}
+                 w="100%" pl={['3', '3', '3', '0']}
+                 pr={['3', '3', '3', '10']} >
+
               <Box w={['100%', '100%', '100%', '47%', '47%']}>
                 <Username />
                 <Email />
@@ -169,7 +208,13 @@ function Profile() {
                 <Lastname />
               </Box>
             </Box>
-            <Box w="100%" display="flex" justifyContent="center" pl={['3', '3', '3', '0']} pr={['3', '3', '3', '10']} pb={['3', '3', '3', '0']}>
+            <Box w="100%"
+                 display="flex"
+                 justifyContent="center"
+                 pl={['3', '3', '3', '0']}
+                 pr={['3', '3', '3', '10']}
+                 pb={['3', '3', '3', '0']}>
+
               <Box w="100%">
                 <Button mt="10" w="100%" style={{backgroundColor: '#D8E5FF'}} color="black200" onClick={handleSubmit} isLoading={isLoading}>Submit</Button>
               </Box>

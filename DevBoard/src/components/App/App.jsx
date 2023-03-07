@@ -67,16 +67,16 @@ export default function App() {
 
   const sidebar =
     isRegisterOrLoginRouteOrHome || isSmallerThan1000 ? null : (
-      <Box w="50" pr="1" bgColor="transparent" zIndex={1}>
+      <Box w="250px" pr="1" bgColor="transparent" zIndex={1}>
         <Sidebar setIsLoading={setIsLoading} />
       </Box>
     );
-  const header = isRegisterOrLoginRouteOrHome ? null : <Header />;
+  const header = isRegisterOrLoginRouteOrHome ? null : <Header setIsLoading={setIsLoading} />;
 
   return (
     // Flex container for Sidebar and main content area
     <Flex minH="100vh"
-          bgGradient='linear(to-r, #2e76ff, #172c69)'>
+          bgGradient='linear(to-r, #2e76ff, #172c69)' w="100vw">
 
 
       {sidebar}
@@ -86,7 +86,7 @@ export default function App() {
         w={
           isRegisterOrLoginRouteOrHome || isSmallerThan1000
             ? '100vw'
-            : 'calc(100vw - 210px)'
+            : '100%'
         }
         p={isHomepage || isSmallerThan1000 ? '' : '5'}
         display="flex"

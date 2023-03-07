@@ -46,12 +46,12 @@ function Homepage() {
 
           {showHomepage && (
             <motion.div
-                  initial={{ x:500, opacity:0 }}
-                  animate={{ x:0, opacity:1 }}
+                  initial={{ opacity:0 }}
+                  animate={{ opacity:1 }}
                   exit={{ opacity: 0 }}
-                  style={{ 
-                    display: 'flex', 
-                    flexWrap: 'wrap'}} 
+                  style={{
+                    display: 'flex',
+                    flexWrap: 'wrap'}}
                     >
 
 

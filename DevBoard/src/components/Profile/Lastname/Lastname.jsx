@@ -14,8 +14,16 @@ function Lastname() {
   return (
     <>
       <Text pl="0" mt="10" color="primary" fontWeight="600" >Last name</Text>
-      <Input variant="filled" placeholder="Last name" mt="5" value={lastname} onChange={handleLastnameChange}
-             bgColor="secondary" fontWeight="600" color="#505E7B" />
+      <Input variant="filled"
+             placeholder="Lastname"
+             mt="5"
+             value={lastname}
+             onChange={handleLastnameChange}
+             bgColor="secondary"
+             fontWeight="600"
+             color="#505E7B"
+             focusBorderColor="primary"
+             _focus={{ bg: 'secondary' }}/>
     </>
   );
 }

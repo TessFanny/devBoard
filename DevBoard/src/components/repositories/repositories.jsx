@@ -68,7 +68,7 @@ function Repositories() {
           <Notification
             title="Successfully Connected"
             description="You are now connected !"
-            status="success"
+            status="info"
           />
         );
       }
@@ -76,7 +76,15 @@ function Repositories() {
   };
   return (
     // Flex container to center and add margin to the grid of Cards
-    <Flex w={isSmallerThan1000 ? '100%' : '98%'} h="80%" mt={10} bgColor="gray.50" borderRadius="md" boxShadow="md" p="4">
+    <Flex w={isSmallerThan1000 ? '100%' : '98%'}
+          h="80%"
+          mt={10}
+          bgColor="bgPrimary"
+          style={{'backdrop-filter': 'blur(15px)'}}
+          borderRadius="md"
+          boxShadow="lg"
+          p="4"
+          zIndex={1}>
       <Box h="100%" w="100%" overflowY="scroll">
 
       {githubLogged ? (
@@ -87,16 +95,16 @@ function Repositories() {
                       h="31%">
             {repositories
             && repositories.map((repo) => (
-              <Card key={repo.id} w="100%">
+              <Card key={repo.id} w="100%" bgColor="bgPrimary">
                 <CardHeader display="flex" justifyContent="center" pb="0">
-                  <Heading size="md">{repo.name}</Heading>
+                  <Heading size="md" color="primary">{repo.name}</Heading>
                 </CardHeader>
                 <CardBody display="flex" flexDirection="column" alignItems="center" pb="0">
                   <Image src={folderImg} boxSize="120px"></Image>
-                  <Text textAlign="center" mt="5" fontSize="14px">{repo.description}</Text>
+                  <Text textAlign="center" mt="5" fontSize="14px" color="primary" fontWeight="600">{repo.description}</Text>
                 </CardBody>
                 <CardFooter display="flex" justifyContent="center">
-                  <Button as="a" href={repo.html_url} target="_blank">View here</Button>
+                  <Button as="a" href={repo.html_url} style={{backgroundColor: '#D8E5FF'}} color="black200" target="_blank">View here</Button>
                 </CardFooter>
               </Card>
             ))}

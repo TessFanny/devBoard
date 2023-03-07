@@ -20,7 +20,9 @@ import { logout } from '../../features/user/user';
 import { useLocation } from 'react-router-dom';
 import RouteInfo from './RouteInfo/Routeinfo';
 import BurgerMenu from "../BurgerMenu/BurgerMenu.jsx";
-function Header() {
+import PropTypes from "prop-types";
+
+function Header({setIsLoading}) {
   const dispatch = useDispatch();
   const { id, username,image_path } = useSelector((state) => state.login.user);
   const [isSmallerThan1000] = useMediaQuery('(max-width: 1000px)');
@@ -28,14 +30,20 @@ function Header() {
   const handleLogout = () => {
     dispatch(logout());
     window.location.replace('/homepage');
+    setIsLoading(true);
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 500);
   };
   const location = useLocation();
   const [showMenu, setShowMenu] = useState(false);
+  const VITE_BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
   const handleButtonClick = () => {
     setShowMenu(!showMenu);
   };
-  const VITE_BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
+
   return (
     <Flex
       h="10vh" // Sets the height of the header
@@ -48,7 +56,7 @@ function Header() {
       justifyContent="space-between" // Sets the horizontal alignment of the header's children
       boxShadow="lg"
       borderRadius="md"
-      zIndex={1}
+      zIndex={2}
     >
       <Box display="flex" alignItems="center" gap="2">
       {isSmallerThan1000 && (
@@ -82,12 +90,12 @@ function Header() {
               onClick={handleButtonClick}
               p="1rem"
             />
-            <MenuList bgColor="bgPrimary" position="none" >
+            <MenuList bgColor="primary" boxShadow="lg" p="1" display="flex" flexDirection="column" gap={2}>
               <Link to="/profile">
-                <MenuItem bgColor="bgPrimary" icon={<FaUserEdit />}>Profile</MenuItem>
+                <MenuItem bgColor="secondary" icon={<FaUserEdit />}>Profile</MenuItem>
               </Link>
               <Link to="/homepage">
-                <MenuItem bgColor="bgPrimary" icon={<FiLogOut />} onClick={handleLogout}>
+                <MenuItem bgColor="secondary" icon={<FiLogOut />} onClick={handleLogout}>
                   Log out
                 </MenuItem>
               </Link>
@@ -102,6 +110,10 @@ function Header() {
       </Box>
     </Flex>
   );
+}
+
+Header.propTypes= {
+  setIsLoading: PropTypes.func,
 }
 
 export default Header;

@@ -27,7 +27,9 @@ function Email() {
              onChange={handleEmailChange}
              bgColor="secondary"
              fontWeight="600"
-             color="black100" />
+             color="black100"
+             focusBorderColor="primary"
+             _focus={{ bg: 'secondary' }}/>
     </>
   );
 }

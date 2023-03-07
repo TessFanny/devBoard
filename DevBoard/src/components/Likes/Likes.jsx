@@ -20,10 +20,13 @@ const Likes = () => {
     return (
         <Flex w={isSmallerThan1000 ? '100%' : '98%'}
               h="80vh" mt={10}
-
-              bgColor="gray.50"
+              style={{'backdrop-filter': 'blur(15px)'}}
               borderRadius="md"
-              boxShadow="md" p="4" overflow="hidden">
+              boxShadow="lg"
+              bgColor="bgPrimary"
+              p="4"
+              overflow="hidden"
+              zIndex={1}>
             <Box width="100%"
                  h="100%"
                  overflowY="scroll">

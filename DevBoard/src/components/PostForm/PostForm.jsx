@@ -60,9 +60,11 @@ function PostForm() {
       data-color-mode="light"
       minH="80%"
       mt={10}
-      bgColor="gray.50"
+      bgColor="bgPrimary"
+      style={{'backdrop-filter': 'blur(15px)'}}
       borderRadius="md"
-      boxShadow="md"
+      boxShadow="lg"
+      zIndex={1}
       p="4"
     >
       <Box w="100%">
@@ -79,7 +81,7 @@ function PostForm() {
             textAlign="center"
             fontSize="2xl"
             boxShadow="md"
-            bgColor="whitevas'y"
+            bgColor="white"
             value={title}
             onChange={handleTitleChange}
           />
@@ -97,11 +99,11 @@ function PostForm() {
           />
 
           <Button
-            colorScheme="blue"
-            height="60px"
-            isLoading={isLoading}
-            onClick={handleSubmit}
-          >
+              style={{backgroundColor: '#D8E5FF'}}
+              height="60px"
+              isLoading={isLoading}
+              onClick={handleSubmit}
+            >
             Publish
           </Button>
         </FormControl>

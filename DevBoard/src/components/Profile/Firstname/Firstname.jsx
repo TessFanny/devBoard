@@ -26,7 +26,9 @@ function Firstname() {
              onChange={handleFirstnameChange}
              bgColor="secondary"
              fontWeight="600"
-             color="#505E7B" />
+             color="#505E7B"
+             focusBorderColor="primary"
+             _focus={{ bg: 'secondary' }}/>
     </>
   );
 }
