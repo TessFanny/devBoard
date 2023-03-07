@@ -22,7 +22,7 @@ import {
   FaThumbsUp,
   FaUser,
   FaPlusSquare,
-  FaRegNewspaper,
+  FaRegNewspaper, FaCode,
 } from 'react-icons/fa';
 import { BsStackOverflow } from 'react-icons/bs';
 import PropTypes from 'prop-types';
@@ -49,17 +49,18 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
       overflowY="auto"
       transition="ease-in-out .2s"
       transform={isOpen ? 'translateX(0)' : '-translateX(100%)'}
-      bgColor="white"
-      borderRadius="md"
+      bgColor="bgPrimary"
+      style={{'backdrop-filter': 'blur(15px)'}}
+      zIndex={1}
+      borderRadius="lg"
       w={['100%']}
     >
       <Flex p="4" alignItems="center" justify="center">
         <Text
-          fontSize="xl"
-          fontWeight="600"
+          fontSize="30px"
+          fontWeight="700"
           mt="5"
-          bgGradient="linear(to-l, #373B44, #4286f4)"
-          bgClip="text"
+          color="primary"
         >
           DevBoard
         </Text>
@@ -71,191 +72,288 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
           flexDirection="column"
           alignItems="flex-start"
       >
-        <Button
-          variant="ghost"
-          mb="2"
-          leftIcon={
-            <FaChartLine
-              color={activeRoute === '/dashboard' ? 'blue' : 'gray'}
-            />
-          }
-          fontWeight="400"
-          onClick={() => {
-            handleLinkClick();
-            setActiveRoute('/dashboard')
-          }}
-        >
-          <Text pl="2">Dashboard <Badge colorScheme='purple'>v2</Badge>
-          </Text>
-          
-        </Button>
-        <Button
-          variant="ghost"
-          mb="4"
-          leftIcon={
-            <FaNewspaper color={activeRoute === '/news' ? 'blue' : 'gray'} />
-          }
-          onClick={onSubToggle}
-          // onClick={() => setActiveRoute('/news')}
-          fontWeight="400"
-        >
-          <Text pl="2">News</Text>
-        </Button>
+          <Box
+              _hover={{backgroundColor: "bgSecondary"}}
+              mb="5px"
+              pl="4"
+              display="flex"
+              alignItems="center"
+              w="100%"
+              h="50px"
+              borderRadius="md"
+
+              onClick={() => {
+                handleLinkClick();
+                setActiveRoute('/dashboard')
+              }}
+              color={activeRoute === '/dashboard' ? 'secondary' : 'primary'}
+              bgColor={activeRoute === '/dashboard' ? 'bgPrimary' : ''}>
+              <Flex justifyContent="space-around" alignItems="center">
+                  <FaChartLine />
+                  <Text pl="4" color="primary" fontWeight="600">Dashboard <Badge colorScheme='purple'>v2</Badge></Text>
+              </Flex>
+
+          </Box>
+
+          <Box
+              _hover={{backgroundColor: "bgSecondary"}}
+              mb="5px"
+              cursor="pointer"
+              pl="4"
+              display="flex"
+              alignItems="center"
+              w="100%"
+              h="50px"
+              borderRadius="md"
+              color="primary"
+              onClick={onSubToggle}>
+              <Flex justifyContent="space-around" alignItems="center">
+                <FaNewspaper />
+                <Text pl="4" color="primary" fontWeight="600">News</Text>
+              </Flex>
+          </Box>
 
         {/* Render the Add Post button inside a slide fade */}
-        <Box w="1px">
+        <Box w="220px">
           <SlideFade in={isSubOpen}>
             {isSubOpen && (
-              <>
-                <Link to="/addpost">
-                <Button
-                  variant="ghost"
-                  mb="4"
-                  leftIcon={<FaPlusSquare />}
-                  onClick={handleLinkClick}
-                  fontWeight="400"
-                >
-                  <Text pl="2">Add Post</Text>
-                </Button>
-                </Link>
-                <Link to="/feed">
-                  <Button
-                    variant="ghost"
-                    mb="4"
-                    leftIcon={<FaRegNewspaper />}
-                    onClick={handleLinkClick}
-                    fontWeight="400"
-                  >
-                    <Text pl="2">Rss Feed</Text>
-                  </Button>
-                </Link>
-                <Link to="/posts">
-                  <Button
-                    variant="ghost"
-                    mb="4"
-                    leftIcon={<FaRegNewspaper />}
-                    onClick={handleLinkClick}
-                    fontWeight="400"
-                  >
-                    <Text pl="2">Devboard Posts</Text>
-                  </Button>
-                </Link>
-                <Link to="/mypost">
-                  <Button
-                    variant="ghost"
-                    mb="4"
-                    leftIcon={<FaRegNewspaper />}
-                    onClick={handleLinkClick}
-                    fontWeight="400"
-                  >
-                    <Text pl="2">My posts</Text>
-                  </Button>
-                </Link>
-              </>
+              <Box>
+
+                  <Link to="/addpost" style={{width: "100%", height: "50px", marginBottom: "5px"}}>
+                      <Box
+                          _hover={{backgroundColor: "bgSecondary"}}
+                          pl="8"
+                          display="flex"
+                          alignItems="center"
+                          w="100%"
+                          h="50px"
+                          borderRadius="md"
+
+                          onClick={() => {
+                              handleLinkClick();
+                              setActiveRoute('/addpost')
+                          }}
+                          color={activeRoute === '/addpost' ? 'secondary' : 'primary'}
+                          bgColor={activeRoute === '/addpost' ? 'bgPrimary' : ''}>
+                          <Flex justifyContent="space-around" alignItems="center">
+                              <FaPlusSquare />
+                              <Text pl="4" color="primary" fontWeight="600">Add Post</Text>
+                          </Flex>
+                      </Box>
+                  </Link>
+
+                  <Link to="/feed" style={{width: "100%", height: "50px", marginBottom: "5px"}}>
+                      <Box
+                          _hover={{backgroundColor: "bgSecondary"}}
+                          pl="8"
+                          display="flex"
+                          alignItems="center"
+                          w="100%"
+                          h="50px"
+                          borderRadius="md"
+
+                          onClick={() => {
+                              handleLinkClick();
+                              setActiveRoute('/feed')
+                          }}
+                          color={activeRoute === '/feed' ? 'secondary' : 'primary'}
+                          bgColor={activeRoute === '/feed' ? 'bgPrimary' : ''}>
+                          <Flex justifyContent="space-around" alignItems="center">
+                              <FaRegNewspaper />
+                              <Text pl="4" color="primary" fontWeight="600">RSS Feed</Text>
+                          </Flex>
+                      </Box>
+                  </Link>
+
+                  <Link to="/posts" style={{width: "100%", height: "50px", marginBottom: "5px"}}>
+                      <Box
+                          _hover={{backgroundColor: "bgSecondary"}}
+                          pl="8"
+                          display="flex"
+                          alignItems="center"
+                          w="100%"
+                          h="50px"
+                          borderRadius="md"
+
+                          onClick={() => {
+                              handleLinkClick();
+                              setActiveRoute('/posts')
+                          }}
+                          color={activeRoute === '/posts' ? 'secondary' : 'primary'}
+                          bgColor={activeRoute === '/posts' ? 'bgPrimary' : ''}>
+                          <Flex justifyContent="space-around" alignItems="center">
+                              <FaRegNewspaper />
+                              <Text pl="4" color="primary" fontWeight="600">DevBoard Posts</Text>
+                          </Flex>
+                      </Box>
+                  </Link>
+
+                  <Link to="/mypost" style={{width: "100%", height: "50px", marginBottom: "5px"}}>
+                      <Box
+                          _hover={{backgroundColor: "bgSecondary"}}
+                          pl="8"
+                          display="flex"
+                          alignItems="center"
+                          w="100%"
+                          h="50px"
+                          borderRadius="md"
+
+                          onClick={() => {
+                              handleLinkClick();
+                              setActiveRoute('/mypost')
+                          }}
+                          color={activeRoute === '/mypost' ? 'secondary' : 'primary'}
+                          bgColor={activeRoute === '/mypost' ? 'bgPrimary' : ''}>
+                          <Flex justifyContent="space-around" alignItems="center">
+                              <FaRegNewspaper />
+                              <Text pl="4" color="primary" fontWeight="600">My posts</Text>
+                          </Flex>
+                      </Box>
+                  </Link>
+
+              </Box>
             )}
           </SlideFade>
         </Box>
 
-        <Link to="/repositories">
-          <Button
-            variant="ghost"
-            mb="4"
-            leftIcon={
-              <FaFolderOpen
-                color={activeRoute === '/repositories' ? 'blue' : 'gray'}
-              />
-            }
-            fontWeight="400"
-            onClick={() => {
-              handleLinkClick();
-              setActiveRoute('/repositories')
-            }}
-          >
-            <Text pl="2">Your Projects</Text>
-          </Button>
+        <Link to="/repositories" style={{width: "100%", height: "50px", marginBottom: "5px"}}>
+          <Box
+              _hover={{backgroundColor: "bgSecondary"}}
+              pl="4"
+              display="flex"
+              alignItems="center"
+              w="100%"
+              h="50px"
+              borderRadius="md"
+
+              onClick={() => {
+                handleLinkClick();
+                setActiveRoute('/repositories')
+              }}
+              color={activeRoute === '/repositories' ? 'secondary' : 'primary'}
+              bgColor={activeRoute === '/repositories' ? 'bgPrimary' : ''}>
+              <Flex justifyContent="space-around" alignItems="center">
+                <FaFolderOpen />
+                <Text pl="4" color="primary" fontWeight="600">Your Projects</Text>
+              </Flex>
+          </Box>
         </Link>
-        <Link to="/stackoverflow">
-          <Button
-            variant="ghost"
-            mb="4"
-            leftIcon={
-              <BsStackOverflow
-                color={activeRoute === '/stackoverflow' ? 'blue' : 'gray'}
-              />
-            }
-            fontWeight="400"
-            onClick={() => {
-              handleLinkClick();
-              setActiveRoute('/stackoverflow')
-            }}
-          >
-            <Text pl="2">StackOverflow</Text>
-          </Button>
+
+        <Link to="/stackoverflow" style={{width: "100%", height: "50px", marginBottom: "5px"}}>
+          <Box
+              _hover={{backgroundColor: "bgSecondary"}}
+              pl="4"
+              display="flex"
+              alignItems="center"
+              w="100%"
+              h="50px"
+              borderRadius="md"
+
+              onClick={() => {
+                handleLinkClick();
+                setActiveRoute('/stackoverflow')
+              }}
+              color={activeRoute === '/stackoverflow' ? 'secondary' : 'primary'}
+              bgColor={activeRoute === '/stackoverflow' ? 'bgPrimary' : ''}>
+              <Flex justifyContent="space-around" alignItems="center">
+                  <BsStackOverflow />
+                  <Text pl="4" color="primary" fontWeight="600">Stackoverflow</Text>
+              </Flex>
+          </Box>
         </Link>
-        <Link to="/playground">
-          <Button
-            variant="ghost"
-            mb="4"
-            leftIcon={
-              <BsStackOverflow
-                color={activeRoute === '/playground' ? 'blue' : 'gray'}
-              />
-            }
-            fontWeight="400"
-            onClick={() => {
-              handleLinkClick();
-              setActiveRoute('/playground')
-            }}
-          >
-            <Text pl="2">Playground</Text>
-          </Button>
+
+        <Link to="/playground" style={{width: "100%", height: "50px", marginBottom: "5px"}}>
+          <Box
+              _hover={{backgroundColor: "bgSecondary"}}
+              pl="4"
+              display="flex"
+              alignItems="center"
+              w="100%"
+              h="50px"
+              borderRadius="md"
+
+              onClick={() => {
+                handleLinkClick();
+                setActiveRoute('/playground')
+              }}
+              color={activeRoute === '/playground' ? 'secondary' : 'primary'}
+              bgColor={activeRoute === '/playground' ? 'bgPrimary' : ''}>
+              <Flex justifyContent="space-around" alignItems="center">
+                <FaCode />
+                <Text pl="4" color="primary" fontWeight="600">Playground</Text>
+              </Flex>
+          </Box>
         </Link>
-        <Button
-          variant="ghost"
-          mb="4"
-          leftIcon={
-            <FaColumns color={activeRoute === '/kanban' ? 'blue' : 'gray'} />
-          }
-          fontWeight="400"
-          onClick={() => {
-            handleLinkClick();
-            setActiveRoute('/kanban')
-          }}
-        >
-          <Text pl="2">Kanban <Badge colorScheme='purple'>v2</Badge></Text>
-        </Button>
-        <Link to="/likes">
-        <Button
-          variant="ghost"
-          mb="4"
-          leftIcon={
-            <FaThumbsUp color={activeRoute === '/likes' ? 'blue' : 'gray'} />
-          }
-          fontWeight="400"
-          onClick={() => {
-            handleLinkClick();
-            setActiveRoute('/likes')
-          }}
-        >
-          <Text pl="2">Likes</Text>
-        </Button>
+
+         <Box
+              _hover={{backgroundColor: "bgSecondary"}}
+              pl="4"
+              display="flex"
+              alignItems="center"
+              w="100%"
+              h="50px"
+              mb="5px"
+              borderRadius="md"
+              cursor="pointer"
+              onClick={() => {
+                handleLinkClick();
+                setActiveRoute('/kanban')
+              }}
+              color={activeRoute === '/kanban' ? 'secondary' : 'primary'}
+              bgColor={activeRoute === '/kanban' ? 'bgPrimary' : ''}>
+             <Flex justifyContent="space-around" alignItems="center">
+                <FaColumns />
+               <Text pl="2" color="primary" fontWeight="600">Kanban <Badge colorScheme='purple'>v2</Badge></Text>
+             </Flex>
+          </Box>
+
+        <Link to="/likes" style={{width: "100%", height: "50px", marginBottom: "5px"}}>
+          <Box
+              _hover={{backgroundColor: "bgSecondary"}}
+              pl="4"
+              display="flex"
+              alignItems="center"
+              w="100%"
+              h="50px"
+              borderRadius="md"
+
+              onClick={() => {
+                handleLinkClick();
+                setActiveRoute('/likes')
+              }}
+              color={activeRoute === '/likes' ? 'secondary' : 'primary'}
+              bgColor={activeRoute === '/likes' ? 'bgPrimary' : ''}>
+              <Flex justifyContent="space-around" alignItems="center">
+                <FaThumbsUp />
+                <Text pl="4" color="primary" fontWeight="600">Likes</Text>
+              </Flex>
+          </Box>
         </Link>
-        <Link to="/profile">
-          <Button
-            variant="ghost"
-            mb="4"
-            leftIcon={
-              <FaUser color={activeRoute === '/profile' ? 'blue' : 'gray'} />
-            }
-            fontWeight="400"
-            onClick={() => {
-              handleLinkClick();
-              setActiveRoute('/profile')
-            }}
-          >
-            <Text pl="2">Profile</Text>
-          </Button>
+
+        <Link to="/profile" style={{width: "100%", height: "50px", marginBottom: "5px"}}>
+          <Box
+              _hover={{backgroundColor: "bgSecondary"}}
+              pl="4"
+               display="flex"
+               alignItems="center"
+               w="100%"
+               h="50px"
+               borderRadius="md"
+
+               onClick={() => {
+                 handleLinkClick();
+                 setActiveRoute('/profile')
+               }}
+               color={activeRoute === '/profile' ? 'secondary' : 'primary'}
+               bgColor={activeRoute === '/profile' ? 'bgPrimary' : ''}>
+              <Flex justifyContent="space-around" alignItems="center">
+                  <FaUser />
+                <Text pl="4" color="primary" fontWeight="600">Profile</Text>
+              </Flex>
+          </Box>
         </Link>
+
+
       </Box>
     </Box>
   );

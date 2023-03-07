@@ -11,13 +11,25 @@ function Github() {
 
   return (
     <>
-      <Text pl="0" mt="10" mb="5">GitHub</Text>
+      <Text pl="0"
+            mt="10"
+            mb="5"
+            color="primary"
+            fontWeight="600">
+          GitHub
+      </Text>
       <InputGroup>
         <InputLeftElement
           pointerEvents="none"
           children={<FaGithub color="grey" />}
         />
-        <Input variant="filled" placeholder="username" isDisabled value={github} />
+        <Input variant="filled"
+               placeholder="username"
+               isDisabled
+               value={github}
+               bgColor="secondary"
+               fontWeight="600"
+               color="#505E7B"  />
       </InputGroup>
     </>
   );

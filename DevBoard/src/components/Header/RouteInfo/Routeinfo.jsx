@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import { Fade } from '@chakra-ui/react';
+import {Box, Fade, Text} from '@chakra-ui/react';
 import './Routeinfo.scss';
 
 function RouteInfo() {
@@ -21,9 +21,9 @@ function RouteInfo() {
 
   return (
     <Fade in={true} duration={0.4} key={counter}>
-      <div>
-        <p>{capitalizedRoutePath}</p>
-      </div>
+      <Box>
+        <Text fontWeight="600" fontSize="lg" color="primary">{capitalizedRoutePath}</Text>
+      </Box>
     </Fade>
   );
 }

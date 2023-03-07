@@ -19,12 +19,13 @@ const MyPosts = () => {
       w={isSmallerThan1000 ? '100%' : '70%'}
       h="80vh"
       mt={10}
-      bgColor="gray.50"
+      bgColor="bgPrimary"
+      style={{'backdrop-filter': 'blur(15px)'}}
       borderRadius="md"
-      boxShadow="md"
+      boxShadow="lg"
       p="4"
       overflow="hidden"
-    >
+      zIndex={1}>
       <Box width="100%" h="100%" overflowY="scroll">
         {posts && posts.length > 0 ? (
           posts.map((post) => (

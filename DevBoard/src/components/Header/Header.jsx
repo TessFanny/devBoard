@@ -20,7 +20,9 @@ import { logout } from '../../features/user/user';
 import { useLocation } from 'react-router-dom';
 import RouteInfo from './RouteInfo/Routeinfo';
 import BurgerMenu from "../BurgerMenu/BurgerMenu.jsx";
-function Header() {
+import PropTypes from "prop-types";
+
+function Header({setIsLoading}) {
   const dispatch = useDispatch();
   const { id, username,image_path } = useSelector((state) => state.login.user);
   const [isSmallerThan1000] = useMediaQuery('(max-width: 1000px)');
@@ -28,14 +30,20 @@ function Header() {
   const handleLogout = () => {
     dispatch(logout());
     window.location.replace('/homepage');
+    setIsLoading(true);
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 500);
   };
   const location = useLocation();
   const [showMenu, setShowMenu] = useState(false);
+  const VITE_BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
   const handleButtonClick = () => {
     setShowMenu(!showMenu);
   };
-  const VITE_BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
+
   return (
     <Flex
       h="10vh" // Sets the height of the header
@@ -43,11 +51,12 @@ function Header() {
       p="4" // Sets the padding of the header
       pr="10" // Sets the right padding of the header
       pl="10" // Sets the left padding of the header
-      bgColor="white" // Sets the background color of the header
+      bgColor="bgPrimary" style={{'backdrop-filter': 'blur(15px)'}} // Sets the background color of the header
       alignItems="center" // Sets the vertical alignment of the header's children
       justifyContent="space-between" // Sets the horizontal alignment of the header's children
-      boxShadow="base"
+      boxShadow="lg"
       borderRadius="md"
+      zIndex={2}
     >
       <Box display="flex" alignItems="center" gap="2">
       {isSmallerThan1000 && (
@@ -60,6 +69,7 @@ function Header() {
           <Menu>
             <MenuButton
               as={IconButton}
+              bgColor="secondary"
               icon={
                 <>
                   {isSmallerThan1000 ? (
@@ -68,7 +78,7 @@ function Header() {
                       </Avatar>
                   ) : (
                       <>
-                      <Text pr="0.5rem">{username}</Text>
+                      <Text pr="0.5rem" color="#2B3447" fontWeight="600">{username}</Text>
                     <Avatar name={username} size='sm' src={`${VITE_BACKEND_URL}/images/${image_path}`}>
                     <AvatarBadge boxSize='1.25em' bg='green.500' />
                     </Avatar>
@@ -80,12 +90,12 @@ function Header() {
               onClick={handleButtonClick}
               p="1rem"
             />
-            <MenuList>
+            <MenuList bgColor="primary" boxShadow="lg" p="1" display="flex" flexDirection="column" gap={2}>
               <Link to="/profile">
-                <MenuItem icon={<FaUserEdit />}>Profile</MenuItem>
+                <MenuItem bgColor="secondary" icon={<FaUserEdit />}>Profile</MenuItem>
               </Link>
               <Link to="/homepage">
-                <MenuItem icon={<FiLogOut />} onClick={handleLogout}>
+                <MenuItem bgColor="secondary" icon={<FiLogOut />} onClick={handleLogout}>
                   Log out
                 </MenuItem>
               </Link>
@@ -96,10 +106,14 @@ function Header() {
             <Text>Sign In</Text>
           </Link>
         )}
-        <IconButton aria-label="Settings" icon={<IoMdSettings />} />
+        <IconButton aria-label="Settings" bgColor="secondary" color="#2B3447" icon={<IoMdSettings />} />
       </Box>
     </Flex>
   );
+}
+
+Header.propTypes= {
+  setIsLoading: PropTypes.func,
 }
 
 export default Header;

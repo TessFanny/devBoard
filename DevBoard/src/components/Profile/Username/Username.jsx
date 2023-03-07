@@ -14,8 +14,23 @@ function Username() {
 
   return (
     <>
-      <Text pl="0" mt="10">Username</Text>
-      <Input variant="filled" placeholder="Last name" mt="5" value={username} onChange={handleUsernameChange} />
+      <Text pl="0"
+            mt="10"
+            color="primary"
+            fontWeight="600">
+          Username
+      </Text>
+      <Input variant="filled"
+             placeholder="Last name"
+             mt="5"
+             value={username}
+             onChange={handleUsernameChange}
+             bgColor="secondary"
+             fontWeight="600"
+             focus
+             color="#505E7B"
+             focusBorderColor="primary"
+             _focus={{ bg: 'secondary' }} />
     </>
   );
 }

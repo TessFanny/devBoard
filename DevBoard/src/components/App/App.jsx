@@ -6,7 +6,7 @@ import {
   Flex,
   useBreakpointValue,
   Text,
-  useMediaQuery,
+  useMediaQuery, Image,
 } from '@chakra-ui/react';
 import Loader from '../Loader/Loader';
 import Sidebar from '../Sidebar/Sidebar';
@@ -27,6 +27,8 @@ import MyPosts from '../Myposts/Myposts';
 import Likes from "../Likes/Likes.jsx";
 import PostEdit from '../Myposts/Postedit.jsx';
 import Kanban from '../Kanban/Kanban';
+import blob2 from "../../assets/blobanimation.svg";
+import blob from "../../assets/blobanimationBG.svg";
 
 // App component
 export default function App() {
@@ -65,15 +67,18 @@ export default function App() {
 
   const sidebar =
     isRegisterOrLoginRouteOrHome || isSmallerThan1000 ? null : (
-      <Box w="50" pr="1" bgColor="gray.200">
+      <Box w="250px" pr="1" bgColor="transparent" zIndex={1}>
         <Sidebar setIsLoading={setIsLoading} />
       </Box>
     );
-  const header = isRegisterOrLoginRouteOrHome ? null : <Header />;
+  const header = isRegisterOrLoginRouteOrHome ? null : <Header setIsLoading={setIsLoading} />;
 
   return (
     // Flex container for Sidebar and main content area
-    <Flex minH="100vh">
+    <Flex minH="100vh"
+          bgGradient='linear(to-r, #2e76ff, #172c69)' w="100vw">
+
+
       {sidebar}
       {/* Box for main content area */}
       <Box
@@ -81,13 +86,13 @@ export default function App() {
         w={
           isRegisterOrLoginRouteOrHome || isSmallerThan1000
             ? '100vw'
-            : 'calc(100vw - 210px)'
+            : '100%'
         }
         p={isHomepage || isSmallerThan1000 ? '' : '5'}
         display="flex"
         alignItems="center"
         flexDirection="column"
-        bgColor="gray.200"
+        bgColor="transparent"
       >
         {header}
         {/* Repositories component */}
@@ -112,6 +117,20 @@ export default function App() {
           </Routes>
         )}
       </Box>
+      <Image  src={blob2}
+              position="absolute"
+              opacity="0.5"
+              w={['80%', '80%', '80%', '35%']}
+              left="-50"
+              top="-70">
+      </Image>
+
+      <Image src={blob}
+             position="fixed"
+             top="-500"
+             right="-710"
+             opacity="0.1">
+      </Image>
     </Flex>
   );
 }
