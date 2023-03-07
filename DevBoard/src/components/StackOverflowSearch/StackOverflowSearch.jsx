@@ -62,12 +62,10 @@ function StackOverflowSearch() {
         flexDir="column"
         align="center"
       >
-        {/* /* This is the search form / */}
         <form
           onSubmit={handleFormSubmit}
           style={{ width: '90%', marginBottom: '2rem' }}
         >
-          {/* {/ The search input and submit button are wrapped in a Stack /} */}
           <Stack direction="row" align="center">
             <Input
               type="text"
@@ -125,7 +123,7 @@ function StackOverflowSearch() {
                       boxShadow="md"
                       p={4}
                       borderRadius="md"
-                      w={{ base: '90vw', md: '90vw' }}
+                      w={{ base: '85vw', md: '90vw', xl: '75vw' }}
                       h={{ base: 'auto', md: '20vh' }}
                       display="flex"
                       justifyContent="center"
