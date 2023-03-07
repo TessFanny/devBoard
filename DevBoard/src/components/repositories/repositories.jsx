@@ -77,7 +77,7 @@ function Repositories() {
   return (
     // Flex container to center and add margin to the grid of Cards
     <Flex w={isSmallerThan1000 ? '100%' : '98%'}
-          h="80%"
+          h="80vh"
           mt={10}
           bgColor="bgPrimary"
           style={{'backdrop-filter': 'blur(15px)'}}
@@ -89,9 +89,10 @@ function Repositories() {
 
       {githubLogged ? (
         <> 
-          <Box display="flex" flexDirection='flex-row' justifyContent='space-between'>
-          <Text> Overview </Text>
-          <IconButton aria-label="refresh repo" icon={<SlRefresh />} onClick={loadRepo} /> 
+          <Box display="flex" flexDirection='flex-row' justifyContent='space-between' mb="20px">
+          <Text color="primary"
+                fontWeight="600"> Overview </Text>
+          <IconButton aria-label="refresh repo" icon={<SlRefresh />} onClick={loadRepo} bgColor="secondary" />
           </Box>
 
           <SimpleGrid spacing={4}
@@ -113,6 +114,7 @@ function Repositories() {
                 </CardFooter>
               </Card>
             ))}
+
           </SimpleGrid>      
 
         </>
