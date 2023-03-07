@@ -35,16 +35,6 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
   const location = useLocation();
   const [activeRoute, setActiveRoute] = useState(location.pathname);
 
-
-
-  // Create a showAddPost state variable that initially is set to false, and a function to toggle it
-  const [showAddPost, setShowAddPost] = useState(false);
-
-  // Define a function to handle the Add Post button click event
-  const handleAddPostClick = () => {
-    setShowAddPost(!showAddPost);
-  };
-
   const handleLinkClick = () => {
     setIsLoading(true);
     setTimeout(() => {
@@ -95,7 +85,8 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
             setActiveRoute('/dashboard')
           }}
         >
-          <Text pl="2">Dashboard <Badge colorScheme='purple'>v2</Badge></Text>
+          <Text pl="2">Dashboard <Badge colorScheme='purple'>v2</Badge>
+          </Text>
           
         </Button>
         <Button
