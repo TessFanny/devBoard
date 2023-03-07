@@ -40,24 +40,9 @@ function Homepage() {
     },
   };
   return (
-      <Flex bgGradient='linear(to-r, #2e76ff, #172c69)'
+      <Flex zIndex={1}
             w="100%" h="100%"
             flexDirection={['column', 'column','column', 'row']}>
-
-        <Image  src={blob2}
-                position="absolute"
-                opacity="0.5"
-                w={['80%', '80%', '80%', '35%']}
-                left="-50"
-                top="-70">
-          </Image>
-
-        <Image src={blob}
-              position="fixed"
-              top="-500"
-              right="-710"
-              opacity="0.1">
-        </Image>
 
           {showHomepage && (
             <motion.div

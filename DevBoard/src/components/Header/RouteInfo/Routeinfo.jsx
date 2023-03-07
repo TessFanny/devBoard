@@ -22,7 +22,7 @@ function RouteInfo() {
   return (
     <Fade in={true} duration={0.4} key={counter}>
       <Box>
-        <Text fontWeight="600" fontSize="lg" color="#BCD2FF">{capitalizedRoutePath}</Text>
+        <Text fontWeight="600" fontSize="lg" color="primary">{capitalizedRoutePath}</Text>
       </Box>
     </Fade>
   );

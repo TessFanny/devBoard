@@ -81,7 +81,7 @@ function Profile() {
 
   return (
     <Flex w="98%" mt={['5', '5', '10']} h={['100%', '100%', '100%', '80%', '80%']}>
-      <Box w="100%" display="flex" flexDirection={['column', 'column', 'column', 'row']} bgColor="rgba(219, 231, 255, 0.2)" style={{'backdrop-filter': 'blur(15px)'}} borderRadius="md" boxShadow="lg" zIndex={1}>
+      <Box w="100%" display="flex" flexDirection={['column', 'column', 'column', 'row']} bgColor="bgPrimary" style={{'backdrop-filter': 'blur(15px)'}} borderRadius="md" boxShadow="lg" zIndex={1}>
         <Box w={['100%', '100%', '100%', '35%', '20%']} pr={['0', '0', '0', '0', '10']}>
           <Box display="flex" flexDirection="column" alignItems={['center', 'center', 'center', 'flex-start']} p={['3','10']}>
             <Image
@@ -96,7 +96,8 @@ function Profile() {
               icon={<FaUpload />}
               size="sm"
               borderRadius="md"
-              bg="gray.300"
+              bg="primary"
+              color="black200"
               _hover={{ bg: "gray.400" }}
               _active={{ bg: "gray.500" }}
               onClick={() => document.getElementById("fileInput").click()}
@@ -111,8 +112,8 @@ function Profile() {
             />
             {!isSmallerThan1000 && (
                 <>
-                  <Divider bgColor='gray.300' h="1px" mt="3.5" mb="3.5" />
-                  <Text color="#BCD2FF" fontWeight="600">Role</Text>
+                  <Divider bgColor='secondary' h="1px" mt="3.5" mb="3.5" />
+                  <Text color="primary" fontWeight="600">Role</Text>
                 </>
             )}
 
@@ -129,9 +130,9 @@ function Profile() {
             )}
             {!isSmallerThan1000 && (
                 <>
-                  <Divider bgColor='gray.300' h="1px" mt="3.5" mb="3.5" />
+                  <Divider bgColor='secondary' h="1px" mt="3.5" mb="3.5" />
 
-                  <Text color="#BCD2FF" fontWeight="600">Account</Text>
+                  <Text color="primary" fontWeight="600">Account</Text>
                   <Button colorScheme="red" mt="3.5" onClick={onOpen}>Delete</Button>
                 </>
             )}
@@ -170,7 +171,7 @@ function Profile() {
             </Box>
             <Box w="100%" display="flex" justifyContent="center" pl={['3', '3', '3', '0']} pr={['3', '3', '3', '10']} pb={['3', '3', '3', '0']}>
               <Box w="100%">
-                <Button mt="10" w="100%" style={{backgroundColor: '#BCD2FF'}} color="#2B3447" onClick={handleSubmit} isLoading={isLoading}>Submit</Button>
+                <Button mt="10" w="100%" style={{backgroundColor: '#D8E5FF'}} color="black200" onClick={handleSubmit} isLoading={isLoading}>Submit</Button>
               </Box>
             </Box>
             </Box>

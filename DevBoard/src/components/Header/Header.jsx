@@ -43,7 +43,7 @@ function Header() {
       p="4" // Sets the padding of the header
       pr="10" // Sets the right padding of the header
       pl="10" // Sets the left padding of the header
-      bgColor="rgba(219, 231, 255, 0.2)" style={{'backdrop-filter': 'blur(15px)'}} // Sets the background color of the header
+      bgColor="bgPrimary" style={{'backdrop-filter': 'blur(15px)'}} // Sets the background color of the header
       alignItems="center" // Sets the vertical alignment of the header's children
       justifyContent="space-between" // Sets the horizontal alignment of the header's children
       boxShadow="lg"
@@ -61,7 +61,7 @@ function Header() {
           <Menu>
             <MenuButton
               as={IconButton}
-              bgColor="rgba(219, 231, 255, 0.5)"
+              bgColor="secondary"
               icon={
                 <>
                   {isSmallerThan1000 ? (
@@ -82,12 +82,12 @@ function Header() {
               onClick={handleButtonClick}
               p="1rem"
             />
-            <MenuList>
+            <MenuList bgColor="bgPrimary" position="none" >
               <Link to="/profile">
-                <MenuItem icon={<FaUserEdit />}>Profile</MenuItem>
+                <MenuItem bgColor="bgPrimary" icon={<FaUserEdit />}>Profile</MenuItem>
               </Link>
               <Link to="/homepage">
-                <MenuItem icon={<FiLogOut />} onClick={handleLogout}>
+                <MenuItem bgColor="bgPrimary" icon={<FiLogOut />} onClick={handleLogout}>
                   Log out
                 </MenuItem>
               </Link>
@@ -98,7 +98,7 @@ function Header() {
             <Text>Sign In</Text>
           </Link>
         )}
-        <IconButton aria-label="Settings" bgColor="rgba(219, 231, 255, 0.5)" color="#2B3447" icon={<IoMdSettings />} />
+        <IconButton aria-label="Settings" bgColor="secondary" color="#2B3447" icon={<IoMdSettings />} />
       </Box>
     </Flex>
   );
