@@ -31,15 +31,14 @@ console.log(posts);
     <Card mb="5" boxShadow="md">
         <CardHeader w="100%" pb="0">
             <Box display="flex" alignItems="center" w="100%" mb="3">
-                <Avatar name={username} src={`${VITE_BACKEND_URL}/images/${imageuser}`}/>
+                <Avatar name={username} size='sm' src={`${VITE_BACKEND_URL}/images/${imageuser}`}/>
                 <Box display="flex" flexDirection="column" justifyContent="center" alignItems="flex-start">
-                    <Text fontSize="sm" ml="3">{username}</Text>
-                    <Text fontSize="sm" ml="3">{date} </Text>
+                    <Text fontSize="md" ml="3" as='b'>{username}</Text>
+                    <Text fontSize="xs" ml="3">{date} </Text>
                 </Box>
 
             </Box>
-
-            <Heading size='md'>{title}</Heading>
+            <Heading size='lg'>{title}</Heading>
         </CardHeader>
         <CardBody pt="0">
 
@@ -50,7 +49,7 @@ console.log(posts);
                     </div>
                 </Text>
             </Box>
-            <Box mt="10" display="flex" alignItems="center" justifyContent="flex-start" gap="2">
+            <Box mt="10" display="flex" alignItems="center" justifyContent="flex-end" gap="2">
                 <BiLike />
                 <Text ml="1">{like}</Text>
                     <Link to={`/editpost/${postId}`}>

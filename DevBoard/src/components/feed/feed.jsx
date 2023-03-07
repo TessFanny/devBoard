@@ -9,7 +9,7 @@ import {
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
 import { useState } from 'react';
 import { useEffect } from 'react';
-
+import { Link } from '@chakra-ui/react';
 
 const Feed = () => {
 
@@ -49,14 +49,13 @@ return (
     <Tabs>
     <TabList>
     {feeds[0] &&
-      feeds.map(feed => <Tab>{feed?.title}</Tab>)}
+      feeds.map(feed => <Tab key={feed?.title}> {feed?.title}</Tab>)}
         </TabList>
         <TabPanels>
           {feeds.map(feed =>
-          <TabPanel>
+          <TabPanel key={feed?.title}>                                                                
             <Text>{feed?.description}</Text>
-            <Text>{feed?.language}</Text>
-            <Text>{feed?.link}</Text>
+            <Link>{feed?.link}</Link>
             {feed.items.map((item) => (
 
                 <Accordion allowMultiple>
