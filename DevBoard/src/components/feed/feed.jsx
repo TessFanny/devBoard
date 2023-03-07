@@ -9,10 +9,14 @@ import {
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
 import { useState } from 'react';
 import { useEffect } from 'react';
-
+import { Link } from '@chakra-ui/react';
+import { useDispatch, useSelector } from 'react-redux';
 
 const Feed = () => {
-
+  // const { user, feed } = useSelector((state) => state.login);
+  // useEffect(() => {
+  //   dispatch(getUsersFeed(user.id));
+  // }, [feeds]);
   const [feeds, setFeeds] = useState([]);
   const VITE_BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
   const fetchData =  async () => {
@@ -34,29 +38,20 @@ const Feed = () => {
     }
     useEffect(() => {fetchData()},[])
 
-// useEffect(() => {
-//     if (token) {
-//       getUsergetFeeds();
-//       getFeeds();
-//     } else {
-//       getFeeds();
-//     }
-//   }, []);
-    console.log(feeds)
+  console.log(feeds)
 
 return (
 
     <Tabs>
     <TabList>
     {feeds[0] &&
-      feeds.map(feed => <Tab>{feed?.title}</Tab>)}
+      feeds.map(feed => <Tab key={feed?.title}> {feed?.title}</Tab>)}
         </TabList>
         <TabPanels>
           {feeds.map(feed =>
-          <TabPanel>
+          <TabPanel key={feed?.title}>                                                                
             <Text>{feed?.description}</Text>
-            <Text>{feed?.language}</Text>
-            <Text>{feed?.link}</Text>
+            <Link>{feed?.link}</Link>
             {feed.items.map((item) => (
 
                 <Accordion allowMultiple>

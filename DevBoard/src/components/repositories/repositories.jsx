@@ -88,7 +88,12 @@ function Repositories() {
       <Box h="100%" w="100%" overflowY="scroll">
 
       {githubLogged ? (
-        <>
+        <> 
+          <Box display="flex" flexDirection='flex-row' justifyContent='space-between'>
+          <Text> Overview </Text>
+          <IconButton aria-label="refresh repo" icon={<SlRefresh />} onClick={loadRepo} /> 
+          </Box>
+
           <SimpleGrid spacing={4}
                       templateColumns="repeat(auto-fill, minmax(300px, 1fr))"
                       w="100%"
@@ -108,8 +113,7 @@ function Repositories() {
                 </CardFooter>
               </Card>
             ))}
-          </SimpleGrid>
-          <IconButton aria-label="refresh repo" icon={<SlRefresh />} onClick={loadRepo} position="fixed" right={isSmallerThan1000 ? '40px' : '80px'} top={isSmallerThan1000 ? ('150') : ('180')} />
+          </SimpleGrid>      
 
         </>
 

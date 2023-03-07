@@ -270,4 +270,11 @@ function Register({setShowDiv, setShowLogin}) {
       </Flex>
   );
 }
+
+Register.propTypes = {
+  setShowDiv: PropTypes.func,
+  setShowLogin: PropTypes.func
+};
+
 export default Register;
+

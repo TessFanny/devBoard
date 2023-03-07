@@ -3,8 +3,6 @@ import { Link } from 'react-router-dom';
 import {GiHamburgerMenu} from 'react-icons/gi';
 import {
     FaChartLine,
-    FaNewspaper,
-    FaComments,
     FaFolderOpen,
     FaColumns,
     FaThumbsUp,
@@ -12,8 +10,13 @@ import {
     FaPlusSquare,
     FaRegNewspaper,
 } from 'react-icons/fa';
+
 import { BsStackOverflow } from 'react-icons/bs';
+
+import {Badge} from '@chakra-ui/react'
+
 function BurgerMenu() {
+
     return (
         <Flex>
         <Menu>
@@ -25,15 +28,47 @@ function BurgerMenu() {
             />
             <MenuList>
                 <MenuItem icon={<FaChartLine />}>
-                        Dashboard
+                        Dashboard <Badge colorScheme='purple'>v2</Badge>
                 </MenuItem>
-                <Link to="/feed">
-                <MenuItem icon={<FaNewspaper />}>
-                    News
-                </MenuItem>
-                </Link>
-                <Link to="/repositories">
-                <MenuItem icon={<FaFolderOpen />}>
+                        <Link to="/addpost">
+                        <MenuItem
+                        icon={<FaPlusSquare />}
+                        // onClick={handleLinkClick}                     
+                        >
+                        <Text pl="2">Add Post</Text>
+                        </MenuItem>
+                        </Link>
+                        <Link to="/feed">
+                        <MenuItem
+
+                        icon={<FaRegNewspaper />}
+                        // onClick={handleLinkClick}
+
+                        >
+                        <Text pl="2">Rss Feed</Text>
+                        </MenuItem>
+                    </Link>
+                    <Link to="/posts">
+                        <MenuItem
+
+                        icon={<FaRegNewspaper />}
+                        // onClick={handleLinkClick}
+
+                        >
+                        <Text pl="2">Devboard Posts</Text>
+                        </MenuItem>
+                    </Link>
+                    <Link to="/mypost">
+                        <MenuItem
+                        icon={<FaRegNewspaper />}
+                        // onClick={handleLinkClick}
+                        >
+                        <Text pl="2">My posts</Text>
+                        </MenuItem>
+                    </Link>
+
+                <Link to="repositories">
+                <MenuItem  hoverStyle={{ background: "transparent", boxShadow: "none" }} icon={<FaFolderOpen />}>
                     Your Project
                 </MenuItem>
                 </Link>
