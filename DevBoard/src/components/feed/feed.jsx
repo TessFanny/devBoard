@@ -10,9 +10,13 @@ import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { Link } from '@chakra-ui/react';
+import { useDispatch, useSelector } from 'react-redux';
 
 const Feed = () => {
-
+  // const { user, feed } = useSelector((state) => state.login);
+  // useEffect(() => {
+  //   dispatch(getUsersFeed(user.id));
+  // }, [feeds]);
   const [feeds, setFeeds] = useState([]);
   const VITE_BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
   const fetchData =  async () => {
@@ -34,15 +38,7 @@ const Feed = () => {
     }
     useEffect(() => {fetchData()},[])
 
-// useEffect(() => {
-//     if (token) {
-//       getUsergetFeeds();
-//       getFeeds();
-//     } else {
-//       getFeeds();
-//     }
-//   }, []);
-    console.log(feeds)
+  console.log(feeds)
 
 return (
 
