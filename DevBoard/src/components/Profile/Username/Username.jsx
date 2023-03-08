@@ -27,7 +27,6 @@ function Username() {
              onChange={handleUsernameChange}
              bgColor="secondary"
              fontWeight="600"
-             focus
              color="#505E7B"
              focusBorderColor="primary"
              _focus={{ bg: 'secondary' }} />

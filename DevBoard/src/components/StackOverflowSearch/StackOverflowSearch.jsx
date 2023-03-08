@@ -13,6 +13,7 @@ import {
   SimpleGrid,
   Heading,
   Avatar,
+  useMediaQuery,
 } from '@chakra-ui/react';
 import { TiInputChecked } from 'react-icons/ti';
 // This function component is called StackOverflowSearch
@@ -21,6 +22,8 @@ function StackOverflowSearch() {
   const [query, setQuery] = useState('');
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [mobile] = useMediaQuery('(max-width: 500px)');
+
   // This function is used to search StackOverflow using the 'query' state variable
   const searchStackOverflow = async () => {
     setLoading(true);
@@ -50,24 +53,21 @@ function StackOverflowSearch() {
     <>
       <Flex
         w="98%"
-        minH="80%"
+        h="80vh"
         mt="10"
-        bgColor="gray.50"
-        borderRadius="md"
-        boxShadow="md"
         p="4"
         flexDir="column"
         align="center"
         bgColor="bgPrimary"
         style={{'backdrop-filter': 'blur(15px)'}}
-        zIndex='5'
+        borderRadius="md"
+        boxShadow="lg"
+        zIndex={1}
       >
-        {/* /* This is the search form / */}
         <form
           onSubmit={handleFormSubmit}
           style={{ width: '90%', marginBottom: '2rem' }}
         >
-          {/* {/ The search input and submit button are wrapped in a Stack /} */}
           <Stack direction="row" align="center">
             <Input
               type="text"
@@ -75,12 +75,17 @@ function StackOverflowSearch() {
               value={query}
               onChange={handleQueryChange}
               size="lg"
-              focusBorderColor="blue.500"
+              bgColor="secondary"
+              fontWeight="600"
+              color="#505E7B"
+              focusBorderColor="primary"
+              _focus={{ bg: 'secondary' }}
               _hover={{ borderColor: 'blue.500' }}
             />
             <Button
               type="submit"
-              colorScheme="blue"
+              style={{backgroundColor: '#D8E5FF'}}
+              color="black200"
               size="lg"
               isLoading={loading}
               loadingText="Searching"
@@ -100,8 +105,21 @@ function StackOverflowSearch() {
           </Flex>
         ) : /* // If the search has returned results, they are displayed in a Box component */
         results.length > 0 ? (
-          <Box style={{ flex: '1', width: '100%', h: '75%' }}>
-            <Stack display="flex" w="100%" h="92%" overflowY="scroll">
+          <Box
+            style={{
+              flex: '1',
+              width: '100%',
+              h: '75%',
+              justifyContent: 'center',
+            }}
+            overflowY="scroll"
+          >
+            <Stack
+              display="flex"
+              w="100%"
+              h={{ base: 'auto', md: '92%' }}
+              overflowY="scroll"
+            >
               {results.map((result) => (
                 <div key={result.question_id}>
                   <Link
@@ -113,14 +131,19 @@ function StackOverflowSearch() {
                       boxShadow="md"
                       p={4}
                       borderRadius="md"
-                      w={'70vw'}
-                      h={'20vh'}
+                      w={{ base: '85vw', md: '90vw', xl: '75vw' }}
+                      h={{ base: 'auto', md: '20vh' }}
+                      display="flex"
+                      justifyContent="center"
+                      flexDirection="column"
+                      fontSize={mobile ? '10px' : '16px'}
+                      bgColor="bgPost"
                     >
                       <Flex alignItems="center">
                         <Box>
                           <Text
                             fontWeight="bold"
-                            fontSize="sm"
+                            fontSize={mobile ? '10px' : 'sm'}
                             style={{
                               display: 'flex',
                               margin: '0vw',
@@ -133,9 +156,9 @@ function StackOverflowSearch() {
                           </Text>
 
                           <Text
-                            fontSize="sm"
                             bgColor="green"
                             color="white"
+                            fontSize={mobile ? '10px' : 'sm'}
                             style={{
                               display: 'flex',
                               flexDirection: 'row',
@@ -152,23 +175,26 @@ function StackOverflowSearch() {
                           </Text>
 
                           <Text
-                            fontSize="sm"
+                            fontSize={mobile ? '12px' : 'sm'}
                             style={{
                               display: 'flex',
                               margin: '0vw',
-                              padding: '2px',
                               justifyContent: 'flex-end',
                             }}
                           >
                             {result.view_count} views
                           </Text>
                         </Box>
-                        <Heading size="md" pl="10px" color={'#2b97fe'}>
+                        <Heading
+                          fontSize={mobile ? '12px' : 'md'}
+                          pl={mobile ? '10px' : { base: '0px', md: '10px' }}
+                          color={'#2b97fe'}
+                        >
                           {result.title}
                           <Text
+                            fontSize={mobile ? '12px' : 'sm'}
+                            pt={mobile ? '0px' : '2rem'}
                             style={{
-                              paddingTop: '2rem',
-                              fontSize: '1rem',
                               color: 'black',
                             }}
                           >
@@ -183,29 +209,37 @@ function StackOverflowSearch() {
                         </Heading>
                       </Flex>
                       <Box />
-                      <List display="flex" mb={2} ml={'7.6rem'} mt={'1rem'}>
+                      <List
+                        display="flex"
+                        mb={'2'}
+                        ml={mobile ? '5.2rem' : { base: '1rem', md: '7.4rem' }}
+                        mt={{ base: '0.5rem', md: '1rem' }}
+                      >
                         {result.tags.map((tag, index) => (
                           <ListItem
                             key={index}
                             color="hsl(205,47%,42%)"
                             bgColor={'hsl(205,46%,92%)'}
                             fontSize="sm"
-                            padding="5px"
+                            margin="5px"
                           >
                             {tag}
                           </ListItem>
                         ))}
                         <Flex
                           alignItems="center"
-                          ml="40rem"
-                          display={'flex'}
-                          h={'1rem'}
+                          ml={{ base: '2', md: '20', lg: '40' }}
+                          display={{ base: 'none', md: 'flex' }}
+                          h={{ base: 'auto', md: '1rem' }}
                         >
                           <Avatar src={result.owner.profile_image} mr={2} />
-                          <Text fontSize="sm" mr={2}>
+                          <Text
+                            fontSize={{ base: 'xs', md: 'sm', lg: 'md' }}
+                            mr={2}
+                          >
                             By {result.owner.display_name}
                           </Text>
-                          <Text fontSize="sm">
+                          <Text fontSize={{ base: 'xs', md: 'sm', lg: 'md' }}>
                             Reputation: {result.owner.reputation}
                           </Text>
                         </Flex>
