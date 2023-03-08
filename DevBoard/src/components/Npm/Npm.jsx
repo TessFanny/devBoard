@@ -61,13 +61,13 @@ function NpmSearch() {
         <Box mt={4}>
           {results.map((result) => (
             <Box
-              bgColor={'white'}
+              bgColor="white"
               style={{
                 marginBottom: '1rem',
                 marginTop: '1rem',
               }}
             >
-              <Link href={result.package.links.npm}>
+              <Link href={result.package.links.npm} isExternal>
                 <Text fontSize="xl" color="black">
                   {result.package.name}
                 </Text>
