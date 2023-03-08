@@ -6,7 +6,8 @@ import {
   Flex,
   useBreakpointValue,
   Text,
-  useMediaQuery, Image,
+  useMediaQuery,
+  Image,
 } from '@chakra-ui/react';
 import Loader from '../Loader/Loader';
 import Sidebar from '../Sidebar/Sidebar';
@@ -18,17 +19,18 @@ import Profile from '../Profile/Profile';
 import Feed from '../feed/feed';
 import Homepage from '../Homepage/Homepage';
 import StackOverflowSearch from '../StackOverflowSearch/StackOverflowSearch';
+import Npm from '../Npm/Npm';
 import Playground from '../Playground/playground.jsx';
 import Organizations from '../Organizations/Organizations.jsx';
 import BurgerMenu from '../BurgerMenu/BurgerMenu.jsx';
 import PostForm from '../PostForm/PostForm.jsx';
 import Posts from '../posts/Posts';
 import MyPosts from '../Myposts/Myposts';
-import Likes from "../Likes/Likes.jsx";
+import Likes from '../Likes/Likes.jsx';
 import PostEdit from '../Myposts/Postedit.jsx';
 import Kanban from '../Kanban/Kanban';
-import blob2 from "../../assets/blobanimation.svg";
-import blob from "../../assets/blobanimationBG.svg";
+import blob2 from '../../assets/blobanimation.svg';
+import blob from '../../assets/blobanimationBG.svg';
 
 // App component
 export default function App() {
@@ -71,23 +73,18 @@ export default function App() {
         <Sidebar setIsLoading={setIsLoading} />
       </Box>
     );
-  const header = isRegisterOrLoginRouteOrHome ? null : <Header setIsLoading={setIsLoading} />;
+  const header = isRegisterOrLoginRouteOrHome ? null : (
+    <Header setIsLoading={setIsLoading} />
+  );
 
   return (
     // Flex container for Sidebar and main content area
-    <Flex minH="100vh"
-          bgGradient='linear(to-r, #2e76ff, #172c69)' w="100vw">
-
-
+    <Flex minH="100vh" bgGradient="linear(to-r, #2e76ff, #172c69)" w="100vw">
       {sidebar}
       {/* Box for main content area */}
       <Box
         minH="100vh"
-        w={
-          isRegisterOrLoginRouteOrHome || isSmallerThan1000
-            ? '100vw'
-            : '100%'
-        }
+        w={isRegisterOrLoginRouteOrHome || isSmallerThan1000 ? '100vw' : '100%'}
         p={isHomepage || isSmallerThan1000 ? '' : '5'}
         display="flex"
         alignItems="center"
@@ -109,28 +106,31 @@ export default function App() {
             <Route path="/profile" element={<Profile />} />
             <Route path="/homepage" element={<Homepage />} />
             <Route path="/stackoverflow" element={<StackOverflowSearch />} />
+            <Route path="/npm" element={<Npm />} />
             <Route path="/playground" element={<Playground />} />
             <Route path="/addpost" element={<PostForm />} />
             <Route path="/likes" element={<Likes />} />
-            <Route path="/kanban" element={<Kanban />} />            
+            <Route path="/kanban" element={<Kanban />} />
             <Route path="/editpost/:postId" element={<PostEdit />} />
           </Routes>
         )}
       </Box>
-      <Image  src={blob2}
-              position="absolute"
-              opacity="0.5"
-              w={['80%', '80%', '80%', '35%']}
-              left="-50"
-              top="-70">
-      </Image>
+      <Image
+        src={blob2}
+        position="absolute"
+        opacity="0.5"
+        w={['80%', '80%', '80%', '35%']}
+        left="-50"
+        top="-70"
+      ></Image>
 
-      <Image src={blob}
-             position="fixed"
-             top="-500"
-             right="-710"
-             opacity="0.1">
-      </Image>
+      <Image
+        src={blob}
+        position="fixed"
+        top="-500"
+        right="-710"
+        opacity="0.1"
+      ></Image>
     </Flex>
   );
 }
