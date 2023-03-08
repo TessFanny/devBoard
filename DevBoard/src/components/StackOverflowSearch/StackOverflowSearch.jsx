@@ -93,8 +93,9 @@ function StackOverflowSearch() {
         {loading ? (
           <Flex justify="center" align="center" w="90%">
             <Stack align="center">
-              <Spinner size="lg" />
-              <Text>Searching...</Text>
+              <Spinner size="lg" style={{color: "#D8E5FF"}} />
+              <Text color="primary"
+                    fontWeight="600">Searching...</Text>
             </Stack>
           </Flex>
         ) : /* // If the search has returned results, they are displayed in a Box component */

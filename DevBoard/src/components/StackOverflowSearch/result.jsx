@@ -32,7 +32,7 @@ function Result({ questionId,
             <Box w="100%" bgColor="bgPost" boxShadow="md" borderRadius="md" display="flex" flexDirection={!mobile ? 'row' : 'column' } p="10px" pt="17px" gap={2} key={questionId} _hover={{ backgroundColor: 'secondary' }}>
                 <Box w={!mobile ? "100px" : "100%"} display="flex" flexDirection={!mobile ? "column" : "row"} alignItems="center" justifyContent={mobile && "flex-start"} gap={1}>
                     {!mobile && <Text fontWeight="600" color="black100">{score} votes</Text>}
-                    <Box display="flex" w={!mobile ? "100%" : "90px"} width={mobile ? "120px" : "100%"} h="35px" bgColor="blue"  borderRadius="md" alignItems="center" justifyContent="space-around">
+                    <Box display="flex" w={!mobile ? "100%" : "90px"} width={mobile ? "120px" : "100%"} h="35px" bgColor="blue100"  borderRadius="md" alignItems="center" justifyContent="space-around">
                         <BsCheckLg color="#D8E5FF" />
 
                         <Text fontSize="13px" fontWeight="600" color="primary">{answerCount} {mobile && "Answers"}</Text>
