@@ -20,7 +20,7 @@ const Posts = () => {
         }, []);
 
     return (
-        <Flex w={isSmallerThan1000 ? '100%' : '98%'}
+        <Flex w={isSmallerThan1000 ? '100%' : '70%'}
               h="80vh" mt={10}
               overflow="hidden"
               bgColor="bgPrimary"
@@ -31,7 +31,7 @@ const Posts = () => {
               zIndex={1}>
             <Box width="100%"
                  h="100%"
-                 overflowY="scroll">
+                 overflowY="auto">
             {liked_posts && posts ? (
                 posts.map((post) => (
                     <Post key={post.id}

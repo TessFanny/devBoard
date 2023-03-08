@@ -85,7 +85,7 @@ function Repositories() {
           boxShadow="lg"
           p="4"
           zIndex={1}>
-      <Box h="100%" w="100%" overflowY="scroll">
+      <Box h="100%" w="100%" overflowY="auto">
 
       {githubLogged ? (
         <> 

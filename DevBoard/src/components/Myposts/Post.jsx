@@ -29,7 +29,7 @@ console.log(posts);
     }
 
     return (
-    <Card mb="5" boxShadow="md"  bgColor="bgPost">
+    <Card opacity='0.8' mb="5" boxShadow="md">
         <CardHeader w="100%" pb="0">
             <Box display="flex" alignItems="center" w="100%" mb="3">
                 <Avatar name={username} size='sm' src={`${VITE_BACKEND_URL}/images/${imageuser}`}/>
