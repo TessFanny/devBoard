@@ -22,14 +22,13 @@ function Post({title,content, like, date, imageuser, username, postId}) {
     const { posts } = useSelector((state) => state.login);
     const dispatch = useDispatch();
     const VITE_BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
-console.log(posts);
     const handleDelete = () => {
         dispatch(deletePost({ postId, id }));
         posts.filter((item) => item.id !== postId);
     }
 
     return (
-    <Card opacity='0.8' mb="5" boxShadow="md">
+    <Card mb="5" boxShadow="md"  bgColor="bgPost">
         <CardHeader w="100%" pb="0">
             <Box display="flex" alignItems="center" w="100%" mb="3">
                 <Avatar name={username} size='sm' src={`${VITE_BACKEND_URL}/images/${imageuser}`}/>

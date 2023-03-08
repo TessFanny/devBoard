@@ -76,7 +76,7 @@ export default function App() {
   return (
     // Flex container for Sidebar and main content area
     <Flex minH="100vh"
-          bgGradient='linear(to-r, #2e76ff, #172c69)' w="100vw">
+          bgGradient='linear(to-r, #2e76ff, #172c69)' w="100vw" zIndex='-500'>
 
 
       {sidebar}
@@ -126,6 +126,7 @@ export default function App() {
       </Image>
 
       <Image src={blob}
+            zIndex='-1'
              position="fixed"
              top="-500"
              right="-710"

@@ -73,7 +73,7 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
           alignItems="flex-start"
       >
           <Box
-              _hover={{backgroundColor: "bgSecondary"}}
+              _hover={{backgroundColor: "bgSecondary", boxShadow: "lg"}}
               mb="5px"
               pl="4"
               display="flex"
@@ -81,11 +81,12 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
               w="100%"
               h="50px"
               borderRadius="md"
-
+              cursor="pointer"
               onClick={() => {
                 handleLinkClick();
                 setActiveRoute('/dashboard')
               }}
+              boxShadow={activeRoute === '/dashboard' ? 'md' : ''}
               color={activeRoute === '/dashboard' ? 'secondary' : 'primary'}
               bgColor={activeRoute === '/dashboard' ? 'bgPrimary' : ''}>
               <Flex justifyContent="space-around" alignItems="center">
@@ -96,7 +97,7 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
           </Box>
 
           <Box
-              _hover={{backgroundColor: "bgSecondary"}}
+              _hover={{backgroundColor: "bgSecondary", boxShadow: "lg"}}
               mb="5px"
               cursor="pointer"
               pl="4"
@@ -121,7 +122,7 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
 
                   <Link to="/addpost" style={{width: "100%", height: "50px", marginBottom: "5px"}}>
                       <Box
-                          _hover={{backgroundColor: "bgSecondary"}}
+                          _hover={{backgroundColor: "bgSecondary", boxShadow: "lg"}}
                           pl="8"
                           display="flex"
                           alignItems="center"
@@ -133,6 +134,7 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
                               handleLinkClick();
                               setActiveRoute('/addpost')
                           }}
+                          boxShadow={activeRoute === '/addpost' ? 'md' : ''}
                           color={activeRoute === '/addpost' ? 'secondary' : 'primary'}
                           bgColor={activeRoute === '/addpost' ? 'bgPrimary' : ''}>
                           <Flex justifyContent="space-around" alignItems="center">
@@ -144,7 +146,7 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
 
                   <Link to="/feed" style={{width: "100%", height: "50px", marginBottom: "5px"}}>
                       <Box
-                          _hover={{backgroundColor: "bgSecondary"}}
+                          _hover={{backgroundColor: "bgSecondary", boxShadow: "lg"}}
                           pl="8"
                           display="flex"
                           alignItems="center"
@@ -156,6 +158,7 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
                               handleLinkClick();
                               setActiveRoute('/feed')
                           }}
+                          boxShadow={activeRoute === '/feed' ? 'md' : ''}
                           color={activeRoute === '/feed' ? 'secondary' : 'primary'}
                           bgColor={activeRoute === '/feed' ? 'bgPrimary' : ''}>
                           <Flex justifyContent="space-around" alignItems="center">
@@ -167,7 +170,7 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
 
                   <Link to="/posts" style={{width: "100%", height: "50px", marginBottom: "5px"}}>
                       <Box
-                          _hover={{backgroundColor: "bgSecondary"}}
+                          _hover={{backgroundColor: "bgSecondary", boxShadow: "lg"}}
                           pl="8"
                           display="flex"
                           alignItems="center"
@@ -179,6 +182,7 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
                               handleLinkClick();
                               setActiveRoute('/posts')
                           }}
+                          boxShadow={activeRoute === '/posts' ? 'md' : ''}
                           color={activeRoute === '/posts' ? 'secondary' : 'primary'}
                           bgColor={activeRoute === '/posts' ? 'bgPrimary' : ''}>
                           <Flex justifyContent="space-around" alignItems="center">
@@ -190,7 +194,7 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
 
                   <Link to="/mypost" style={{width: "100%", height: "50px", marginBottom: "5px"}}>
                       <Box
-                          _hover={{backgroundColor: "bgSecondary"}}
+                          _hover={{backgroundColor: "bgSecondary", boxShadow: "lg"}}
                           pl="8"
                           display="flex"
                           alignItems="center"
@@ -202,6 +206,7 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
                               handleLinkClick();
                               setActiveRoute('/mypost')
                           }}
+                          boxShadow={activeRoute === '/mypost' ? 'md' : ''}
                           color={activeRoute === '/mypost' ? 'secondary' : 'primary'}
                           bgColor={activeRoute === '/mypost' ? 'bgPrimary' : ''}>
                           <Flex justifyContent="space-around" alignItems="center">
@@ -218,7 +223,7 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
 
         <Link to="/repositories" style={{width: "100%", height: "50px", marginBottom: "5px"}}>
           <Box
-              _hover={{backgroundColor: "bgSecondary"}}
+              _hover={{backgroundColor: "bgSecondary", boxShadow: "lg"}}
               pl="4"
               display="flex"
               alignItems="center"
@@ -230,6 +235,7 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
                 handleLinkClick();
                 setActiveRoute('/repositories')
               }}
+              boxShadow={activeRoute === '/repositories' ? 'md' : ''}
               color={activeRoute === '/repositories' ? 'secondary' : 'primary'}
               bgColor={activeRoute === '/repositories' ? 'bgPrimary' : ''}>
               <Flex justifyContent="space-around" alignItems="center">
@@ -241,7 +247,7 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
 
         <Link to="/stackoverflow" style={{width: "100%", height: "50px", marginBottom: "5px"}}>
           <Box
-              _hover={{backgroundColor: "bgSecondary"}}
+              _hover={{backgroundColor: "bgSecondary", boxShadow: "lg"}}
               pl="4"
               display="flex"
               alignItems="center"
@@ -253,6 +259,7 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
                 handleLinkClick();
                 setActiveRoute('/stackoverflow')
               }}
+              boxShadow={activeRoute === '/stackoverflow' ? 'md' : ''}
               color={activeRoute === '/stackoverflow' ? 'secondary' : 'primary'}
               bgColor={activeRoute === '/stackoverflow' ? 'bgPrimary' : ''}>
               <Flex justifyContent="space-around" alignItems="center">
@@ -264,7 +271,7 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
 
         <Link to="/playground" style={{width: "100%", height: "50px", marginBottom: "5px"}}>
           <Box
-              _hover={{backgroundColor: "bgSecondary"}}
+              _hover={{backgroundColor: "bgSecondary", boxShadow: "lg"}}
               pl="4"
               display="flex"
               alignItems="center"
@@ -276,6 +283,7 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
                 handleLinkClick();
                 setActiveRoute('/playground')
               }}
+              boxShadow={activeRoute === '/playground' ? 'md' : ''}
               color={activeRoute === '/playground' ? 'secondary' : 'primary'}
               bgColor={activeRoute === '/playground' ? 'bgPrimary' : ''}>
               <Flex justifyContent="space-around" alignItems="center">
@@ -286,7 +294,7 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
         </Link>
 
          <Box
-              _hover={{backgroundColor: "bgSecondary"}}
+              _hover={{backgroundColor: "bgSecondary", boxShadow: "lg"}}
               pl="4"
               display="flex"
               alignItems="center"
@@ -299,6 +307,7 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
                 handleLinkClick();
                 setActiveRoute('/kanban')
               }}
+              boxShadow={activeRoute === '/kanban' ? 'md' : ''}
               color={activeRoute === '/kanban' ? 'secondary' : 'primary'}
               bgColor={activeRoute === '/kanban' ? 'bgPrimary' : ''}>
              <Flex justifyContent="space-around" alignItems="center">
@@ -309,7 +318,7 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
 
         <Link to="/likes" style={{width: "100%", height: "50px", marginBottom: "5px"}}>
           <Box
-              _hover={{backgroundColor: "bgSecondary"}}
+              _hover={{backgroundColor: "bgSecondary", boxShadow: "lg"}}
               pl="4"
               display="flex"
               alignItems="center"
@@ -321,6 +330,7 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
                 handleLinkClick();
                 setActiveRoute('/likes')
               }}
+              boxShadow={activeRoute === '/likes' ? 'md' : ''}
               color={activeRoute === '/likes' ? 'secondary' : 'primary'}
               bgColor={activeRoute === '/likes' ? 'bgPrimary' : ''}>
               <Flex justifyContent="space-around" alignItems="center">
@@ -332,7 +342,7 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
 
         <Link to="/profile" style={{width: "100%", height: "50px", marginBottom: "5px"}}>
           <Box
-              _hover={{backgroundColor: "bgSecondary"}}
+              _hover={{backgroundColor: "bgSecondary", boxShadow: "lg"}}
               pl="4"
                display="flex"
                alignItems="center"
@@ -344,6 +354,7 @@ const Sidebar = ({ isOpen, setIsLoading }) => {
                  handleLinkClick();
                  setActiveRoute('/profile')
                }}
+              boxShadow={activeRoute === '/profile' ? 'md' : ''}
                color={activeRoute === '/profile' ? 'secondary' : 'primary'}
                bgColor={activeRoute === '/profile' ? 'bgPrimary' : ''}>
               <Flex justifyContent="space-around" alignItems="center">
