@@ -53,16 +53,15 @@ function StackOverflowSearch() {
     <>
       <Flex
         w="98%"
-        minH="80%"
+        h="80vh"
         mt="10"
-        bgColor="gray.50"
-        borderRadius="md"
-        boxShadow="md"
         p="4"
         flexDir="column"
         align="center"
         style={{'backdrop-filter': 'blur(15px)'}}
-        zIndex='5'
+        borderRadius="md"
+        boxShadow="lg"
+        zIndex={1}
       >
         <form
           onSubmit={handleFormSubmit}
@@ -75,12 +74,17 @@ function StackOverflowSearch() {
               value={query}
               onChange={handleQueryChange}
               size="lg"
-              focusBorderColor="blue.500"
+              bgColor="secondary"
+              fontWeight="600"
+              color="#505E7B"
+              focusBorderColor="primary"
+              _focus={{ bg: 'secondary' }}
               _hover={{ borderColor: 'blue.500' }}
             />
             <Button
               type="submit"
-              colorScheme="blue"
+              style={{backgroundColor: '#D8E5FF'}}
+              color="black200"
               size="lg"
               isLoading={loading}
               loadingText="Searching"
@@ -107,6 +111,7 @@ function StackOverflowSearch() {
               h: '75%',
               justifyContent: 'center',
             }}
+            overflowY="scroll"
           >
             <Stack
               display="flex"
@@ -131,6 +136,7 @@ function StackOverflowSearch() {
                       justifyContent="center"
                       flexDirection="column"
                       fontSize={mobile ? '10px' : '16px'}
+                      bgColor="bgPost"
                     >
                       <Flex alignItems="center">
                         <Box>

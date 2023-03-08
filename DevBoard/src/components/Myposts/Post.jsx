@@ -28,7 +28,11 @@ function Post({title,content, like, date, imageuser, username, postId}) {
     }
 
     return (
+<<<<<<< HEAD
     <Card mb="5" boxShadow="md"  bgColor="bgPost">
+=======
+    <Card opacity='0.8' mb="5" boxShadow="md">
+>>>>>>> b11f0ddb6d38607d018fbcc21f203a8b55bb65fd
         <CardHeader w="100%" pb="0">
             <Box display="flex" alignItems="center" w="100%" mb="3">
                 <Avatar name={username} size='sm' src={`${VITE_BACKEND_URL}/images/${imageuser}`}/>
