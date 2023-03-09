@@ -1,5 +1,4 @@
 import {
-  Text,
   useMediaQuery,
   Flex,
   Box,
@@ -8,16 +7,15 @@ import {
   Button,
 } from '@chakra-ui/react';
 import { useDispatch, useSelector } from 'react-redux';
+import MDEditor, { commands, EditorContext } from '@uiw/react-md-editor';
+import { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import {
   editPost,
   deletePost,
   changeContentValue,
   changeTitleValue,
-} from '../../features/Post/post';
-import MDEditor, { commands, EditorContext } from '@uiw/react-md-editor';
-import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+} from '../../features/Editpost/editpost';
 import Notification from '../Notification/Notification.jsx';
 
 function PostEdit() {
@@ -27,13 +25,13 @@ function PostEdit() {
   const [isSmallerThan1000] = useMediaQuery('(max-width: 1000px)');
 
   // Récupération du state "post" depuis le store Redux
-  const { title, content } = useSelector((state) => state.post);
+  const { title, content } = useSelector((state) => state.edit);
 
   // Récupération de l'ID utilisateur depuis le store Redux
   const { id } = useSelector((state) => state.login.user);
   const user_id = id;
   // Récupération de l'URL de l'API backend depuis les variables d'environnement
-  const VITE_BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+  const { VITE_BACKEND_URL } = import.meta.env;
 
   // Récupération de l'ID du post à éditer depuis les paramètres de l'URL
   const { postId } = useParams();
@@ -45,14 +43,15 @@ function PostEdit() {
   // Récupération des données du post à éditer depuis l'API backend et mise à jour du state "post" dans le store Redux
   useEffect(() => {
     async function fetchPost() {
-      const response = await fetch(`${VITE_BACKEND_URL}/api/post/${postId}`,
+      const response = await fetch(
+        `${VITE_BACKEND_URL}/api/post/${postId}`,
 
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem('token')}`, // Bearer ACCESSTOKEN
-            },
-          }
-          );
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`, // Bearer ACCESSTOKEN
+          },
+        }
+      );
       const data = await response.json();
       if (user_id !== data.user_id) {
         // L'utilisateur n'est pas autorisé à modifier ou supprimer le post, donc on le redirige vers la page précédente
@@ -72,7 +71,6 @@ function PostEdit() {
 
   // Gestionnaire de changement de contenu
   const handleContentChange = (evt) => {
-    console.log(evt);
     dispatch(changeContentValue(evt));
   };
 
@@ -80,7 +78,14 @@ function PostEdit() {
   const handleSubmit = () => {
     if (isLoading) return;
     setIsLoading(true);
-    dispatch(editPost({ title, content, postId, user_id }));
+    dispatch(
+      editPost({
+        title,
+        content,
+        postId,
+        user_id,
+      })
+    );
     setTimeout(() => {
       setIsLoading(false);
       setNotification(true);
@@ -119,6 +124,7 @@ function PostEdit() {
       boxShadow="lg"
       zIndex={1}
       p="4"
+      zIndex="50"
     >
       <Box w="100%">
         <FormControl
