@@ -22,7 +22,6 @@ function Post({title,content, like, date, imageuser, username, postId}) {
     const { posts } = useSelector((state) => state.login);
     const dispatch = useDispatch();
     const VITE_BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
-console.log(posts);
     const handleDelete = () => {
         dispatch(deletePost({ postId, id }));
         posts.filter((item) => item.id !== postId);
