@@ -25,7 +25,6 @@ function PostForm() {
   const [isSmallerThan1000] = useMediaQuery('(max-width: 1000px)');
   const { title, content, status } = useSelector((state) => state.post);
   const { id } = useSelector((state) => state.login.user);
-  console.log(id);
   const dispatch = useDispatch();
   const navigateto = useNavigate();
   const handleTitleChange = (evt) => {
@@ -33,7 +32,6 @@ function PostForm() {
   };
 
   const handleContentChange = (evt) => {
-    console.log(evt);
     dispatch(changeContentValue(evt));
   };
 
