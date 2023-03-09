@@ -16,7 +16,6 @@ import {
 } from '../../features/Post/post';
 import MDEditor, { commands, EditorContext } from '@uiw/react-md-editor';
 import { useState } from 'react';
-import { modifyUser } from '../../features/user/user.js';
 import { useNavigate } from 'react-router-dom';
 import Notification from '../Notification/Notification.jsx';
 function PostForm() {
@@ -25,7 +24,6 @@ function PostForm() {
   const [isSmallerThan1000] = useMediaQuery('(max-width: 1000px)');
   const { title, content, status } = useSelector((state) => state.post);
   const { id } = useSelector((state) => state.login.user);
-  console.log(id);
   const dispatch = useDispatch();
   const navigateto = useNavigate();
   const handleTitleChange = (evt) => {
