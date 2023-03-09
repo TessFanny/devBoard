@@ -12,6 +12,7 @@ import { useEffect } from 'react';
 import { Link } from '@chakra-ui/react';
 import { useDispatch, useSelector } from 'react-redux';
 import {getFeeds} from "../../features/user/user.js";
+import Article from "./article.jsx";
 
 const Feed = () => {
     const [isSmallerThan1000] = useMediaQuery('(max-width: 1000px)');
@@ -28,7 +29,6 @@ return (
     <Flex w={isSmallerThan1000 ? '100%' : '98%'}
           h="80vh"
           mt={10}
-          display="flex"
           justifyContent="center"
           bgColor="bgPrimary"
           style={{'backdrop-filter': 'blur(15px)'}}
@@ -49,22 +49,10 @@ return (
                                 <Link fontSize="sm">{feed?.link}</Link>
                                 {feed.items.map((item) => (
 
-                                    <Link href={item.link}  isExternal _hover={{ textDecoration: 'none' }}>
-                                        <Box w="100%"
-                                             p="4"
-                                             _hover={{ backgroundColor: 'secondary' }}
-                                             display="flex"
-                                             flexDirection="column"
-                                             gap={2}
-                                             mt="10px"
-                                             bgColor="bgPost" borderRadius="md" boxShadow="md">
-                                            <Text fontSize="12px" fontWeight="600" color="black100">{item.pubDate}</Text>
-                                            <Text fontSize="md" fontWeight="600" color="black100">{item.title}</Text>
-                                            <Text fontSize="sm" textAlign="end" fontWeight="600" color="black100">Creator: {item.creator}</Text>
-                                        </Box>
-                                    </Link>
-
-
+                                    <Article link={item.link}
+                                             pubDate={item.pubDate}
+                                             title={item.title}
+                                             creator={item.creator} />
                                 ))}
                             </TabPanel>
                         )}

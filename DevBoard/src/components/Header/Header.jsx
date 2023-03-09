@@ -92,10 +92,10 @@ function Header({setIsLoading}) {
             />
             <MenuList bgColor="bgPrimary" border="none" style={{'backdrop-filter': 'blur(300px)'}} boxShadow="lg" p="1" display="flex" flexDirection="column" gap={2}>
               <Link to="/profile">
-                <MenuItem bgColor="secondary" icon={<FaUserEdit />}>Profile</MenuItem>
+                <MenuItem bgColor="secondary" color="black100" fontWeight="600" borderRadius="md" icon={<FaUserEdit />}>Profile</MenuItem>
               </Link>
               <Link to="/homepage">
-                <MenuItem bgColor="secondary" icon={<FiLogOut />} onClick={handleLogout}>
+                <MenuItem bgColor="secondary" color="black100" fontWeight="600" borderRadius="md" icon={<FiLogOut />} onClick={handleLogout}>
                   Log out
                 </MenuItem>
               </Link>
