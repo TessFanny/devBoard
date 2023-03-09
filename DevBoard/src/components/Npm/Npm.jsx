@@ -1,27 +1,21 @@
 import React, { useState } from 'react';
-import { formatDistanceToNow } from 'date-fns';
 import {
   Input,
   Button,
   Stack,
   Box,
-  List,
-  ListItem,
-  Link,
   Text,
   Spinner,
   Flex,
-  SimpleGrid,
-  Heading,
-  Avatar,
   useMediaQuery,
 } from '@chakra-ui/react';
+import Result from './Result';
 
 function NpmSearch() {
   const [query, setQuery] = useState('');
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
-
+  const [mobile] = useMediaQuery('(max-width: 600px)');
   const searchNpm = async () => {
     setLoading(true);
     const url = `https://registry.npmjs.com/-/v1/search?text=${query}`;
@@ -44,60 +38,90 @@ function NpmSearch() {
   };
 
   return (
-    <Box zIndex={1}>
-      <form onSubmit={handleFormSubmit}>
-        <Stack direction="row" paddingTop={5}>
+    <Flex
+      w="98%"
+      h="80vh"
+      mt="10"
+      p="4"
+      flexDir="column"
+      align="center"
+      bgColor="bgPrimary"
+      style={{ 'backdrop-filter': 'blur(15px)' }}
+      borderRadius="md"
+      boxShadow="lg"
+      zIndex={1}
+    >
+      <form
+        onSubmit={handleFormSubmit}
+        style={{ width: '90%', marginBottom: '2rem' }}
+      >
+        <Stack direction="row" align="center">
           <Input
-            placeholder="Search packages on NPM"
+            type="text"
+            placeholder="Search on Npm"
             value={query}
             onChange={handleQueryChange}
+            size="lg"
+            bgColor="secondary"
+            fontWeight="600"
+            color="#505E7B"
+            focusBorderColor="primary"
+            _focus={{ bg: 'secondary' }}
+            _hover={{ borderColor: 'blue.500' }}
           />
-          <Button type="submit" disabled={loading}>
-            {loading ? <Spinner size="sm" /> : 'Search'}
+          <Button
+            type="submit"
+            style={{ backgroundColor: '#D8E5FF' }}
+            color="black200"
+            size="lg"
+            isLoading={loading}
+            loadingText="Searching"
+          >
+            Search
           </Button>
         </Stack>
       </form>
-      {results.length > 0 && (
-        <Box mt={4}>
-          {results.map((result) => (
-            <Box
-              bgColor="white"
-              style={{
-                marginBottom: '1rem',
-                marginTop: '1rem',
-              }}
-            >
-              <Link href={result.package.links.npm} isExternal>
-                <Text fontSize="xl" color="black">
-                  {result.package.name}
-                </Text>
-                <Text fontSize="sm" color="gray.500">
-                  {result.package.description}
-                </Text>
-                <Box style={{ display: 'flex', flexDirection: 'row' }}>
-                  <Text style={{ paddingRight: '1rem' }}>
-                    {result.package.publisher.username}{' '}
-                  </Text>
-                  <Text color="gray.500" style={{ paddingRight: '1rem' }}>
-                    {' '}
-                    {`published ${result.package.version}`}{' '}
-                  </Text>
-                  <Text style={{ paddingRight: '1rem' }} color="gray.500">
-                    {' '}
-                    •{' '}
-                  </Text>
-                  <Text color="gray.500">
-                    {` ${formatDistanceToNow(new Date(result.package.date), {
-                      addSuffix: true,
-                    })}`}
-                  </Text>
-                </Box>
-              </Link>
-            </Box>
-          ))}
-        </Box>
-      )}
-    </Box>
+      {/* If the search is currently loading, a Spinner and a Text component are displayed  */}
+
+      {loading ? (
+        <Flex justify="center" align="center" w="90%">
+          <Stack align="center">
+            <Spinner size="lg" style={{ color: '#D8E5FF' }} />
+            <Text color="primary" fontWeight="600">
+              Searching...
+            </Text>
+          </Stack>
+        </Flex>
+      ) /* // If the search has returned results, they are displayed in a Box component */
+        : results.length > 0 ? (
+          <Box
+            w={!mobile ? '91%' : '100%'}
+            h="100%"
+            display="flex"
+            flexDirection="column"
+            gap={2}
+            overflowY="auto"
+          >
+            {results.map((result, index) => (
+              <Result
+                key={index}
+                name={result.package.name}
+                link={result.package.links.npm}
+                description={result.package.description}
+                username={result.package.publisher.username}
+                version={result.package.version}
+                date={result.package.date}
+              />
+            ))}
+          </Box>
+        ) : (
+          <Flex justify="center" align="center" w="100%" mt="4">
+            <Text color="primary" fontWeight="600">
+              Make a research.
+            </Text>
+          </Flex>
+        )}
+    </Flex>
   );
 }
 
