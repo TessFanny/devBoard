@@ -86,6 +86,7 @@ function Post({ title, content, like, date, imageuser, username, postId }) {
       </CardBody>
     </Card>
   );
+
 }
 
 Post.propTypes = {
@@ -101,6 +102,3 @@ Post.propTypes = {
 
 export default Post;
 
-// const Post = ({
-
-// }) => {

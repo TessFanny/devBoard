@@ -118,9 +118,11 @@ function PostEdit() {
       data-color-mode="light"
       minH="80%"
       mt={10}
-      bgColor="gray.50"
+      bgColor="bgPrimary"
+      style={{'backdrop-filter': 'blur(15px)'}}
       borderRadius="md"
-      boxShadow="md"
+      boxShadow="lg"
+      zIndex={1}
       p="4"
       zIndex="50"
     >
@@ -137,8 +139,8 @@ function PostEdit() {
             height="120px"
             textAlign="center"
             fontSize="2xl"
-            boxShadow="md"
-            bgColor="whitevas'y"
+            boxShadow="lg"
+            bgColor="bgPost"
             value={title}
             onChange={handleTitleChange}
           />
@@ -149,7 +151,7 @@ function PostEdit() {
             onChange={handleContentChange}
             height="450px"
             style={{
-              backgroundColor: 'white',
+              backgroundColor: 'rgba(219, 231, 255, 0.9)',
               boxShadow: '2px 2px 5px rgba(0, 0, 0, 0.1)',
               color: 'black',
             }}

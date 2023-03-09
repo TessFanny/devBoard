@@ -31,7 +31,6 @@ function PostForm() {
   };
 
   const handleContentChange = (evt) => {
-    console.log(evt);
     dispatch(changeContentValue(evt));
   };
 

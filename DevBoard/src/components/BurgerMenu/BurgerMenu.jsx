@@ -24,7 +24,8 @@ function BurgerMenu() {
                 as={IconButton}
                 aria-label='Options'
                 icon={<GiHamburgerMenu />}
-                variant='outline'
+                color="black100"
+                bgColor="secondary"
             />
             <MenuList>
                 <MenuItem icon={<FaChartLine />}>
