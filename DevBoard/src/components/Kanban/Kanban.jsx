@@ -4,25 +4,30 @@ import { useState, useRef } from 'react';
 import { Button, Flex } from '@chakra-ui/react';
 import useLocalStorage from '../Playground/useLocalStorage';
 import { Box } from '@chakra-ui/react'
-import uuidv4 from 'uuidv4'
+import {useMediaQuery} from '@chakra-ui/react';
+import { useId } from 'react';
+import { v4 as uuid } from 'uuid';
 
 function Kanban() {
 
-    const [itemTodo, setitemTodo] = useLocalStorage('itemTodo', [
-    {id: '1', content: 'coucou'},
-    {id:'2', content: 'coucou2'},
-    {id: '3', content: 'coucou3'},])
+    const [itemTodo, setitemTodo] = useLocalStorage('itemTodo', [])
     const [itemInprogress, setitemInprogress] = useLocalStorage('itemInprogress', [])
     const [itemFinish, setitemFinish] = useLocalStorage('itemFinish', [])
     const todoNameRef = useRef()
-    
+    const [isSmallerThan1000] = useMediaQuery('(max-width: 1000px)');
+    const [isSmallerThan1200] = useMediaQuery('(max-width: 1200px)');
 
     function handleAdd (e){
         const input = todoNameRef.current.value
         if (input==='') return;
-        setitemTodo(prevtodo => {
-            return [...prevtodo, {id:1, content: input}]
-
+        const sourceColumn = columns[1];
+        const sourceItems = [...sourceColumn.items];
+        setColumns({
+            ...columns, [1]:{
+                ...sourceColumn, items: sourceItems
+            },[destination.droppableId]:{
+                ...destColumn, items: destItems
+            }
         })
         console.log(input)
     }
@@ -80,7 +85,19 @@ function Kanban() {
 };
 
 return (
-    <Flex display='flex' flexDirection='column'>
+    <Flex w={isSmallerThan1000 ? '100%' : '98%'}
+    h="80vh"
+    mt={10}
+    flexDirection="column"
+    gap={5}
+    bgColor="bgPrimary"
+    style={{'backdrop-filter': 'blur(15px)'}}
+    borderRadius="md"
+    boxShadow="lg"
+    p="4"
+    zIndex={1}
+    display='flex' >
+
         <Flex display='flex' flexDirection='flex-wrap'>
         <DragDropContext 
         key='kanban' 
@@ -89,7 +106,9 @@ return (
 
             {Object.entries(columns).map(([id, column]) => {
                 return (
-                    <Box style={{
+                    <Box 
+                    bgColor="bgPrimary"
+                    style={{
                         display:'flex',
                         flexDirection:'column',
                         alignItems:'center'
@@ -98,7 +117,7 @@ return (
                     <h2>
                         {column.name}
                     </h2>
-                    <Box style={{margin:8}}>
+                    <Box bgColor="bgPrimary" style={{margin:8}}>
                     <Droppable droppableId={id} key={id}>
                         {(provided, snapshot)=> {
                             return (
@@ -152,7 +171,7 @@ return (
         </DragDropContext>
         </Flex>
         <Box>
-            <input type='text' />                     
+            <input ref={todoNameRef} type='text' />                     
             <Button size='xs' onClick={handleAdd}> Add Task </Button>
             <Button size='xs'> Clear Complete </Button>
         </Box>        

@@ -24,6 +24,7 @@ export const modifyUser = createAsyncThunk(
     const {
       id, firstname, lastname, username, email, image_path,
     } = user;
+    console.log(user)
     // Make a patch request to a modify endpoint with user object
     const response = await axios.patch(
       `${VITE_BACKEND_URL}/api/user/${id}`,
@@ -34,7 +35,6 @@ export const modifyUser = createAsyncThunk(
         email,
         image_path,
       },
-
       {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`, // Bearer ACCESSTOKEN

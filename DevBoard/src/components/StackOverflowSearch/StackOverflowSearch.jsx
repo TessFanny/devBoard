@@ -4,26 +4,20 @@ import {
   Button,
   Stack,
   Box,
-  List,
-  ListItem,
-  Link,
   Text,
   Spinner,
   Flex,
-  SimpleGrid,
-  Heading,
-  Avatar,
   useMediaQuery,
 } from '@chakra-ui/react';
 import { TiInputChecked } from 'react-icons/ti';
+import Result from "./result.jsx";
 // This function component is called StackOverflowSearch
 function StackOverflowSearch() {
   // The state variables 'query', 'results' and 'loading' are declared using the useState hook
   const [query, setQuery] = useState('');
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [mobile] = useMediaQuery('(max-width: 500px)');
-
+  const [mobile] = useMediaQuery('(max-width: 600px)');
   // This function is used to search StackOverflow using the 'query' state variable
   const searchStackOverflow = async () => {
     setLoading(true);
@@ -98,160 +92,32 @@ function StackOverflowSearch() {
         {loading ? (
           <Flex justify="center" align="center" w="90%">
             <Stack align="center">
-              <Spinner size="lg" />
-              <Text>Searching...</Text>
+              <Spinner size="lg" style={{color: "#D8E5FF"}} />
+              <Text color="primary"
+                    fontWeight="600">Searching...</Text>
             </Stack>
           </Flex>
         ) : /* // If the search has returned results, they are displayed in a Box component */
         results.length > 0 ? (
-          <Box
-            style={{
-              flex: '1',
-              width: '100%',
-              h: '75%',
-              justifyContent: 'center',
-            }}
-            overflowY="scroll"
-          >
-            <Stack
-              display="flex"
-              w="100%"
-              h={{ base: 'auto', md: '92%' }}
-              overflowY="scroll"
-            >
-              {results.map((result) => (
-                <div key={result.question_id}>
-                  <Link
-                    href={result.link}
-                    isExternal
-                    _hover={{ textDecoration: 'none' }}
-                  >
-                    <Box
-                      boxShadow="md"
-                      p={4}
-                      borderRadius="md"
-                      w={{ base: '85vw', md: '90vw', xl: '75vw' }}
-                      h={{ base: 'auto', md: '20vh' }}
-                      display="flex"
-                      justifyContent="center"
-                      flexDirection="column"
-                      fontSize={mobile ? '10px' : '16px'}
-                      bgColor="bgPost"
-                    >
-                      <Flex alignItems="center">
-                        <Box>
-                          <Text
-                            fontWeight="bold"
-                            fontSize={mobile ? '10px' : 'sm'}
-                            style={{
-                              display: 'flex',
-                              margin: '0vw',
-                              padding: '2px',
-                              justifyContent: 'flex-end',
-                              textDecoration: 'none',
-                            }}
-                          >
-                            {result.score} votes
-                          </Text>
-
-                          <Text
-                            bgColor="green"
-                            color="white"
-                            fontSize={mobile ? '10px' : 'sm'}
-                            style={{
-                              display: 'flex',
-                              flexDirection: 'row',
-                              alignItems: 'center',
-                              padding: '2px',
-                              textDecoration: 'none',
-                            }}
-                          >
-                            <TiInputChecked
-                              size={30}
-                              style={{ marginRight: '0.5rem' }}
-                            />
-                            {result.answer_count} answers
-                          </Text>
-
-                          <Text
-                            fontSize={mobile ? '12px' : 'sm'}
-                            style={{
-                              display: 'flex',
-                              margin: '0vw',
-                              justifyContent: 'flex-end',
-                            }}
-                          >
-                            {result.view_count} views
-                          </Text>
-                        </Box>
-                        <Heading
-                          fontSize={mobile ? '12px' : 'md'}
-                          pl={mobile ? '10px' : { base: '0px', md: '10px' }}
-                          color={'#2b97fe'}
-                        >
-                          {result.title}
-                          <Text
-                            fontSize={mobile ? '12px' : 'sm'}
-                            pt={mobile ? '0px' : '2rem'}
-                            style={{
-                              color: 'black',
-                            }}
-                          >
-                            {result.body
-                              .replace(/<\/?p>/g, '')
-                              .split('\n')
-                              .slice(0, 2)
-                              .join('\n')}
-                            {result.body.replace(/<\/?p>/g, '').split('\n')
-                              .length > 2 && '...'}
-                          </Text>
-                        </Heading>
-                      </Flex>
-                      <Box />
-                      <List
-                        display="flex"
-                        mb={'2'}
-                        ml={mobile ? '5.2rem' : { base: '1rem', md: '7.4rem' }}
-                        mt={{ base: '0.5rem', md: '1rem' }}
-                      >
-                        {result.tags.map((tag, index) => (
-                          <ListItem
-                            key={index}
-                            color="hsl(205,47%,42%)"
-                            bgColor={'hsl(205,46%,92%)'}
-                            fontSize="sm"
-                            margin="5px"
-                          >
-                            {tag}
-                          </ListItem>
-                        ))}
-                        <Flex
-                          alignItems="center"
-                          ml={{ base: '2', md: '20', lg: '40' }}
-                          display={{ base: 'none', md: 'flex' }}
-                          h={{ base: 'auto', md: '1rem' }}
-                        >
-                          <Avatar src={result.owner.profile_image} mr={2} />
-                          <Text
-                            fontSize={{ base: 'xs', md: 'sm', lg: 'md' }}
-                            mr={2}
-                          >
-                            By {result.owner.display_name}
-                          </Text>
-                          <Text fontSize={{ base: 'xs', md: 'sm', lg: 'md' }}>
-                            Reputation: {result.owner.reputation}
-                          </Text>
-                        </Flex>
-                      </List>
-                    </Box>
-                  </Link>
-                </div>
-              ))}
-            </Stack>
-          </Box>
+         <Box w={!mobile ? "91%" : "100%"} h="100%" display="flex" flexDirection="column" gap={2} overflowY="auto">
+           {results.map((result) => (
+               <Result questionId={result.question_id}
+                       link={result.link}
+                       score={result.score}
+                       answerCount={result.answer_count}
+                       viewCount={result.view_count}
+                       title={result.title}
+                       body={result.body}
+                       tags={result.tags}
+                       ownerprofileImage={result.owner.profile_image}
+                       ownerName={result.owner.display_name}
+                       ownerReputation={result.owner.reputation} />
+           ))}
+         </Box>
         ) : (
           <Flex justify="center" align="center" w="100%" mt="4">
-            <Text>Make a research.</Text>
+            <Text color="primary"
+                  fontWeight="600">Make a research.</Text>
           </Flex>
         )}
       </Flex>

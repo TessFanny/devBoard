@@ -25,6 +25,7 @@
         "@uiw/react-codemirror": "^4.19.9",
         "@uiw/react-md-editor": "^3.20.5",
         "axios": "^1.3.3",
+        "date-fns": "^2.29.3",
         "framer-motion": "^9.0.4",
         "lottie-react": "^2.4.0",
         "prop-types": "^15.8.1",

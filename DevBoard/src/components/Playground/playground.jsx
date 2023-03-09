@@ -7,6 +7,7 @@ import { css } from '@codemirror/lang-css';
 import { okaidia } from '@uiw/codemirror-theme-okaidia';
 import {Box, Button, Flex, useMediaQuery} from '@chakra-ui/react';
 import { FaCopy } from 'react-icons/fa';
+import { Text } from '@chakra-ui/react'
 
 function Playground() {
   const [htmldata, setHtml] = useLocalStorage('html', '')
@@ -48,7 +49,9 @@ function Playground() {
             boxShadow="lg"
             p="4"
             zIndex={1}>
-
+         
+          {/* <Button w='5px' onClick={() => copyToClipboard(htmldata)}> <FaCopy /> </Button>
+          <Button w='5px' onClick={() => copyToClipboard (js)}> <FaCopy /></Button> */}
           <Box w="100%" h="50%" display="flex" flexDirection={isSmallerThan1200 ? 'column' : 'row'}>
                 <Box h="100%" w="100%" display="flex" flexDirection="column">
 
@@ -61,12 +64,12 @@ function Playground() {
                           style={{border: "4px solid rgba(219, 231, 255, 0.2)"}}
                           extensions={[javascript({ jsx: true })]}
                           onChange={setJs}
-                      />
-
-
+                          
+                      /> 
+                  <Button w='5px' pos='absolute' zIndex = '15' right='5' onClick={() => copyToClipboard(cssdata)}> <FaCopy /> </Button>
                 </Box>
 
-                  <Box h="100%" w="100%" display="flex" flexDirection="column">
+                  <Box h="100%" w="100%" display="flex" right='5' flexDirection="column">
                       <CodeMirror
                           value={htmldata}
                           placeholder='Please enter the Html code.'
@@ -79,9 +82,11 @@ function Playground() {
                           })]}
                           onChange={setHtml}
                       />
+                    <Button w='4px' pos='absolute' right='5' zIndex = '15' onClick={() => copyToClipboard(cssdata)}> <FaCopy /> </Button>
                   </Box>
 
                   <Box h="100%" w="100%" display="flex" flexDirection="column">
+                  
                       <CodeMirror
                           placeholder='Please enter the Css code.'
                           value={cssdata}
@@ -92,6 +97,7 @@ function Playground() {
                           extensions={[css()]}
                           onChange={setCss}
                       />
+                      <Button w='5px' pos='absolute' right='5' zIndex = '15' onClick={() => copyToClipboard(cssdata)}> <FaCopy /> </Button>
                   </Box>
 
 
