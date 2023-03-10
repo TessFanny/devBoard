@@ -302,6 +302,7 @@ export const loginSlice = createSlice({
         })
         // Reducer for handling the rejected state of the modify request
         .addCase(getUserPosts.rejected, (state, action) => {
+            state.posts = [];
             state.status = false;
             state.error = action.error.message;
         })
