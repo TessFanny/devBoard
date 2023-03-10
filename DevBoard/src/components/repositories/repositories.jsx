@@ -121,8 +121,8 @@ function Repositories() {
 
       ) : (
         <Flex w="100%" justifyContent="center" pt="10">
-          <Box w="50%" h="30%" display="flex" justifyContent="center" alignItems="center" flexDirection="column" bgColor="white" borderRadius="md" boxShadow="md" p="4">
-            <Text>
+          <Box w={isSmallerThan1000 ? "100%" : "50%"} h="30%" display="flex" justifyContent="center" alignItems="center" flexDirection="column" bgColor="bgPost" borderRadius="md" boxShadow="md" p="4">
+            <Text fontWeight="600" fontSize="lg" color="black100" textAlign="center">
               You are not logged with GitHub,
               make sure you are connected to see your repositories.
 

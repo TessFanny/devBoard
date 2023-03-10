@@ -221,7 +221,6 @@ function Sidebar({ isOpen, setIsLoading }) {
                     h="50px"
                     borderRadius="md"
                     onClick={() => {
-                      handleLinkClick();
                       setActiveRoute('/mypost');
                     }}
                     boxShadow={activeRoute === '/mypost' ? 'md' : ''}
@@ -397,7 +396,6 @@ function Sidebar({ isOpen, setIsLoading }) {
             h="50px"
             borderRadius="md"
             onClick={() => {
-              handleLinkClick();
               setActiveRoute('/likes');
             }}
             boxShadow={activeRoute === '/likes' ? 'md' : ''}

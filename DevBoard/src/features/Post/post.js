@@ -49,7 +49,6 @@ export const getLikedPosts = createAsyncThunk(
       }
     );
     const { data } = response;
-    console.log(data);
     return data;
   }
 );
@@ -135,7 +134,6 @@ export const postSlice = createSlice({
       })
       // Reducer for handling the fulfilled state of the addPost request
       .addCase(addPost.fulfilled, (state) => {
-        console.log('test');
         state.post = {
           title: '',
           content: '',

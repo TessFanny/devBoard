@@ -7,13 +7,14 @@ import { Avatar} from '@chakra-ui/react'
 import {BiLike} from "react-icons/bi";
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
-import {deleteLike, likePost} from "../../features/Post/post.js";
+import {deleteLike, getLikedPosts, likePost} from "../../features/Post/post.js";
 import {useDispatch, useSelector} from "react-redux";
 import PropTypes from 'prop-types';
 
-function Post({postId, title, content, like, date, imageuser, username, isLiked }) {
+function Post({postId, title, content, like, date, imageuser, username, isLiked, onLoad, load }) {
     const VITE_BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
-    const {id} = useSelector((state) => state.login.user)
+    const { user } = useSelector((state) => state.login)
+    const { id } = user;
     const dispatch = useDispatch();
     const [liked, setLiked] = useState(isLiked)
     const [count, setCount] = useState(like);
@@ -22,11 +23,17 @@ function Post({postId, title, content, like, date, imageuser, username, isLiked 
         if(!liked) {
             const newCount = count +1;
             setCount(newCount)
-            dispatch(likePost({id, postId}));
+            dispatch(likePost({id, postId})).then(() => {
+                onLoad(!load);
+            });
+
         } else {
             const newCount = count -1;
             setCount(newCount);
             dispatch(deleteLike({id, postId}));
+            dispatch(getLikedPosts(user)).then(() => {
+                onLoad(!load);
+            });
         }
     };
 
@@ -73,6 +80,8 @@ Post.propTypes = {
     imageuser:PropTypes.string,
     username:PropTypes.string,
     isLiked: PropTypes.bool,
+    onLoad: PropTypes.func,
+    load: PropTypes.bool,
 };
 
 export default Post;

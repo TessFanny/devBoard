@@ -14,18 +14,21 @@ import { FaEdit } from 'react-icons/fa';
 import { RiDeleteBin6Line } from 'react-icons/ri';
 import { deletePost } from '../../features/Editpost/editpost';
 import PropTypes from 'prop-types';
+import {getUserPosts} from "../../features/user/user.js";
 
-function Post({ title, content, like, date, imageuser, username, postId }) {
+function Post({ title, content, like, date, imageuser, username, postId, load, onLoad }) {
   const navigateto = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
-  const { id } = useSelector((state) => state.login.user);
+  const { user } = useSelector((state) => state.login);
+  const { id } = user;
   const { posts } = useSelector((state) => state.login);
   const dispatch = useDispatch();
   const VITE_BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
-  console.log(posts);
   const handleDelete = () => {
-    dispatch(deletePost({ postId, id }));
-    posts.filter((item) => item.id !== postId);
+    dispatch(deletePost({ postId, id })).then(() => {
+      onLoad(!load);
+    })
+
   };
 
   return (
@@ -98,6 +101,8 @@ Post.propTypes = {
   imageuser: PropTypes.string,
   username: PropTypes.string,
   isLiked: PropTypes.bool,
+  load: PropTypes.bool,
+  onLoad: PropTypes.func,
 };
 
 export default Post;

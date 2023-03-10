@@ -43,11 +43,13 @@ function PostForm() {
       // Définir une fonction qui sera appelée après un délai de 500 millisecondes
       setIsLoading(false); // Mettre isLoading à faux
       setNotification(true); // Mettre notification à vrai
+      dispatch(changeTitleValue(""));
+      dispatch(changeContentValue(""))
       setTimeout(() => {
         // Définir une fonction qui sera appelée après un délai de 3000 millisecondes
         setNotification(false); // Mettre notification à faux
         navigateto('/mypost'); // Rediriger l'utilisateur vers la page 'mypost'
-      }, 3000); 
+      }, 100);
     }, 500); 
   };
 

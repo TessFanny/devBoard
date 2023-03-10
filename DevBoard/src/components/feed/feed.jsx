@@ -36,7 +36,7 @@ return (
           boxShadow="lg"
           p={isSmallerThan500 ? "0" : "4"}
           zIndex={1}>
-            <Tabs w={isSmallerThan500 ? "100%" : "90%"} color="primary" bg="bgPrimary" borderRadius="md" boxShadow="lg" p={isSmallerThan500 ? "1" : "10"} colorScheme="gray">
+            <Tabs w={isSmallerThan500 ? "100%" : "90%"} color="primary" bg="bgPrimary" borderRadius="md" boxShadow="lg" p={isSmallerThan500 ? "1" : "10"} colorScheme="blue">
                 <TabList mb="10" h="60px">
                     {feeds[0] &&
                         feeds.map(feed => <Tab borderTopRadius="md" fontWeight="600" fontSize={isSmallerThan500 ? "15" : "lg"} key={feed?.title}> {feed?.title}</Tab>)}

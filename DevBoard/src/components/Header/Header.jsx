@@ -26,6 +26,7 @@ function Header({setIsLoading}) {
   const dispatch = useDispatch();
   const { id, username,image_path } = useSelector((state) => state.login.user);
   const [isSmallerThan1000] = useMediaQuery('(max-width: 1000px)');
+  const [isSmallerThan400] = useMediaQuery('(max-width: 400px)');
 
   const handleLogout = () => {
     dispatch(logout());
@@ -62,7 +63,10 @@ function Header({setIsLoading}) {
       {isSmallerThan1000 && (
           <BurgerMenu />
       )}
-      <RouteInfo />
+        {!isSmallerThan400 && (
+            <RouteInfo />
+        )}
+
       </Box>
       <Box display="flex" alignItems="center" gap="2">
         {id ? (
