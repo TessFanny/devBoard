@@ -54,6 +54,7 @@ function StackOverflowSearch() {
         align="center"
         style={{'backdrop-filter': 'blur(15px)'}}
         borderRadius="md"
+        bgColor="bgPrimary"
         boxShadow="lg"
         zIndex={1}
       >

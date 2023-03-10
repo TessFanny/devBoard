@@ -23,31 +23,8 @@ function Result({ link, description, username, version, date, name, key }) {
         gap={2}
         _hover={{ backgroundColor: 'secondary' }}
       >
-        <Box
-          w={!mobile ? '100px' : '100%'}
-          display="flex"
-          flexDirection={!mobile ? 'column' : 'row'}
-          alignItems="center"
-          justifyContent={mobile && 'flex-start'}
-          gap={1}
-        >
-          <Box
-            display="flex"
-            w={!mobile ? '100%' : '90px'}
-            width={mobile ? '120px' : '100%'}
-            h="35px"
-            bgColor="blue100"
-            borderRadius="md"
-            alignItems="center"
-            justifyContent="space-around"
-          />
-          {mobile && (
-            <Text mr="10px" fontWeight="600" color="black100">
-              {description}
-            </Text>
-          )}
-        </Box>
-        <Box w="92%">
+
+        <Box w="92%" ml="20px">
           <Text fontSize="lg" fontWeight="600" color="black100" mb="15px">
             {name}
           </Text>
