@@ -1,10 +1,10 @@
-import {} from '@chakra-ui/icons';
-import { Container, Heading, SimpleGrid } from '@chakra-ui/react';
+import { Container, SimpleGrid } from '@chakra-ui/react';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import Column from './Column.jsx';
 import { Flex } from '@chakra-ui/react';
 import {useMediaQuery} from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
 
 function Kanban() {
 
@@ -15,8 +15,7 @@ function Kanban() {
         COMPLETED: 'Completed'
         };
 
-    const [isSmallerThan1000] = useMediaQuery('(max-width: 1000px)');
-    const [isSmallerThan1200] = useMediaQuery('(max-width: 1200px)');
+    const [isSmallerThan1000] = useMediaQuery('(max-width: 1000px)');  
 
     return (
         <Flex w={isSmallerThan1000 ? '100%' : '98%'}
@@ -31,6 +30,9 @@ function Kanban() {
         p="4"
         zIndex={1}
         display='flex' >
+            <Box    width="100%"
+                    h="100%"
+                    overflowY="auto">
             <DndProvider backend={HTML5Backend}>
             <Container maxWidth="container.lg" px={4} py={4}>
             <SimpleGrid
@@ -44,6 +46,7 @@ function Kanban() {
             </SimpleGrid>
             </Container>
         </DndProvider>
+        </Box>
         </Flex>
     );
 }
