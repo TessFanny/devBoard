@@ -51,13 +51,10 @@ function Result({ questionId,
                         fontSize={['12px', '12px', 'lg', 'lg', 'lg', 'lg']}
 
                     >
-                        {body
-                            .replace(/<\/?p>/g, '')
-                            .split('\n')
-                            .slice(0, 1)
-                            .join('\n')}
-                        {body.replace(/<\/?p>/g, '').split('\n')
-                            .length > 2 && '...'}
+                        {new window.DOMParser()
+                            .parseFromString(body, "text/html")
+                            .documentElement.textContent
+                            .slice(0, 250)}{body.length > 200 && '...'}
                     </Text>
 
                     {!mobile && (

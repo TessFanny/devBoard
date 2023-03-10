@@ -26,6 +26,7 @@ function Header({setIsLoading}) {
   const dispatch = useDispatch();
   const { id, username,image_path } = useSelector((state) => state.login.user);
   const [isSmallerThan1000] = useMediaQuery('(max-width: 1000px)');
+  const [isSmallerThan400] = useMediaQuery('(max-width: 400px)');
 
   const handleLogout = () => {
     dispatch(logout());
@@ -62,7 +63,10 @@ function Header({setIsLoading}) {
       {isSmallerThan1000 && (
           <BurgerMenu />
       )}
-      <RouteInfo />
+        {!isSmallerThan400 && (
+            <RouteInfo />
+        )}
+
       </Box>
       <Box display="flex" alignItems="center" gap="2">
         {id ? (
@@ -92,10 +96,10 @@ function Header({setIsLoading}) {
             />
             <MenuList bgColor="bgPrimary" border="none" style={{'backdrop-filter': 'blur(300px)'}} boxShadow="lg" p="1" display="flex" flexDirection="column" gap={2}>
               <Link to="/profile">
-                <MenuItem bgColor="secondary" icon={<FaUserEdit />}>Profile</MenuItem>
+                <MenuItem bgColor="secondary" color="black100" fontWeight="600" borderRadius="md" icon={<FaUserEdit />}>Profile</MenuItem>
               </Link>
               <Link to="/homepage">
-                <MenuItem bgColor="secondary" icon={<FiLogOut />} onClick={handleLogout}>
+                <MenuItem bgColor="secondary" color="black100" fontWeight="600" borderRadius="md" icon={<FiLogOut />} onClick={handleLogout}>
                   Log out
                 </MenuItem>
               </Link>

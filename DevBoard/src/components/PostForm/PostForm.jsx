@@ -16,7 +16,6 @@ import {
 } from '../../features/Post/post';
 import MDEditor, { commands, EditorContext } from '@uiw/react-md-editor';
 import { useState } from 'react';
-import { modifyUser } from '../../features/user/user.js';
 import { useNavigate } from 'react-router-dom';
 import Notification from '../Notification/Notification.jsx';
 function PostForm() {
@@ -25,7 +24,6 @@ function PostForm() {
   const [isSmallerThan1000] = useMediaQuery('(max-width: 1000px)');
   const { title, content, status } = useSelector((state) => state.post);
   const { id } = useSelector((state) => state.login.user);
-  console.log(id);
   const dispatch = useDispatch();
   const navigateto = useNavigate();
   const handleTitleChange = (evt) => {
@@ -33,7 +31,6 @@ function PostForm() {
   };
 
   const handleContentChange = (evt) => {
-    console.log(evt);
     dispatch(changeContentValue(evt));
   };
 
@@ -46,11 +43,13 @@ function PostForm() {
       // Définir une fonction qui sera appelée après un délai de 500 millisecondes
       setIsLoading(false); // Mettre isLoading à faux
       setNotification(true); // Mettre notification à vrai
+      dispatch(changeTitleValue(""));
+      dispatch(changeContentValue(""))
       setTimeout(() => {
         // Définir une fonction qui sera appelée après un délai de 3000 millisecondes
         setNotification(false); // Mettre notification à faux
         navigateto('/mypost'); // Rediriger l'utilisateur vers la page 'mypost'
-      }, 3000); 
+      }, 100);
     }, 500); 
   };
 

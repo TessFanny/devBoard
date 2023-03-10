@@ -106,6 +106,27 @@ export const getUserPosts = createAsyncThunk(
 
 );
 
+export const getFeeds = createAsyncThunk(
+    'user/getFeeds',
+    async () => {
+        console.log('hey')
+        const VITE_BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+        // Make a POST request to a register endpoint with email and password
+        const response = await fetch(`${VITE_BACKEND_URL}/api/feeds`,
+
+            {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`, // Bearer ACCESSTOKEN
+                },
+            }
+        )
+        const data = await response.json();
+        console.log(data);
+        return data;
+    }
+
+);
+
 export async function getUserGithubData() {
   const response = await fetch(`${VITE_BACKEND_URL}/api/getUserData`, {
     method: 'GET',
@@ -144,6 +165,8 @@ export async function getUserOrgs() {
         .then((data) => data);
     return response;
 }
+
+
 
 // Define the initial state of the user slice
 const initialState = {
@@ -257,7 +280,6 @@ export const loginSlice = createSlice({
                 password: '',
             };
             state.user = user;
-            state.status = true;
         })
         // Reducer for handling the rejected state of the modify request
         .addCase(deleteUser.rejected, (state, action) => {
@@ -277,7 +299,14 @@ export const loginSlice = createSlice({
         .addCase(getUserPosts.rejected, (state, action) => {
             state.status = false;
             state.error = action.error.message;
+        })
+        .addCase(getFeeds.fulfilled, (state, action) => {
+            console.log("feeds :",action.payload);
+            state.feeds = action.payload;
+            state.status = true;
         });
+
+
   },
 
 });

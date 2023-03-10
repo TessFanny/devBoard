@@ -79,7 +79,6 @@ function Sidebar({ isOpen, setIsLoading }) {
           borderRadius="md"
           cursor="pointer"
           onClick={() => {
-            handleLinkClick();
             setActiveRoute('/dashboard');
           }}
           boxShadow={activeRoute === '/dashboard' ? 'md' : ''}
@@ -269,25 +268,26 @@ function Sidebar({ isOpen, setIsLoading }) {
             </Flex>
           </Box>
         </Link>
+
         <Link
-          to="/npm"
-          style={{ width: '100%', height: '50px', marginBottom: '5px' }}
+            to="/npm"
+            style={{ width: '100%', height: '50px', marginBottom: '5px' }}
         >
           <Box
-            _hover={{ backgroundColor: 'bgSecondary', boxShadow: 'lg' }}
-            pl="4"
-            display="flex"
-            alignItems="center"
-            w="100%"
-            h="50px"
-            borderRadius="md"
-            onClick={() => {
-              handleLinkClick();
-              setActiveRoute('/npm');
-            }}
-            boxShadow={activeRoute === '/npm' ? 'md' : ''}
-            color={activeRoute === '/npm' ? 'secondary' : 'primary'}
-            bgColor={activeRoute === '/Npm' ? 'bgPrimary' : ''}
+              _hover={{ backgroundColor: 'bgSecondary', boxShadow: 'lg' }}
+              pl="4"
+              display="flex"
+              alignItems="center"
+              w="100%"
+              h="50px"
+              borderRadius="md"
+              onClick={() => {
+                handleLinkClick();
+                setActiveRoute('/npm');
+              }}
+              boxShadow={activeRoute === '/npm' ? 'md' : ''}
+              color={activeRoute === '/npm' ? 'secondary' : 'primary'}
+              bgColor={activeRoute === '/npm' ? 'bgPrimary' : ''}
           >
             <Flex justifyContent="space-around" alignItems="center">
               <FaNpm />
@@ -297,6 +297,7 @@ function Sidebar({ isOpen, setIsLoading }) {
             </Flex>
           </Box>
         </Link>
+
         <Link
           to="/stackoverflow"
           style={{ width: '100%', height: '50px', marginBottom: '5px' }}
@@ -366,7 +367,6 @@ function Sidebar({ isOpen, setIsLoading }) {
           borderRadius="md"
           cursor="pointer"
           onClick={() => {
-            handleLinkClick();
             setActiveRoute('/kanban');
           }}
           boxShadow={activeRoute === '/kanban' ? 'md' : ''}
