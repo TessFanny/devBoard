@@ -355,7 +355,10 @@ function Sidebar({ isOpen, setIsLoading }) {
             </Flex>
           </Box>
         </Link>
-
+        <Link
+          to="/kanban"
+          style={{ width: '100%', height: '50px', marginBottom: '5px' }}
+        >
         <Box
           _hover={{ backgroundColor: 'bgSecondary', boxShadow: 'lg' }}
           pl="4"
@@ -367,6 +370,7 @@ function Sidebar({ isOpen, setIsLoading }) {
           borderRadius="md"
           cursor="pointer"
           onClick={() => {
+            handleLinkClick();
             setActiveRoute('/kanban');
           }}
           boxShadow={activeRoute === '/kanban' ? 'md' : ''}
@@ -377,11 +381,10 @@ function Sidebar({ isOpen, setIsLoading }) {
             <FaColumns />
             <Text pl="2" color="primary" fontWeight="600">
               Kanban
-              <Badge colorScheme="purple">v2</Badge>
             </Text>
           </Flex>
         </Box>
-
+      </Link>
         <Link
           to="/likes"
           style={{ width: '100%', height: '50px', marginBottom: '5px' }}
