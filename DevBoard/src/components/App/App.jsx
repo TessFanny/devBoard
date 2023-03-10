@@ -128,7 +128,6 @@ export default function App() {
       ></Image>
 
       <Image src={blob}
-            zIndex='-1'
              position="fixed"
              top="-500"
              right="-710"
