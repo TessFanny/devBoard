@@ -38,12 +38,12 @@ return (
           zIndex={1}>
             <Tabs w={isSmallerThan500 ? "100%" : "90%"} color="primary" bg="bgPrimary" borderRadius="md" boxShadow="lg" p={isSmallerThan500 ? "1" : "10"} colorScheme="blue">
                 <TabList mb="10" h="60px">
-                    {feeds[0] &&
+                    {feeds &&
                         feeds.map(feed => <Tab borderTopRadius="md" fontWeight="600" fontSize={isSmallerThan500 ? "15" : "lg"} key={feed?.title}> {feed?.title}</Tab>)}
                 </TabList>
                 <Box w="100%" h="85%" overflowY="auto">
                     <TabPanels>
-                        {feeds.map(feed =>
+                        {feeds && feeds.map(feed =>
                             <TabPanel key={feed?.title} p="0">
                                 <Text fontSize="sm">{feed?.description}</Text>
                                 <Link fontSize="sm">{feed?.link}</Link>
