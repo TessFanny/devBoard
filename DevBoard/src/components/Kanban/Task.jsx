@@ -1,8 +1,6 @@
 import { DeleteIcon } from '@chakra-ui/icons';
 import { Box, IconButton, ScaleFade, Textarea } from '@chakra-ui/react';
-// import _ from 'lodash';
-// import { memo } from 'react';
-// import { useTaskDragAndDrop } from './useTaskDragAndDrop';
+import { useTaskDragAndDrop } from './useTaskDragAndDrop';
 
 function Task({ 
     index, 
@@ -12,10 +10,10 @@ function Task({
     onDelete: handleDelete,
 }) {
 
-//   const { ref, isDragging } = useTaskDragAndDrop(
-//     { task, index: index },
-//     handleDropHover,
-//   );
+  const { ref, isDragging } = useTaskDragAndDrop(
+    { task, index: index },
+    handleDropHover,
+  );
 
   const handleTitleChange = (e) => {
     const newTitle = e.target.value;
@@ -29,7 +27,7 @@ function Task({
   return (
     <ScaleFade in={true} unmountOnExit>
       <Box
-        // ref={ref}
+        ref={ref}
         as="div"
         role="group"
         position="relative"
@@ -44,7 +42,7 @@ function Task({
         fontWeight="bold"
         userSelect="none"
         bgColor={task.color}
-        // opacity={isDragging ? 0.5 : 1}
+        opacity={isDragging ? 0.5 : 1}
       >
         <IconButton
             position="absolute"
@@ -80,17 +78,3 @@ function Task({
   );
 }
  export default Task;
-
-// export default memo(Task, (prev, next) => {
-//   if (
-//     _.isEqual(prev.task, next.task) &&
-//     _.isEqual(prev.index, next.index) &&
-//     prev.onDelete === next.onDelete &&
-//     prev.onDropHover === next.onDropHover &&
-//     prev.onUpdate === next.onUpdate
-//   ) {
-//     return true;
-//   }
-
-//   return false;
-// });

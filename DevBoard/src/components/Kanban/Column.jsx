@@ -1,16 +1,14 @@
 import { AddIcon } from '@chakra-ui/icons';
 import {
-  Badge,
-  Box,
-  Heading,
-  IconButton,
-  Stack,
+    Badge,
+    Box,
+    Heading,
+    IconButton,
+    Stack,
 } from '@chakra-ui/react';
-// import useColumnDrop from '.useColumnDrop';
+import useColumnDrop from './useColumnDrop';
 import useColumnTasks from './useColumnTasks';
 import Task from './Task';
-import { v4 as uuidv4 } from 'uuid';
-
 
 function Column({ column }) {
 
@@ -23,7 +21,7 @@ function Column({ column }) {
         updateTask,
         } = useColumnTasks(column);
 
-//   const { dropRef, isOver } = useColumnDrop(column, dropTaskFrom);
+    const { dropRef, isOver } = useColumnDrop(column, dropTaskFrom);
 
     const ColumnColorScheme = {
         Todo: 'gray',
@@ -72,9 +70,9 @@ function Column({ column }) {
         icon={<AddIcon />}
       />
       <Stack
-        // ref={dropRef}
+        ref={dropRef}
         direction={{ base: 'row', md: 'column' }}
-        h={{ base: 300, md: 470 }}
+        h={{ base: 300, md: 600 }}
         p={4}
         mt={2}
         spacing={4}
@@ -83,7 +81,7 @@ function Column({ column }) {
         rounded="lg"
         boxShadow="md"
         overflow="auto"
-        // opacity={isOver ? 0.85 : 1}
+        opacity={isOver ? 0.85 : 1}
       >
         {ColumnTasks}
       </Stack>
