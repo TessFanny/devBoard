@@ -280,7 +280,6 @@ export const loginSlice = createSlice({
                 password: '',
             };
             state.user = user;
-            state.status = true;
         })
         // Reducer for handling the rejected state of the modify request
         .addCase(deleteUser.rejected, (state, action) => {

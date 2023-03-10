@@ -120,7 +120,7 @@ function Register({setShowDiv, setShowLogin}) {
         dispatch(registerUser({
           username, email, password, passwordConfirm: confirmPassword,
         }));
-        navigateto('/login');
+        navigateto('/homepage');
     }
   };
   // Cette fonction prend deux arguments : dispatch et actionCreator
