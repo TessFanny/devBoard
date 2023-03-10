@@ -60,8 +60,8 @@ function Post({postId, title, content, like, date, imageuser, username, isLiked,
                     
                 </Box>
                 <Box mt="10" display="flex" alignItems="center" justifyContent="flex-end" gap="2">
-                    <IconButton bg="none" border="none" style={{outline: 'none'}} aria-label='like' icon={<BiLike color={liked ? "#4284EF" : "gray"} />} onClick={handleLikeClick} />
-                    <Text ml="2">{count}</Text>
+                    <IconButton bg="none" border="none" style={{outline: 'none'}} aria-label='like' icon={<BiLike size={20} color={liked ? "#4284EF" : "gray"} />} onClick={handleLikeClick} />
+                    <Text fontSize="md" fontWeight="600" color="black100">{count}</Text>
                 </Box>
 
             </CardBody>

@@ -79,7 +79,6 @@ function Sidebar({ isOpen, setIsLoading }) {
           borderRadius="md"
           cursor="pointer"
           onClick={() => {
-            handleLinkClick();
             setActiveRoute('/dashboard');
           }}
           boxShadow={activeRoute === '/dashboard' ? 'md' : ''}
@@ -368,7 +367,6 @@ function Sidebar({ isOpen, setIsLoading }) {
           borderRadius="md"
           cursor="pointer"
           onClick={() => {
-            handleLinkClick();
             setActiveRoute('/kanban');
           }}
           boxShadow={activeRoute === '/kanban' ? 'md' : ''}
