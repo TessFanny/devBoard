@@ -106,7 +106,7 @@ function Header({setIsLoading}) {
             </MenuList>
           </Menu>
         ) : (
-          <Link to="/register">
+          <Link to="/homepage">
             <Text>Sign In</Text>
           </Link>
         )}
