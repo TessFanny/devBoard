@@ -52,7 +52,6 @@ function StackOverflowSearch() {
         p="4"
         flexDir="column"
         align="center"
-        bgColor="bgPrimary"
         style={{'backdrop-filter': 'blur(15px)'}}
         borderRadius="md"
         boxShadow="lg"

@@ -79,7 +79,10 @@ export default function App() {
 
   return (
     // Flex container for Sidebar and main content area
-    <Flex minH="100vh" bgGradient="linear(to-r, #2e76ff, #172c69)" w="100vw">
+    <Flex minH="100vh"
+          bgGradient='linear(to-r, #2e76ff, #172c69)' w="100vw" zIndex='-500'>
+
+
       {sidebar}
       {/* Box for main content area */}
       <Box
@@ -124,13 +127,13 @@ export default function App() {
         top="-70"
       ></Image>
 
-      <Image
-        src={blob}
-        position="fixed"
-        top="-500"
-        right="-710"
-        opacity="0.1"
-      ></Image>
+      <Image src={blob}
+            zIndex='-1'
+             position="fixed"
+             top="-500"
+             right="-710"
+             opacity="0.1">
+      </Image>
     </Flex>
   );
 }
