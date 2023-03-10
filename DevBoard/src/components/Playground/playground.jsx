@@ -48,10 +48,7 @@ function Playground() {
             borderRadius="md"
             boxShadow="lg"
             p="4"
-            zIndex={1}>
-         
-          {/* <Button w='5px' onClick={() => copyToClipboard(htmldata)}> <FaCopy /> </Button>
-          <Button w='5px' onClick={() => copyToClipboard (js)}> <FaCopy /></Button> */}
+            zIndex={1}>         
           <Box w="100%" h="50%" display="flex" flexDirection={isSmallerThan1200 ? 'column' : 'row'}>
                 <Box h="100%" w="100%" display="flex" flexDirection="column">
 
@@ -103,11 +100,12 @@ function Playground() {
 
           </Box>
 
-          <Box w="100%"
-               h={["40%", "40%", "40%", "40%", "40%", "40%", "50%"]}
-               mt={["20px", "20px", "20px", "20px", "20px", "20px", "0px"]}
-               display="flex"
-               alignItems="flex-end">
+          <Box  w="100%"
+                h={["40%", "40%", "40%", "40%", "40%", "40%", "50%"]}
+                mt={["20px", "20px", "20px", "20px", "20px", "20px", "0px"]}
+                display="flex"
+                alignItems="flex-end">
+
                   <iframe
                       srcDoc={srcDoc}
                       title="output"
