@@ -148,36 +148,6 @@ function Sidebar({ isOpen, setIsLoading }) {
                     </Flex>
                   </Box>
                 </Link>
-
-                <Link
-                  to="/feed"
-                  style={{ width: '100%', height: '50px', marginBottom: '5px' }}
-                >
-                  <Box
-                    _hover={{ backgroundColor: 'bgSecondary', boxShadow: 'lg' }}
-                    pl="8"
-                    display="flex"
-                    alignItems="center"
-                    w="100%"
-                    h="50px"
-                    borderRadius="md"
-                    onClick={() => {
-                      handleLinkClick();
-                      setActiveRoute('/feed');
-                    }}
-                    boxShadow={activeRoute === '/feed' ? 'md' : ''}
-                    color={activeRoute === '/feed' ? 'secondary' : 'primary'}
-                    bgColor={activeRoute === '/feed' ? 'bgPrimary' : ''}
-                  >
-                    <Flex justifyContent="space-around" alignItems="center">
-                      <FaRegNewspaper />
-                      <Text pl="4" color="primary" fontWeight="600">
-                        RSS Feed
-                      </Text>
-                    </Flex>
-                  </Box>
-                </Link>
-
                 <Link
                   to="/posts"
                   style={{ width: '100%', height: '50px', marginBottom: '5px' }}
@@ -201,7 +171,7 @@ function Sidebar({ isOpen, setIsLoading }) {
                     <Flex justifyContent="space-around" alignItems="center">
                       <FaRegNewspaper />
                       <Text pl="4" color="primary" fontWeight="600">
-                        DevBoard Posts
+                        Posts
                       </Text>
                     </Flex>
                   </Box>
@@ -231,6 +201,35 @@ function Sidebar({ isOpen, setIsLoading }) {
                       <FaRegNewspaper />
                       <Text pl="4" color="primary" fontWeight="600">
                         My posts
+                      </Text>
+                    </Flex>
+                  </Box>
+                </Link>
+              
+                <Link
+                  to="/feed"
+                  style={{ width: '100%', height: '50px', marginBottom: '5px' }}
+                >
+                  <Box
+                    _hover={{ backgroundColor: 'bgSecondary', boxShadow: 'lg' }}
+                    pl="8"
+                    display="flex"
+                    alignItems="center"
+                    w="100%"
+                    h="50px"
+                    borderRadius="md"
+                    onClick={() => {
+                      handleLinkClick();
+                      setActiveRoute('/feed');
+                    }}
+                    boxShadow={activeRoute === '/feed' ? 'md' : ''}
+                    color={activeRoute === '/feed' ? 'secondary' : 'primary'}
+                    bgColor={activeRoute === '/feed' ? 'bgPrimary' : ''}
+                  >
+                    <Flex justifyContent="space-around" alignItems="center">
+                      <FaRegNewspaper />
+                      <Text pl="4" color="primary" fontWeight="600">
+                        RSS Feed
                       </Text>
                     </Flex>
                   </Box>
