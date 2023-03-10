@@ -8,14 +8,14 @@ import login from '../../assets/security6.json';
 import Register from '../Register/Register';
 import Login from '../Login/Login';
 import { motion } from "framer-motion"
-import { useState } from 'react';
+import {useEffect, useState} from 'react';
 import log from "eslint-plugin-react/lib/util/log.js";
 
 
 function Homepage() {
 
     // Homepage
-    
+    const [isRegisterSuccess, setRegisterSuccess] = useState(false);
     const [showDiv, setShowDiv] = useState(false);
     const [showLogin, setShowLogin] = useState(false);
     const [showHomepage, setShowHomepage]= useState(true)
@@ -30,6 +30,13 @@ function Homepage() {
       setShowLogin(!showLogin);
       setShowHomepage(!showHomepage);
     };
+
+    useEffect(() => {
+        {isRegisterSuccess &&
+            setShowLogin(true)
+            setShowDiv(false)
+        }
+    },[isRegisterSuccess])
 
   const defaultOptions = {
     loop: true,
@@ -116,6 +123,18 @@ function Homepage() {
         </Box>
       </motion.div>
         )}
+
+          {showLogin && (
+              <motion.div
+                  initial={{ x:-150, opacity:0 }}
+                  animate={{ x:0, opacity:1 }}
+                  transition={{ duration: 0.3 }}
+                  exit={{ opacity: 0 }}
+              >
+                  <Login setShowLogin={setShowLogin} setShowDiv={setShowDiv} />
+              </motion.div>
+          )}
+
         {showDiv && (
                 <motion.div
                   initial={{ x:-150, opacity:0 }}
@@ -123,17 +142,7 @@ function Homepage() {
                   transition={{ duration: 0.3 }}
                   exit={{ opacity: 0 }}
                 >
-                  <Register setShowDiv={setShowDiv} setShowLogin={setShowLogin} />
-                </motion.div>
-        )} 
-        {showLogin && (
-                <motion.div
-                    initial={{ x:-150, opacity:0 }}
-                    animate={{ x:0, opacity:1 }}
-                    transition={{ duration: 0.3 }}
-                    exit={{ opacity: 0 }}
-                >
-                  <Login setShowLogin={setShowLogin} setShowDiv={setShowDiv} />
+                  <Register setShowDiv={setShowDiv} setShowLogin={setShowLogin} onRegisterSuccess={setRegisterSuccess} />
                 </motion.div>
         )}
           {!showHomepage && (

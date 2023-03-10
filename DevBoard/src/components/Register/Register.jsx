@@ -12,17 +12,13 @@ import {
   Button,
   Heading,
   Text,
-  useColorModeValue,
-  Center,
   FormErrorMessage,
   Link,
 } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
-import { FaGithub } from 'react-icons/fa';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-// import { Link } from 'react-router-dom';
 import {
   changeEmailValue,
   changePasswordValue,
@@ -31,42 +27,13 @@ import {
   registerUser,
 } from '../../features/register/register';
 import { getUserGithubData } from '../../features/user/user';
-import Email from "../Login/Email/Email.jsx";
-import PasswordInput from "../Login/Password/Password.jsx";
 import PropTypes from "prop-types";
+import Notification from "../Notification/Notification.jsx";
 // Hooks for state management
-function Register({setShowDiv, setShowLogin}) {
-  const [rerender, setRerender] = useState(false);
-  const CLIENT_ID = import.meta.env.VITE_CLIENT_ID;
-  const VITE_BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
-  const navigateto = useNavigate();
-  useEffect(() => {
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-    const codeParam = urlParams.get('code');
+function Register({setShowDiv, setShowLogin, onRegisterSuccess}) {
+  const [isLoading, setIsLoading] = useState(false);
+  const [notification, setNotification] = useState(false);
 
-    if (codeParam && localStorage.getItem('accessToken') === null) {
-      async function getAccessToken() {
-        try {
-          const response = await fetch(
-            `${VITE_BACKEND_URL}/getAccessToken?code=${codeParam}`,
-          )
-            .then((response) => response.json())
-            .then((data) => {
-              if (data.access_token) {
-                localStorage.setItem('accessToken', data.access_token);
-                setRerender(!rerender);
-                getUserGithubData();
-                navigateto('/');
-              }
-            });
-        } catch (err) {
-          console.error(err);
-        }
-      }
-      getAccessToken();
-    }
-  }, []);
 
   const [showPassword, setShowPassword] = useState(false);
   const [isEmailValid, setEmailValid] = useState(true);
@@ -117,22 +84,26 @@ function Register({setShowDiv, setShowLogin}) {
         setEmailValid(true);
         setPasswordValid(true);
         setPasswordConfirmed(true);
+        setIsLoading(true);
         dispatch(registerUser({
           username, email, password, passwordConfirm: confirmPassword,
         }));
-        navigateto('/homepage');
-    }
+        setTimeout(() => {
+          // Définir une fonction qui sera appelée après un délai de 500 millisecondes
+          setIsLoading(false); // Mettre isLoading à faux
+          setNotification(true); // Mettre notification à vrai
+          onRegisterSuccess(true);
+          setTimeout(() => {
+            // Définir une fonction qui sera appelée après un délai de 3000 millisecondes
+            setNotification(false); // Mettre notification à faux
+          }, 300);
+        }, 500);}
   };
   // Cette fonction prend deux arguments : dispatch et actionCreator
   // Elle renvoie une nouvelle fonction qui sera utilisée dans l'onChange
   // Cette nouvelle fonction prend un argument (evt) et utilise dispatch et actionCreator pour créer et envoyer une action Redux
   const handleInputChange = (dispatch, actionCreator) => (evt) => {
     dispatch(actionCreator(evt.target.value));
-  };
-  const HandleGitHubAuth = async () => {
-    window.location.assign(
-      `https://github.com/login/oauth/authorize?client_id=${CLIENT_ID}`,
-    );
   };
 
   const handleLogin = () => {
@@ -243,6 +214,7 @@ function Register({setShowDiv, setShowLogin}) {
               </FormControl>
               <Stack spacing={10} pt={2}>
                 <Button
+                    isLoading={isLoading}
                     onClick={handleSubmit}
                     loadingText="Submitting"
                     size="lg"
@@ -268,13 +240,21 @@ function Register({setShowDiv, setShowLogin}) {
             </Stack>
           </Box>
         </Box>
+        {notification && (
+            <Notification
+                title="Congratulations !"
+                description="Your account has been registered succesfully"
+                status="info"
+            />
+        )}
       </Flex>
   );
 }
 
 Register.propTypes = {
   setShowDiv: PropTypes.func,
-  setShowLogin: PropTypes.func
+  setShowLogin: PropTypes.func,
+  onRegisterSuccess: PropTypes.func,
 };
 
 export default Register;
