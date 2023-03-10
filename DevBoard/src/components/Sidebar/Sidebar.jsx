@@ -45,7 +45,7 @@ function Sidebar({ isOpen, setIsLoading }) {
 
   return (
     <Box
-      h="full"
+      h="100vh"
       boxShadow="base"
       overflowY="auto"
       transition="ease-in-out .2s"
