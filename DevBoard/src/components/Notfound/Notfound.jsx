@@ -1,28 +1,17 @@
-import {
-  Box,
-  Button,
-  Flex,
-  Heading,
-  Image,
-  Text,
-  useMediaQuery,
-} from '@chakra-ui/react';
+import { Box, Flex, Text, useMediaQuery } from '@chakra-ui/react';
 import { Link, useLocation } from 'react-router-dom';
 import Lottie from 'lottie-react';
 import homepage from '../../assets/404.json';
 import blob from '../../assets/blobanimationBG.svg';
 import blob2 from '../../assets/blobanimation.svg';
 import login from '../../assets/security6.json';
-import Register from '../Register/Register';
-import Login from '../Login/Login';
+
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 
 function Notfound() {
   // Homepage
-  const [isRegisterSuccess, setRegisterSuccess] = useState(false);
-  const [showDiv, setShowDiv] = useState(false);
-  const [showLogin, setShowLogin] = useState(false);
+
   const [showHomepage, setShowHomepage] = useState(true);
   const [isSmallerThan1050] = useMediaQuery('(max-width: 1050px)');
   const location = useLocation();
@@ -36,7 +25,6 @@ function Notfound() {
     },
   };
 
-  const is404Page = location.pathname === '/404';
   return (
     <Flex
       zIndex={1}
@@ -109,31 +97,6 @@ function Notfound() {
         </motion.div>
       )}
 
-      {showLogin && (
-        <motion.div
-          initial={{ x: -150, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          transition={{ duration: 0.3 }}
-          exit={{ opacity: 0 }}
-        >
-          <Login setShowLogin={setShowLogin} setShowDiv={setShowDiv} />
-        </motion.div>
-      )}
-
-      {showDiv && (
-        <motion.div
-          initial={{ x: -150, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          transition={{ duration: 0.3 }}
-          exit={{ opacity: 0 }}
-        >
-          <Register
-            setShowDiv={setShowDiv}
-            setShowLogin={setShowLogin}
-            onRegisterSuccess={setRegisterSuccess}
-          />
-        </motion.div>
-      )}
       {!showHomepage && (
         <Flex
           w="100%"
