@@ -39,29 +39,36 @@ export default function App() {
   const location = useLocation();
 
   // Check if user is logged in
-
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) {
       setIsLoggedIn(true);
     }
     if (
-      !token &&
-      location.pathname !== '/login' &&
-      location.pathname !== '/register' &&
-      location.pathname !== '/homepage'
+      !token && 
+      location.pathname == '/repositories' ||
+      location.pathname == '/feed'  ||
+      location.pathname == '/profile' ||
+      location.pathname == '/mypost' ||
+      location.pathname == '/post' ||
+      location.pathname == '/stackoverflow' ||
+      location.pathname == '/editpost/:postId' ||
+      location.pathname == '/kanban' ||
+      location.pathname == '/playground' ||
+      location.pathname == '/likes' ||
+      location.pathname == '/addpost' ||
+      location.pathname == '/npm'      
     ) {
-      window.location.replace('/login');
+      window.location.replace('/homepage');
     }
   }, []);
-
   // Redirect user to register page if not logged in and not on login or homepage routes
 
   // Hide Sidebar and Header components for /register and /login routes
   const isRegisterOrLoginRouteOrHome =
     location.pathname === '/register' ||
-    location.pathname === '/login' ||
     location.pathname === '/homepage' ||
+    location.pathname === '/posts' ||
     location.pathname === '/404';
 
   const isHomepage = location.pathname === '/homepage';
@@ -119,6 +126,7 @@ export default function App() {
             <Route path="/kanban" element={<Kanban />} />
             <Route path="/editpost/:postId" element={<PostEdit />} />
             <Route path="/404" element={<Notfound />} />
+            <Route path="*" element={<Navigate to="/404" />} />
           </Routes>
         )}
       </Box>
@@ -141,22 +149,3 @@ export default function App() {
     </Flex>
   );
 }
-// {/* <Flex>
-// {/* Box for Sidebar */}
-// <Box w="50" pr="1" bgColor="gray.200">
-//   <Sidebar setIsLoading={setIsLoading} />
-// </Box>
-// {/* Box for main content area */}
-// <Box minH="100vh" w={`calc(100vw - 210px)`} p="5" display="flex" alignItems="center" flexDirection="column" bgColor="gray.200">
-//   {/* Header component */}
-//   <Header />
-//   {/* Repositories component */}
-//   {isLoading ? (
-//     <Loader />
-//   ) : (
-//     <Routes>
-//       <Route path="/repositories" element={<Repositories />} />
-//     </Routes>
-// )}
-// </Box> */}
-// </Flex>
