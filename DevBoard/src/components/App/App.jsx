@@ -31,7 +31,7 @@ import PostEdit from '../Myposts/Postedit.jsx';
 import Kanban from '../Kanban/Kanban';
 import blob2 from '../../assets/blobanimation.svg';
 import blob from '../../assets/blobanimationBG.svg';
-
+import Notfound from '../Notfound/Notfound';
 // App component
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -61,10 +61,11 @@ export default function App() {
   const isRegisterOrLoginRouteOrHome =
     location.pathname === '/register' ||
     location.pathname === '/login' ||
-    location.pathname === '/homepage';
+    location.pathname === '/homepage' ||
+    location.pathname === '/404';
 
   const isHomepage = location.pathname === '/homepage';
-
+  const is404 = location.pathname === '/404';
   const [isSmallerThan1000] = useMediaQuery('(max-width: 1000px)');
 
   const sidebar =
@@ -79,10 +80,12 @@ export default function App() {
 
   return (
     // Flex container for Sidebar and main content area
-    <Flex minH="100vh"
-          bgGradient='linear(to-r, #2e76ff, #172c69)' w="100vw" zIndex='-500'>
-
-
+    <Flex
+      minH="100vh"
+      bgGradient="linear(to-r, #2e76ff, #172c69)"
+      w="100vw"
+      zIndex="-500"
+    >
       {sidebar}
       {/* Box for main content area */}
       <Box
@@ -115,6 +118,7 @@ export default function App() {
             <Route path="/likes" element={<Likes />} />
             <Route path="/kanban" element={<Kanban />} />
             <Route path="/editpost/:postId" element={<PostEdit />} />
+            <Route path="/404" element={<Notfound />} />
           </Routes>
         )}
       </Box>
@@ -125,14 +129,15 @@ export default function App() {
         w={['80%', '80%', '80%', '35%']}
         left="-50"
         top="-70"
-      ></Image>
+      />
 
-      <Image src={blob}
-             position="fixed"
-             top="-500"
-             right="-710"
-             opacity="0.1">
-      </Image>
+      <Image
+        src={blob}
+        position="fixed"
+        top="-500"
+        right="-710"
+        opacity="0.1"
+      />
     </Flex>
   );
 }
