@@ -44,24 +44,24 @@ export default function App() {
     if (token) {
       setIsLoggedIn(true);
     }
-    // if (
-    //   !token && 
-    //   location.pathname == '/repositories' ||
-    //   location.pathname == '/feed'  ||
-    //   location.pathname == '/profile' ||
-    //   location.pathname == '/mypost' ||
-    //   location.pathname == '/post' ||
-    //   location.pathname == '/stackoverflow' ||
-    //   location.pathname == '/editpost/:postId' ||
-    //   location.pathname == '/kanban' ||
-    //   location.pathname == '/playground' ||
-    //   location.pathname == '/likes' ||
-    //   location.pathname == '/addpost' ||
-    //   location.pathname == '/' ||
-    //   location.pathname == '/npm'      
-    // ) {
-    //   window.location.replace('/homepage');
-    // }
+    if (
+      !token && 
+      location.pathname == '/repositories' ||
+      location.pathname == '/feed'  ||
+      location.pathname == '/profile' ||
+      location.pathname == '/mypost' ||
+      location.pathname == '/post' ||
+      location.pathname == '/stackoverflow' ||
+      location.pathname == '/editpost/:postId' ||
+      location.pathname == '/kanban' ||
+      location.pathname == '/playground' ||
+      location.pathname == '/likes' ||
+      location.pathname == '/addpost' ||
+      location.pathname == '/' ||
+      location.pathname == '/npm'      
+    ) {
+      window.location.replace('/homepage');
+    }
   }, []);
   // Redirect user to register page if not logged in and not on login or homepage routes
 
@@ -69,7 +69,7 @@ export default function App() {
   const isRegisterOrLoginRouteOrHome =
     location.pathname === '/register' ||
     location.pathname === '/homepage' ||
-    location.pathname === '/posts' ||
+    location.pathname === '/login' ||
     location.pathname === '/404';
 
   const isHomepage = location.pathname === '/homepage';
