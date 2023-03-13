@@ -262,7 +262,7 @@ function Sidebar({ isOpen, setIsLoading }) {
             <Flex justifyContent="space-around" alignItems="center">
               <FaFolderOpen />
               <Text pl="4" color="primary" fontWeight="600">
-                Your Projects
+                Git Projects
               </Text>
             </Flex>
           </Box>

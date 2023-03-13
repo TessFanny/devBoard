@@ -5,7 +5,6 @@ import {
 } from '@chakra-ui/react';
 import { SlRefresh } from 'react-icons/sl';
 import { FaGithub } from 'react-icons/fa';
-import { RiGitRepositoryFill } from 'react-icons/ri';
 import { useDispatch, useSelector } from 'react-redux';
 import {getRepo, getUserGithubData, getUserGithubRepos} from '../../features/user/user';
 import Notification from '../Notification/Notification';
