@@ -7,9 +7,5 @@ export default defineConfig({
   build: {
     outDir: 'build', // Specify the output folder
   },
-  server: {
-    host: true,
-    strictPort: true,
-    port: 8000,
-    },
+  
 })
