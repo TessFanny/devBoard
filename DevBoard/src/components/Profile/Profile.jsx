@@ -103,7 +103,7 @@ function Profile() {
 
             <Image
               maxW={['350px', '400px', '400xpx', '200px', '200px']}
-              src={`http://tessfanny-server.eddi.cloud:8080/images/${image_path}`}
+              src={`https://devboard-api.onrender.com/images/${image_path}`}
               fallbackSrc={img}
               borderRadius="md"
               mb="10"
