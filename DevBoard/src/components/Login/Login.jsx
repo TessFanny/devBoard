@@ -149,7 +149,7 @@ function Login({setShowDiv, setShowLogin}) {
           </FormControl>
         </Box>
       </Box>
-      {notification && <Notification title="Oupss..." description="Your email/password are incorrect..." status="error" />}
+      {/*notification && <Notification title="Oupss..." description="Your email/password are incorrect..." status="error" />*/}
     </Flex>
   );
 }

@@ -1,12 +1,14 @@
 // Import necessary libraries
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 // Define an asynchronous thunk for register
 export const registerUser = createAsyncThunk(
   'register/registerUser',
-  async ({ username, email, password, passwordConfirm }) => {
-    const VITE_BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+  async ({ username, email, password, passwordConfirm }, thunkAPI) => {
+    try {
+      const VITE_BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
     // Make a POST request to a register endpoint with email and password
     const response = await axios.post(`${VITE_BACKEND_URL}/api/register`, {
       username,
@@ -15,6 +17,10 @@ export const registerUser = createAsyncThunk(
       passwordConfirm,
     });
     console.log(response);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+    
   }
 );
 
@@ -24,6 +30,7 @@ const initialState = {
   email: '',
   password: '',
   confirmPassword: '',
+  isRegisterSuccess: false
 };
 
 // Create the user slice
@@ -58,11 +65,14 @@ export const registerSlice = createSlice({
           .addCase(registerUser.fulfilled, (state) => {
             state.status = 'succeeded';
             state.password = null;
+            state.isRegisterSuccess = true
+            toast.success(`Your account has been  succesfully registered`)
           })
           // Reducer for handling the rejected state of the register request
-          .addCase(registerUser.rejected, (state, action) => {
-            state.status = 'failed';
-            state.error = action.error.message;
+          .addCase(registerUser.rejected, (state, {payload}) => {
+            //state.status = 'failed';
+            //state.error = action.error.message;
+            toast.error(payload)
           });
   },
 });

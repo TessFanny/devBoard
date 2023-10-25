@@ -43,7 +43,7 @@ function Register({setShowDiv, setShowLogin, onRegisterSuccess}) {
   const dispatch = useDispatch();
   // Selector from store
   const {
-    username, email, password, confirmPassword,
+    username, email, password, confirmPassword, isRegisterSuccess
   } = useSelector(
     (state) => state.register,
   );
@@ -54,6 +54,13 @@ function Register({setShowDiv, setShowLogin, onRegisterSuccess}) {
   // au moins un caractère spécial (?=.*[!@#$%^&*])
   // une longueur minimale de 8 caractères {8,}.
   const passwordRegex = /^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/;
+  useEffect(() => {
+    if (isRegisterSuccess) {
+      setTimeout(() => {
+        window.location.reload(false);
+      }, 1000);
+    }
+  }, [isRegisterSuccess]);
   const handleSubmit = (evt) => {
     evt.preventDefault();
 
@@ -91,12 +98,12 @@ function Register({setShowDiv, setShowLogin, onRegisterSuccess}) {
         setTimeout(() => {
           // Définir une fonction qui sera appelée après un délai de 500 millisecondes
           setIsLoading(false); // Mettre isLoading à faux
-          setNotification(true); // Mettre notification à vrai
-          onRegisterSuccess(true);
-          setTimeout(() => {
-            // Définir une fonction qui sera appelée après un délai de 3000 millisecondes
-            setNotification(false); // Mettre notification à faux
-          }, 300);
+          //setNotification(true); // Mettre notification à vrai
+          //onRegisterSuccess(true);
+          // setTimeout(() => {
+          //   // Définir une fonction qui sera appelée après un délai de 3000 millisecondes
+          //   setNotification(false); // Mettre notification à faux
+          // }, 300);
         }, 500);}
   };
   // Cette fonction prend deux arguments : dispatch et actionCreator
@@ -240,13 +247,13 @@ function Register({setShowDiv, setShowLogin, onRegisterSuccess}) {
             </Stack>
           </Box>
         </Box>
-        {notification && (
+        {/*notification && (
             <Notification
                 title="Congratulations !"
                 description="Your account has been registered succesfully"
                 status="info"
             />
-        )}
+        )*/}
       </Flex>
   );
 }

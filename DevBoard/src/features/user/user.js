@@ -1,12 +1,14 @@
 // Import necessary libraries
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { toast } from "react-toastify";
 const VITE_BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 // Define an asynchronous thunk for login
 export const login = createAsyncThunk(
   '/login',
-  async ({ email, password }) => {
-    // Make a POST request to a login endpoint with email and password
+  async ({ email, password }, thunkAPI) => {
+    try {
+      // Make a POST request to a login endpoint with email and password
     const response = await axios.post(`${VITE_BACKEND_URL}/api/login`, {
       email,
       password,
@@ -14,7 +16,12 @@ export const login = createAsyncThunk(
     const { token, userAuth } = response.data;
     // Store the received token in local storage
     localStorage.setItem('token', token);
+    console.log(response);
     return { userAuth };
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+    
   },
 );
 // Define an asynchronous thunk for login
@@ -174,6 +181,7 @@ const initialState = {
     email: '',
     password: '',
   },
+  
 };
 
 // Create the user slice
@@ -234,11 +242,12 @@ export const loginSlice = createSlice({
         state.status = true;
       })
       // Reducer for handling the rejected state of the login request
-      .addCase(login.rejected, (state, action) => {
-        state.user.email = '';
-        state.user.password = '';
-        state.status = false;
-        state.error = action.error.message;
+      .addCase(login.rejected, (state,  {payload}) => {
+        // state.user.email = '';
+        // state.user.password = '';
+        // state.status = false;
+        //state.error = action.error.message;
+        toast.error(payload);
       })
       .addCase(modifyUser.pending, (state) => {
         state.status = 'loading';

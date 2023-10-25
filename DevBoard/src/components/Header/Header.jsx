@@ -30,7 +30,7 @@ function Header({setIsLoading}) {
 
   const handleLogout = () => {
     dispatch(logout());
-    window.location.replace('/homepage');
+    window.location.replace('/');
     setIsLoading(true);
     setTimeout(() => {
       setIsLoading(false);
